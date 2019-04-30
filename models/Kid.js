@@ -23,4 +23,5 @@ module.exports = function(sequelize, DataTypes){
         Kid.hasOne(models.schools);
 
       };
+    return Kid
 }

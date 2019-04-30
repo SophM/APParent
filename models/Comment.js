@@ -8,10 +8,14 @@ module.exports = function(sequelize, DataTypes){
 
     Comment.associate = function (models) {
         Comment.belongsTo(models.posts, {
-          foreignKey: 'commentId'
+          foreignKey: {
+            allowNull: false
+          }
         });
         Comment.belongsTo(models.parents, {
-          foreignKey: 'commentId'
+          foreignKey: {
+            allowNull: false
+          }
         });
       };
 }

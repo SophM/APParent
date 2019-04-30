@@ -16,7 +16,9 @@ module.exports = function(sequelize, DataTypes){
 
     Kid.associate = function (models) {
         Kid.belongsTo(models.parents, {
-          foreignKey: 'kidId'
+            foreignKey: {
+                allowNull: false
+              }
         });
         Kid.hasOne(models.schools);
 

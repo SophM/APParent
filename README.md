@@ -9,7 +9,7 @@ This is our final project!!! :)
 <hr>
 
 <h2>Technology Used:</h2>
-<li><b>M</b>ongoDB</li>
+<li><b>S</b>equelize</li>
 <li><b>E</b>xpress</li>
 <li><b>R</b>eact</li>
 <li><b>N</b>ode</li>

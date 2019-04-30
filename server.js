@@ -4,6 +4,9 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Requiring our models for syncing
+const db = require("./models");
+
 app.use(express.urlencoded({
     extended: true
 }));
@@ -13,13 +16,15 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
+// Static directory
+app.use(express.static("public"));
+
 // app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlesearch", {
-    useNewUrlParser: true
-});
-
-// Start the API server
-app.listen(PORT, function () {
-    console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(PORT, function() {
+      console.log("App listening on PORT " + PORT);
+    });
+  });

@@ -1,6 +1,6 @@
 // Creating Activity model for activities table
 module.exports = function(sequelize, DataTypes) {
-  var Parent = sequelize.define("parent", {
+  var Parent = sequelize.define("parents", {
     userName: {
       type: Sequelize.STRING,
       unique: true,
@@ -39,17 +39,15 @@ module.exports = function(sequelize, DataTypes) {
 
   Parent.associate = function(models) {
     Parent.hasMany(models.posts, {
-      as: "posts",
-      foreignKey: "parentId"
+      onDelete: "cascade"
     });
-    Parents.belongsToMany(models.schools, {
+    Parent.belongsToMany(models.schools, {
       as: "schools",
       through: "parentSchools",
       foreignKey: "parentId"
     });
-    Parents.hasMany(models.comments, {
-      as: "comments",
-      foreignKey: "parentId"
+    Parent.hasMany(models.comments, {
+      onDelete: "cascade"
     });
   };
 

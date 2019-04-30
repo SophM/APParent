@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS appparent;
-CREATE DATABASE appparent;

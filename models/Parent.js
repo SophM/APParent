@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Parent = sequelize.define("parents", {
     userName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: true,
       allowNull: true,
       validate: {

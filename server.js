@@ -35,12 +35,12 @@ app.use(express.static("./client/public"));
 // --------------------------------------------------- 
 
 // link the "controllers" folder
-var controllers = require("./controllers");
-app.use(controllers);
+// var controllers = require("./controllers");
+// app.use(controllers);
 
 // link the "routes" folder
-var routes = require("./routes");
-app.use(routes);
+// var routes = require("./routes");
+// app.use(routes);
 
 
 // ---------------------------------------------------

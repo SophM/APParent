@@ -20,7 +20,11 @@ module.exports = function(sequelize, DataTypes){
                 allowNull: false
               }
         });
-        Kid.hasOne(models.schools);
+        Kid.belongsTo(models.schools, {
+            foreignKey: {
+                allowNull: false
+              }
+        });
 
       };
     return Kid

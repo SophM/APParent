@@ -23,7 +23,7 @@ module.exports = function (passport) {
     function (req, email, password, done) {
       
       process.nextTick(function () {
-        db.User.findOne({
+        db.parents.findOne({
           where: {
             email: email
           }
@@ -38,14 +38,12 @@ module.exports = function (passport) {
           } else {
             //creating a new account in our database
             // console.log("user ######", user)
-            db.User.create({
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
+            db.parents.create({
+              userName: req.body.firstName,
               email: email,
-              phone: req.body.phone,
               city: req.body.city,
               state: req.body.state,
-              password: db.User.generateHash(password)
+              password: db.parents.generateHash(password)
             }).then(function (newUser) {
               // console.log("new user", newUser)
               return done(null, newUser)
@@ -68,7 +66,7 @@ module.exports = function (passport) {
         // allows us to pass back the entire request to the callback
       }, function (req, email, password, done) {
         // Match user
-        db.User.findOne({where:{
+        db.parents.findOne({where:{
           email: email,
 
         }}).then(function (user, err) {

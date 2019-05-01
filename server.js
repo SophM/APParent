@@ -34,13 +34,13 @@ app.use(express.static("./client/public"));
 // Routes
 // --------------------------------------------------- 
 
-// link the "parentscontroller.js" file
-var controllers = require("./controllers/parentscontroller.js");
+// link the "controllers" folder
+var controllers = require("./controllers");
 app.use(controllers);
 
-// link the "api" folder
-var apiRoutes = require("./routes/api")
-app.use(apiRoutes);
+// link the "routes" folder
+var routes = require("./routes");
+app.use(routes);
 
 
 // ---------------------------------------------------

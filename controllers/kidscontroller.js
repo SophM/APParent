@@ -9,8 +9,7 @@ module.export = {
             parentId:parentId, 
             schoolId: req.body.school
         }).then(function(result){
-            //This needs to be change to res.redirect(/api/parents/dashboard) once the route is define
-            res.end()
+            res.json(result)
         })
     }
 

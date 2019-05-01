@@ -14,9 +14,8 @@ module.export = {
     create: function(req, res){
         db.comment.create({
             description: req.body.description
-        }).then(function(){
-            //This needs to be change to res.redirect(/api/post/allcomments) when the route is define
-            res.end()
+        }).then(function(result){
+            res.json(result)
         })
     }
 

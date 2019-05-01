@@ -1,3 +1,5 @@
+var bcrypt = require("bcryptjs")
+
 // Creating Activity model for activities table
 module.exports = function(sequelize, DataTypes) {
   var Parent = sequelize.define("parents", {

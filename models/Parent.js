@@ -37,6 +37,16 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
+  //Method for generating hashed password
+  Parent.generateHash = function (password) {
+    return bcrypt.hashSync(password, 8)
+  };
+
+  //Method for comparing hashed password to user input password
+  Parent.prototype.compareHash = function (password) {
+    return bcrypt.compareSync(password, this.password)
+  };
+
   Parent.associate = function(models) {
     Parent.hasMany(models.posts, {
       onDelete: "cascade"

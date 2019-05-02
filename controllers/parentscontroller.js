@@ -9,56 +9,47 @@ const Op = Sequelize.Op;
 var parentId = req.session.passport.user.id;
 
 module.export = {
-    create: function (req, res, parentId) {
-        if (req.isAuthenticated()) {
-            db.parents.create({
-                userName: req.body.userName,
-                // parentId: parentId,
-                password: req.body.password,
-                email: req.body.email,
-                city: req.body.city,
-                state: req.body.state
-            }).then(function (result) {
-                res.json(result)
-            })
-        }
+    create: function(req, res, parentId){
+        db.parents.create({
+            userName: req.body.userName,
+            // parentId: parentId,
+            password: req.body.password,
+            email: req.body.email, 
+            city: req.body.city, 
+            state: req.body.state
+        }).then(function(result){
+            res.json(result)
+        })
     },
 
     //find a specific parent 
-    findOne: function (req, res) {
-        if (req.isAuthenticated()) {
-            db.parents.findOne({ where: { id: req.params.id } }).then(function (result) {
-                res.json(result)
-            })
-        }
-    },
+    findOne : function(req, res){
+        db.parents.findOne({where:{id: req.params.id}}).then(function(result){
+            res.json(result)
+        })
+    }, 
     //find all parents 
-    findAllParents: function (req, res) {
-        if (req.isAuthenticated()) {
-            db.parents.findAll({
-                //Excluded the logged in user only activee members 
-                where: {
-                    //using the not operator of sequlize i.e example: userid NOT "1"
-                    [Op.not]: [{ id: parentId }]
-                },
-            }).then(function (result) {
-                res.json(result)
-            })
-        }
-    },
-    findAllMyPosts: function (req, res) {
-        if (req.isAuthenticated()) {
-            db.parents.findOne({
-                where: { id: req.params.id },
-
-                //Include all posts for the parent 
-                include: [{
-                    model: db.posts, as: "posts"
-                }],
-            }).then(function (result) {
-                res.json(result)
-            })
-        }
-    }
-};
+    findAllParents: function(req, res){
+        db.parents.findAll({
+           //Excluded the logged in user only activee members 
+        where: {
+            //using the not operator of sequlize i.e example: userid NOT "1"
+            [Op.not] : [{id: parentId}]
+          },
+        }).then(function(result){
+            res.json(result)
+        })
+    }, 
+    findAllMyPosts: function(req, res){
+        db.parents.findOne({where:{id: req.params.id}, 
+        
+         //Include all posts for the parent 
+         include: [{
+            model: db.posts, as: "posts"
+          }] ,
+        }).then(function(result){
+            res.json(result)
+        })
+    }, 
+}
 

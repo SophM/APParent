@@ -1,11 +1,11 @@
-// we will put parent controllers here. We can create more JS for other conditions. 
+// load the models 
 const db = require("../models")
 
-//Using it to access the Sequelize in built operators to conditionally show data 
+// using it to access the Sequelize in built operators to conditionally show data 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-//Grabs the logged in user ID 
+// grabs the logged in user ID 
 var parentId = req.session.passport.user.id;
 
 module.export = {
@@ -22,34 +22,55 @@ module.export = {
         })
     },
 
-    //find a specific parent 
+    // find a specific parent 
     findOne : function(req, res){
         db.parents.findOne({where:{id: req.params.id}}).then(function(result){
             res.json(result)
         })
     }, 
-    //find all parents 
+
+    // find all parents - sauf the parent logged in
     findAllParents: function(req, res){
         db.parents.findAll({
-           //Excluded the logged in user only activee members 
-        where: {
-            //using the not operator of sequlize i.e example: userid NOT "1"
-            [Op.not] : [{id: parentId}]
-          },
+            where: {
+                // excluded the logged-in parent
+                [Op.not] : [{id: parentId}]
+            },
         }).then(function(result){
             res.json(result)
         })
     }, 
-    findAllMyPosts: function(req, res){
-        db.parents.findOne({where:{id: req.params.id}, 
-        
-         //Include all posts for the parent 
-         include: [{
-            model: db.posts, as: "posts"
-          }] ,
-        }).then(function(result){
+
+    // find all posts for a specific parent
+    // findAllPostsForAParent: function(req, res){
+    //     db.parents.findOne({
+    //         where:{
+    //             id: req.params.id
+    //         }, 
+    //         // include all posts for the specific parent 
+    //         include: [{
+    //             model: db.posts, as: "posts"
+    //         }],
+    //     }).then(function(result){
+    //         res.json(result)
+    //     });
+    // },
+    
+    // find all kids for a specific parent
+    findAllKidsForAParent: function(req, res) {
+        db.parents.findOne({
+            where:{
+                id: req.params.id
+            }, 
+            // include all posts for the specific parent 
+            include: [{
+                model: db.kids, as: "kids"
+            }],
+        }).then(function(result) {
             res.json(result)
-        })
-    }, 
+        });
+    }
+
+
 }
 

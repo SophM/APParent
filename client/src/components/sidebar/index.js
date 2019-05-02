@@ -5,28 +5,29 @@ function SideBar() {
     return (
         <div>
             <nav id="sidebar">
-                <div class="sidebar-header">
-                    <img src="./images/logo-only-color.png" />
+                <div className="sidebar-header">
+                    {/* <img src="./images/logo-only-color.png" /> */}
+                    <h3>APP</h3>
                     <strong>APP</strong>
                 </div>
 
-                <ul class="list-unstyled components">
-                    <li class="active">
-                        <a href="#homeSubmenu" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fas fa-home"></i>
+                <ul className="list-unstyled components">
+                    <li className="active">
+                        <a href="#homeSubmenu" aria-expanded="false" className="dropdown-toggle">
+                            <i className="fas fa-home"></i>
                             Home
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-briefcase"></i>
+                            <i className="fas fa-briefcase"></i>
                             About
                         </a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fas fa-copy"></i>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                            <i className="fas fa-copy"></i>
                             View
                         </a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <ul className="collapse list-unstyled" id="pageSubmenu">
                             <li>
                                 <a href="#">My Profile</a>
                             </li>
@@ -40,13 +41,13 @@ function SideBar() {
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                             About
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-paper-plane"></i>
+                            <i className="fas fa-paper-plane"></i>
                             Contact
                         </a>
                     </li>

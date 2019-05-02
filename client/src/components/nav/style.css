@@ -1,15 +1,10 @@
 /* styling for nav bar */
 
 img {
-    width: 200px;
+    width: 90px;
 }
 
-h3 {
-    /* testing */
-    color: aquamarine;
-}
-
-p {
-    float: right;
+#nav-bar {
+    background-color: #176d88;
 }
 

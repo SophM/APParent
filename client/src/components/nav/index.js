@@ -7,9 +7,9 @@ function Nav() {
   return (
     <nav className="nav navbar-expand-lg navbar-dark">
       <a className="nav-link text-info" href="/">
-        <h3>Apparents</h3>
+        <img src="./images/logo-APParent-color.png" />
       </a>
-      <a className="nav-link mt-2 text-info" id="logout" href="/logout">Logout</a>
+      <a className="nav-link mt-2 text-info" id="logout" href="/logout"><p>Logout</p></a>
     </nav>
   );
 }

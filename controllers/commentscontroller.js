@@ -1,6 +1,6 @@
 var db = require("../models")
 
-module.export = {
+module.exports = {
     findAllForPost: function (req, res) {
         if (req.isAuthenticated()) {
             db.comments.findAll({

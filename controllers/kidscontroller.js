@@ -1,6 +1,6 @@
 var db = require("../models")
 
-module.export = {
+module.exports = {
     create: function (req, res, parentId) {
         if (req.isAuthenticated()) {
             db.kids.create({

@@ -6,9 +6,9 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 // grabs the logged in user ID 
-var parentId = req.session.passport.user.id;
+// var parentId = req.session.passport.user.id;
 
-module.export = {
+module.exports = {
     create: function(req, res, parentId){
         db.parents.create({
             userName: req.body.userName,

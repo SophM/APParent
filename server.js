@@ -39,8 +39,8 @@ app.use(express.static("./client/public"));
 // app.use(controllers);
 
 // link the "routes" folder
-// var routes = require("./routes");
-// app.use(routes);
+var routes = require("./routes");
+app.use(routes);
 
 
 // ---------------------------------------------------

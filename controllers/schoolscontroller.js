@@ -1,6 +1,6 @@
 const db = require("../models")
 
-module.export = {
+module.exports = {
     findAll: function (req, res) {
         if (req.isAuthenticated()) {
             db.schools.findAll()

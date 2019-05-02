@@ -1,6 +1,6 @@
 import React from "react"
 
-export function formContainer(children) {
+export function formContainer({children}) {
     return (
         <div className="row mt-5">
             <div className="col-md-6 m-auto">
@@ -29,7 +29,7 @@ export function formLabel(props) {
 
 export function formButton(props){
     return (
-        <button type="submit" className="btn btn-primary btn-block">Login</button>
+        <button type="submit" className="btn btn-primary btn-block">{props.nameButton}</button>
     )
 }
 
@@ -37,7 +37,7 @@ export function formMessage(props){
     return (
         <p class="lead mt-4">
             {props.message} <a href={props.path}>{props.action}</a>
-         </p>
+        </p>
     )
 }
 

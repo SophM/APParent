@@ -16,19 +16,19 @@ module.export = {
     },
     //find a specific post 
     findOne : function(req, res){
-        db.post.findOne({where:{id: req.params.id}}).then(function(result){
+        db.posts.findOne({where:{id: req.params.id}}).then(function(result){
             res.json(result)
         })
     }, 
     //find all post from a parent
     findAllFromParent : function(req, res){
-        db.findAll({where: {parentId: req.params.parentId}}).then(function(result){
+        db.posts.findAll({where: {parentId: req.params.parentId}}).then(function(result){
             res.json(result)
         })
     }, 
     //find all post ever made
-    findAllPost: function(req, res){
-        db.findAll().then(function(result){
+    findAllPosts: function(req, res){
+        db.posts.findAll().then(function(result){
             res.json(result)
         })
     }

@@ -1,32 +1,32 @@
 // this is the landing page
 import React, { Component } from "react";
-import {formContainer, formTitle, formLabel, formButton, formMessage} from "../components/./form";
+import { FormContainer, FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
 class Home extends Component {
 
     state = {
         data: {
-                    title: "Sign Up",
-                    for: ["userName", "password", "email", "city", "state", ],
-                    button: "Sign Up", 
-                    message: "Already Have An Account?",
-                    path: "/login", 
-                    action: "Login"
-                }
+            title: "Sign Up",
+            for: ["userName", "password", "email", "city", "state",],
+            nameButton: "Sign Up",
+            message: "Already Have An Account?",
+            path: "/login",
+            action: "Login"
+        }
     };
 
     handleButtonClick = event => {
         event.preventDefault();
-        if(event.target.id === "signup"){
+        if (event.target.id === "signup") {
             this.setState({
                 data: {
                     title: "Sign Up",
-                    for: ["userName", "password", "email", "city", "state", ],
-                    button: "Sign Up", 
+                    for: ["userName", "password", "email", "city", "state",],
+                    nameButton: "Sign Up",
                     message: "Already Have An Account?",
-                    path: "/login", 
+                    path: "/login",
                     action: "Login"
                 }
-                
+
             })
         }
         else {
@@ -34,13 +34,13 @@ class Home extends Component {
                 data: {
                     title: "Login",
                     for: ["email", "password"],
-                    button: "Login", 
+                    nameButton: "Login",
                     message: "No Account?",
-                    path: "/register", 
+                    path: "/register",
                     action: "Register"
                 }
-                
-            }) 
+
+            })
         }
     }
 
@@ -51,34 +51,35 @@ class Home extends Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <FormTitle
+                                    title={this.state.data.title}
+                                />                                
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <formContainer>
-                                    <formTitle
-                                    title={this.state.data.title}
-                                    />
-                                    {this.state.data.for.map(item => {
-                                        return(
-                                            <formLabel
+
+
+
+                                {this.state.data.for.map(item => {
+                                    return (
+                                        <FormLabel
                                             for={item}
-                                            />
-                                        )
-                                    })}
-                                    <formButton
-                                    button={this.state.data.button}
-                                    />
-                                    <formMessage
+                                        />
+                                    )
+                                })}
+                                <FormButton
+                                    nameButton={this.state.data.nameButton}
+                                />
+                                <formMessage
                                     message={this.state.data.message}
                                     path={this.state.data.path}
                                     action={this.state.data.action}
-                                    />
-                                </formContainer>
+                                />
+
                             </div>
-        
+
                         </div>
                     </div>
                 </div>

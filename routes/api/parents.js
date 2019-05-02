@@ -2,11 +2,11 @@ const router = require("express").Router();
 const parentsController = require("../../controllers/parentscontroller.js");
 
 // displaying all the parents
-router.route("/api/parents")
+router.route("/")
 	.get(parentsController.findAllParents);
 
 // displaying only one parent
-router.route("/api/parents/:id")
+router.route("/:id")
 	.get(parentsController.findOne);
 
 

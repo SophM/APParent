@@ -1,6 +1,19 @@
-const path = require("path");
-const router = require("express").Router();
-const apiRoutes = require("./api");
+var path = require("path");
+var router = require("express").Router();
+var apiRoutes = require("./api");
+var controller = require(".././controllers")
+
+
+router.route("/logout").get(function (req, res) {
+       
+    res.clearCookie("user_sid");
+    req.session.destroy(function(err) {
+        req.logout();
+        res.clearCookie("user_sid");
+        res.status(200).redirect("/");
+    });
+
+});
 
 // API Routes
 // router.use("/api", apiRoutes);

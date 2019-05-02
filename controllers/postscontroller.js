@@ -1,6 +1,6 @@
 const db = require("../models")
 
-module.export = {
+module.exports = {
     //create a post
     create: function (req, res) {
         if (req.isAuthenticated()) {

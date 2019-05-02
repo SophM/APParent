@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const parentsController = require("../../controllers/parentscontroller");
+const parentsController = require("../../controllers/parentscontroller.js");
 
 // displaying all the parents
 router.route("/api/parents")

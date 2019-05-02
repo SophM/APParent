@@ -1,5 +1,15 @@
 /* styling for nav bar */
 
-.logout {
-    text-align: right;
+img {
+    width: 200px;
 }
+
+h3 {
+    /* testing */
+    color: aquamarine;
+}
+
+p {
+    float: right;
+}
+

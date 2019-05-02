@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const postscontroller = require("../../controllers/postscontroller.js");
+const commentsController = require("../../controllers/commentscontroller");
 
 // displaying all the posts
 router.route("/")
@@ -8,6 +9,10 @@ router.route("/")
 // displaying only one post
 router.route("/:id")
     .get(postscontroller.findOne);
+
+// displaying all comments for one post
+router.route("/comments/:id")
+    .get(commentsController.findAllForPost); 
     
 // displaying only post for a parent 
 router.route("/parents/:id")

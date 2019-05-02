@@ -16,7 +16,10 @@ module.exports = {
     create: function (req, res) {
         if (req.isAuthenticated()) {
             db.comment.create({
-                description: req.body.description
+                description: req.body.description, 
+                postId: req.body.postId, 
+                //change it to passport once we set it up 
+                parentId: req.body.parentId
             }).then(function (result) {
                 res.json(result)
             })

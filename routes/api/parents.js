@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const parentsController = require("../../controllers/parentscontroller.js");
 
+const passport = require("passport"); 
+
 // displaying all the parents
 router.route("/")
 	.get(parentsController.findAllParents);

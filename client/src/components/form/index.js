@@ -2,7 +2,7 @@ import React from "react"
 
 export function FormContainer({ children }) {
     return (
-        <div className="row mt-5">
+        <div className="row mt-5 mb-3">
             <div className="col-md-6 m-auto">
                 <div className="card card-body">
                     {children}
@@ -28,7 +28,7 @@ export function FormAction(props) {
 
 export function FormLabel(props) {
     return (
-        <div className="form-group">
+        <div className="form-group text-left">
             <label for={props.for}>{props.for}</label>
             <input type={props.for} id={props.for} name={props.for} className="form-control" placeholder={"Enter a " + props.for} />
         </div>
@@ -37,7 +37,7 @@ export function FormLabel(props) {
 
 export function InputText(props) {
     return (
-        <div className="form-group">
+        <div className="form-group text-left">
             <label for={props.for}>{props.for}</label>
             <textarea id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for}></textarea>
         </div>
@@ -46,7 +46,7 @@ export function InputText(props) {
 
 export function Dropdown(props){
     return (
-        <div className="form-group">
+        <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
             <select class="form-control" id={props.for}>
                 {props.children}

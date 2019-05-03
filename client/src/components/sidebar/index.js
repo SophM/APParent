@@ -1,59 +1,29 @@
-import React from "react"; 
+import React from "react";
 import "./style.css";
+import { stack as Menu } from 'react-burger-menu';
 
-function SideBar() {  
+function SideBar() {
     return (
-        <div>
-            <nav id="sidebar">
-                <div className="sidebar-header">
-                    {/* <img src="./images/logo-only-color.png" /> */}
-                    <h3>APP</h3>
-                    <strong>APP</strong>
-                </div>
-
-                <ul className="list-unstyled components">
-                    <li className="active">
-                        <a href="#homeSubmenu" aria-expanded="false" className="dropdown-toggle">
-                            <i className="fas fa-home"></i>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fas fa-briefcase"></i>
-                            About
-                        </a>
-                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
-                            <i className="fas fa-copy"></i>
-                            View
-                        </a>
-                        <ul className="collapse list-unstyled" id="pageSubmenu">
-                            <li>
-                                <a href="#">My Profile</a>
-                            </li>
-                            <li>
-                                <a href="#">All Posts</a>
-                            </li>
-                            <li>
-                                <a href="#">All Members</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fas fa-question"></i>
-                            About
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i className="fas fa-paper-plane"></i>
-                            Contact
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div id="sidebar">
+            <Menu>
+                <a className="menu-item" href="/">
+                    Home
+                </a>
+                <a className="menu-item" href="#">
+                    My profile
+                </a>
+                <a className="menu-item" href="#">
+                    All members
+                </a>
+                <a className="menu-item" href="#">
+                    About us!
+                </a>
+                <a className="menu-item" href="#">
+                    Contact
+                </a>
+            </Menu>
         </div>
+
     );
 }
 

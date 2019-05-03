@@ -2,7 +2,7 @@ var db = require("../models")
 
 module.exports = {
     findAllForPost: function (req, res) {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             db.comments.findAll({
                 where: {
                     postId: req.params.id
@@ -11,7 +11,7 @@ module.exports = {
                 .then(function (result) {
                     res.json(result)
                 });
-        // }
+        }
     },
     create: function (req, res) {
         if (req.isAuthenticated()) {

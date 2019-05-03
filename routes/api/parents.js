@@ -57,7 +57,7 @@ router.route("/signup").post(function (req, res, next) {
 
 router.route("/login").post(function (req, res, next) {
 	// console.log("Req", req.body)
-	passportAuthenticate("local-login", req, res, next);
+	passportAuthenticate("local-signin", req, res, next);
 });
 
 

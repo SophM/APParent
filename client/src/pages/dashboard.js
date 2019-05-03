@@ -4,6 +4,11 @@ import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
 import PostCard from "../components/postCard";
 // import WritePost from "../components/write-post";
+// ============== Namita 
+import AllMembers from "../components/allMembers";
+import UserCard from "../components/userCard";
+// ============== Namita 
+
 import API from "../utils/API";
 
 
@@ -59,7 +64,14 @@ class Dashboard extends Component {
                 <h3>No Results to Display</h3>
               )}
             </Activity>
-           
+           {/* This is section is to display all members */}
+          
+            <AllMembers>
+
+              <UserCard />
+
+            </AllMembers>
+          {/* This is section is to display all members */}
         </div>
 
        

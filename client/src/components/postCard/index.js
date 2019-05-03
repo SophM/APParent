@@ -7,7 +7,9 @@ function PostCard(props) {
       <div className="row no-gutters">
         <div className="col">
           <img
-            src={"https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwj_rq_txv7hAhWIqp4KHUuIDKAQjRx6BAgBEAU&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973461%2F&psig=AOvVaw3WsI0NmXFbv68Nh1_KaueP&ust=1556945164739345"}
+            src={
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png"
+            }
             className="card-img"
             alt="blank"
             style={{ width: "200px" }}
@@ -15,14 +17,20 @@ function PostCard(props) {
         </div>
         <div className="col-md-8">
           <div className="card-body">
-            <h5 className="card-title">TITLE{/* {props.title} */}</h5>
-            <p className="card-text">Post By: NAME{/* {props.name} */}</p>
-            <p className="card-text">Desc: BLAH BLAH BLAH{/* {props.description} */}</p>
+            <h5 className="card-title">
+              Child Abduction {props.title}
+            </h5>
+            <p className="card-text">Post By: John Doe {props.name}</p>
+            <p className="card-text">
+              Desc: Mum's child abduction warning after son escapes man who
+              tries to pull him into van on school walk
+              {props.description}
+            </p>
           </div>
           <a
-            href={"www.google.com"}
+            href={"/dashboard"}
             target="_blank"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             role="button"
           >
             Comment

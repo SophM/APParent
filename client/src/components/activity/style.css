@@ -1,8 +1,12 @@
 h1 {
     /* testing */
-    color: blue;
+
+    /* color: blue; */
+
+
 }
 
 .row:hover {
     border-style: solid;
+
 }

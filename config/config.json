@@ -1,7 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "a9uLc2frfg7buEidFA",
+
+    "password": "password",
+
     "database": "apparentDB",
     "host": "127.0.0.1",
     "port": 3306,

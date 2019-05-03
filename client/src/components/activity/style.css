@@ -1,4 +1,12 @@
 h1 {
     /* testing */
+
     /* color: blue; */
+
+
+}
+
+.row:hover {
+    border-style: solid;
+
 }

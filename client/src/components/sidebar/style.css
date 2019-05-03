@@ -21,11 +21,11 @@ body {
 }
 
 .bm-burger-button {
-  position: fixed;
+  position: relative;
   width: 36px;
   height: 30px;
   left: 36px;
-  top: 110px;
+  top: 30px;
 }
 
 .bm-burger-bars {

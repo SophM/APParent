@@ -26,8 +26,8 @@ class Home extends Component {
                     for: ["userName", "password", "email", "city", "state",],
                     nameButton: "Sign Up",
                     message: "Already Have An Account?",
-                    path: "/login",
-                    action: "Login"
+                    action: "Login",
+                    alt:"login"
                 }
 
             })
@@ -40,8 +40,8 @@ class Home extends Component {
                     for: ["email", "password"],
                     nameButton: "Login",
                     message: "No Account?",
-                    path: "/register",
-                    action: "Register"
+                    action: "Register",
+                    alt: "signup"
                 }
 
             })
@@ -82,8 +82,9 @@ class Home extends Component {
                                 </FormAction>
                                 <FormMessage
                                     message={this.state.data.message}
-                                    path={this.state.data.path}
+                                    path={this.handleButtonClick}
                                     action={this.state.data.action}
+                                    id={this.state.data.alt}
                                 />
 
                             </div>

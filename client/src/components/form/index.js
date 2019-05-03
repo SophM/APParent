@@ -70,7 +70,7 @@ export function FormButton(props) {
 export function FormMessage(props) {
     return (
         <p className="lead mt-4">
-            {props.message} <a href={props.path}>{props.action}</a>
+            {props.message} <a href="#" id={props.id} onClick={props.path}>{props.action}</a>
         </p>
     )
 }

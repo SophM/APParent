@@ -3,11 +3,9 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import NavBar from "./components/nav";
 import Footer from "./components/footer";
 import Home from "./pages/home"
-// import Books from "./pages/dashboard";
+import Dashboard from "./pages/dashboard";
 // import Login from "./pages/login";
 // import Signup from "./pages/signup";
-// import dashboard from "./pages/dashboard";
-
 
 
 function App() {
@@ -17,7 +15,7 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/dashboard" />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
         <Footer/>
       </div>

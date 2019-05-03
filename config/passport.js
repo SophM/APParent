@@ -39,7 +39,7 @@ module.exports = function (passport) {
             //creating a new account in our database
             // console.log("user ######", user)
             db.parents.create({
-              userName: req.body.firstName,
+              userName: req.body.userName,
               email: email,
               city: req.body.city,
               state: req.body.state,

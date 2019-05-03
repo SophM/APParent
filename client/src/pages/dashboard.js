@@ -16,15 +16,25 @@ class Dashboard extends Component {
   state = {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
+    members: [],
     pageWanted: "dashboard"
   };
 
   componentDidMount() {
+
     API.searchAll()
       .then(
         res =>
           this.setState({
             results: res.data
+          })
+      )
+      .catch(err => console.log(err));
+
+      API.searchAllMembers()
+      .then(res =>
+          this.setState({
+            members: res.data
           })
       )
       .catch(err => console.log(err));
@@ -104,11 +114,24 @@ class Dashboard extends Component {
   
             <h1 className="mt-2 text-dark">Welcome</h1>
       
-            <AllMembers>
+             <AllMembers>
+            {this.state.members.length ? (
+              this.state.members.map((member, i) => {
+                return (
+                  <UserCard
+                    key={member.id}
+                    email={member.email}
+                    userName={member.userName}
+                    city={member.city}
+                    state={member.state}
+                  />
+                );
+              })
+            ) : (
+                <h3>No Results to Display</h3>
+              )}
+          </AllMembers>
 
-              <UserCard />
-
-            </AllMembers>
           </div>
         </div>
       );
@@ -130,7 +153,6 @@ class Dashboard extends Component {
         </div>
       );
     }
-    
   }
 }
 

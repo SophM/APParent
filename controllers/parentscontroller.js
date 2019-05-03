@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 // grabs the logged in user ID 
-// var parentId = req.session.passport.user.id;
+var parentId = req.session.passport.user.id;
 
 module.exports = {
     create: function(req, res, parentId){
@@ -32,13 +32,14 @@ module.exports = {
     // find all parents - sauf the parent logged in
     findAllParents: function(req, res){
         db.parents.findAll({
-            // where: {
-            //     // excluded the logged-in parent
-            //     [Op.not] : [{id: parentId}]
-            // }
+            where: {
+                // excluded the logged-in parent
+                [Op.not] : [{id: req.session.passport.user.id}]
+            }
         }).then(function(result){
             res.json(result)
         })
+        .catch(err => res.status(422).json(err));
     }, 
 
     // find all posts for a specific parent

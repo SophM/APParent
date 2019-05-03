@@ -18,26 +18,26 @@ module.exports = {
     },
     //find a specific post 
     findOne: function (req, res) {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             db.posts.findOne({ where: { id: req.params.id } }).then(function (result) {
                 res.json(result)
             })
-        // }
+        }
     },
     //find all post from a parent
     findAllFromParent: function (req, res) {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             db.posts.findAll({ where: { parentId: req.params.parentId } }).then(function (result) {
                 res.json(result)
             })
-        // }
+        }
     },
     //find all post ever made
     findAllPosts: function (req, res) {
-        // if (req.isAuthenticated()) {
+        if (req.isAuthenticated()) {
             db.posts.findAll().then(function (result) {
                 res.json(result)
             })
-        // }
+        }
     }
 }

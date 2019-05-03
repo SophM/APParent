@@ -22,10 +22,10 @@ function passportAuthenticate(localStrategy, req, res, next) {
 		if (!user) {
 			// console.log("************", err, user, info)
 			if (info.from === "signup") {
-				return res.render('signup', info)
+				return res.redirect("/")
 			}
 			else if (info.from === "login") {
-				return res.render("auth", info)
+				return res.redirect("/")
 			}
 		} else {
 			// console.log("passed ++++++++++++++++")
@@ -40,7 +40,7 @@ function passportAuthenticate(localStrategy, req, res, next) {
 					console.log(req.session.passport.user.dataValues.id);
 					console.log("##########################");
 					console.log("\n")
-					return res.send("success");
+					return res.redirect("/dashboard");
 				}
 
 			});

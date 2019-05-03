@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
 import PostCard from "../components/postCard";
+import WritePost from "../components/write-post";
+
 
 class Dashboard extends Component {
   state = {

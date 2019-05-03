@@ -30,17 +30,26 @@ export function FormLabel(props) {
     return (
         <div className="form-group">
             <label for={props.for}>{props.for}</label>
-            <input type={props.for} id={props.for} name={props.for} className="form-control" placeholder={"Enter " + props.for} />
+            <input type={props.for} id={props.for} name={props.for} className="form-control" placeholder={"Enter a " + props.for} />
         </div>
     )
 }
 
-export function Dropdown(props, {children}){
+export function InputText(props) {
+    return (
+        <div className="form-group">
+            <label for={props.for}>{props.for}</label>
+            <textarea id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for}></textarea>
+        </div>
+    )
+}
+
+export function Dropdown(props){
     return (
         <div className="form-group">
             <label for={props.for}>{props.label}</label>
             <select class="form-control" id={props.for}>
-                {children}
+                {props.children}
             </select>
         </div>
     )
@@ -48,9 +57,7 @@ export function Dropdown(props, {children}){
 
 export function OptionForDropdown(props) {
     return (
-        <div>
-            <option>{props.option}</option>
-        </div>
+        <option>{props.option}</option>
     )
 }
 

@@ -1,31 +1,30 @@
 import React from "react";
-import {FormContainer, FormTitle, FormLabel, Dropdown, OptionForDropdown, FormButton} from "../form";
+import {FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
 
-const postCategories = ["Event", "Offer", "Advice", "On Sale", "Random", "In search of"]
+const categories = ["Event", "Advice", "Free", "On sale", "Question"];
 
 function WritePost() {
+
     return (
         <div>
             <FormContainer>
                 <FormTitle 
                     title = "Write a post"
                 />
-                <Dropdown 
-                    for="Category" 
+                <Dropdown
+                    for="category"
                     label="Choose a category for your post"
-                > 
-                    {postCategories.map(category => {
+                >
+                    {categories.map(category => {
                         return (
-                            <OptionForDropdown 
-                                option={category}
-                            />
-                        )
-                    })}   
+                            <OptionForDropdown option={category}/>
+                        ) 
+                    })}
                 </Dropdown>
                 <FormLabel 
                     for="Title"
                 />
-                <FormLabel 
+                <InputText 
                     for="Message"
                 />
                 <FormButton 

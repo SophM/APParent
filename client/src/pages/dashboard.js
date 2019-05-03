@@ -1,6 +1,9 @@
 // this is the main dashbaord after the user login
 import React, { Component } from "react";
 import Sidebar  from "../components/sidebar";
+// ================== Sophie =========================
+import WritePost from "../components/write-post";
+// ===================================================
 
 class Dashboard extends Component {
 

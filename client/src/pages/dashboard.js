@@ -14,39 +14,28 @@ import API from "../utils/API";
 
 class Dashboard extends Component {
   state = {
-    results: [{
-        "id": 6,
-        "title": "Things to do this weekend",
-        "description": "Check this link out if you want to have fun this weekend with your kids: https://zenhabits.net/100-ways-to-have-fun-with-your-kids-for/",
-        "category": "Event",
-        "createdAt": "2019-04-12T03:31:57.000Z",
-        "updatedAt": "2019-04-12T03:31:57.000Z",
-        "parentId": 1
-        }],
+    results: [],
     username: "Sophie, Namita , Samuel & Kevin"
   };
 
   componentDidMount() {
-    // API.searchAll()
-    //   .then(
-    //     res =>
-    //       this.setState({
-    //         results: res.data.items
-    //       })
-    //     // console.log("reesponse", res.data.items)
-    //   )
-    //   .catch(err => console.log(err));
+    API.searchAll()
+      .then(
+        res =>
+          this.setState({
+            results: res.data
+          })
+      )
+      .catch(err => console.log(err));
   }
 
   render() {
     return (
       <div>
         <Sidebar />
-      
         <div id="page-wrap">
       
             <h1>Welcome</h1>
-      
             {/* This is the activity section */}
             <Activity>
               {this.state.results.length ? (
@@ -54,6 +43,7 @@ class Dashboard extends Component {
                   return (
                     <PostCard
                       key={post.id}
+                      category={post.category}
                       title={post.title}
                       author={post.authors}
                       description={post.description}

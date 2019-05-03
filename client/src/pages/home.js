@@ -1,11 +1,12 @@
 // this is the landing page
 import React, { Component } from "react";
-import { FormContainer, FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
+import {FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
 class Home extends Component {
 
     state = {
         data: {
             title: "Sign Up",
+            route: "/api/parents/signup",
             for: ["userName", "password", "email", "city", "state",],
             nameButton: "Sign Up",
             message: "Already Have An Account?",
@@ -20,6 +21,7 @@ class Home extends Component {
             this.setState({
                 data: {
                     title: "Sign Up",
+                    route: "/api/parents/signup",
                     for: ["userName", "password", "email", "city", "state",],
                     nameButton: "Sign Up",
                     message: "Already Have An Account?",
@@ -33,6 +35,7 @@ class Home extends Component {
             this.setState({
                 data: {
                     title: "Login",
+                    route: "/api/parents/login",
                     for: ["email", "password"],
                     nameButton: "Login",
                     message: "No Account?",
@@ -53,7 +56,7 @@ class Home extends Component {
                             <div className="modal-header">
                                 <FormTitle
                                     title={this.state.data.title}
-                                />                                
+                                />
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -61,18 +64,22 @@ class Home extends Component {
                             <div className="modal-body">
 
 
-
-                                {this.state.data.for.map(item => {
-                                    return (
-                                        <FormLabel
-                                            for={item}
-                                        />
-                                    )
-                                })}
-                                <FormButton
-                                    nameButton={this.state.data.nameButton}
-                                />
-                                <formMessage
+                                <FormAction
+                                route={this.state.data.route}
+                                >
+                                    {this.state.data.for.map(item => {
+                                        return (
+                                            <FormLabel
+                                                key={item}
+                                                for={item}
+                                            />
+                                        )
+                                    })}
+                                    <FormButton
+                                        nameButton={this.state.data.nameButton}
+                                    />
+                                </FormAction>
+                                <FormMessage
                                     message={this.state.data.message}
                                     path={this.state.data.path}
                                     action={this.state.data.action}

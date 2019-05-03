@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
 import "../style/home.css"
+
 class Home extends Component {
 
     state = {

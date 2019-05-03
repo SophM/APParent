@@ -3,20 +3,21 @@ import React, { Component } from "react";
 import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
 import PostCard from "../components/postCard";
-// import WritePost from "../components/write-post";
-// ============== Namita 
+import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 import UserCard from "../components/userCard";
-// ============== Namita 
+import NavBar from "../components/nav";
 
 import API from "../utils/API";
 
 
 class Dashboard extends Component {
+
   state = {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
-    members: []
+    members: [],
+    pageWanted: "dashboard"
   };
 
   componentDidMount() {
@@ -39,34 +40,81 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   }
 
+  handleClickOnSideBar = event => {
+    event.preventDefault();
+
+    this.setState({
+      pageWanted: event.target.attributes.getNamedItem("data-content").value
+    });
+  }
+
+  
+
   render() {
-    return (
-      <div>
-        <Sidebar />
-        <div id="page-wrap">
+    {/* display the page with the activity component */}
+    if (this.state.pageWanted === "dashboard") {
+      return (
+        <div>
+          <NavBar />
+          <Sidebar
+            handleClick={this.handleClickOnSideBar}
+          />
+          <div id="page-wrap">
+  
+            <h1 className="mt-2 text-dark">Welcome</h1>
+      
+            <Activity>
+              {this.state.results.length ? (
+                this.state.results.map((post) => {
+                  return (
+                    <PostCard
+                      key={post.id}
+                      category={post.category}
+                      title={post.title}
+                      author={post.authors}
+                      description={post.description}
+                    />
+                  );
+                })
+              ) : (
+                  <h3>No Results to Display</h3>
+                )}
+            </Activity>
+          </div>
+        </div>
+      );
 
-          <h1>Welcome</h1>
-          {/* This is the activity section */}
-          <Activity>
-            {this.state.results.length ? (
-              this.state.results.map((post, i) => {
-                return (
-                  <PostCard
-                    key={post.id}
-                    category={post.category}
-                    title={post.title}
-                    author={post.authors}
-                    description={post.description}
-                  />
-                );
-              })
-            ) : (
-                <h3>No Results to Display</h3>
-              )}
-          </Activity>
+    {/* display the page with the myProfile component */}
+    } else if (this.state.pageWanted === "myProfile") {
+      return (
+        <div>
+          <NavBar />
+          <Sidebar
+            handleClick={this.handleClickOnSideBar}
+          />
+          <div id="page-wrap">
+  
+            <h1 className="mt-2 text-dark">Welcome</h1>
+      
+            
+            
+          </div>
+        </div>
+      );
 
-          {/* This is section is to display all members */}
-          <AllMembers>
+    {/* display the page with the allMembers component */}    
+    } else if (this.state.pageWanted === "allMembers") {
+      return (
+        <div>
+          <NavBar />
+          <Sidebar
+            handleClick={this.handleClickOnSideBar}
+          />
+          <div id="page-wrap">
+  
+            <h1 className="mt-2 text-dark">Welcome</h1>
+      
+             <AllMembers>
             {this.state.members.length ? (
               this.state.members.map((member, i) => {
                 return (
@@ -83,13 +131,28 @@ class Dashboard extends Component {
                 <h3>No Results to Display</h3>
               )}
           </AllMembers>
-          {/* This is section is to display all members */}
+
+          </div>
         </div>
+      );
 
-
-
-      </div>
-    );
+    {/* display the page with the writePost component */}
+    } else if (this.state.pageWanted === "writePost") {
+      return (
+        <div>
+          <NavBar />
+          <Sidebar
+            handleClick={this.handleClickOnSideBar}
+          />
+          <div id="page-wrap">
+  
+            <h1 className="mt-2 text-dark">Welcome</h1>
+      
+            <WritePost />          
+          </div>
+        </div>
+      );
+    }
   }
 }
 

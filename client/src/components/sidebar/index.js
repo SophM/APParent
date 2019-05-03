@@ -15,13 +15,13 @@ function SideBar(props) {
                 <button className="btn btn-lg menu-item" data-content="allMembers" onClick={props.handleClick}>
                     All members
                 </button>
-                <button className="btn btn-lg menu-item"  data-content="aboutUs" onClick={props.handleClick}>
+                <button className="btn btn-lg menu-item"  data-content="writePost" onClick={props.handleClick}>
+                    Write a post
+                </button>
+                <button className="btn btn-lg menu-item" data-content="aboutUs" onClick={props.handleClick}>
                     About us!
                 </button>
-                <button className="btn btn-lg menu-item" data-content="contact" onClick={props.handleClick}>
-                    Contact
-                </button>
-                <a className="menu-item" href="/">
+                <a className="menu-item ml-3" href="/logout">
                     Logout
                 </a>
             </Menu>

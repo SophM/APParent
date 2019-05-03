@@ -93,8 +93,10 @@ class Home extends Component {
                     </div>
                 </div>
 
-                <h1 className="text-center mt-4">Welcome to APP@rent!</h1>
+                
                 <img className="logo" src="/images/logo-only-color.png" alt="logo"/>
+                <h1 className="text-center mt-4">Welcome to APP@rent!</h1>
+                <p className="text-center">An app for parents to meet other parents to share information!</p>
 
                 <div className="row">
                     <div className="col-6 text-center">

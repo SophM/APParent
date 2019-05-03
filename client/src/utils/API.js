@@ -4,6 +4,6 @@ import axios from "axios";
 
 export default {
     searchAll: function() {
-        return axios.get("/api/parents");
+        return axios.get("/api/posts");
     }
 };

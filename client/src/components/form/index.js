@@ -35,6 +35,25 @@ export function FormLabel(props) {
     )
 }
 
+export function Dropdown(props, {children}){
+    return (
+        <div className="form-group">
+            <label for={props.for}>{props.label}</label>
+            <select class="form-control" id={props.for}>
+                {children}
+            </select>
+        </div>
+    )
+}
+
+export function OptionForDropdown(props) {
+    return (
+        <div>
+            <option>{props.option}</option>
+        </div>
+    )
+}
+
 export function FormButton(props) {
     return (
         <button type="submit" className="btn btn-primary btn-block">{props.nameButton}</button>

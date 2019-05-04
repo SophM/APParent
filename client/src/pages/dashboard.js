@@ -51,6 +51,8 @@ class Dashboard extends Component {
     this.setState({
       pageWanted: event.target.attributes.getNamedItem("data-content").value
     });
+          console.log("This is the result", this.state.results)
+
   }
 
   //Write a post 
@@ -92,7 +94,7 @@ class Dashboard extends Component {
                       key={post.id}
                       category={post.category}
                       title={post.title}
-                      author={post.authors}
+                      name={post.parent.userName}
                       description={post.description}
                     />
                   );

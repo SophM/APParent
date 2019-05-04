@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select class="form-control" id={props.for}>
+            <select className="form-control" id={props.for}>
                 {props.children}
             </select>
         </div>

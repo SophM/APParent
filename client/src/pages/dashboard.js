@@ -45,11 +45,12 @@ class Dashboard extends Component {
       
      //Retrives Logged in USer Info 
      API.findOne()
-     .then(res =>
+     .then(res =>{
         console.log("Logged in User Data ", res.data)
-        //  this.setState({
-        //   loggedInUser: res.data
-        //  })
+         this.setState({
+          loggedInUser: res.data
+         })
+      }
      )
      .catch(err => console.log(err));
   }
@@ -125,12 +126,17 @@ class Dashboard extends Component {
           <div id="page-wrap">
   
             <h1 className="mt-2 text-dark">Welcome</h1>
-
-            <MyProfile>
-
-            </MyProfile>
-    
             
+  
+                  <MyProfile
+                    userName={this.state.loggedInUser.userName}
+                    email={this.state.loggedInUser.email}
+                    city={this.state.loggedInUser.city}
+                    state={this.state.loggedInUser.state}
+                  >
+
+                  </MyProfile>
+              
           </div>
         </div>
       );

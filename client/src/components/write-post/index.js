@@ -11,18 +11,22 @@ class WritePost extends Component {
     state = {
         title: "",
         description: "",
-        category: ""
+        category: "Event"
     };
 
     handleInputChange = event => {
         const value = event.target.value;
-        const column = event.target.name
+        const column = event.target.id
         this.setState({
             [column]: value
         })
+        
     }
 
     handleButtonClick = event => {
+        event.preventDefault();
+        console.log("title: " , this.state.title, "description:" ,this.state.description,
+        "category:",  this.state.category)
         API.createPost(
             {
                 title: this.state.title,
@@ -32,6 +36,7 @@ class WritePost extends Component {
         ).then(() => {
             //redirect to dashboard
             this.props.handleCreatePost()
+            console.log("inside API calls")
         })
     }
 
@@ -49,6 +54,7 @@ class WritePost extends Component {
                     for="category"
                     label="Choose a category for your post"
                     handleChange={this.handleInputChange}
+                    value={this.state.category}
                 >
                     {categories.map((category, i) => {
                         return (

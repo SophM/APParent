@@ -55,8 +55,7 @@ class Dashboard extends Component {
 
   //Write a post 
   
-  handleCreatePost = event => {
-    event.preventDefault();
+  handleCreatePost = () => {
 
     //Pulling all the posts again redirect to dashboard 
     API.searchAll()

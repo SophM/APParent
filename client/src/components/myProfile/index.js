@@ -64,10 +64,21 @@ class MyProfile extends Component {
                         disabled={this.state.disabled}
                     // handleChange={this.handleInputChange}
                     />
-                    <FormButton
-                        nameButton="Edit Profile"
+                    
+                    {/* Conditional hide & show the buttons */}
+                    { this.state.disabled ? 
+                        <FormButton
+                            nameButton="Edit Profile"
+                            handleButtonClick={this.handleButtonClick}
+                        /> 
+                    :  
+                        <FormButton
+                        nameButton="Save Profile"
                         handleButtonClick={this.handleButtonClick}
-                    />
+                        /> 
+                    }
+                   
+                   
                     {/* </FormAction> */}
                 </FormContainer>
             </div>

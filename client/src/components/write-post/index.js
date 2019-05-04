@@ -15,9 +15,9 @@ function WritePost() {
                     for="category"
                     label="Choose a category for your post"
                 >
-                    {categories.map(category => {
+                    {categories.map((category,i) => {
                         return (
-                            <OptionForDropdown option={category}/>
+                            <OptionForDropdown option={category} key={i}/>
                         ) 
                     })}
                 </Dropdown>

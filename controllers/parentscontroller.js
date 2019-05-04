@@ -21,7 +21,10 @@ module.exports = {
 
     // find a specific parent 
     findOne : function(req, res){
-        db.parents.findOne({where:{id: req.params.id}}).then(function(result){
+        db.parents.findOne({
+            where:{id: req.session.passport.user.id}
+            // where:{id: req.param.id}
+        }).then(function(result){
             res.json(result)
         })
     }, 
@@ -29,10 +32,10 @@ module.exports = {
     // find all parents - sauf the parent logged in
     findAllParents: function(req, res){
         db.parents.findAll({
-            // where: {
-            //     // excluded the logged-in parent
-            //     [Op.not] : [{id: req.session.passport.user.id}]
-            // }
+            where: {
+                // excluded the logged-in parent
+                [Op.not] : [{ id : req.session.passport.user.id}]
+            }
         }).then(function(result){
             res.json(result)
         })

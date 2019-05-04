@@ -10,8 +10,13 @@ export default {
     searchAllMembers: function() {
         return axios.get("/api/parents");
     },
+    //See Logged in user data 
+    findOne: function() {
+        return axios.get("/api/parents/:id");
+    },
     //Create a post 
     createPost: function(data) {
         return axios.post("/api/posts",data);
     }
+    
 };

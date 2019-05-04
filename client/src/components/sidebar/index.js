@@ -21,7 +21,7 @@ function SideBar(props) {
                 <button className="btn btn-lg menu-item" data-content="aboutUs" onClick={props.handleClick}>
                     About us!
                 </button>
-                <a className="menu-item ml-3" href="/logout">
+                <a className="menu-item ml-3" href="/">
                     Logout
                 </a>
             </Menu>

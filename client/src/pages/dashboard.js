@@ -6,19 +6,20 @@ import PostCard from "../components/postCard";
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 import UserCard from "../components/userCard";
+import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
 
 import API from "../utils/API";
 
-
 class Dashboard extends Component {
-
+  //Setting all default values 
   state = {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
     members: [],
-    pageWanted: "dashboard",
-    posts: []
+    pageWanted: "dashboard", 
+    loggedInUser: []
+
   };
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class Dashboard extends Component {
       )
       .catch(err => console.log(err));
       
-      //Retrives all the MEMbe
+      //Retrives all the Members Data 
       API.searchAllMembers()
       .then(res =>
           this.setState({
@@ -42,7 +43,16 @@ class Dashboard extends Component {
       )
       .catch(err => console.log(err));
       
-     
+     //Retrives Logged in USer Info 
+     API.findOne()
+     .then(res =>{
+        console.log("Logged in User Data ", res.data)
+         this.setState({
+          loggedInUser: res.data
+         })
+      }
+     )
+     .catch(err => console.log(err));
   }
 
   handleClickOnSideBar = event => {
@@ -118,9 +128,17 @@ class Dashboard extends Component {
           <div id="page-wrap">
   
             <h1 className="mt-2 text-dark">Welcome</h1>
-      
             
-            
+  
+                  <MyProfile
+                    userName={this.state.loggedInUser.userName}
+                    email={this.state.loggedInUser.email}
+                    city={this.state.loggedInUser.city}
+                    state={this.state.loggedInUser.state}
+                  >
+
+                  </MyProfile>
+              
           </div>
         </div>
       );

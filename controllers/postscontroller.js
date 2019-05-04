@@ -35,8 +35,18 @@ module.exports = {
     //find all post ever made
     findAllPosts: function (req, res) {
         if (req.isAuthenticated()) {
-            db.posts.findAll().then(function (result) {
+            db.posts.findAll(
+                {
+                    include: [
+                        {
+                            model: db.parents,
+                            as: "parent"
+                        }
+                    ]
+                }
+            ).then(function (result) {
                 res.json(result)
+                console.log("This is the result", result)
             })
         }
     }

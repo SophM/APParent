@@ -56,31 +56,9 @@ class MyProfile extends Component {
                     <FormTitle
                         title="View My Profile"
                     />
-                    {/* <FormLabel
-                        for="userName"
-                        disabled={this.state.disabled}
-                        value={this.props.userName}
-                        // handleChange={this.handleInputChange}
-                    />
-                    <FormLabel
-                        for="email"
-                        disabled={this.state.disabled}
-                        value={this.props.email}
-                    // handleChange={this.handleInputChange}
-                    />
-                    <FormLabel
-                        for="city"
-                        disabled={this.state.disabled}
-                        value={this.props.city}
-                    // handleChange={this.handleInputChange}
-                    />
-                    <FormLabel
-                        for="state"
-                        disabled={this.state.disabled}
-                        value={this.props.state}
-                    // handleChange={this.handleInputChange}
-                    /> */}
-                    
+
+                    {/* Rendering Form labels using the userInfo object values */}
+
                     {this.state.userInfo.map((user , i) =>{
 
                         return(

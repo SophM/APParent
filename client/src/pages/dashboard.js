@@ -17,11 +17,13 @@ class Dashboard extends Component {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
     members: [],
-    pageWanted: "dashboard"
+    pageWanted: "dashboard",
+    posts: []
   };
 
   componentDidMount() {
 
+    //retrieves All the post 
     API.searchAll()
       .then(
         res =>
@@ -30,7 +32,8 @@ class Dashboard extends Component {
           })
       )
       .catch(err => console.log(err));
-
+      
+      //Retrives all the MEMbe
       API.searchAllMembers()
       .then(res =>
           this.setState({
@@ -38,6 +41,8 @@ class Dashboard extends Component {
           })
       )
       .catch(err => console.log(err));
+      
+     
   }
 
   handleClickOnSideBar = event => {
@@ -48,6 +53,23 @@ class Dashboard extends Component {
     });
   }
 
+  //Write a post 
+  
+  handleCreatePost = event => {
+    event.preventDefault();
+
+    //Pulling all the posts again redirect to dashboard 
+    API.searchAll()
+    .then(
+      res =>
+        this.setState({
+          results: res.data,
+          pageWanted: "dashboard"
+        })
+    )
+    .catch(err => console.log(err));
+
+  }
   
 
   render() {
@@ -148,7 +170,10 @@ class Dashboard extends Component {
   
             <h1 className="mt-2 text-dark">Welcome</h1>
       
-            <WritePost />          
+            <WritePost 
+              handleCreatePost={this.handleCreatePost}
+            />  
+                    
           </div>
         </div>
       );

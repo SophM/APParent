@@ -1,38 +1,78 @@
-import React from "react";
-import {FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
+//
+import React,{Component} from "react";
+import { FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton, FormAction } from "../form";
+import API from "../../utils/API";
 
+//Declaring all categories for the Post 
 const categories = ["Event", "Advice", "Free", "On sale", "Question"];
 
-function WritePost() {
+class WritePost extends Component {
 
-    return (
+    state = {
+        title: "",
+        description: "",
+        category: ""
+    };
+
+    handleInputChange = event => {
+        const value = event.target.value;
+        const column = event.target.name
+        this.setState({
+            [column]: value
+        })
+    }
+
+    handleButtonClick = event => {
+        API.createPost(
+            {
+                title: this.state.title,
+                description: this.state.description,
+                category: this.state.category
+            }
+        ).then(() => {
+            //redirect to dashboard
+            this.props.handleCreatePost()
+        })
+    }
+
+    render() {
+        return(
         <div>
             <FormContainer>
-                <FormTitle 
-                    title = "Write a post"
+                {/* <FormAction 
+                    route={props.route} > */}
+
+                <FormTitle
+                    title="Write a post"
                 />
                 <Dropdown
                     for="category"
                     label="Choose a category for your post"
+                    handleChange={this.handleInputChange}
                 >
-                    {categories.map(category => {
+                    {categories.map((category, i) => {
                         return (
-                            <OptionForDropdown option={category}/>
-                        ) 
+                            <OptionForDropdown option={category} key={i} />
+                        )
                     })}
                 </Dropdown>
-                <FormLabel 
-                    for="Title"
+                <FormLabel
+                    for="title"
+                    handleChange={this.handleInputChange}
                 />
-                <InputText 
-                    for="Message"
+                <InputText
+                    for="description"
+                    handleChange={this.handleInputChange}
                 />
-                <FormButton 
+                <FormButton
                     nameButton="Post"
+                    handleButtonClick={this.handleButtonClick}
                 />
+                {/* </FormAction> */}
             </FormContainer>
-        </div> 
-    );
+        </div>
+        );
+    }
 }
 
 export default WritePost;

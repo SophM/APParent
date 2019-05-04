@@ -1,10 +1,10 @@
 import React from "react";
+import { InputText, FormContainer } from "../form";
 import "./style.css";
 
 function PostCard(props) {
   return (
     <div>
-      
       <div className="card mb-3">
         <div className="row no-gutters">
           <div className="col">
@@ -39,7 +39,7 @@ function PostCard(props) {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              Title
+              {props.title}
               <button
                 type="button"
                 className="close"
@@ -49,11 +49,14 @@ function PostCard(props) {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">test</div>
+            <div className="modal-body">
+              <FormContainer>
+                <InputText for="comment" />
+              </FormContainer>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   );
 }

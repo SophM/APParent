@@ -179,7 +179,9 @@ class Dashboard extends Component {
             <h1 className="mt-2 text-dark">Welcome</h1>
       
             <WritePost 
-              handleCreatePost={this.handleCreatePost}/>          
+              handleCreatePost={this.handleCreatePost}
+            />  
+                    
           </div>
         </div>
       );

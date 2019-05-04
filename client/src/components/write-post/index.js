@@ -1,35 +1,40 @@
 import React from "react";
-import {FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
+import {FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton, FormAction} from "../form";
 
 const categories = ["Event", "Advice", "Free", "On sale", "Question"];
 
-function WritePost() {
+function WritePost(props) {
 
     return (
         <div>
             <FormContainer>
-                <FormTitle 
-                    title = "Write a post"
-                />
-                <Dropdown
-                    for="category"
-                    label="Choose a category for your post"
-                >
-                    {categories.map((category,i) => {
-                        return (
-                            <OptionForDropdown option={category} key={i}/>
-                        ) 
-                    })}
-                </Dropdown>
-                <FormLabel 
-                    for="Title"
-                />
-                <InputText 
-                    for="Message"
-                />
-                <FormButton 
-                    nameButton="Post"
-                />
+                {/* <FormAction 
+                    route={props.route} > */}
+
+                    <FormTitle 
+                        title = "Write a post"
+                    />
+                    <Dropdown
+                        for="category"
+                        label="Choose a category for your post"
+                    >
+                        {categories.map((category,i) => {
+                            return (
+                                <OptionForDropdown option={category} key={i} />
+                            ) 
+                        })}
+                    </Dropdown>
+                    <FormLabel 
+                        for="title"
+                    />
+                    <InputText 
+                        for="description"
+                    />
+                    <FormButton 
+                        nameButton="Post"
+                        handleCreatePost={props.handleCreatePost}
+                    />
+                {/* </FormAction> */}
             </FormContainer>
         </div> 
     );

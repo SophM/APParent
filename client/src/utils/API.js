@@ -9,5 +9,9 @@ export default {
 
     searchAllMembers: function() {
         return axios.get("/api/parents");
+    },
+    //Create a post 
+    createPost: function() {
+        return axios.post("/api/posts");
     }
 };

@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select className="form-control" id={props.for}>
+            <select className="form-control" id={props.for} name={props.for}>
                 {props.children}
             </select>
         </div>
@@ -63,7 +63,7 @@ export function OptionForDropdown(props) {
 
 export function FormButton(props) {
     return (
-        <button type="submit" className="btn btn-primary btn-block">{props.nameButton}</button>
+        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleCreatePost}>{props.nameButton} </button>
     )
 }
 

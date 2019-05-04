@@ -1,22 +1,21 @@
-import React from "react"; 
+import React from "react";
 
-function userCard(props) { 
+function userCard(props) {
 
     return (
-        <div className="card-columns">
-          
-                    <img className="card-img" src="http://lorempixel.com/600/500/people" //{props.thumbnail} 
-                        alt={props.userName} style={{ width: "300px" }} />
-              
-                <div className="card-body">
-                    <h4 class="card-title">{props.userName}</h4>
-                    <p className="card-text">Email: {props.email}</p>
-                    <p className="card-text">City: {props.city} | State : {props.state}</p>
-                </div>
-                <a href="#" target="_blank" className="btn round btn-primary" role="button">See Profile</a>
-           
-        </div> 
+    
+        <div className="card" style={{ width: "18rem" }}>
+            <img src="http://lorempixel.com/600/500/people" className="card-img-top" alt={props.userName} />
+            <div className="card-body">
+                <h2 className="card-title">{props.userName}</h2>
+                <h5 className="card-text">Email: {props.email}</h5>
+                <h5 className="card-text">City: {props.city}</h5>
+                <h5 className="card-text">State : {props.state}</h5>
+                <button className="btn btn-primary btn-lg mt-1">Chat</button>
+            </div>
+        </div>
+
     );
 }
 
-export default userCard; 
+export default userCard;

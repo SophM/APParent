@@ -17,7 +17,8 @@ class Dashboard extends Component {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
     members: [],
-    pageWanted: "dashboard"
+    pageWanted: "dashboard", 
+    loggedInUser: []
 
   };
 
@@ -33,7 +34,7 @@ class Dashboard extends Component {
       )
       .catch(err => console.log(err));
       
-      //Retrives all the MEMbe
+      //Retrives all the Members Data 
       API.searchAllMembers()
       .then(res =>
           this.setState({
@@ -42,7 +43,15 @@ class Dashboard extends Component {
       )
       .catch(err => console.log(err));
       
-     
+     //Retrives Logged in USer Info 
+     API.findOne()
+     .then(res =>
+        console.log("Logged in User Data ", res.data)
+        //  this.setState({
+        //   loggedInUser: res.data
+        //  })
+     )
+     .catch(err => console.log(err));
   }
 
   handleClickOnSideBar = event => {

@@ -6,7 +6,7 @@ function Activity({children}) {
     <div className="container mt-4 mb-4">
       <div className="card">
         <h5 className="card-header">Activity Feed</h5>
-        <div className="card-body">{children}</div>
+        <div className="card-body" id="eachPost">{children}</div>
       </div>
     </div>
 

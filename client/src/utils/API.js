@@ -11,7 +11,7 @@ export default {
         return axios.get("/api/parents");
     },
     //Create a post 
-    createPost: function() {
-        return axios.post("/api/posts");
+    createPost: function(data) {
+        return axios.post("/api/posts",data);
     }
 };

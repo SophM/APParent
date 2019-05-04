@@ -57,25 +57,17 @@ class Dashboard extends Component {
   
   handleCreatePost = event => {
     event.preventDefault();
-    
-    console.log("Create Post Data", event.target); 
-    //  //Creating a Post 
-    //  API.createPost()
-    //  .then(
-    //    () => {
-    //      //Pulling all the posts again redirect to dashboard 
-    //       API.searchAll()
-    //       .then(
-    //         res =>
-    //           this.setState({
-    //             results: res.data,
-    //             pageWanted: "dashboard"
-    //           })
-    //       )
-    //       .catch(err => console.log(err));
-    //       }
-    //  )
-    //  .catch(err => console.log(err))
+
+    //Pulling all the posts again redirect to dashboard 
+    API.searchAll()
+    .then(
+      res =>
+        this.setState({
+          results: res.data,
+          pageWanted: "dashboard"
+        })
+    )
+    .catch(err => console.log(err));
 
   }
   

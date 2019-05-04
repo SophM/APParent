@@ -30,7 +30,7 @@ export function FormLabel(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.for}</label>
-            <input type={props.for} id={props.for} name={props.for} className="form-control" placeholder={"Enter a " + props.for} />
+            <input type={props.for} id={props.for} name={props.for} className="form-control" placeholder={"Enter a " + props.for} onChange={props.handleChange}/>
         </div>
     )
 }
@@ -39,7 +39,7 @@ export function InputText(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.for}</label>
-            <textarea id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for}></textarea>
+            <textarea id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for} onChange={props.handleChange}></textarea>
         </div>
     )
 }
@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select className="form-control" id={props.for} name={props.for}>
+            <select value={props.value} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
                 {props.children}
             </select>
         </div>
@@ -63,7 +63,7 @@ export function OptionForDropdown(props) {
 
 export function FormButton(props) {
     return (
-        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleCreatePost}>{props.nameButton} </button>
+        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleButtonClick}>{props.nameButton} </button>
     )
 }
 

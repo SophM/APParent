@@ -11,8 +11,8 @@ module.exports = {
                 //double check to see if req.session.passport.user.id is what we need
                 parentId: req.session.passport.user.id,
             }).then(function (result) {
-
-                res.json(result)
+                res.end()
+                // res.json(result)
             })
         }
     },

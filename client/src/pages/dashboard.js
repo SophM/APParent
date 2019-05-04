@@ -6,19 +6,19 @@ import PostCard from "../components/postCard";
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 import UserCard from "../components/userCard";
+import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
 
 import API from "../utils/API";
 
-
 class Dashboard extends Component {
-
+  //Setting all default values 
   state = {
     results: [],
     username: "Sophie, Namita , Samuel & Kevin",
     members: [],
-    pageWanted: "dashboard",
-    posts: []
+    pageWanted: "dashboard"
+
   };
 
   componentDidMount() {
@@ -116,8 +116,11 @@ class Dashboard extends Component {
           <div id="page-wrap">
   
             <h1 className="mt-2 text-dark">Welcome</h1>
-      
-            
+
+            <MyProfile>
+
+            </MyProfile>
+    
             
           </div>
         </div>

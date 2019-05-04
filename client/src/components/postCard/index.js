@@ -12,8 +12,8 @@ function PostCard(props) {
             <p className="card-text">Post By: {props.name}</p>
             <p className="card-text">{props.description}</p>
           </div>
-          <button className="btn btn-primary btn-lg float-right m-3 mr-5">
-            Comment
+          <button className="btn btn-primary btn-lg float-right m-3 mr-5"id="comment" data-toggle="modal" data-target="#exampleModalLong">
+          Comment
           </button>
         </div>
       </div>

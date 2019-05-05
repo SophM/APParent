@@ -75,3 +75,16 @@ export function FormMessage(props) {
     )
 }
 
+export function CommentDisplay(props) {
+    return (
+        <p className="lead mt-4">
+            display comment... this is a test
+        </p>
+    )
+}
+
+export function CommentSubmitButton(props) {
+    return (
+        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleButtonClick}>Submit Comment </button>
+    )
+}

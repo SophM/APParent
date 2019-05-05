@@ -1,7 +1,7 @@
 //This component is for Edit or View my Profile 
 
 import React, { Component } from "react";
-import { FormContainer, FormTitle, FormLabel, FormButton, FormAction } from "../form";
+import { FormContainer, FormTitle, FormLabel, FormButton, FormAction, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
 
 class MyProfile extends Component {
@@ -27,7 +27,7 @@ class MyProfile extends Component {
                 },
                 {
                     for: "state",
-                    label:"Enter your state",
+                    label:"Choose a state",
                     value: this.props.state
                 }
             ]
@@ -44,7 +44,7 @@ class MyProfile extends Component {
 
     handleEditButtonClick = event => {
         event.preventDefault();
-        console.log("EDIT MY PROFILE");
+        // console.log("EDIT MY PROFILE");
         this.setState({
             disabled: false
         })
@@ -52,7 +52,7 @@ class MyProfile extends Component {
 
     handleSaveButtonClick = event => {
         event.preventDefault();
-        console.log("SAVE MY PROFILE");
+        // console.log("SAVE MY PROFILE");
         this.setState({
             disabled: true
         })
@@ -89,7 +89,7 @@ class MyProfile extends Component {
                         );
                     }
                     )} 
-
+                    
                     {/* Conditional hide & show the buttons */}
                     { this.state.disabled ? 
                         <FormButton

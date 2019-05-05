@@ -15,14 +15,7 @@ module.exports = {
             city: req.body.city, 
             state: req.body.state
         }).then(function(result){
-            db.kids.create({
-                name: req.body.nameFirstKid,
-                gradeLevel: req.body.grade,
-                parentId: req.session.passport.user.id,
-                schoolId: req.body.schoolId
-            }).then(function () {
-                res.json(result)
-            })
+            res.json(result)
         })
     },
 

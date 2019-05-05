@@ -47,12 +47,23 @@ module.exports = function (passport) {
             }).then(function (newUser) {
               // console.log("new user", newUser)
               return done(null, newUser)
-            }).catch(err => console.log(err))
+            }).catch(err => console.log(err));
+
+            db.kids.create({
+              name: req.body.nameFirstKid,
+              gradeLevel: req.body.grade,
+              parentId: 10,
+              schoolId: req.body.schoolId
+            }).then(function (newKid) {
+              // console.log("new user", newUser)
+              return done(null, newKid)
+            }).catch(err => console.log(err));
+             
           }
         })
       })
-
-    }))
+    }
+  ))
 
 
 

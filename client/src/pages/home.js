@@ -128,7 +128,7 @@ class Home extends Component {
                                             >
                                                 {this.state.schools.map(school => {
                                                     return (
-                                                        <OptionForDropdown value={school.schoolId} option={school.name}/>
+                                                        <OptionForDropdown option={school.id}/>
                                                     )
                                                 })}
                                             </Dropdown>

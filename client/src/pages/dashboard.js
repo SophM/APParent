@@ -80,6 +80,14 @@ class Dashboard extends Component {
     .catch(err => console.log(err));
 
   }
+
+  handleLogOut = () => {
+    API.logout().then(
+      res => {
+        console.log("Logged Out")
+      }
+    )
+  }
   
 
   render() {
@@ -87,9 +95,12 @@ class Dashboard extends Component {
     if (this.state.pageWanted === "dashboard") {
       return (
         <div>
-          <NavBar />
+          <NavBar 
+          logout={this.handleLogOut}
+          />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
           />
           <div id="page-wrap">
   
@@ -120,9 +131,12 @@ class Dashboard extends Component {
     } else if (this.state.pageWanted === "myProfile") {
       return (
         <div>
-          <NavBar />
+          <NavBar
+            logout={this.handleLogOut}
+          />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
           />
           <div id="page-wrap">
   
@@ -146,9 +160,12 @@ class Dashboard extends Component {
     } else if (this.state.pageWanted === "allMembers") {
       return (
         <div>
-          <NavBar />
+          <NavBar
+            logout={this.handleLogOut}
+          />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
           />
           <div id="page-wrap">
   
@@ -180,9 +197,12 @@ class Dashboard extends Component {
     } else if (this.state.pageWanted === "writePost") {
       return (
         <div>
-          <NavBar />
+          <NavBar
+            logout={this.handleLogOut}
+          />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
           />
           <div id="page-wrap">
   
@@ -200,9 +220,12 @@ class Dashboard extends Component {
     } else if (this.state.pageWanted === "aboutUs") {
       return (
         <div>
-          <NavBar />
+          <NavBar
+            logout={this.handleLogOut}
+          />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
           />
           <div id="page-wrap">
   

@@ -31,5 +31,9 @@ export default {
     //update logged in profile 
     updateProfile: function(data) {
         return axios.post("/api/parents/:id",data);
+    }, 
+
+    logout: function(){
+        return axios.get("/logout")
     }
 };

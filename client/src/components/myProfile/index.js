@@ -21,14 +21,14 @@ class MyProfile extends Component {
                     value: this.props.email
                 },
                 {
-                    for: "state",
-                    label:"Enter your state",
-                    value: this.props.state
-                },
-                {
                     for: "city", //db column
                     label:"Enter your city", //message u see 
                     value: this.props.city
+                },
+                {
+                    for: "state",
+                    label:"Enter your state",
+                    value: this.props.state
                 }
             ]
     };

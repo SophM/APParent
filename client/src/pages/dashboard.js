@@ -208,7 +208,7 @@ class Dashboard extends Component {
   
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             <div className="card">
-              <h3 className="card-header text-success">Best place to  network/connect, get to know each other and help each other out, share tips, events.... </h3>
+              <h3 className="card-header text-success">Best place to  network/connect with other parents, get to know each other and help each other out, share tips, events.... </h3>
               <div className="card-body">
                 
                 <h5 className="card-text">Sophie Mallez</h5><br />

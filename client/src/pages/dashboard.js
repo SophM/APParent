@@ -45,13 +45,14 @@ class Dashboard extends Component {
      //Retrives Logged in USer Info 
      API.findOne()
      .then(res =>{
-        console.log("Logged in User Data ", res.data)
+        // console.log("Logged in User Data ", res.data)
          this.setState({
           loggedInUser: res.data
          })
       }
      )
      .catch(err => console.log(err));
+
   }
 
   handleClickOnSideBar = event => {

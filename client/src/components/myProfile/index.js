@@ -60,11 +60,16 @@ class MyProfile extends Component {
                 <FormContainer>
                     {/* <FormAction 
                     route={props.route} > */}
-
-                    <FormTitle
-                        title="View My Profile"
-                    />
-
+                    { this.state.disabled ? 
+                        <FormTitle
+                            title="View My Profile"
+                        />
+                    :
+                        <FormTitle
+                            title="Update Profile Info"
+                        />
+                    }
+                    
                     {/* Rendering Form labels using the userInfo object values */}
 
                     {this.state.userInfo.map((user , i) =>{

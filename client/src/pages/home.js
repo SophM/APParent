@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
 import "../style/home.css"
 
+let labels = [];
+
 class Home extends Component {
 
     state = {
@@ -24,7 +26,7 @@ class Home extends Component {
                 data: {
                     title: "Sign Up",
                     route: "/api/parents/signup",
-                    for: ["userName", "password", "email", "city", "state",],
+                    for: ["userName", "password", "email", "city",],
                     nameButton: "Sign Up",
                     message: "Already Have An Account?",
                     action: "Login",
@@ -69,14 +71,30 @@ class Home extends Component {
                                 <FormAction
                                     route={this.state.data.route}
                                 >
-                                    {this.state.data.for.map(item => {
+                                    {this.state.data.for.map( (item, i) => {
+                                        // to get nicer labels for the inputs on the sign-up and login forms
+                                        if (this.state.data.for.length !== 2) {
+                                            labels = ["Enter a username", "Enter a password", "Enter an email", "Enter a city"];
+                                        } else {
+                                            labels =["Enter your email", "Enter your password"]; 
+                                        }
                                         return (
                                             <FormLabel
                                                 key={item}
                                                 for={item}
+                                                label={labels[i]}
                                             />
                                         )
                                     })}
+
+                                    {/* ternary so the state input is only displayed on the sign-up form */}
+                                    {this.state.data.title === "Sign Up" ? 
+                                        <div className="form-group text-left">
+                                            <label for="state">Choose a state</label>
+                                            <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
+                                        </div>
+                                    : (" ")} 
+
                                     <FormButton
                                         nameButton={this.state.data.nameButton}
                                     />
@@ -96,8 +114,8 @@ class Home extends Component {
 
                 
                 <img className="logo" src="/images/logo-only-color.png" alt="logo"/>
-                <h1 className="text-center mt-4">Welcome to APP@rent!</h1>
-                <p className="text-center">An app for parents to meet other parents to share information!</p>
+                <h1 className="text-center mt-3">Welcome to APP@rent!</h1>
+                <p className="text-center font-weight-bold">An app to meet other parents, help one another and share information!</p>
 
                 <div className="row">
                     <div className="col-6 text-center">

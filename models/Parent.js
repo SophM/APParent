@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       allowNull: true,
       validate: {
-        len: [5, 10]
+        len: [5, 25]
       }
     },
     password: {

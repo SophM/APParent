@@ -12,18 +12,22 @@ class MyProfile extends Component {
             [
                 {
                     for: "userName",
+                    label:"Enter your userName",
                     value: this.props.userName
                 },
                 {
                     for: "email",
+                    label:"Enter your email",
                     value: this.props.email
                 },
                 {
                     for: "state",
+                    label:"Enter your state",
                     value: this.props.state
                 },
                 {
-                    for: "city",
+                    for: "city", //db column
+                    label:"Enter your city", //message u see 
                     value: this.props.city
                 }
             ]
@@ -77,6 +81,7 @@ class MyProfile extends Component {
                         return(
                             <FormLabel
                                 for={user.for}
+                                label={user.label}
                                 disabled={this.state.disabled}
                                 value={user.value}
                                 handleChange={this.handleInputChange}

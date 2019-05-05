@@ -1,38 +1,51 @@
 // this is the landing page
 import React, { Component } from "react";
-import { FormTitle, FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
-import "../style/home.css"
+import { FormTitle, FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../components/./form";
+import "../style/home.css";
+import API from "../utils/API";
 
 let labels = [];
 
 class Home extends Component {
 
     state = {
+        schools: [],
         data: {
             title: "Sign Up",
             route: "/api/parents/signup",
-            for: ["userName", "password", "email", "city", "state",],
+            for: ["userName", "password", "email", "enter a number",],
             nameButton: "Sign Up",
             message: "Already Have An Account?",
             path: "/login",
-            action: "Login"
+            action: "Login",
         }
     };
+
+    componentDidMount() {
+        // retrieves all the schools
+        API.getAllSchools()
+            .then(
+                res => {
+                    console.log(res.data);
+                    this.setState({
+                        schools: res.data
+                    })
+                }
+            )
+            .catch(err => console.log(err));
+    }
 
     handleButtonClick = event => {
         event.preventDefault();
         if (event.target.id === "signup") {
             this.setState({
-                data: {
-                    title: "Sign Up",
-                    route: "/api/parents/signup",
-                    for: ["userName", "password", "email", "city",],
-                    nameButton: "Sign Up",
-                    message: "Already Have An Account?",
-                    action: "Login",
-                    alt:"login"
-                }
-
+                title: "Sign Up",
+                route: "/api/parents/signup",
+                for: ["userName", "password", "email", "city"],
+                nameButton: "Sign Up",
+                message: "Already Have An Account?",
+                action: "Login",
+                alt:"login"
             })
         }
         else {
@@ -88,10 +101,26 @@ class Home extends Component {
                                     })}
 
                                     {/* ternary so the state input is only displayed on the sign-up form */}
-                                    {this.state.data.title === "Sign Up" ? 
-                                        <div className="form-group text-left">
-                                            <label for="state">Choose a state</label>
-                                            <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
+                                    {this.state.data.title === "Sign Up" ?
+                                        <div>
+                                            <div className="form-group text-left">
+                                                <label for="state">Choose a state</label>
+                                                <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
+                                            </div>
+                                            <FormLabel 
+                                                for="name-first-kid"
+                                                label="What's the name of your first kid?"
+                                            />
+                                            <Dropdown 
+                                                for="school"
+                                                label="Which school is your kid going to?"
+                                            >
+                                                {this.state.schools.map(school => {
+                                                    return (
+                                                        <OptionForDropdown option={school.name}/>
+                                                    )
+                                                })}
+                                            </Dropdown>
                                         </div>
                                     : (" ")} 
 

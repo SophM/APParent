@@ -12,8 +12,8 @@ class MyProfile extends Component {
             [
                 {
                     for: "userName",
-                    label:"Enter your userName",
-                    value: this.props.userName
+                    label:"Enter your username",
+                    value: this.props.userName,
                 },
                 {
                     for: "email",
@@ -30,14 +30,20 @@ class MyProfile extends Component {
                     label:"Choose a state",
                     value: this.props.state
                 }
-            ]
+            ],
+        // userName: "",
+        // email: "",
+        // city: "",
+        // state: "" 
     };
 
+
     handleInputChange = event => {
+        // const {name, value} = event.target;
         const value = event.target.value;
-        const column = event.target.id
+        const column = event.target.id;
         this.setState({
-            [column]: value
+            [column] : value
         })
 
     }
@@ -56,12 +62,12 @@ class MyProfile extends Component {
         this.setState({
             disabled: true
         })
-         //Updates the user profile 
-         API.updateProfile()
-         .then(res => {
- 
-         })
-         .catch(err => console.log(err)); 
+        //Updates the user profile 
+        API.updateProfile()
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err)); 
     }
 
     render() {
@@ -87,6 +93,7 @@ class MyProfile extends Component {
                         return(
                             <FormLabel
                                 for={user.for}
+                                name={user.for}
                                 label={user.label}
                                 disabled={this.state.disabled}
                                 value={user.value}
@@ -94,7 +101,7 @@ class MyProfile extends Component {
                             /> 
                         );
                     }
-                    )} 
+                    )}
                     
                     {/* Conditional hide & show the buttons */}
                     { this.state.disabled ? 
@@ -104,8 +111,8 @@ class MyProfile extends Component {
                         /> 
                     :  
                         <FormButton
-                        nameButton="Save Profile"
-                        handleButtonClick={this.handleSaveButtonClick}
+                            nameButton="Save Profile"
+                            handleButtonClick={this.handleSaveButtonClick}
                         /> 
                     }
                    

@@ -40,13 +40,15 @@ class Home extends Component {
         event.preventDefault();
         if (event.target.id === "signup") {
             this.setState({
-                title: "Sign Up",
-                route: "/api/parents/signup",
-                for: ["userName", "password", "email", "city"],
-                nameButton: "Sign Up",
-                message: "Already Have An Account?",
-                action: "Login",
-                alt:"login"
+                data: {
+                    title: "Sign Up",
+                    route: "/api/parents/signup",
+                    for: ["userName", "password", "email", "city"],
+                    nameButton: "Sign Up",
+                    message: "Already Have An Account?",
+                    action: "Login",
+                    alt:"login"
+                } 
             })
         }
         else {
@@ -88,7 +90,7 @@ class Home extends Component {
                                     {this.state.data.for.map( (item, i) => {
                                         // to get nicer labels for the inputs on the sign-up and login forms
                                         if (this.state.data.for.length !== 2) {
-                                            labels = ["Enter a username", "Enter a password", "Enter an email", "Enter a city"];
+                                            labels = ["Enter a username", "Enter a password", "Enter an email", "Which city do you live in?"];
                                         } else {
                                             labels =["Enter your email", "Enter your password"]; 
                                         }
@@ -105,7 +107,7 @@ class Home extends Component {
                                     {this.state.data.title === "Sign Up" ?
                                         <div>
                                             <div className="form-group text-left">
-                                                <label for="state">Choose a state</label>
+                                                <label for="state">Which state do you live in?</label>
                                                 <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
                                             </div>
                                             <FormLabel 
@@ -128,7 +130,7 @@ class Home extends Component {
                                             >
                                                 {this.state.schools.map(school => {
                                                     return (
-                                                        <OptionForDropdown option={school.id}/>
+                                                        <OptionForDropdown option={school.name}/>
                                                     )
                                                 })}
                                             </Dropdown>

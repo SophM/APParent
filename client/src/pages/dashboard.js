@@ -15,7 +15,6 @@ class Dashboard extends Component {
   //Setting all default values 
   state = {
     results: [],
-    username: "Sophie, Namita , Samuel & Kevin",
     members: [],
     pageWanted: "dashboard", 
     loggedInUser: []
@@ -94,7 +93,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
             <Activity>
               {this.state.results.length ? (
@@ -127,7 +126,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             
   
                   <MyProfile
@@ -153,7 +152,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
              <AllMembers>
               {this.state.members.length ? (
@@ -187,7 +186,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
             <WritePost 
               handleCreatePost={this.handleCreatePost}

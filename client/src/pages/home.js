@@ -109,7 +109,7 @@ class Home extends Component {
                                                 <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
                                             </div>
                                             <FormLabel 
-                                                for="name-first-kid"
+                                                for="nameFirstKid"
                                                 label="What's the name of your first kid?"
                                             />
                                             <Dropdown
@@ -123,12 +123,12 @@ class Home extends Component {
                                                 })}
                                             </Dropdown>
                                             <Dropdown 
-                                                for="school"
+                                                for="schoolId"
                                                 label="Which school is your kid going to?"
                                             >
                                                 {this.state.schools.map(school => {
                                                     return (
-                                                        <OptionForDropdown option={school.name}/>
+                                                        <OptionForDropdown value={school.schoolId} option={school.name}/>
                                                     )
                                                 })}
                                             </Dropdown>

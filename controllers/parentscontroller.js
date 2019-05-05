@@ -15,12 +15,19 @@ module.exports = {
             city: req.body.city, 
             state: req.body.state
         }).then(function(result){
-            res.json(result)
+            db.kids.create({
+                name: req.body.nameFirstKid,
+                gradeLevel: req.body.grade,
+                parentId: req.session.passport.user.id,
+                schoolId: req.body.schoolId
+            }).then(function () {
+                res.json(result)
+            })
         })
     },
 
     // find a specific parent 
-    findOne : function(req, res){
+    findOne: function(req, res){
         db.parents.findOne({
             where:{id: req.session.passport.user.id}
             // where:{id: req.param.id}

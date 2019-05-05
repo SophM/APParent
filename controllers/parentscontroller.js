@@ -20,7 +20,7 @@ module.exports = {
     },
 
     // find a specific parent 
-    findOne : function(req, res){
+    findOne: function(req, res){
         db.parents.findOne({
             where:{id: req.session.passport.user.id}
             // where:{id: req.param.id}

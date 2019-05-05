@@ -7,8 +7,8 @@ module.exports = {
                 name: req.body.name,
                 gradeLevel: req.body.gradeLevel,
                 //get parentId from the result of creating a parent row
-                parentId: parentId,
-                schoolId: req.body.school
+                parentId: req.session.passport.user.id,
+                schoolId: req.body.schoolId
             }).then(function (result) {
                 res.json(result)
             })

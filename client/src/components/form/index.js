@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select value={props.value} className="form-control" id={props.for} name={props.for}>
+            <select value={props.value} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
                 {props.children}
             </select>
         </div>
@@ -57,7 +57,7 @@ export function Dropdown(props){
 
 export function OptionForDropdown(props) {
     return (
-        <option>{props.option}</option>
+        <option value={props.schoolId}>{props.option}</option>
     )
 }
 

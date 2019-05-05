@@ -18,6 +18,12 @@ export default {
     createPost: function(data) {
         return axios.post("/api/posts",data);
     },
+
+    // find all the schools
+    getAllSchools: function() {
+        return axios.get("/api/schools");
+    },
+
     //update logged in profile 
     updateProfile: function(data) {
         return axios.post("/api/parents/:id",data);

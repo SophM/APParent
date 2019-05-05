@@ -21,6 +21,9 @@ export default {
     // Create a comment in the modal and auto populate new entries
     createComment: function(data) {
         return axios.post("/api/comments", data);
+    },
+    //update logged in profile 
+    updateProfile: function(data) {
+        return axios.post("/api/parents/:id",data);
     }
-    
 };

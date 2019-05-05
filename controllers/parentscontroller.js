@@ -70,8 +70,29 @@ module.exports = {
         }).then(function(result) {
             res.json(result)
         });
+    }, 
+
+    //Updating deatils for the logged in user 
+    update: function(req, res) {
+        db.parents.update(
+            //Fields to update 
+            {
+            userName: req.body.userName, 
+            //Re-generate Hashed Password for the user 
+            // passw: db.users.generateHash(req.body.password) , 
+            city: req.body.city, 
+            state: req.body.state
+            //   photoLink : req.body.photoLink
+            }, {
+            where: {
+                id: req.session.passport.user.id
+            }
+        }).then(function (dbParent) {
+
+            console.log("Parent Information Updated" , dbParent);
+            console.log("1");
+            res.json(dbParent);
+        })
     }
-
-
 }
 

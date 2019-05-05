@@ -57,7 +57,7 @@ export function Dropdown(props){
 
 export function OptionForDropdown(props) {
     return (
-        <option>{props.option}</option>
+        <option value={props.value}>{props.option}</option>
     )
 }
 

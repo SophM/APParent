@@ -5,6 +5,7 @@ import "../style/home.css";
 import API from "../utils/API";
 
 let labels = [];
+const gradeLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 class Home extends Component {
 
@@ -13,7 +14,7 @@ class Home extends Component {
         data: {
             title: "Sign Up",
             route: "/api/parents/signup",
-            for: ["userName", "password", "email", "enter a number",],
+            for: ["userName", "password", "email", "city",],
             nameButton: "Sign Up",
             message: "Already Have An Account?",
             path: "/login",
@@ -111,6 +112,16 @@ class Home extends Component {
                                                 for="name-first-kid"
                                                 label="What's the name of your first kid?"
                                             />
+                                            <Dropdown
+                                                for="grade"
+                                                label="Which grade is your kid in?"
+                                            >
+                                                {gradeLevels.map(grade => {
+                                                    return (
+                                                        <OptionForDropdown option={grade}/>
+                                                    )
+                                                })}
+                                            </Dropdown>
                                             <Dropdown 
                                                 for="school"
                                                 label="Which school is your kid going to?"

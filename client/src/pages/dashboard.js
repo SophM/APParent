@@ -52,6 +52,7 @@ class Dashboard extends Component {
       }
      )
      .catch(err => console.log(err));
+
   }
 
   handleClickOnSideBar = event => {

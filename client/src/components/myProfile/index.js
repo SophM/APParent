@@ -56,6 +56,12 @@ class MyProfile extends Component {
         this.setState({
             disabled: true
         })
+         //Updates the user profile 
+         API.updateProfile()
+         .then(res => {
+ 
+         })
+         .catch(err => console.log(err)); 
     }
 
     render() {

@@ -17,6 +17,9 @@ export default {
     //Create a post 
     createPost: function(data) {
         return axios.post("/api/posts",data);
+    },
+    //update logged in profile 
+    updateProfile: function(data) {
+        return axios.post("/api/parents/:id",data);
     }
-    
 };

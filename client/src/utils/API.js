@@ -17,6 +17,10 @@ export default {
     //Create a post 
     createPost: function(data) {
         return axios.post("/api/posts",data);
+    }, 
+    // Create a comment in the modal and auto populate new entries
+    createComment: function(data) {
+        return axios.post("/api/comments", data);
     },
 
     // find all the schools

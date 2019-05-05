@@ -16,7 +16,7 @@ class Dashboard extends Component {
   state = {
     results: [],
     members: [],
-    pageWanted: "dashboard", 
+    pageWanted: "dashboard",
     loggedInUser: []
 
   };
@@ -32,25 +32,25 @@ class Dashboard extends Component {
           })
       )
       .catch(err => console.log(err));
-      
-      //Retrives all the Members Data 
-      API.searchAllMembers()
+
+    //Retrives all the Members Data 
+    API.searchAllMembers()
       .then(res =>
-          this.setState({
-            members: res.data
-          })
+        this.setState({
+          members: res.data
+        })
       )
       .catch(err => console.log(err));
-      
-     //Retrives Logged in USer Info 
-     API.findOne()
-     .then(res =>{
-         this.setState({
+
+    //Retrives Logged in USer Info 
+    API.findOne()
+      .then(res => {
+        this.setState({
           loggedInUser: res.data
-         })
+        })
       }
-     )
-     .catch(err => console.log(err));
+      )
+      .catch(err => console.log(err));
 
   }
 
@@ -60,24 +60,24 @@ class Dashboard extends Component {
     this.setState({
       pageWanted: event.target.attributes.getNamedItem("data-content").value
     });
-          console.log("This is the result", this.state.results)
+    console.log("This is the result", this.state.results)
 
   }
 
   //Write a post 
-  
+
   handleCreatePost = () => {
 
     //Pulling all the posts again redirect to dashboard 
     API.searchAll()
-    .then(
-      res =>
-        this.setState({
-          results: res.data,
-          pageWanted: "dashboard"
-        })
-    )
-    .catch(err => console.log(err));
+      .then(
+        res =>
+          this.setState({
+            results: res.data,
+            pageWanted: "dashboard"
+          })
+      )
+      .catch(err => console.log(err));
 
   }
 
@@ -88,24 +88,24 @@ class Dashboard extends Component {
       }
     )
   }
-  
+
 
   render() {
-    {/* display the page with the activity component */}
+    {/* display the page with the activity component */ }
     if (this.state.pageWanted === "dashboard") {
       return (
         <div>
-          <NavBar 
-          logout={this.handleLogOut}
+          <NavBar
+            logout={this.handleLogOut}
           />
           <Sidebar
             handleClick={this.handleClickOnSideBar}
             logout={this.handleLogOut}
           />
           <div id="page-wrap">
-  
+
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-      
+
             <Activity>
               {this.state.results.length ? (
                 this.state.results.map((post) => {
@@ -127,7 +127,7 @@ class Dashboard extends Component {
         </div>
       );
 
-    {/* display the page with the myProfile component */}
+      {/* display the page with the myProfile component */ }
     } else if (this.state.pageWanted === "myProfile") {
       return (
         <div>
@@ -139,24 +139,24 @@ class Dashboard extends Component {
             logout={this.handleLogOut}
           />
           <div id="page-wrap">
-  
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-            
-  
-                  <MyProfile
-                    userName={this.state.loggedInUser.userName}
-                    email={this.state.loggedInUser.email}
-                    city={this.state.loggedInUser.city}
-                    state={this.state.loggedInUser.state}
-                  >
 
-                  </MyProfile>
-              
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+
+
+            <MyProfile
+              userName={this.state.loggedInUser.userName}
+              email={this.state.loggedInUser.email}
+              city={this.state.loggedInUser.city}
+              state={this.state.loggedInUser.state}
+            >
+
+            </MyProfile>
+
           </div>
         </div>
       );
 
-    {/* display the page with the allMembers component */}    
+      {/* display the page with the allMembers component */ }
     } else if (this.state.pageWanted === "allMembers") {
       return (
         <div>
@@ -168,10 +168,10 @@ class Dashboard extends Component {
             logout={this.handleLogOut}
           />
           <div id="page-wrap">
-  
+
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-      
-             <AllMembers>
+
+            <AllMembers>
               {this.state.members.length ? (
                 this.state.members.map((member, i) => {
                   return (
@@ -185,15 +185,15 @@ class Dashboard extends Component {
                   );
                 })
               ) : (
-                <h3>No Results to Display</h3>
-              )}
-          </AllMembers>
+                  <h3>No Results to Display</h3>
+                )}
+            </AllMembers>
 
           </div>
         </div>
       );
 
-    {/* display the page with the writePost component */}
+      {/* display the page with the writePost component */ }
     } else if (this.state.pageWanted === "writePost") {
       return (
         <div>
@@ -205,18 +205,18 @@ class Dashboard extends Component {
             logout={this.handleLogOut}
           />
           <div id="page-wrap">
-  
+
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-      
-            <WritePost 
+
+            <WritePost
               handleCreatePost={this.handleCreatePost}
-            />  
-                    
+            />
+
           </div>
         </div>
       );
-      
-    {/* display the page with the aboutUs component */}
+
+      {/* display the page with the aboutUs component */ }
     } else if (this.state.pageWanted === "aboutUs") {
       return (
         <div>
@@ -228,16 +228,19 @@ class Dashboard extends Component {
             logout={this.handleLogOut}
           />
           <div id="page-wrap">
-  
+
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-            <div className="card">
-              <h3 className="card-header text-success">Best place to  network/connect with other parents, get to know each other and help each other out, share tips, events.... </h3>
-              <div className="card-body">
-                
-                <h5 className="card-text">Sophie Mallez</h5><br />
-                <h5 className="card-text">Namita Shenai</h5><br />
-                <h5 className="card-text">Samuel Yu</h5><br />
-                <h5 className="card-text">Kevin Choi</h5><br />
+            <div className="container mt-4 mb-4">
+              <div className="card">
+                <h3 className="card-header">About us!</h3>
+                <div className="card-body">
+                  <p className="card-text">Parenthood is great but let's face it, it can also be very challenging! For every moment along the way, <strong style={{"color": "#176d88"}}>APP@rent</strong> is there to network/connect with other parents, help each other out, share tips, events.... </p>
+                  <p className="card-text"><strong style={{"color": "#176d88"}}>APP@rent</strong> was built by Namita - a happy-parent of a little boy and inspiration of the project - and Sophie, Kevin and Samuel - parents in training... with their pets!!</p>
+                  <img className="img-thumbnail img-fluid m-3" src="https://avatars2.githubusercontent.com/u/39390897?s=460&v=4" alt="namita-picture"/>
+                  <img className="img-thumbnail img-fluid m-3" src="https://avatars1.githubusercontent.com/u/47410186?s=460&v=4" alt="sophie-picture"/>
+                  <img className="img-thumbnail img-fluid m-3" src="https://avatars3.githubusercontent.com/u/41413295?s=400&v=4" alt="kevin-picture"/>
+                  <img className="img-thumbnail img-fluid m-3" src="https://avatars2.githubusercontent.com/u/45929868?s=460&v=4" alt="samuel-picture"/>
+                </div>
               </div>
             </div>
           </div>

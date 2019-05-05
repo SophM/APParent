@@ -16,7 +16,7 @@ export default {
     },
     //Create a post 
     createPost: function(data) {
-        return axios.post("/api/posts",data);
+        return axios.post("/api/posts", data);
     }, 
     // Create a comment in the modal and auto populate new entries
     createComment: function(data) {
@@ -30,7 +30,7 @@ export default {
 
     //update logged in profile 
     updateProfile: function(data) {
-        return axios.post("/api/parents/:id",data);
+        return axios.post("/api/parents/:id", data);
     }, 
 
     logout: function(){

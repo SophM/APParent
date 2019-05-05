@@ -12,7 +12,7 @@ class MyProfile extends Component {
             [
                 {
                     for: "userName",
-                    label:"Enter your userName",
+                    label:"Enter your username",
                     value: this.props.userName
                 },
                 {
@@ -56,12 +56,12 @@ class MyProfile extends Component {
         this.setState({
             disabled: true
         })
-         //Updates the user profile 
-         API.updateProfile()
-         .then(res => {
- 
-         })
-         .catch(err => console.log(err)); 
+        //Updates the user profile 
+        API.updateProfile()
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err)); 
     }
 
     render() {

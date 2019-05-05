@@ -69,7 +69,7 @@ class MyProfile extends Component {
                             title="Update Profile Info"
                         />
                     }
-                    
+
                     {/* Rendering Form labels using the userInfo object values */}
 
                     {this.state.userInfo.map((user , i) =>{
@@ -98,7 +98,7 @@ class MyProfile extends Component {
                         /> 
                     }
                    
-                   
+                    
                     {/* </FormAction> */}
                 </FormContainer>
             </div>

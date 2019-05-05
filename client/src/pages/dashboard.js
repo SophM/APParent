@@ -15,7 +15,6 @@ class Dashboard extends Component {
   //Setting all default values 
   state = {
     results: [],
-    username: "Sophie, Namita , Samuel & Kevin",
     members: [],
     pageWanted: "dashboard", 
     loggedInUser: []
@@ -94,7 +93,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
             <Activity>
               {this.state.results.length ? (
@@ -127,7 +126,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             
   
                   <MyProfile
@@ -153,7 +152,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
              <AllMembers>
               {this.state.members.length ? (
@@ -187,12 +186,37 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
   
-            <h1 className="mt-2 text-dark">Welcome</h1>
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
       
             <WritePost 
               handleCreatePost={this.handleCreatePost}
             />  
                     
+          </div>
+        </div>
+      );
+      
+    {/* display the page with the aboutUs component */}
+    } else if (this.state.pageWanted === "aboutUs") {
+      return (
+        <div>
+          <NavBar />
+          <Sidebar
+            handleClick={this.handleClickOnSideBar}
+          />
+          <div id="page-wrap">
+  
+            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <div className="card">
+              <h3 className="card-header text-success">Best place to  network/connect with other parents, get to know each other and help each other out, share tips, events.... </h3>
+              <div className="card-body">
+                
+                <h5 className="card-text">Sophie Mallez</h5><br />
+                <h5 className="card-text">Namita Shenai</h5><br />
+                <h5 className="card-text">Samuel Yu</h5><br />
+                <h5 className="card-text">Kevin Choi</h5><br />
+              </div>
+            </div>
           </div>
         </div>
       );

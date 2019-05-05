@@ -39,7 +39,7 @@ export function InputText(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.for}</label>
-            <textarea id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for} onChange={props.handleChange}></textarea>
+            <textarea value={props.value} id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for} onChange={props.handleChange}></textarea>
         </div>
     )
 }

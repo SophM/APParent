@@ -1,6 +1,6 @@
 //
 import React,{Component} from "react";
-import { FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton, FormAction } from "../form";
+import { FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
 import API from "../../utils/API";
 
 //Declaring all categories for the Post 

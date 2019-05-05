@@ -38,11 +38,19 @@ class MyProfile extends Component {
 
     }
 
-    handleButtonClick = event => {
+    handleEditButtonClick = event => {
         event.preventDefault();
         console.log("EDIT MY PROFILE");
         this.setState({
             disabled: false
+        })
+    }
+
+    handleSaveButtonClick = event => {
+        event.preventDefault();
+        console.log("SAVE MY PROFILE");
+        this.setState({
+            disabled: true
         })
     }
 
@@ -52,10 +60,15 @@ class MyProfile extends Component {
                 <FormContainer>
                     {/* <FormAction 
                     route={props.route} > */}
-
-                    <FormTitle
-                        title="View My Profile"
-                    />
+                    { this.state.disabled ? 
+                        <FormTitle
+                            title="View My Profile"
+                        />
+                    :
+                        <FormTitle
+                            title="Update Profile Info"
+                        />
+                    }
 
                     {/* Rendering Form labels using the userInfo object values */}
 
@@ -66,7 +79,7 @@ class MyProfile extends Component {
                                 for={user.for}
                                 disabled={this.state.disabled}
                                 value={user.value}
-                            // handleChange={this.handleInputChange}
+                                handleChange={this.handleInputChange}
                             /> 
                         );
                     }
@@ -76,16 +89,16 @@ class MyProfile extends Component {
                     { this.state.disabled ? 
                         <FormButton
                             nameButton="Edit Profile"
-                            handleButtonClick={this.handleButtonClick}
+                            handleButtonClick={this.handleEditButtonClick}
                         /> 
                     :  
                         <FormButton
                         nameButton="Save Profile"
-                        handleButtonClick={this.handleButtonClick}
+                        handleButtonClick={this.handleSaveButtonClick}
                         /> 
                     }
                    
-                   
+                    
                     {/* </FormAction> */}
                 </FormContainer>
             </div>

@@ -21,7 +21,7 @@ module.exports = function (passport) {
   },
 
     function (req, email, password, done) {
-      
+
       process.nextTick(function () {
         db.parents.findOne({
           where: {
@@ -31,9 +31,9 @@ module.exports = function (passport) {
           //if email is already registered
           if (user) {
             // console.log("user &&&&&&&&&&&&&&&&&&&", user)
-            return done(null, false, { 
+            return done(null, false, {
               from: "signup",
-              message: 'This email is already registered.' 
+              message: 'This email is already registered.'
             });
           } else {
             //creating a new account in our database
@@ -45,20 +45,24 @@ module.exports = function (passport) {
               state: req.body.state,
               password: db.parents.generateHash(password)
             }).then(function (newUser) {
-              // console.log("new user", newUser)
-              return done(null, newUser)
+              console.log("new user", newUser)
+              
+              
+              db.kids.create({
+                name: req.body.nameFirstKid,
+                gradeLevel: req.body.grade,
+                parentId: newUser.dataValues.id,
+                schoolId: req.body.schoolId
+              }).then(function (newKid) {
+                return done(null, newUser)
+              }).catch(err => console.log(err));
+
+
+
+
             }).catch(err => console.log(err));
 
-            db.kids.create({
-              name: req.body.nameFirstKid,
-              gradeLevel: req.body.grade,
-              parentId: 10,
-              schoolId: req.body.schoolId
-            }).then(function (newKid) {
-              // console.log("new user", newUser)
-              return done(null, newKid)
-            }).catch(err => console.log(err));
-             
+
           }
         })
       })
@@ -77,11 +81,13 @@ module.exports = function (passport) {
         // allows us to pass back the entire request to the callback
       }, function (req, email, password, done) {
         // Match user
-        db.parents.findOne({where:{
-          email: email,
+        db.parents.findOne({
+          where: {
+            email: email,
 
-        }}).then(function (user, err) {
-          
+          }
+        }).then(function (user, err) {
+
           // if there are any errors, return the error before anything else
           if (err) {
             // console.log("err ^^^^^^^^^^^^", err);
@@ -90,7 +96,7 @@ module.exports = function (passport) {
           // if no user is found, return the message
           if (!user) {
             // console.log("$$$$$$$$$", !user)
-            return done(null, false, { 
+            return done(null, false, {
               from: 'login',
               message: 'Incorrect email/ password combination.'
             }); // req.flash is the way to set flashdata using connect-flash
@@ -98,13 +104,13 @@ module.exports = function (passport) {
           // if the user is found but the password is wrong
           if (user && !user.compareHash(req.body.password)) {
             // console.log('%%^^^^%$%$%%wrong password', user, err)
-            return done(null, false, { 
+            return done(null, false, {
               from: 'login',
               message: 'Incorrect email/ password combination.'
             }); // create the loginMessage and save it to session as flashdata
           }
           // all is well, return successful user
-        //   console.log("logging in @@@@@@@@@@@@@@@@", user)
+          //   console.log("logging in @@@@@@@@@@@@@@@@", user)
           return done(null, user);
 
         });

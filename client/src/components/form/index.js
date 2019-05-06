@@ -30,7 +30,7 @@ export function FormLabel(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <input value={props.value} disabled={props.disabled} type={props.for} id={props.for} name={props.for} className="form-control" placeholder={props.for} onChange={props.handleChange} />
+            <input data-id={props.data} value={props.value} disabled={props.disabled} type={props.for} id={props.for} name={props.for} className="form-control" placeholder={props.for} onChange={props.handleChange} />
         </div>
     )
 }

@@ -41,9 +41,13 @@ class MyProfile extends Component {
     handleInputChange = event => {
         // const {name, value} = event.target;
         const value = event.target.value;
-        const column = event.target.id;
+        // const column = event.target.id;
+        const key = event.target.getAttribute("data-id")
+        let copy = [...this.state.userInfo]
+        copy[key].value = value
         this.setState({
-            [column] : value
+            userInfo: copy
+            // [column] : value
         })
 
     }
@@ -92,6 +96,8 @@ class MyProfile extends Component {
 
                         return(
                             <FormLabel
+                                key= {i}
+                                data={i}
                                 for={user.for}
                                 name={user.for}
                                 label={user.label}

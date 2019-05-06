@@ -2,6 +2,8 @@ var db = require("../models")
 
 module.exports = {
     findAllForPost: function (req, res) {
+        console.log(">>>>>>>>>>>>>>>>>>>kkll");
+        console.log(req.params);
         if (req.isAuthenticated()) {
             db.comments.findAll({
                 where: {
@@ -15,7 +17,7 @@ module.exports = {
     },
     create: function (req, res) {
         if (req.isAuthenticated()) {
-            db.comment.create({
+            db.comments.create({
                 description: req.body.description, 
                 postId: req.body.postId, 
                 //change it to passport once we set it up 

@@ -15,8 +15,27 @@ class PostCard extends Component {
   // make a state for the values in this component
   state = {
     nameButton: "Comment",
-    description: ""
+    description: "",
+    comments: {},
   };
+
+  componentDidMount() {
+    const requestParams = {
+      params: {
+        id: this.props.postId,
+      }
+    };
+
+    API.findAllForPost(requestParams)
+      .then(
+        res =>
+          this.setState({
+            comments: res.data
+          })
+      )
+      .catch(err => console.log(err));
+
+  }
 
   // write letters on the posting field while typed
   handleInputChange = event => {
@@ -30,13 +49,25 @@ class PostCard extends Component {
     event.preventDefault();
     console.log(`Description: ${this.state.description}`);
     // need to post to MySQL here
-    API.createComment()
+
+    const commentData = {
+      description: this.state.description,
+      postId: this.props.postId
+    }
+
+    API.createComment(commentData)
       .then(res => {
         console.log(res)
       })
       .catch(err => console.log(err));
     this.setState({ description: "" });
   };
+  
+  renderComments() {
+  //  this.state.comments.map((comment) => {
+  //     return <CommentDisplay />
+  //   })
+  }
 
   render() {
     return (
@@ -93,7 +124,7 @@ class PostCard extends Component {
               </div>
               <div className="modal-body">
                 {/* create another component for displaying */}
-                <CommentDisplay />
+                {this.renderComments()}
                 <p>Your Comment: {this.state.description}</p>
 
                 <input

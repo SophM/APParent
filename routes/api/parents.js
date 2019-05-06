@@ -12,8 +12,8 @@ router.route("/:id")
 	.get(parentsController.findOne);
 
 // Updating  only one parent profile
-router.route("/:id")
-	.put(parentsController.update);
+router.route("/update")
+	.post(parentsController.update);
 
 
 function passportAuthenticate(localStrategy, req, res, next) {

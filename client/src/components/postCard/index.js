@@ -75,7 +75,7 @@ class PostCard extends Component {
     const { comments } = this.state;
     // const { members } = this.props;
     return (<div>
-      {Object.values(comments).map((comment) => {
+      {comments.map((comment) => {
         // if (comments && members) {
         // const parent = members.find((member) => member.id === comment.parentId);
         // const parentUsername = parent && parent.userName;
@@ -107,7 +107,7 @@ class PostCard extends Component {
                 className="btn btn-primary btn-lg float-right m-3 mr-5"
                 id="comment"
                 data-toggle="modal"
-                data-target="#exampleModalLong"
+                data-target={"#post"+this.props.postId}
                 onClick={this.handleCommentClick}
               >
                 Comment
@@ -120,7 +120,7 @@ class PostCard extends Component {
         {/* modal */}
         <div
           className="modal fade"
-          id="exampleModalLong"
+          id={"post"+this.props.postId}
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLongTitle"

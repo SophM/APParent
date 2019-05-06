@@ -37,6 +37,7 @@ module.exports = {
         if (req.isAuthenticated()) {
             db.posts.findAll(
                 {
+                    order: [['updatedAt', 'DESC']],
                     include: [
                         {
                             model: db.parents,

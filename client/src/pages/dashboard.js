@@ -10,6 +10,7 @@ import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
 
 import API from "../utils/API";
+import { stat } from "fs";
 
 class Dashboard extends Component {
   //Setting all default values 
@@ -117,6 +118,7 @@ class Dashboard extends Component {
                       name={post.parent.userName}
                       description={post.description}
                       postId={post.id}
+                      members={this.state.members}
                     />
                   );
                 })

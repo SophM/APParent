@@ -15,27 +15,27 @@ class PostCard extends Component {
   // make a state for the values in this component
   state = {
     nameButton: "Comment",
-    description: "",
-    postId: "",
-    parentId: ""
+    description: ""
   };
 
-  // create a handle for submit
-  handleCommentSubmit = event => {
-    event.preventDefault();
-    console.log();
-
-    API.createComment({
-      description: this.state.description
-    }).then(() => {
-      this.props.handleCreatePost();
-      console.log("posted...");
+  // write letters on the posting field while typed
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
     });
   }
 
-  handleCommentClick = event => {
+  handleFormSubmit = event => {
     event.preventDefault();
-    console.log(event.target);
+    console.log(`Description: ${this.state.description}`);
+    // need to post to MySQL here
+    API.createComment()
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log(err));
+    this.setState({ description: "" });
   };
 
   render() {
@@ -81,7 +81,7 @@ class PostCard extends Component {
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                {this.props.title} 
+                {this.props.title}
                 <button
                   type="button"
                   className="close"
@@ -94,12 +94,20 @@ class PostCard extends Component {
               <div className="modal-body">
                 {/* create another component for displaying */}
                 <CommentDisplay />
+                <p>Your Comment: {this.state.description}</p>
 
-                <FormContainer>
-                  <InputText for="comment" label="Comment Here" />
-                </FormContainer>
+                <input
+                  for="comment"
+                  label="Comment Here"
+                  type="text"
+                  placeholder="Description"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleInputChange}
+                />
 
-                <CommentSubmitButton nameButton={this.state.nameButton} />
+                {/* <CommentSubmitButton nameButton={this.state.nameButton} /> */}
+                <button onClick={this.handleFormSubmit}>Submit</button>
 
                 {/* need a button to post */}
                 {/* create a handle click for the button - that will post to MySQL */}

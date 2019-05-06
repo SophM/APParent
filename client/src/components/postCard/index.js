@@ -20,20 +20,21 @@ class PostCard extends Component {
   };
 
   componentDidMount() {
-    const requestParams = {
-      params: {
-        id: this.props.postId,
-      }
-    };
+    // const requestParams = {
+    //     id: this.props.postId,
+    //   }
+    // console.log("requestParams: " + requestParams.id)
 
-    API.findAllForPost(requestParams)
-      .then(
-        res =>
-          this.setState({
-            comments: res.data
-          })
-      )
-      .catch(err => console.log(err));
+    // API.findAllForPost(requestParams)
+    //   .then(
+    //     res =>
+    //       this.setState({
+    //         comments: res.data
+    //       })
+    //   )
+    //   .catch(err => console.log(err));
+
+    //   console.log("comments: " + this.state.comments)
 
   }
 
@@ -43,6 +44,28 @@ class PostCard extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleCommentClick = event => {
+    event.preventDefault();
+
+    const requestParams = {
+      id: this.props.postId,
+    }
+
+    console.log("requestParams: " + requestParams.id)
+
+    API.findAllForPost(requestParams)
+      .then(
+        res => {
+          console.log("result.data: ", res.data[0]);
+          this.setState({
+            comments: res.data
+          })
+
+        }  
+      )
+      .catch(err => console.log(err));
   }
 
   handleFormSubmit = event => {
@@ -64,9 +87,9 @@ class PostCard extends Component {
   };
   
   renderComments() {
-  //  this.state.comments.map((comment) => {
+  //  {this.state.comments.map((comment) => {
   //     return <CommentDisplay />
-  //   })
+  //   })}
   }
 
   render() {
@@ -124,7 +147,7 @@ class PostCard extends Component {
               </div>
               <div className="modal-body">
                 {/* create another component for displaying */}
-                {this.renderComments()}
+                {/* {this.renderComments()} */}
                 <p>Your Comment: {this.state.description}</p>
 
                 <input

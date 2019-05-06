@@ -3,7 +3,8 @@ var db = require("../models")
 module.exports = {
     findAllForPost: function (req, res) {
         console.log(">>>>>>>>>>>>>>>>>>>kkll");
-        console.log(req.params);
+        console.log("req.params.id: ", req.params.id)
+        // console.log(req.params);
         if (req.isAuthenticated()) {
             db.comments.findAll({
                 where: {

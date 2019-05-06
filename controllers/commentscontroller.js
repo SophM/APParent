@@ -19,7 +19,8 @@ module.exports = {
                 description: req.body.description, 
                 postId: req.body.postId, 
                 //change it to passport once we set it up 
-                parentId: req.body.parentId
+                parentId: req.session.passport.user.id
+                //req.body.parentId
             }).then(function (result) {
                 res.json(result)
             })

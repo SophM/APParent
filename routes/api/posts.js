@@ -20,6 +20,12 @@ router.route("/parents/:id")
     
 // Create a new post 
 router.route("/")
-	.post(postscontroller.create);
+    .post(postscontroller.create);
+
+
+// Create a new comment on the post  -api/posts/comments
+router.route("/comments")
+	.post(commentsController.create);
+
 
 module.exports = router;

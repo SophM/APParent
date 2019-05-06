@@ -16,7 +16,7 @@ class PostCard extends Component {
   state = {
     nameButton: "Comment",
     description: "",
-    comments: {},
+    comments: [],
   };
 
   getComments = () => {
@@ -35,9 +35,9 @@ class PostCard extends Component {
       )
       .catch(err => console.log(err));
   }
-  componentDidMount() {
-    this.getComments();
-  }
+  // componentDidMount() {
+  //   this.getComments();
+  // }
 
   // write letters on the posting field while typed
   handleInputChange = event => {
@@ -49,6 +49,7 @@ class PostCard extends Component {
 
   handleCommentClick = event => {
     event.preventDefault();
+    this.getComments()
   }
 
   handleFormSubmit = event => {
@@ -72,14 +73,14 @@ class PostCard extends Component {
   
   renderComments = () => {
     const { comments } = this.state;
-    const { members } = this.props;
+    // const { members } = this.props;
     return (<div>
       {Object.values(comments).map((comment) => {
-        if (comments && members) {
-        const parent = members.find((member) => member.id === comment.parentId);
-        const parentUsername = parent && parent.userName;
-        return (<CommentDisplay for="displayComment" posterName={parentUsername} comment={comment.description}/>)
-        }
+        // if (comments && members) {
+        // const parent = members.find((member) => member.id === comment.parentId);
+        // const parentUsername = parent && parent.userName;
+        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description}/><hr/></div>)
+        // }
       })}
     </div>)
   }
@@ -112,26 +113,7 @@ class PostCard extends Component {
                 Comment
               </button>
             </div>
-            <div className="something">
-                {this.renderComments()}
-                <p>Your Comment: {this.state.description}</p>
-
-                <input
-                  for="comment"
-                  label="Comment Here"
-                  type="text"
-                  placeholder="Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.handleInputChange}
-                />
-
-                {/* <CommentSubmitButton nameButton={this.state.nameButton} /> */}
-                <button onClick={this.handleFormSubmit}>Submit</button>
-
-                {/* need a button to post */}
-                {/* create a handle click for the button - that will post to MySQL */}
-              </div>
+            
           </div>
         </div>
 

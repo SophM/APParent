@@ -9,7 +9,15 @@ module.exports = {
             db.comments.findAll({
                 where: {
                     postId: req.params.id
-                }
+                },
+
+                include: [
+                    {
+                        model: db.parents,
+                        as: "parent"
+                    }
+                ]
+
             })
                 .then(function (result) {
                     res.json(result)
@@ -19,8 +27,8 @@ module.exports = {
     create: function (req, res) {
         if (req.isAuthenticated()) {
             db.comments.create({
-                description: req.body.description, 
-                postId: req.body.postId, 
+                description: req.body.description,
+                postId: req.body.postId,
                 //change it to passport once we set it up 
                 parentId: req.session.passport.user.id
                 //req.body.parentId

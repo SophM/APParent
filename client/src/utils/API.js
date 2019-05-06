@@ -23,6 +23,11 @@ export default {
         return axios.post("/api/posts/comments", data);
     },
 
+    // get all comments for a post
+    findAllForPost: function(params) {
+        return axios.get("/api/posts/comments/:id", params);
+    },
+
     // find all the schools
     getAllSchools: function() {
         return axios.get("/api/schools");

@@ -16,11 +16,6 @@ class MyProfile extends Component {
                     value: this.props.userName,
                 },
                 {
-                    for: "email",
-                    label:"Enter your email",
-                    value: this.props.email
-                },
-                {
                     for: "city", //db column
                     label:"Enter your city", //message u see 
                     value: this.props.city
@@ -31,10 +26,7 @@ class MyProfile extends Component {
                     value: this.props.state
                 }
             ],
-        // userName: "",
-        // email: "",
-        // city: "",
-        // state: "" 
+
     };
 
 
@@ -66,10 +58,19 @@ class MyProfile extends Component {
         this.setState({
             disabled: true
         })
+
+        const userUpdatedData = {
+            userName: this.state.userInfo[0].value,
+            city: this.state.userInfo[1].value,
+            state: this.state.userInfo[2].value
+        }
+
+        console.log(userUpdatedData);
+
         //Updates the user profile 
-        API.updateProfile()
+        API.updateProfile(userUpdatedData)
             .then(res => {
-                console.log(res)
+                window.location.reload();
             })
             .catch(err => console.log(err)); 
     }

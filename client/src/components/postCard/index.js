@@ -19,23 +19,24 @@ class PostCard extends Component {
     comments: {},
   };
 
+  getComments = () => {
+    const requestParams = {
+      id: this.props.postId,
+    }
+
+    API.findAllForPost(requestParams)
+      .then(
+        res => {
+          this.setState({
+            comments: res.data
+          })
+
+        }  
+      )
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
-    // const requestParams = {
-    //     id: this.props.postId,
-    //   }
-    // console.log("requestParams: " + requestParams.id)
-
-    // API.findAllForPost(requestParams)
-    //   .then(
-    //     res =>
-    //       this.setState({
-    //         comments: res.data
-    //       })
-    //   )
-    //   .catch(err => console.log(err));
-
-    //   console.log("comments: " + this.state.comments)
-
+    this.getComments();
   }
 
   // write letters on the posting field while typed
@@ -48,24 +49,6 @@ class PostCard extends Component {
 
   handleCommentClick = event => {
     event.preventDefault();
-
-    const requestParams = {
-      id: this.props.postId,
-    }
-
-    console.log("requestParams: " + requestParams.id)
-
-    API.findAllForPost(requestParams)
-      .then(
-        res => {
-          console.log("result.data: ", res.data[0]);
-          this.setState({
-            comments: res.data
-          })
-
-        }  
-      )
-      .catch(err => console.log(err));
   }
 
   handleFormSubmit = event => {
@@ -80,16 +63,25 @@ class PostCard extends Component {
 
     API.createComment(commentData)
       .then(res => {
-        console.log(res)
+        console.log("show res ", res)
+        this.getComments();
       })
       .catch(err => console.log(err));
     this.setState({ description: "" });
   };
   
-  renderComments() {
-  //  {this.state.comments.map((comment) => {
-  //     return <CommentDisplay />
-  //   })}
+  renderComments = () => {
+    const { comments } = this.state;
+    const { members } = this.props;
+    return (<div>
+      {Object.values(comments).map((comment) => {
+        if (comments && members) {
+        const parent = members.find((member) => member.id === comment.parentId);
+        const parentUsername = parent && parent.userName;
+        return (<CommentDisplay for="displayComment" posterName={parentUsername} comment={comment.description}/>)
+        }
+      })}
+    </div>)
   }
 
   render() {
@@ -120,6 +112,26 @@ class PostCard extends Component {
                 Comment
               </button>
             </div>
+            <div className="something">
+                {this.renderComments()}
+                <p>Your Comment: {this.state.description}</p>
+
+                <input
+                  for="comment"
+                  label="Comment Here"
+                  type="text"
+                  placeholder="Description"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleInputChange}
+                />
+
+                {/* <CommentSubmitButton nameButton={this.state.nameButton} /> */}
+                <button onClick={this.handleFormSubmit}>Submit</button>
+
+                {/* need a button to post */}
+                {/* create a handle click for the button - that will post to MySQL */}
+              </div>
           </div>
         </div>
 
@@ -146,8 +158,7 @@ class PostCard extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/* create another component for displaying */}
-                {/* {this.renderComments()} */}
+                {this.renderComments()}
                 <p>Your Comment: {this.state.description}</p>
 
                 <input

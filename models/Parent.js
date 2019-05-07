@@ -1,19 +1,19 @@
 var bcrypt = require("bcryptjs")
 
-// Creating Activity model for activities table
+// Creating parent model for parents table
 module.exports = function(sequelize, DataTypes) {
   var Parent = sequelize.define("parents", {
     userName: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: true,
+      allowNull: false,
       validate: {
         len: [4, 25]
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
         len: [5]
       }
@@ -30,12 +30,12 @@ module.exports = function(sequelize, DataTypes) {
     city: {
       type: DataTypes.STRING,
       is: ["^[a-z]+$", "i"], // will only allow letters
-      allowNull: true
+      allowNull: false
     },
     state: {
       type: DataTypes.STRING,
       is: ["^[a-z]+$", "i"], // will only allow letters
-      allowNull: true
+      allowNull: false
     }
   });
 

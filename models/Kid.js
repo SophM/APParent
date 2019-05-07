@@ -1,3 +1,4 @@
+//creating Kid model for kids table
 module.exports = function(sequelize, DataTypes){
     var Kid = sequelize.define("kids", {
         name: {

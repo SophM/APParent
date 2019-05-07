@@ -1,4 +1,4 @@
-//creating User model for users table
+//creating Post model for posts table
 module.exports = function (sequelize, DataTypes) {
   var Post = sequelize.define("posts", {
     title: {

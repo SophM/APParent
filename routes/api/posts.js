@@ -11,7 +11,7 @@ router.route("/:id")
     .get(postscontroller.findOne);
 
 // displaying all comments for one post
-router.route("/comments/:id")
+router.route("/:id/comments/")
     .get(commentsController.findAllForPost); 
     
 // displaying only post for a parent 

@@ -5,7 +5,7 @@ function userCard(props) {
     return (
     
         <div className="card" style={{ width: "18rem" }}>
-            <img src="http://lorempixel.com/600/500/people" className="card-img-top" alt={props.userName} />
+            <img src="http://lorempixel.com/125/125/people/2/cc" className="card-img-top" alt={props.userName} />
             <div className="card-body">
                 <h2 className="card-title">{props.userName}</h2>
                 <h5 className="card-text">Email: {props.email}</h5>

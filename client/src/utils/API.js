@@ -25,7 +25,7 @@ export default {
 
     // get all comments for a post
     findAllForPost: function(data) {
-        return axios.get("/api/posts/comments/" + data.id);
+        return axios.get("/api/posts/" + data.id + "/comments/");
     },
 
     // find all the schools

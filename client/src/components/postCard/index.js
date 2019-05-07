@@ -92,15 +92,15 @@ class PostCard extends Component {
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body">
-                <h1 className="card-title">{this.props.title}</h1>
-                <p className="category">
-                  Category: {this.props.category}
+                <h1 className="card-title" id="postCardTitle">{this.props.title}</h1>
+                <p className="category" id="postCardCategory">
+                  <b><u>Category:</u></b> {this.props.category}
                 </p>
-                <p className="card-text">
-                  Post By: {this.props.name}
+                <p className="card-text" id="postCardTitle" id="postCardPostedBy">
+                  <b><u>Posted By:</u></b> {this.props.name}
                 </p>
-                <p className="card-text">
-                  {this.props.description}
+                <p className="card-text" id="postCardDetails">
+                  <b><u>Details:</u> </b>{this.props.description}
                 </p>
               </div>
               <button
@@ -128,8 +128,8 @@ class PostCard extends Component {
         >
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-header">
-                {this.props.title}
+              <div className="modal-header" id="modalTitle">
+                <b>{this.props.title}</b>
                 <button
                   type="button"
                   className="close"
@@ -141,7 +141,7 @@ class PostCard extends Component {
               </div>
               <div className="modal-body">
                 {this.renderComments()}
-                <p>Your Comment: {this.state.description}</p>
+                <p><b>Your Comment:</b> {this.state.description}</p>
 
                 <input
                   for="comment"

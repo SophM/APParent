@@ -25,6 +25,7 @@ This is the first version of APP@rent and it is a work in progress! The team is 
 <li>CSS</li>
 <li>Bootstrap</li>
 <li>JavaScript</li>
+<li>Media Queries</li>
 <br></br>
 
 <hr>

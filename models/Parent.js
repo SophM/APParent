@@ -36,6 +36,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       is: ["^[a-z]+$", "i"], // will only allow letters
       allowNull: false
+    }, 
+    //Add an image link for portfolio 
+    photoLink: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'http://lorempixel.com/600/500/people'
     }
   });
 

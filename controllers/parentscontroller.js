@@ -13,7 +13,8 @@ module.exports = {
             password: req.body.password,
             email: req.body.email, 
             city: req.body.city, 
-            state: req.body.state
+            state: req.body.state, 
+            photoLink: req.body.photoLink
         }).then(function(result){
             res.json(result)
         })

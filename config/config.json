@@ -3,7 +3,7 @@
     "username": "root",
     "password": "password",
     "database": "apparentDB",
-    "host": "10.0.0.51",
+    "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"
   },
@@ -18,7 +18,7 @@
     "username": "root",
     "password": "password",
     "database": "apparentDB",
-    "host": "10.0.0.51",
+    "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"
   }

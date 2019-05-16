@@ -19,7 +19,7 @@ var app = express();
 
 // set the port of the application
 // process.env.PORT lets the port be set by Heroku
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3001;
 require('./config/passport')(passport);
 
 // set up the Express app to handle data parsing

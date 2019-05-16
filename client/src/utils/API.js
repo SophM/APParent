@@ -40,5 +40,8 @@ export default {
 
     logout: function(){
         return axios.get("/logout")
+    },
+    checkLogin: function(){
+        return axios.get("/api/parents/checkstatus")
     }
 };

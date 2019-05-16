@@ -15,6 +15,7 @@ router.route("/:id")
 router.route("/update")
 	.post(parentsController.update);
 
+router.route("/checkstatus").get(parentsController.checkStatus);
 
 function passportAuthenticate(localStrategy, req, res, next) {
 	// console.log(localStrategy, req.body, next)

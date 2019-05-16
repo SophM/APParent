@@ -51,7 +51,7 @@ p {
   font-weight: bold;
   border-bottom: solid 3px #3cb1c0;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.65);
-  transition: .6s;
+  transition: 1.5s;
 }
   
 .button:hover{

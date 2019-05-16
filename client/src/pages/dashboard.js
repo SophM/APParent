@@ -184,6 +184,7 @@ class Dashboard extends Component {
                       userName={member.userName}
                       city={member.city}
                       state={member.state}
+                      photoLink={member.photoLink}
                     />
                   );
                 })

@@ -18,14 +18,14 @@ class Home extends Component {
         //     path: "/login",
         //     action: "Login",
         // }
-        form: "sign up"
+        form: "Sign-Up"
     };
 
     handleButtonClick = event => {
         event.preventDefault();
         if (event.target.id === "signup") {
             this.setState({
-                form: "sign up"
+                form: "Sign-Up"
             })
         }
         else {
@@ -39,7 +39,7 @@ class Home extends Component {
                 //     action: "Register",
                 //     alt: "signup"
                 // }
-                form: "login"
+                form: "Login"
 
             })
         }
@@ -53,7 +53,7 @@ class Home extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <FormTitle
-                                    title={this.state.data.title}
+                                    title={this.state.form}
                                 />
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -80,7 +80,7 @@ class Home extends Component {
                                             />
                                         )
                                     })} */}
-                                {(this.state.form === "sign up") ?
+                                {(this.state.form === "Sign-Up") ?
                                     // change this to Sign up form later
                                     <LoginForm/>
                                         :

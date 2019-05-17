@@ -62,12 +62,21 @@ class LoginForm extends Component {
         }
     }
 
+    handleCloseButtonClick = event => {
+        event.preventDefault();
+
+        this.setState({
+            hasError: false
+        })
+    }
+
     render() {
         return (
             <div>
                 {(this.state.hasError) ?
                     (<ErrorMessage
                         message="Invalid email/password"
+                        handleCloseButtonClick={this.handleCloseButtonClick}
                     />) :
                     ("")
                 }

@@ -4,13 +4,11 @@ import { FormTitle, FormAction, FormLabel, FormButton, FormMessage, Dropdown, Op
 import "../style/home.css";
 import API from "../utils/API";
 import LoginForm from "../components/./loginForm"
-let labels = [];
-const gradeLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 
 class Home extends Component {
 
     state = {
-        schools: [],
         data: {
             title: "Sign Up",
             route: "/api/parents/signup",
@@ -21,20 +19,6 @@ class Home extends Component {
             action: "Login",
         }
     };
-
-    componentDidMount() {
-        // retrieves all the schools
-        API.getAllSchools()
-            .then(
-                res => {
-                    console.log(res.data);
-                    this.setState({
-                        schools: res.data
-                    })
-                }
-            )
-            .catch(err => console.log(err));
-    }
 
     handleButtonClick = event => {
         event.preventDefault();

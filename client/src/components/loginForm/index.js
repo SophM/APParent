@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { FormAction, FormLabel, FormButton, FormMessage } from "../form";
 import API from "../../utils/API";
+import ErrorMessage from "../errorMessage"
 
 class LoginForm extends Component {
     state = {
@@ -50,11 +51,22 @@ class LoginForm extends Component {
                 )
                 .catch(err => console.log(err))
         }
+        else {
+            this.setState(
+                {hasError: true}
+            )
+        }
     }
 
     render() {
         return (
             <div>
+                {(this.state.hasError) ? 
+                (<ErrorMessage
+                message="Invalid email/password"
+                />) :
+                ("")
+                }
                 <FormAction>
                     {this.state.userInfo.map((info, i) => {
 

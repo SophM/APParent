@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { FormTitle, FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../components/./form";
 import "../style/home.css";
 import API from "../utils/API";
-
+import LoginForm from "../components/./loginForm"
 let labels = [];
 const gradeLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -84,7 +84,7 @@ class Home extends Component {
                             <div className="modal-body">
 
 
-                                <FormAction
+                                {/* <FormAction
                                     route={this.state.data.route}
                                 >
                                     {this.state.data.for.map( (item, i) => {
@@ -101,7 +101,11 @@ class Home extends Component {
                                                 label={labels[i]}
                                             />
                                         )
-                                    })}
+                                    })} */}
+
+                                    < LoginForm
+                                    path={this.handleButtonClick}
+                                    />
 
                                     {/* ternary so the state input is only displayed on the sign-up form */}
                                     {this.state.data.title === "Sign Up" ?
@@ -140,7 +144,7 @@ class Home extends Component {
                                         </div>
                                     : (" ")} 
 
-                                    <FormButton
+                                    {/* <FormButton
                                         nameButton={this.state.data.nameButton}
                                     />
                                 </FormAction>
@@ -149,7 +153,7 @@ class Home extends Component {
                                     path={this.handleButtonClick}
                                     action={this.state.data.action}
                                     id={this.state.data.alt}
-                                />
+                                /> */}
 
                             </div>
 

@@ -1,4 +1,4 @@
-# Project-3
+# APP@rent
 
 <b><u>Summary:</u></b><br></br>
 In this project, we built APP@rent - an app for parents. Parenthood is great but let's face it, it can also be very challenging! The idea was then to create an app to help parents meet other parents, help one another, share tips, events....

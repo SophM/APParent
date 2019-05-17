@@ -46,14 +46,18 @@ class LoginForm extends Component {
                     password: this.state.userInfo[1].value
                 }
             )
-                .then(res =>
-                    window.location.reload()
+                .then(res => {
+                    if (res.data.status === "success") {
+                        window.location.reload()
+                    }
+                }
+
                 )
                 .catch(err => console.log(err))
         }
         else {
             this.setState(
-                {hasError: true}
+                { hasError: true }
             )
         }
     }
@@ -61,11 +65,11 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                {(this.state.hasError) ? 
-                (<ErrorMessage
-                message="Invalid email/password"
-                />) :
-                ("")
+                {(this.state.hasError) ?
+                    (<ErrorMessage
+                        message="Invalid email/password"
+                    />) :
+                    ("")
                 }
                 <FormAction>
                     {this.state.userInfo.map((info, i) => {
@@ -90,8 +94,8 @@ class LoginForm extends Component {
                     id={this.state.formMessage.alt}
                 />
                 <FormButton
-                nameButton="Submit"
-                handleButtonClick={this.handleSubmitButtonClick}
+                    nameButton="Submit"
+                    handleButtonClick={this.handleSubmitButtonClick}
                 />
             </div>
         )

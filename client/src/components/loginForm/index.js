@@ -50,6 +50,11 @@ class LoginForm extends Component {
                     if (res.data.status === "success") {
                         window.location.reload()
                     }
+                    else if (res.data.status === "unsuccessful"){
+                        this.setState(
+                            { hasError: true }
+                        )
+                    }
                 }
 
                 )

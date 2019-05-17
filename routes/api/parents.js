@@ -30,7 +30,7 @@ function passportAuthenticate(localStrategy, req, res, next) {
 				return res.redirect("/")
 			}
 			else if (info.from === "login") {
-				return res.redirect("/")
+				return res.json({status:"unsuccessful"})
 			}
 		} else {
 			// console.log("passed ++++++++++++++++")

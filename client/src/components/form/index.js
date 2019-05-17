@@ -30,7 +30,7 @@ export function FormLabel(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <input data-id={props.data} value={props.value} disabled={props.disabled} type={props.for} id={props.for} name={props.for} className="form-control" placeholder={props.for} onChange={props.handleChange} />
+            <input data-id={props.data} value={props.value} disabled={props.disabled} type={props.for} id={props.for} name={props.for} className="form-control" placeholder={props.placeholder} onChange={props.handleChange} />
         </div>
     )
 }
@@ -39,7 +39,7 @@ export function InputText(props) {
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <textarea value={props.value} id={props.for} name={props.for} className="form-control" rows="4" placeholder={"Enter your " + props.for} onChange={props.handleChange}></textarea>
+            <textarea value={props.value} id={props.for} name={props.for} className="form-control" rows="4" placeholder={props.placeholder} onChange={props.handleChange}></textarea>
         </div>
     )
 }

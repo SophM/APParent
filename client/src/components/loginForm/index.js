@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { FormAction, FormLabel, FormButton, FormMessage } from "../components/./form";
+import { FormAction, FormLabel, FormButton, FormMessage } from "../form";
 import API from "../../utils/API";
 
 class LoginForm extends Component {
@@ -38,8 +38,13 @@ class LoginForm extends Component {
 
     handleSubmitButtonClick = event => {
         event.preventDefault();
-        if (this.state.email.value && this.state.password.value) {
-            API.login()
+        if (this.state.userInfo[0].value && this.state.userInfo[1].value) {
+            API.login(
+                {
+                    email: this.state.userInfo[0].value,
+                    password: this.state.userInfo[1].value
+                }
+            )
                 .then(res =>
                     window.location.reload()
                 )
@@ -58,8 +63,8 @@ class LoginForm extends Component {
                                 key={i}
                                 data={i}
                                 for={info.for}
-                                label={user.label}
-                                value={user.value}
+                                label={info.label}
+                                value={info.value}
                                 handleChange={this.handleInputChange}
                             />
                         );
@@ -68,9 +73,13 @@ class LoginForm extends Component {
                 </FormAction>
                 <FormMessage
                     message={this.state.formMessage.message}
-                    path={this.handleButtonClick}
-                    action={props.path}
+                    path={this.props.path}
+                    action={this.state.formMessage.action}
                     id={this.state.formMessage.alt}
+                />
+                <FormButton
+                nameButton="Submit"
+                handleButtonClick={this.handleSubmitButtonClick}
                 />
             </div>
         )

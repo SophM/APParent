@@ -44,7 +44,7 @@ export default {
     checkLogin: function(){
         return axios.get("/api/parents/checkstatus")
     },
-    login: function (){
-        return axios.get("/api/parents/login")
+    login: function (data){
+        return axios.post("/api/parents/login", data)
     }
 };

@@ -45,7 +45,7 @@ function passportAuthenticate(localStrategy, req, res, next) {
 					console.log(req.session.passport.user.dataValues.id);
 					console.log("##########################");
 					console.log("\n")
-					return res.redirect("/dashboard");
+					return res.send("/dashboard");
 				}
 
 			});
@@ -61,7 +61,7 @@ router.route("/signup").post(function (req, res, next) {
 });
 
 router.route("/login").post(function (req, res, next) {
-	// console.log("Req", req.body)
+	console.log("Req", req.body)
 	passportAuthenticate("local-signin", req, res, next);
 });
 

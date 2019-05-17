@@ -45,7 +45,7 @@ function passportAuthenticate(localStrategy, req, res, next) {
 					console.log(req.session.passport.user.dataValues.id);
 					console.log("##########################");
 					console.log("\n")
-					return res.send("/dashboard");
+					return res.json({status:"success"});
 				}
 
 			});

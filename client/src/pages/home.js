@@ -9,43 +9,37 @@ import LoginForm from "../components/./loginForm"
 class Home extends Component {
 
     state = {
-        data: {
-            title: "Sign Up",
-            route: "/api/parents/signup",
-            for: ["userName", "password", "email", "city",],
-            nameButton: "Sign Up",
-            message: "Already Have An Account?",
-            path: "/login",
-            action: "Login",
-        }
+        // data: {
+        //     title: "Sign Up",
+        //     route: "/api/parents/signup",
+        //     for: ["userName", "password", "email", "city",],
+        //     nameButton: "Sign Up",
+        //     message: "Already Have An Account?",
+        //     path: "/login",
+        //     action: "Login",
+        // }
+        form: "sign up"
     };
 
     handleButtonClick = event => {
         event.preventDefault();
         if (event.target.id === "signup") {
             this.setState({
-                data: {
-                    title: "Sign Up",
-                    route: "/api/parents/signup",
-                    for: ["userName", "password", "email", "city"],
-                    nameButton: "Sign Up",
-                    message: "Already Have An Account?",
-                    action: "Login",
-                    alt:"login"
-                } 
+                form: "sign up"
             })
         }
         else {
             this.setState({
-                data: {
-                    title: "Login",
-                    route: "/api/parents/login",
-                    for: ["email", "password"],
-                    nameButton: "Login",
-                    message: "No Account?",
-                    action: "Register",
-                    alt: "signup"
-                }
+                // data: {
+                //     title: "Login",
+                //     route: "/api/parents/login",
+                //     for: ["email", "password"],
+                //     nameButton: "Login",
+                //     message: "No Account?",
+                //     action: "Register",
+                //     alt: "signup"
+                // }
+                form: "login"
 
             })
         }
@@ -86,13 +80,16 @@ class Home extends Component {
                                             />
                                         )
                                     })} */}
-
+                                {(this.state.form === "sign up") ?
+                                    // change this to Sign up form later
+                                    <LoginForm/>
+                                        :
                                     < LoginForm
-                                    path={this.handleButtonClick}
+                                        path={this.handleButtonClick}
                                     />
-
-                                    {/* ternary so the state input is only displayed on the sign-up form */}
-                                    {this.state.data.title === "Sign Up" ?
+                                }
+                                {/* ternary so the state input is only displayed on the sign-up form */}
+                                {/* {this.state.data.title === "Sign Up" ?
                                         <div>
                                             <div className="form-group text-left">
                                                 <label for="state">Which state do you live in?</label>
@@ -126,9 +123,9 @@ class Home extends Component {
                                                 })}
                                             </Dropdown>
                                         </div>
-                                    : (" ")} 
+                                    : (" ")}  */}
 
-                                    {/* <FormButton
+                                {/* <FormButton
                                         nameButton={this.state.data.nameButton}
                                     />
                                 </FormAction>
@@ -145,8 +142,8 @@ class Home extends Component {
                     </div>
                 </div>
 
-                
-                <img className="logo" src="/images/logo-only-color.png" alt="logo"/>
+
+                <img className="logo" src="/images/logo-only-color.png" alt="logo" />
                 <h1 className="text-center mt-3">Welcome to APP@rent!</h1>
                 <p className="text-center font-weight-bold">An app to meet other parents, help one another and share information!</p>
 

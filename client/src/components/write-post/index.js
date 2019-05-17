@@ -44,9 +44,6 @@ class WritePost extends Component {
         return(
         <div>
             <FormContainer>
-                {/* <FormAction 
-                    route={props.route} > */}
-
                 <FormTitle
                     title="Write a post"
                 />
@@ -64,17 +61,20 @@ class WritePost extends Component {
                 </Dropdown>
                 <FormLabel
                     for="title"
+                    label="Enter a title for your message"
+                    placeholder= "title"
                     handleChange={this.handleInputChange}
                 />
                 <InputText
                     for="description"
+                    label="Enter your message"
+                    placeholder="message"
                     handleChange={this.handleInputChange}
                 />
                 <FormButton
                     nameButton="Post"
                     handleButtonClick={this.handleButtonClick}
                 />
-                {/* </FormAction> */}
             </FormContainer>
         </div>
         );

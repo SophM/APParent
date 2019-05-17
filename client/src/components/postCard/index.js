@@ -1,11 +1,6 @@
 // make component a statefull component
 import React, { Component } from "react";
-import {
-  InputText,
-  FormContainer,
-  CommentDisplay,
-  CommentSubmitButton
-} from "../form";
+import { CommentDisplay } from "../form";
 import API from "../../utils/API";
 import "./style.css";
 

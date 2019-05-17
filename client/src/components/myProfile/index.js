@@ -1,7 +1,7 @@
 //This component is for Edit or View my Profile 
 
 import React, { Component } from "react";
-import { FormContainer, FormTitle, FormLabel, FormButton, FormAction, Dropdown, OptionForDropdown } from "../form";
+import { FormContainer, FormTitle, FormLabel, FormButton } from "../form";
 import API from "../../utils/API";
 
 class MyProfile extends Component {

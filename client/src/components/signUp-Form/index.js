@@ -1,14 +1,15 @@
 // import all the dependencies
 import React, { Component } from "react";
-import { FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
+import { FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../form";
 import "./style.css";
-import API from "../utils/API";
+import API from "../../utils/API";
 
 
 // define a class SignUp to create the component
 class SignUp extends Component {
     
     state = {
+        firstStepRegistration: true,
         parentInfo: 
             [
                 {
@@ -36,10 +37,8 @@ class SignUp extends Component {
                     value: "",
                 },
             ],
-        kidInfo: [{}],
         schools: [],
         gradeLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        nameButton: "Continue",
         formMessage:
             {
                 message: "Already Have An Account?",
@@ -63,42 +62,73 @@ class SignUp extends Component {
             .catch(err => console.log(err));
     }
 
+    handleInputChange = event => {
+        const value = event.target.value;
+        const key = event.target.getAttribute("data-id")
+        let copy = [...this.state.userInfo]
+        copy[key].value = value
+        this.setState({
+            userInfo: copy
+        })
+    }
+
+    handleContinueButtonClick = event => {
+        event.preventDefault();
+        
+        this.setState({
+            firstStepRegistration: false
+        });
+    }
+
 
     render() {
         return (
             <div>
-                <FormAction>
-                    {this.state.userInfo.map((info, i) => {
+                {(this.state.firstStepRegistration) ? (
+                    <div>
+                        <FormAction>
+                            {this.state.parentInfo.map((parentInfo, i) => {
 
-                        return (
-                            <FormLabel
-                                key={i}
-                                data={i}
-                                for={info.for}
-                                label={info.label}
-                                placeholder={info.placeholder}
-                                value={info.value}
-                                handleChange={this.handleInputChange}
-                            />
-                        );
-                    }
-                    )}
-                    <div className="form-group text-left">
-                        <label for="state">Which state do you live in?</label>
-                        <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
+                                return (
+                                    <FormLabel
+                                        key={i}
+                                        data={i}
+                                        for={parentInfo.for}
+                                        label={parentInfo.label}
+                                        placeholder={parentInfo.placeholder}
+                                        value={parentInfo.value}
+                                        handleChange={this.handleInputChange}
+                                    />
+                                );
+                            })}
+                            <div className="form-group text-left">
+                                <label for="state">Which state do you live in?</label>
+                                <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
+                            </div>
+                        </FormAction>
+                        <FormButton
+                            nameButton="Continue"
+                            handleButtonClick={this.handleContinueButtonClick}
+                        />
                     </div>
-                </FormAction>
+                ) : (
+                    <div>
+                        <FormAction>
+                            <FormLabel />
+                        </FormAction>
+                        <FormButton
+                            nameButton="Sign Up"
+                            handleButtonClick={this.handleSignUpButtonClick}
+                        />
+                    </div>
+                )}
+                
                 <FormMessage
                     message={this.state.formMessage.message}
                     path={this.props.path}
                     action={this.state.formMessage.action}
                     id={this.state.formMessage.alt}
                 />
-                <FormButton
-                    nameButton={this.state.nameButton}
-                    handleButtonClick={this.handleButtonClick}
-                />
-
             </div>
         );
     }

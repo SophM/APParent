@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import { FormTitle, FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../components/./form";
 import "../style/home.css";
 import API from "../utils/API";
-import LoginForm from "../components/./loginForm"
+import LoginForm from "../components/./loginForm";
+import SignUp from "../components/signUp-Form";
 
 
 class Home extends Component {
@@ -82,7 +83,9 @@ class Home extends Component {
                                     })} */}
                                 {(this.state.form === "Sign-Up") ?
                                     // change this to Sign up form later
-                                    <LoginForm/>
+                                    <SignUp
+                                        path={this.handleButtonClick}
+                                    />
                                         :
                                     < LoginForm
                                         path={this.handleButtonClick}

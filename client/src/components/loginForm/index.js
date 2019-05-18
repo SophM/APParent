@@ -37,6 +37,8 @@ class LoginForm extends Component {
         })
     }
 
+    
+
     handleSubmitButtonClick = event => {
         event.preventDefault();
         if (this.state.userInfo[0].value && this.state.userInfo[1].value) {
@@ -75,7 +77,19 @@ class LoginForm extends Component {
         })
     }
 
+    resetError = () => {
+        if(this.state.hasError){
+        setTimeout(()=>{
+            this.setState({
+                hasError: false
+            })
+        }, 2000)
+    }
+    }
+
+
     render() {
+        this.resetError()
         return (
             <div>
                 {(this.state.hasError) ?

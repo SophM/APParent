@@ -39,12 +39,19 @@ export default {
     }, 
 
     logout: function(){
-        return axios.get("/logout")
+        return axios.get("/logout");
     },
+
     checkLogin: function(){
         return axios.get("/api/parents/checkstatus")
     },
+
     login: function (data){
-        return axios.post("/api/parents/login", data)
+        return axios.post("/api/parents/login", data);
+    },
+
+    // sign up - create parent and kid in the database
+    signup: function (data) {
+        return axios.post("api/parents/signup", data);
     }
 };

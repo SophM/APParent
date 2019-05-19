@@ -43,22 +43,19 @@ module.exports = function (passport) {
               email: email,
               city: req.body.city,
               state: req.body.state,
+              photoLink: req.body.photoLink,
               password: db.parents.generateHash(password)
             }).then(function (newUser) {
               console.log("new user", newUser)
-              
-              
+                           
               db.kids.create({
-                name: req.body.nameFirstKid,
+                name: req.body.kidName,
                 gradeLevel: req.body.grade,
                 parentId: newUser.dataValues.id,
                 schoolId: req.body.schoolId
               }).then(function (newKid) {
                 return done(null, newUser)
               }).catch(err => console.log(err));
-
-
-
 
             }).catch(err => console.log(err));
 

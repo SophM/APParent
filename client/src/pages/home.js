@@ -46,10 +46,6 @@ class Home extends Component {
         }
     }
 
-    handleModalCloseButton = () => {
-
-    }
-
     render() {
         return (
             <div className="container main">

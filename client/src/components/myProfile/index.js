@@ -115,27 +115,28 @@ class MyProfile extends Component {
     //     })
     // }
 
-    // handleSaveNewKid = event => {
-    //     event.preventDefault();
-    //     console.log("SAVE NEW KID INFO");
-    //     this.setState({
-    //         addnewMember: false
-    //     })
+    handleUpdateKidInfo = event => {
+        event.preventDefault();
+        console.log("SAVE NEW KID INFO");
+        this.setState({
+            addnewMember: false
+        })
 
-    //     const kidInfoData = {
-    //         name: this.state.kidInfo[0].value,
-    //         gradeLevel: this.state.grade.value
-    //     }
+        const kidInfoData = {
+            name: this.state.kidInfo[0].value,
+            gradeLevel: this.state.grade.value, 
+            schoolId: this.state.schools.id
+        }
 
-    //     console.log(kidInfoData);
+        console.log(kidInfoData);
 
-    //     // //Updates the user profile 
-    //     // API.updateProfile(userUpdatedData)
-    //     //     .then(res => {
-    //     //         window.location.reload();
-    //     //     })
-    //     //     .catch(err => console.log(err)); 
-    // }
+        // //Updates the user profile 
+        // API.updateProfile(userUpdatedData)
+        //     .then(res => {
+        //         window.location.reload();
+        //     })
+        //     .catch(err => console.log(err)); 
+    }
 
     componentDidMount() {
         // retrieves all the schools - filter by state 
@@ -217,65 +218,19 @@ class MyProfile extends Component {
                         <div className="card ">
                             {/* Rendering Form labels using the kidInfo object values */}
                             <FormTitle
-                            title="Update Kid(s) Info"
-                        />
-                            {this.state.kidInfo.map((kid, i) => {
-
-                                return (
-                                    <FormLabel
-                                        key={i}
-                                        data={i}
-                                        for={kid.for}
-                                        name={kid.for}
-                                        label={kid.label}
-                                        value={kid.value}
-                                        handleChange={this.handleInputMemberChange}
-                                    />
-                                    
-                                );
-                            }
-                            )}
-                            <Dropdown
-                                for="grade"
-                                label="Choose which grade is your kid in?"
-                            >
-                                {this.state.gradeLevels.map((grade ,i) => {
-                                    return (
-                                        <OptionForDropdown option={grade}
-                                            value={grade} 
-                                            key={i} />
-                                    )
-                                })}
-                            </Dropdown>
-                            <Dropdown
-                                for="schoolId"
-                                label="Which school is your kid going to?"
-                                handleChange={this.handleInputChangeKid}
-                            >
-                                {this.state.schools.map(school => {
-                                    return (
-                                        <OptionForDropdown
-                                            option={school.name}
-                                            value={school.id}
-                                            key={school.id}
-                                        />
-                                    )
-                                })}
-                            </Dropdown>
-                            <FormButton 
-                                nameButton ="Save Member Info"
-                                handleButtonClick={this.handleSaveNewKid}
+                                title="Update Kid(s) Info"
                             />
+
                         </div>
-                                : 
-                           <div>
-                           <h3>No Family Member(s) found
+                        :
+                        <div>
+                            <h3>No Family Member(s) found
                            {/* <FormButton 
                                 nameButton ="Add New Member"
                                 handleButtonClick={this.handleAddNewMember}
                             /> */}
                             </h3>
-                            </div>
+                        </div>
                    }
                     
                   

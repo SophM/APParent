@@ -45,7 +45,14 @@ class SignUp extends Component {
             ],
         parentState: "CA",
         // kidInfoTemp: [],
-        kidInfo: [],
+        kidInfo: 
+            [
+                {
+                    name: "",
+                    grade: 1,
+                    schoolId: 1
+                }
+            ],
         schools: [],
         gradeLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         formMessage:
@@ -108,12 +115,18 @@ class SignUp extends Component {
 
     handleInputChangeKid = event => {
         // const value = event.target.value;
-        // const { name, value } = event.target;
+        const { name, value } = event.target;
 
         // this.state.kidInfoTemp.push(event.target.value);
-        this.state.kidInfo.push(event.target.value);
+        // this.state.kidInfo.push(event.target.value);
 
-        // const copy = [...this.state.kidInfo];
+        const copy = [...this.state.kidInfo];
+
+        copy[0][name] = value;
+
+        this.setState({
+            kidInfo: copy
+        })
 
         // copy.push({
         //     name: this.state.kidInfoTemp[0],
@@ -137,13 +150,36 @@ class SignUp extends Component {
     handleSignUpButtonClick = event => {
         event.preventDefault();
 
-        if (this.state.kidInfo[0] && this.state.kidInfo[1] && this.state.kidInfo[2]) {
-            
-            // this.setState({
-            //     firstStepRegistration: true
-            // });
+        if (this.state.kidInfo[0].name && this.state.kidInfo[0].grade && this.state.kidInfo[0].schoolId) {
+
             // console.log("kidInfoTemp: ", this.state.kidInfoTemp);
             console.log("kidInfo: ", this.state.kidInfo);
+
+            API.signup(
+                {
+                    userName: this.state.parentInfo[0].value,
+                    password: this.state.parentInfo[1].value,
+                    email: this.state.parentInfo[2].value,
+                    photoLink: this.state.parentInfo[3].value,
+                    city: this.state.parentInfo[4].value,
+                    state: this.state.parentState,
+                    kidName: this.state.kidInfo[0].name,
+                    grade: this.state.kidInfo[0].grade,
+                    schoolId: this.state.kidInfo[0].schoolId
+                }
+            )
+            .then(res => {
+                if (res.data.status === "success") {
+                    window.location.reload()
+                }
+                else if (res.data.status === "unsuccessful"){
+                    this.setState(
+                        { hasError: true }
+                    )
+                }
+                
+            })
+            .catch(err => console.log(err))
 
         } else {
 
@@ -203,7 +239,7 @@ class SignUp extends Component {
                             })}
                             <div className="form-group text-left">
                                 <label for="state">Which state do you live in?</label>
-                                <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA" onChange={this.handleInputChangeParentState}></select>
+                                <select className="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA" onChange={this.handleInputChangeParentState}></select>
                             </div>
                         </FormAction>
                         <FormButton
@@ -223,7 +259,7 @@ class SignUp extends Component {
                         )}
                         <FormAction>
                         <FormLabel 
-                            for="kidName"
+                            for="name"
                             label="What's the name of your kid?"
                             handleChange={this.handleInputChangeKid}
                         />

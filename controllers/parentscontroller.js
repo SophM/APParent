@@ -58,20 +58,21 @@ module.exports = {
     //     });
     // },
 
-    // find all kids for a specific parent
-    findAllKidsForAParent: function (req, res) {
-        db.parents.findOne({
-            where: {
-                id: req.params.id
-            },
-            // include all posts for the specific parent 
-            include: [{
-                model: db.kids, as: "kids"
-            }],
-        }).then(function (result) {
-            res.json(result)
-        });
-    },
+    // // find all kids for a specific parent
+    // findAllKidsForAParent: function (req, res) {
+    //     console.log("Parent id ", req.params.id); 
+    //     db.parents.findOne({
+    //         where: {
+    //             id: req.params.id
+    //         },
+    //         // include all kids for the specific parent 
+    //         include: [{
+    //             model: db.kids, as: "kids"
+    //         }],
+    //     }).then(function (result) {
+    //         res.json(result)
+    //     });
+    // },
 
     //Updating deatils for the logged in user 
     update: function (req, res) {
@@ -82,8 +83,8 @@ module.exports = {
                 //Re-generate Hashed Password for the user 
                 // passw: db.users.generateHash(req.body.password) , 
                 city: req.body.city,
-                state: req.body.state
-                //   photoLink : req.body.photoLink
+                state: req.body.state,
+                  photoLink : req.body.photoLink
             }, {
                 where: {
                     id: req.session.passport.user.id

@@ -77,10 +77,13 @@ export function FormMessage(props) {
 
 export function CommentDisplay(props) {
     return (
+        <div>
         <p className="lead mt-4">
         <label for={props.for}>{props.posterName}:</label>
             {" "}{props.comment}
         </p>
+        <p>Last Updated:{props.updatedAt}</p>
+        </div>
     )
 }
 

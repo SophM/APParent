@@ -117,6 +117,7 @@ class Dashboard extends Component {
                       title={post.title}
                       name={post.parent.userName}
                       description={post.description}
+                      updatedAt={post.updatedAt}
                       postId={post.id}
                       members={this.state.members}
                     />

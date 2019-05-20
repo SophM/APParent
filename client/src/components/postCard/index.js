@@ -11,6 +11,7 @@ class PostCard extends Component {
   state = {
     nameButton: "Comment",
     description: "",
+    timeStamp:"",
     comments: [],
   };
 
@@ -74,7 +75,7 @@ class PostCard extends Component {
         // if (comments && members) {
         // const parent = members.find((member) => member.id === comment.parentId);
         // const parentUsername = parent && parent.userName;
-        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description}/><hr/></div>)
+        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={comment.updatedAt}/><hr/></div>)
         // }
       })}
     </div>)
@@ -96,6 +97,9 @@ class PostCard extends Component {
                 </p>
                 <p className="card-text" id="postCardDetails">
                   <b><u>Details:</u> </b>{this.props.description}
+                </p>
+                <p>
+                  Last Updated: {this.props.updatedAt}
                 </p>
               </div>
               <button

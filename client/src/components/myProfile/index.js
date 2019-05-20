@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
+import KidCard from "../kidCard"; 
 
 class MyProfile extends Component {
 
@@ -214,23 +215,24 @@ class MyProfile extends Component {
                         </div>
                     }
                    
-                   { this.state.kids.length ? 
-                        <div className="card ">
-                            {/* Rendering Form labels using the kidInfo object values */}
-                            <FormTitle
-                                title="Update Kid(s) Info"
-                            />
-
-                        </div>
-                        :
-                        <div>
+                   { this.state.kids.length ? (
+                        this.state.kids.map((kid) => {
+                            return (
+                              <KidCard
+                                key={kid.id}
+                                name={kid.name}
+                                gradeLevel={kid.gradeLevel}
+                              />
+                            );
+                          })
+                          ) : (
                             <h3>No Family Member(s) found
                            {/* <FormButton 
                                 nameButton ="Add New Member"
                                 handleButtonClick={this.handleAddNewMember}
                             /> */}
                             </h3>
-                        </div>
+                        )
                    }
                     
                   

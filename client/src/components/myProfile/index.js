@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
-import KidCard from "../kidCard"; 
+// import KidCard from "../kidCard"; 
 
 class MyProfile extends Component {
 
@@ -38,7 +38,17 @@ class MyProfile extends Component {
                     for: "name",
                     label:"Update your Kid's Name",
                     value: this.props.name
-                } 
+                },
+                {
+                    for: "gradeLevels", 
+                    label: "Select child's curent gradeleevel", 
+                    value: this.props.gradeLevel
+                },
+                {
+                    for: "schoolId", 
+                    label: "Select child's curent school", 
+                    value: this.props.schoolId
+                }
             ],
             schools: [],
             kids:[],
@@ -103,18 +113,18 @@ class MyProfile extends Component {
 
     // }
 
-    // handleInputMemberChange = event => {
-    //     // const {name, value} = event.target;
-    //     const value = event.target.value;
-    //     // const column = event.target.id;
-    //     const key = event.target.getAttribute("data-id")
-    //     let copy = [...this.state.kidInfo]
-    //     copy[key].value = value
-    //     this.setState({
-    //         kidInfo: copy
-    //         // [column] : value
-    //     })
-    // }
+    handleInputMemberChange = event => {
+        // const {name, value} = event.target;
+        const value = event.target.value;
+        // const column = event.target.id;
+        const key = event.target.getAttribute("data-id")
+        let copy = [...this.state.kidInfo]
+        copy[key].value = value
+        this.setState({
+            kidInfo: copy
+            // [column] : value
+        })
+    }
 
     handleUpdateKidInfo = event => {
         event.preventDefault();

@@ -125,11 +125,11 @@ class MyProfile extends Component {
 
         const kidInfoData = {
             name: this.state.kidInfo[0].value,
-            gradeLevel: this.state.grade.value, 
-            schoolId: this.state.schools.id
+            gradeLevel: this.state.kidInfo[1].value, 
+            schoolId: this.state.kidInfo[2].value
         }
 
-        console.log(kidInfoData);
+        console.log("updated Kid",kidInfoData);
 
         // //Updates the user profile 
         // API.updateProfile(userUpdatedData)
@@ -216,13 +216,49 @@ class MyProfile extends Component {
                     }
                    
                    { this.state.kids.length ? (
-                        this.state.kids.map((kid) => {
+                        this.state.kids.map((kid, id) => {
                             return (
-                              <KidCard
-                                key={kid.id}
-                                name={kid.name}
-                                gradeLevel={kid.gradeLevel}
-                              />
+                              <div>
+                                  <FormTitle title = "Kid Info" />
+                                  <FormLabel 
+                                  label="Child's Name"
+                                  value={kid.name}
+                                  key={id}
+                                  disabled={this.state.disabled}
+                                  />
+                                     <Dropdown
+                                for="grade"
+                                label="Currently which grade is your kid in?"
+                            >
+                                {this.state.gradeLevels.map((grade ,i) => {
+                                    return (
+                                        <OptionForDropdown option={grade}
+                                            value={kid.gradeLevel} 
+                                            key={i} />
+                                    )
+                                })}
+                            </Dropdown>
+                            <Dropdown
+                                for="schoolId"
+                                label="Which school is your kid going to?"
+                                handleChange={this.handleInputChangeKid}
+                            >
+                                {this.state.schools.map(school => {
+                                    return (
+                                        <OptionForDropdown
+                                            option={school.name}
+                                            value={kid.schoolId}
+                                            key={school.id}
+                                        />
+                                    )
+                                })}
+                            </Dropdown>
+                            <FormButton 
+                                nameButton ="Update Member Info"
+                                handleButtonClick={this.handleUpdateKidInfo}
+                            />
+
+                              </div>
                             );
                           })
                           ) : (

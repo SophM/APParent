@@ -114,19 +114,21 @@ class MyProfile extends Component {
     // }
 
     handleInputKidChange = event => {
-        // const {name, value} = event.target;
-        const value = event.target.value;
-        // const column = event.target.id;
-        const key = event.target.getAttribute("data-id"); 
-        console.log("this.state.kidInfo" ,this.state.kidInfo);
-        let copy = [...this.state.kidInfo]
-        copy[key].value = value
-        this.setState({
-            kidInfo: copy
-            // [column] : value
-        })
-    }
 
+        const { name, value } = event.target;
+        console.log("Handle change fired", name , value);
+        // let copy = [...this.state.kidInfo];
+        // copy[key].value = value
+        // this.setState({
+        //     kidInfo: copy
+        // })
+
+    }
+    handleInputDropDownOpt = event => {
+        console.log("handleInputDropDownOpt");
+        const { name, value } = event.target;
+        console.log("Name", name , "value ", value)
+    }
     handleUpdateKidInfo = event => {
         event.preventDefault();
         console.log("SAVE KID INFO");
@@ -134,20 +136,22 @@ class MyProfile extends Component {
         //     addnewMember: false
         // })
 
-        const kidInfoData = {
-            name: this.state.kidInfo[0].value,
-            gradeLevel: this.state.kidInfo[1].value, 
-            schoolId: this.state.kidInfo[2].value
-        }
+        // const kidInfoData = {
+        //     // name: this.state.kidInfo[0].value,
+        //     // gradeLevel: this.state.kidInfo[1].value, 
+        //     // schoolId: this.state.kidInfo[2].value
+        // }
 
-        console.log("updated Kid",kidInfoData);
-
+        // console.log("updated Kid",kidInfoData);
+        console.log("Step1"); 
         //Updates the user profile 
-        API.updateKidForAParent(kidInfoData)
-            .then(res => {
-                window.location.reload();
-            })
-            .catch(err => console.log(err)); 
+        // API.updateKidForAParent(kidInfoData)
+        //     .then(res => {
+        //         console.log("results", res);
+        //         console.log("Step3"); 
+        //         // window.location.reload();
+        //     })
+        //     .catch(err => console.log(err)); 
     }
 
     handleDeleteKidInfo = event => {
@@ -237,16 +241,18 @@ class MyProfile extends Component {
                                 <div>
                                     <FormTitle title="Kid Info" />
                                     <FormLabel
+                                        key={id}
+                                        data={id}
                                         for="name"
+                                        name="name"
                                         label="Please update Child's name:"
                                         value={kid.name}
-                                        key={id}
-                                        handleChange={this.handleInputChangeKid}
+                                        handleChange={this.handleInputKidChange}
                                     />
                                     <Dropdown
                                         for="gradeLevel"
                                         label="Currently which grade is your kid in?"
-                                        handleChange={this.handleInputChangeKid}
+                                        handleChange={this.handleInputDropDownOpt}
                                     >
                                         {this.state.gradeLevels.map((grade, i) => {
                                             return (
@@ -256,27 +262,46 @@ class MyProfile extends Component {
                                             )
                                         })}
                                     </Dropdown>
+                                    {/* <FormLabel
+                                        key={id}
+                                        data={id}
+                                        for="gradeLevel"
+                                        name="gradeLevel"
+                                        label="Current Gadee"
+                                        value={kid.gradeLevel}
+                                    /> */}
                                     <Dropdown
                                         for="schoolId"
                                         label="Which school is your kid going to?"
-                                        handleChange={this.handleInputChangeKid}
+                                        handleChange={this.handleInputDropDownOpt}
                                     >
                                         {this.state.schools.map((school, j) => {
                                             return (
                                                 <OptionForDropdown
                                                     option={school.name}
-                                                    value={kid.schoolId}
+                                                    value={school.schoolId}
+                                                    selected value={kid.schoolId}
                                                     key={j}
                                                 />
                                             )
                                         })}
                                     </Dropdown>
+                                    {/* <FormLabel
+                                        key={id}
+                                        data={id}
+                                        for="schoolId"
+                                        name="schoolId"
+                                        label="Current school id"
+                                        value={kid.schoolId}
+                                    /> */}
                                     <FormButton
-                                        nameButton="Update Child Info"
+                                        nameButton="Update Child"
+                                        className="btn-success"
                                         handleButtonClick={this.handleUpdateKidInfo}
                                     />
                                     <FormButton
-                                        nameButton="Remove Child Info"
+                                        nameButton="Remove Child"
+                                        className="btn-warning"
                                         handleButtonClick={this.handleDeleteKidInfo}
                                     />
                                 </div>
@@ -285,7 +310,7 @@ class MyProfile extends Component {
                     ) : (
                             <h3>No Family Member(s) found
                            {/* <FormButton 
-                                nameButton ="Add New Member"
+                                nameButton ="Add New Kid Info"
                                 handleButtonClick={this.handleAddNewMember}
                             /> */}
                             </h3>

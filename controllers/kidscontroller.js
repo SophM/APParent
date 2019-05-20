@@ -17,6 +17,7 @@ module.exports = {
 
     //update kids info function as a stretch goal
     update: function(req,res){
+        console.log("Step 2 inside kid controler", req.body.parentId); 
         if (req.isAuthenticated()) {
             db.kids.update(
                 {   //Fields to update 

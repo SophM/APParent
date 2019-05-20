@@ -95,6 +95,7 @@ module.exports = {
                 console.log("1");
                 res.json(dbParent);
             })
+            .catch(err => res.status(422).json(err));
     },
     checkStatus: function (req, res) {
         if (req.isAuthenticated()) {

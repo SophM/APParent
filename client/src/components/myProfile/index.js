@@ -114,10 +114,11 @@ class MyProfile extends Component {
     // }
 
     handleInputKidChange = event => {
-        const {name, value} = event.target;
-        // const value = event.target.value;
+        // const {name, value} = event.target;
+        const value = event.target.value;
         // const column = event.target.id;
-        const key = event.target.getAttribute("data-id")
+        const key = event.target.getAttribute("data-id"); 
+        console.log("this.state.kidInfo" ,this.state.kidInfo);
         let copy = [...this.state.kidInfo]
         copy[key].value = value
         this.setState({
@@ -153,8 +154,9 @@ class MyProfile extends Component {
         event.preventDefault();
         console.log("Delete KID INFO");
     }
+
     componentDidMount() {
-        // retrieves all the schools - filter by state 
+        // retrieves all the kids for the logged in parent... 
         API.findAllKidsForAParent()
             .then(
                 res => {
@@ -228,58 +230,59 @@ class MyProfile extends Component {
                             /> 
                         </div>
                     }
-                   
-                   { this.state.kids.length ? (
+                   {/* Loop through all the kids for the logged in Parent */}
+                    {this.state.kids.length ? (
                         this.state.kids.map((kid, id) => {
                             return (
-                              <div>
-                                  <FormTitle title = "Kid Info" />
-                                  <FormLabel 
-                                  for="name"
-                                  label="Child's Name"
-                                  value={kid.name}
-                                  key={id}
-                                  disabled={this.state.disabled}
-                                  />
-                                     <Dropdown
-                                for="gradeLevel"
-                                label="Currently which grade is your kid in?"
-                            >
-                                {this.state.gradeLevels.map((grade ,i) => {
-                                    return (
-                                        <OptionForDropdown option={grade}
-                                            value={kid.gradeLevel} 
-                                            key={i} />
-                                    )
-                                })}
-                            </Dropdown>
-                            <Dropdown
-                                for="schoolId"
-                                label="Which school is your kid going to?"
-                                handleChange={this.handleInputChangeKid}
-                            >
-                                {this.state.schools.map(school => {
-                                    return (
-                                        <OptionForDropdown
-                                            option={school.name}
-                                            value={kid.schoolId}
-                                            key={school.id}
-                                        />
-                                    )
-                                })}
-                            </Dropdown>
-                            <FormButton 
-                                nameButton ="Update Child Info"
-                                handleButtonClick={this.handleUpdateKidInfo}
-                            />
-                            <FormButton 
-                                nameButton ="Remove Child Info"
-                                handleButtonClick={this.handleDeleteKidInfo}
-                            />
-                            </div>
+                                <div>
+                                    <FormTitle title="Kid Info" />
+                                    <FormLabel
+                                        for="name"
+                                        label="Please update Child's name:"
+                                        value={kid.name}
+                                        key={id}
+                                        handleChange={this.handleInputChangeKid}
+                                    />
+                                    <Dropdown
+                                        for="gradeLevel"
+                                        label="Currently which grade is your kid in?"
+                                        handleChange={this.handleInputChangeKid}
+                                    >
+                                        {this.state.gradeLevels.map((grade, i) => {
+                                            return (
+                                                <OptionForDropdown option={grade}
+                                                    value={kid.gradeLevel}
+                                                    key={i} />
+                                            )
+                                        })}
+                                    </Dropdown>
+                                    <Dropdown
+                                        for="schoolId"
+                                        label="Which school is your kid going to?"
+                                        handleChange={this.handleInputChangeKid}
+                                    >
+                                        {this.state.schools.map((school, j) => {
+                                            return (
+                                                <OptionForDropdown
+                                                    option={school.name}
+                                                    value={kid.schoolId}
+                                                    key={j}
+                                                />
+                                            )
+                                        })}
+                                    </Dropdown>
+                                    <FormButton
+                                        nameButton="Update Child Info"
+                                        handleButtonClick={this.handleUpdateKidInfo}
+                                    />
+                                    <FormButton
+                                        nameButton="Remove Child Info"
+                                        handleButtonClick={this.handleDeleteKidInfo}
+                                    />
+                                </div>
                             );
-                          })
-                          ) : (
+                        })
+                    ) : (
                             <h3>No Family Member(s) found
                            {/* <FormButton 
                                 nameButton ="Add New Member"
@@ -287,9 +290,8 @@ class MyProfile extends Component {
                             /> */}
                             </h3>
                         )
-                   }
-                    
-                  
+                    }
+
                     {/* </FormAction> */}
                 </FormContainer>
             </div>

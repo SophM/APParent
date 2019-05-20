@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     }, 
     //Add an image link for portfolio 
     photoLink: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: 'http://lorempixel.com/600/500/people'
     }

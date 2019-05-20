@@ -5,4 +5,12 @@ const kidsController = require("../../controllers/kidscontroller.js");
 router.route("/")
 	.get(kidsController.findAllKidsForAParent);
 
+// Updating  only one kid for a parent 
+router.route("/update")
+	.post(kidsController.update);
+
+// Delete the selected child  
+router.route("/:id")
+	.delete(kidsController.delete);
+
 module.exports = router;

@@ -80,7 +80,7 @@ class MyProfile extends Component {
     //Saves the changes made to the profile 
     handleSaveButtonClick = event => {
         event.preventDefault();
-        console.log("SAVE MY PROFILE");
+        // console.log("SAVE MY PROFILE");
         this.setState({
             disabled: true
         })
@@ -113,9 +113,9 @@ class MyProfile extends Component {
 
     // }
 
-    handleInputMemberChange = event => {
-        // const {name, value} = event.target;
-        const value = event.target.value;
+    handleInputKidChange = event => {
+        const {name, value} = event.target;
+        // const value = event.target.value;
         // const column = event.target.id;
         const key = event.target.getAttribute("data-id")
         let copy = [...this.state.kidInfo]
@@ -128,10 +128,10 @@ class MyProfile extends Component {
 
     handleUpdateKidInfo = event => {
         event.preventDefault();
-        console.log("SAVE NEW KID INFO");
-        this.setState({
-            addnewMember: false
-        })
+        console.log("SAVE KID INFO");
+        // this.setState({
+        //     addnewMember: false
+        // })
 
         const kidInfoData = {
             name: this.state.kidInfo[0].value,
@@ -141,14 +141,18 @@ class MyProfile extends Component {
 
         console.log("updated Kid",kidInfoData);
 
-        // //Updates the user profile 
-        // API.updateProfile(userUpdatedData)
-        //     .then(res => {
-        //         window.location.reload();
-        //     })
-        //     .catch(err => console.log(err)); 
+        //Updates the user profile 
+        API.updateKidForAParent(kidInfoData)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => console.log(err)); 
     }
 
+    handleDeleteKidInfo = event => {
+        event.preventDefault();
+        console.log("Delete KID INFO");
+    }
     componentDidMount() {
         // retrieves all the schools - filter by state 
         API.findAllKidsForAParent()
@@ -231,13 +235,14 @@ class MyProfile extends Component {
                               <div>
                                   <FormTitle title = "Kid Info" />
                                   <FormLabel 
+                                  for="name"
                                   label="Child's Name"
                                   value={kid.name}
                                   key={id}
                                   disabled={this.state.disabled}
                                   />
                                      <Dropdown
-                                for="grade"
+                                for="gradeLevel"
                                 label="Currently which grade is your kid in?"
                             >
                                 {this.state.gradeLevels.map((grade ,i) => {
@@ -264,11 +269,14 @@ class MyProfile extends Component {
                                 })}
                             </Dropdown>
                             <FormButton 
-                                nameButton ="Update Member Info"
+                                nameButton ="Update Child Info"
                                 handleButtonClick={this.handleUpdateKidInfo}
                             />
-
-                              </div>
+                            <FormButton 
+                                nameButton ="Remove Child Info"
+                                handleButtonClick={this.handleDeleteKidInfo}
+                            />
+                            </div>
                             );
                           })
                           ) : (

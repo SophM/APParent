@@ -27,8 +27,9 @@ module.exports = {
                     where: {
                         parentId: req.session.passport.user.id
                     }
-                }).then(function (result) {
-                    res.json(result)
+                }).then(function (dbKidInfo) {
+                    console.log("update child info for ", dbKidInfo);
+                    res.json(dbKidInfo)
                 })
                 .catch(err => res.status(422).json(err));
         }
@@ -52,5 +53,16 @@ module.exports = {
             res.json(result)
         })
         .catch(err => res.status(422).json(err));
-    },
+    }, 
+    //delete one single kid 
+    delete: function(req,res){
+        console.log("Delete child's Info"); 
+        db.kids.destroy({
+            where: {id: req.params.id}
+        }).then(function(deletedKid){
+            console.log(`Has the kid been deleted? 1 means yes, 0 means no: ${deletedKid}`);
+            res.json(deletedKid);
+        })
+        .catch(err => res.status(422).json(err));
+    }
 }

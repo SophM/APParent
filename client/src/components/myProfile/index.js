@@ -3,7 +3,9 @@
 import React, { Component } from "react";
 import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
-import KidProfile from "../kidProfile"; 
+import KidProfile from "../kidProfile";
+
+const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 class MyProfile extends Component {
 
@@ -25,7 +27,8 @@ class MyProfile extends Component {
                 {
                     for: "state",
                     label: "Choose a state",
-                    value: this.props.state
+                    value: this.props.state,
+                    options: statesList
                 },
                 {
                     for: "photoLink",
@@ -210,19 +213,43 @@ class MyProfile extends Component {
                     {/* Rendering Form labels using the userInfo object values */}
 
                     {this.state.userInfo.map((user, i) => {
+                        if (user.for !== "state") {
 
-                        return (
-                            <FormLabel
-                                key={i}
-                                data={i}
-                                for={user.for}
-                                name={user.for}
-                                label={user.label}
-                                disabled={this.state.disabled}
-                                value={user.value}
-                                handleChange={this.handleInputChange}
-                            />
-                        );
+                            return (
+                                <FormLabel
+                                    key={i}
+                                    data={i}
+                                    for={user.for}
+                                    name={user.for}
+                                    label={user.label}
+                                    disabled={this.state.disabled}
+                                    value={user.value}
+                                    handleChange={this.handleInputChange}
+                                />
+                            );
+                        } else {
+                            return (
+                                <Dropdown
+                                    key={i}
+                                    data={i}
+                                    for={user.for}
+                                    label={user.label}
+                                    value={user.value}
+                                    disabled={this.state.disabled}
+                                    handleChange={this.handleInputChange}
+                                >
+                                    {user.options.map((item, j) => {
+                                        return (
+                                            <OptionForDropdown
+                                                option={item}
+                                                value={item}
+                                                key={j}
+                                            />
+                                        )
+                                    })}
+                                </Dropdown>
+                            )
+                        }
                     }
                     )}
 

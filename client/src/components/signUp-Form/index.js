@@ -5,12 +5,14 @@ import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
 
+const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+
 // define a class SignUp to create the component
 class SignUp extends Component {
-    
+
     state = {
         firstStepRegistration: true,
-        parentInfo: 
+        parentInfo:
             [
                 {
                     for: "userName",
@@ -42,11 +44,16 @@ class SignUp extends Component {
                     placeholder: "city",
                     value: "",
                 },
+                {
+                    for: "state",
+                    label: "Which state do you live in?",
+                    value: "Alabama",
+                    options: statesList
+                }
             ],
-        parentState: "CA",
         numberOfKid: 1,
         allKidInfo: [],
-        kidInfo: 
+        kidInfo:
             [
                 {
                     name: "",
@@ -57,11 +64,11 @@ class SignUp extends Component {
         schools: [],
         gradeLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         formMessage:
-            {
-                message: "Already Have An Account?",
-                action: "Login",
-                alt: "login"
-            },
+        {
+            message: "Already Have An Account?",
+            action: "Login",
+            alt: "login"
+        },
         hasError: false,
         addKid: false
     };
@@ -90,26 +97,19 @@ class SignUp extends Component {
         });
     }
 
-    handleInputChangeParentState = event => {
-        this.setState({
-            parentState: event.target.value
-        })
-    }
-
     handleContinueButtonClick = event => {
         event.preventDefault();
 
-        if (this.state.parentInfo[0].value && this.state.parentInfo[1].value && this.state.parentInfo[2].value && this.state.parentInfo[3].value && this.state.parentInfo[4].value) {
-            
+        if (this.state.parentInfo[0].value && this.state.parentInfo[1].value && this.state.parentInfo[2].value && this.state.parentInfo[3].value && this.state.parentInfo[4].value && this.state.parentInfo[5].value) {
+
             this.setState({
                 firstStepRegistration: false
             });
             console.log("parent info: ", this.state.parentInfo);
-            console.log("parentState:", this.state.parentState);
 
         } else {
 
-            this.setState({ 
+            this.setState({
                 hasError: true
             })
         }
@@ -146,7 +146,7 @@ class SignUp extends Component {
         //             }
         //         ]
         // });
-  
+
     }
 
     handleSignUpButtonClick = event => {
@@ -158,7 +158,7 @@ class SignUp extends Component {
         // if (this.state.kidInfo[0].name && this.state.kidInfo[0].grade && this.state.kidInfo[0].schoolId) {
 
         //   
-            console.log("kidInfo: ", this.state.kidInfo);
+        console.log("kidInfo: ", this.state.kidInfo);
 
         //     API.signup(
         //         {
@@ -182,7 +182,7 @@ class SignUp extends Component {
         //                 { hasError: true }
         //             )
         //         }
-                
+
         //     })
         //     .catch(err => console.log(err))
 
@@ -217,8 +217,8 @@ class SignUp extends Component {
     }
 
     resetError = () => {
-        if(this.state.hasError){
-            setTimeout(()=>{
+        if (this.state.hasError) {
+            setTimeout(() => {
                 this.setState({
                     hasError: false
                 })
@@ -233,33 +233,47 @@ class SignUp extends Component {
             <div>
                 {(this.state.firstStepRegistration) ? (
                     <div>
-                       {(this.state.hasError) ? (
+                        {(this.state.hasError) ? (
                             <ErrorMessage
                                 message="Please fill up all the fields!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         <FormAction>
                             {this.state.parentInfo.map((parentInfo, i) => {
-
-                                return (
-                                    <FormLabel
-                                        key={i}
-                                        data={i}
-                                        for={parentInfo.for}
-                                        label={parentInfo.label}
-                                        placeholder={parentInfo.placeholder}
-                                        value={parentInfo.value}
-                                        handleChange={this.handleInputChangeParent}
-                                    />
-                                );
+                                if (parentInfo.for !== "state") {
+                                    return (
+                                        <FormLabel
+                                            key={i}
+                                            data={i}
+                                            for={parentInfo.for}
+                                            label={parentInfo.label}
+                                            placeholder={parentInfo.placeholder}
+                                            value={parentInfo.value}
+                                            handleChange={this.handleInputChangeParent}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <Dropdown
+                                            key={i}
+                                            data={i}
+                                            for={parentInfo.for}
+                                            label={parentInfo.label}
+                                            value={parentInfo.value}
+                                            handleChange={this.handleInputChangeParent}
+                                        >
+                                        {parentInfo.options.map((state, j) => {
+                                            return (
+                                                <OptionForDropdown option={state} value={state} key={j} />
+                                            )
+                                        })}
+                                        </Dropdown>
+                                    );  
+                                }
                             })}
-                            <div className="form-group text-left">
-                                <label for="state">Which state do you live in?</label>
-                                <select className="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA" onChange={this.handleInputChangeParentState}></select>
-                            </div>
                         </FormAction>
                         <FormButton
                             nameButton="Continue"
@@ -267,88 +281,88 @@ class SignUp extends Component {
                         />
                     </div>
                 ) : (
-                    <div>
-                        {(this.state.hasError) ? (
-                            <ErrorMessage
-                                message="Please fill up all the fields!"
-                                handleCloseButtonClick={this.handleCloseButtonClick}
-                            />
-                        ) : (
-                            ""
-                        )}
-                        <FormAction>
-                            {(!this.state.addKid) ? (
-                                <div>
-                                    <div className="font-weight-bold mb-2">Information for kid #1</div>
-                                    <FormLabel 
-                                        for="name"
-                                        label="What's the name of your kid?"
-                                        handleChange={this.handleInputChangeKid}
-                                    />
-                                    <Dropdown
-                                        for="grade"
-                                        label="Which grade is your kid in?"
-                                        handleChange={this.handleInputChangeKid}
-                                    >
-                                    {this.state.gradeLevels.map((grade, i) => {
-                                        return (
-                                            <OptionForDropdown option={grade} value={grade} key={i} />
-                                        )
-                                    })}
-                                    </Dropdown>
-                                    <Dropdown 
-                                        for="schoolId"
-                                        label="Which school is your kid going to?"
-                                        handleChange={this.handleInputChangeKid}
-                                    >
-                                        {this.state.schools.map(school => {
-                                            return (
-                                                <OptionForDropdown 
-                                                    option={school.name}
-                                                    value={school.id}
-                                                    key={school.id}
-                                                />
-                                            )
-                                        })}
-                                    </Dropdown>
-                                </div>
+                        <div>
+                            {(this.state.hasError) ? (
+                                <ErrorMessage
+                                    message="Please fill up all the fields!"
+                                    handleCloseButtonClick={this.handleCloseButtonClick}
+                                />
                             ) : (
-                                <div>
-                                    <div className="font-weight-bold mb-2">Information for kid #{this.state.numberOfKid}</div>
-                                    <FormLabel 
-                                        for="name"
-                                        label="What's the name of your kid?"
-                                        handleChange={this.handleInputChangeKid}
-                                    />
-                                    <Dropdown
-                                        for="grade"
-                                        label="Which grade is your kid in?"
-                                        handleChange={this.handleInputChangeKid}
-                                    >
-                                    {this.state.gradeLevels.map((grade, i) => {
-                                        return (
-                                            <OptionForDropdown option={grade} value={grade} key={i} />
-                                        )
-                                    })}
-                                    </Dropdown>
-                                    <Dropdown 
-                                        for="schoolId"
-                                        label="Which school is your kid going to?"
-                                        handleChange={this.handleInputChangeKid}
-                                    >
-                                        {this.state.schools.map(school => {
-                                            return (
-                                                <OptionForDropdown 
-                                                    option={school.name}
-                                                    value={school.id}
-                                                    key={school.id}
-                                                />
-                                            )
-                                        })}
-                                    </Dropdown>
-                                </div> 
-                            )}
-                            {/* <div className="font-weight-bold mb-2">Information for kid #1</div>
+                                    ""
+                                )}
+                            <FormAction>
+                                {(!this.state.addKid) ? (
+                                    <div>
+                                        <div className="font-weight-bold mb-2">Information for kid #1</div>
+                                        <FormLabel
+                                            for="name"
+                                            label="What's the name of your kid?"
+                                            handleChange={this.handleInputChangeKid}
+                                        />
+                                        <Dropdown
+                                            for="grade"
+                                            label="Which grade is your kid in?"
+                                            handleChange={this.handleInputChangeKid}
+                                        >
+                                            {this.state.gradeLevels.map((grade, i) => {
+                                                return (
+                                                    <OptionForDropdown option={grade} value={grade} key={i} />
+                                                )
+                                            })}
+                                        </Dropdown>
+                                        <Dropdown
+                                            for="schoolId"
+                                            label="Which school is your kid going to?"
+                                            handleChange={this.handleInputChangeKid}
+                                        >
+                                            {this.state.schools.map(school => {
+                                                return (
+                                                    <OptionForDropdown
+                                                        option={school.name}
+                                                        value={school.id}
+                                                        key={school.id}
+                                                    />
+                                                )
+                                            })}
+                                        </Dropdown>
+                                    </div>
+                                ) : (
+                                        <div>
+                                            <div className="font-weight-bold mb-2">Information for kid #{this.state.numberOfKid}</div>
+                                            <FormLabel
+                                                for="name"
+                                                label="What's the name of your kid?"
+                                                handleChange={this.handleInputChangeKid}
+                                            />
+                                            <Dropdown
+                                                for="grade"
+                                                label="Which grade is your kid in?"
+                                                handleChange={this.handleInputChangeKid}
+                                            >
+                                                {this.state.gradeLevels.map((grade, i) => {
+                                                    return (
+                                                        <OptionForDropdown option={grade} value={grade} key={i} />
+                                                    )
+                                                })}
+                                            </Dropdown>
+                                            <Dropdown
+                                                for="schoolId"
+                                                label="Which school is your kid going to?"
+                                                handleChange={this.handleInputChangeKid}
+                                            >
+                                                {this.state.schools.map(school => {
+                                                    return (
+                                                        <OptionForDropdown
+                                                            option={school.name}
+                                                            value={school.id}
+                                                            key={school.id}
+                                                        />
+                                                    )
+                                                })}
+                                            </Dropdown>
+                                        </div>
+                                    )}
+                                {/* <div className="font-weight-bold mb-2">Information for kid #1</div>
                             <FormLabel 
                                 for="name"
                                 label="What's the name of your kid?"
@@ -380,18 +394,18 @@ class SignUp extends Component {
                                     )
                                 })}
                             </Dropdown> */}
-                        </FormAction>
-                        <FormButton
-                            nameButton="I have another kid!"
-                            handleButtonClick={this.handleAddKidButtonClick}
-                        />
-                        <FormButton
-                            nameButton="Sign Up"
-                            handleButtonClick={this.handleSignUpButtonClick}
-                        />
-                    </div>
-                )}
-                
+                            </FormAction>
+                            <FormButton
+                                nameButton="I have another kid!"
+                                handleButtonClick={this.handleAddKidButtonClick}
+                            />
+                            <FormButton
+                                nameButton="Sign Up"
+                                handleButtonClick={this.handleSignUpButtonClick}
+                            />
+                        </div>
+                    )}
+
                 <FormMessage
                     message={this.state.formMessage.message}
                     path={this.props.path}

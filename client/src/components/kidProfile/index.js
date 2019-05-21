@@ -68,7 +68,7 @@ class KidProfile extends Component {
     handleDeleteInfo = event => {
         event.preventDefault();
         console.log("Delete KID INFO");
-        API.deleteKidForAParent()
+        API.deleteKidForAParent(this.state.kidId)
             .then(res => {
                 console.log("Kid deleted");
                 window.location.reload();

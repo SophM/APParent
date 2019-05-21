@@ -152,6 +152,7 @@ class Dashboard extends Component {
               email={this.state.loggedInUser.email}
               city={this.state.loggedInUser.city}
               state={this.state.loggedInUser.state}
+              photoLink={this.state.loggedInUser.photoLink}
             >
 
             </MyProfile>

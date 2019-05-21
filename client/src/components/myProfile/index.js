@@ -250,6 +250,7 @@ class MyProfile extends Component {
                                     name={kid.name}
                                     grade={kid.gradeLevel}
                                     school={kid.schoolId}
+                                    kidId={kid.id}
                                 />
                             )})}
                             </div>) :

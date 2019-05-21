@@ -17,7 +17,7 @@ module.exports = {
 
     //update kids info function as a stretch goal
     update: function(req,res){
-        console.log("Step 2 inside kid controler", req.body.parentId); 
+        console.log("Step 2 inside kid controller", req.params.id); 
         if (req.isAuthenticated()) {
             db.kids.update(
                 {   //Fields to update 
@@ -26,7 +26,7 @@ module.exports = {
                     schoolId: req.body.schoolId
                 }, {
                     where: {
-                        parentId: req.session.passport.user.id
+                       id: req.params.id
                     }
                 }).then(function (dbKidInfo) {
                     console.log("update child info for ", dbKidInfo);

@@ -25,7 +25,8 @@ class KidProfile extends Component {
                     value: this.props.school,
                     options: []
                 }
-            ]
+            ], 
+            kidId: this.props.kidId
     }
 
     handleInputChange = event => {
@@ -52,10 +53,10 @@ class KidProfile extends Component {
             schoolId: this.state.kidInfo[2].value
         }
 
-        console.log("Kid Details ", kidUpdatedData);
+        console.log("Kid Details ", kidUpdatedData, "ID", this.state.kidId);
 
         //Updates the kid profile 
-        API.updateKidForAParent(kidUpdatedData)
+        API.updateKidForAParent(kidUpdatedData, this.state.kidId)
             .then(res => {
                 console.log("Kid data - upd", res);
                 window.location.reload();
@@ -75,7 +76,8 @@ class KidProfile extends Component {
     }
 
     componentDidMount() {
-        console.log("Grade", this.props.grade)
+        console.log("Grade", this.props.grade); 
+        console.log("Kid ID", this.props.kidId); 
         API.getAllSchools()
             .then(
                 res => {
@@ -139,7 +141,7 @@ class KidProfile extends Component {
 
                     {this.state.disabled ? (
                         <FormButton
-                            nameButton="Edit All Kid(s) Info"
+                            nameButton="Edit Kid Info"
                             handleButtonClick={this.handleEditButtonClick}
                         />
                     ) :
@@ -148,7 +150,7 @@ class KidProfile extends Component {
                                 <FormButton
                                     nameButton="Update Child"
                                     className="btn-success"
-                                    handleButtonClick={this.handleUpdateInfo}
+                                    handleButtonClick={this.handleUpdateButtonClick}
                                 />
                                 <FormButton
                                     nameButton="Remove Child"

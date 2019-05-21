@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import Home from "./pages/home"
 import Dashboard from "./pages/dashboard";
 import API from "./utils/API";
+import "./App.css"
 
 class App extends Component {
   state = {

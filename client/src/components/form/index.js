@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select value={props.value} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
+            <select disabled={props.disabled} value={props.value} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
                 {props.children}
             </select>
         </div>
@@ -89,6 +89,6 @@ export function CommentDisplay(props) {
 
 export function CommentSubmitButton(props) {
     return (
-        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleButtonClick}>Submit Comment </button>
+        <button type="submit" className="btn" onClick={props.handleButtonClick}>Submit Comment </button>
     )
 }

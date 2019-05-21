@@ -1,6 +1,6 @@
 // make component a statefull component
 import React, { Component } from "react";
-import { CommentDisplay } from "../form";
+import { CommentSubmitButton, CommentDisplay } from "../form";
 import API from "../../utils/API";
 import "./style.css";
 
@@ -87,8 +87,8 @@ class PostCard extends Component {
         <div className="card mb-3">
           <div className="row no-gutters">
             <div className="col">
-              <div className="card-body">
-                <h1 className="card-title" id="postCardTitle">{this.props.title}</h1>
+              <div className="card-body post-content text-left">
+                <h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1>
                 <p className="category" id="postCardCategory">
                   <b><u>Category:</u></b> {this.props.category}
                 </p>
@@ -99,7 +99,7 @@ class PostCard extends Component {
                   <b><u>Details:</u> </b>{this.props.description}
                 </p>
                 <p>
-                  Last Updated: {this.props.updatedAt}
+                <b><u>Last Updated: </u></b>{this.props.updatedAt}
                 </p>
               </div>
               <button
@@ -140,6 +140,7 @@ class PostCard extends Component {
               </div>
               <div className="modal-body">
                 {this.renderComments()}
+                <form onSubmit={this.handleFormSubmit}>
                 <p><b>Your Comment:</b> {this.state.description}</p>
 
                 <input
@@ -152,9 +153,9 @@ class PostCard extends Component {
                   onChange={this.handleInputChange}
                 />
 
-                {/* <CommentSubmitButton nameButton={this.state.nameButton} /> */}
-                <button onClick={this.handleFormSubmit}>Submit</button>
-
+                <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
+                {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
+                </form>
                 {/* need a button to post */}
                 {/* create a handle click for the button - that will post to MySQL */}
               </div>

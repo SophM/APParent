@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
-// import KidCard from "../kidCard"; 
+import KidProfile from "../kidProfile"; 
 
 class MyProfile extends Component {
 
@@ -242,110 +242,120 @@ class MyProfile extends Component {
                     }
                     {/* Loop through all the kids for the logged in Parent */}
                     {this.state.kids.length ? (
-                        this.state.kids.map((kid, id) => {
+                        <div>
+                        {this.state.kids.map((kid, id) => {
                             return (
-                                <div>
-                                    {this.state.kidDisabled ?
-                                        <div>
-                                            <FormTitle
-                                                title="View Kid Info"
-                                            />
-                                            {/* Disabled Form labels to display kid data  */}
-                                            <FormLabel
-                                                key={id}
-                                                data={id}
-                                                for="name"
-                                                name="name"
-                                                label="Please update Child's name:"
-                                                value={kid.name}
-                                                disabled={this.state.kidDisabled}
-                                                handleChange={this.handleInputKidChange}
-                                            />
-                                            <FormLabel
-                                                key={id}
-                                                data={id}
-                                                for="gradeLevel"
-                                                name="gradeLevel"
-                                                label="Current Grade kid is in :"
-                                                value={kid.gradeLevel}
-                                                disabled={this.state.kidDisabled}
-                                            />
-                                            <FormLabel
-                                                key={id}
-                                                data={id}
-                                                for="schoolId"
-                                                name="schoolId"
-                                                label="Current School : "
-                                                value={kid.schoolId}
-                                                disabled={this.state.kidDisabled}
-                                            />
-                                            <FormButton
-                                                nameButton="Edit All Kid(s) Info"
-                                                handleButtonClick={this.handleEditKidButtonClick}
-                                            />
-                                        </div>
-                                        :
-                                        <div>
-                                            <FormTitle
-                                                title="Update Kid Info"
-                                            />
-                                            <FormLabel
-                                                key={id+1}
-                                                data={id+1}
-                                                for="name"
-                                                name="name"
-                                                label="Please update Child's name:"
-                                                value={kid.name}
-                                                handleChange={this.handleInputKidChange}
-                                            />
-                                            <Dropdown
-                                                for="gradeLevel"
-                                                label="Currently which grade is your kid in?"
+                                <KidProfile
+                                    key={id}
+                                    name={kid.name}
+                                    grade={kid.gradeLevel}
+                                    school={kid.schoolId}
+                                />
+                            )})}
+                            </div>) :
 
-                                            >
-                                                {this.state.gradeLevels.map((grade, i) => {
-                                                    return (
-                                                        <OptionForDropdown option={grade}
-                                                            value={kid.gradeLevel}
-                                                            key={i} />
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                            <Dropdown
-                                                for="schoolId"
-                                                label="Which school is your kid going to?"
+                    //             <div>
+                    //                 {this.state.kidDisabled ?
+                    //                     <div>
+                    //                         <FormTitle
+                    //                             title="View Kid Info"
+                    //                         />
+                    //                         {/* Disabled Form labels to display kid data  */}
+                    //                         <FormLabel
+                    //                             key={id}
+                    //                             data={id}
+                    //                             for="name"
+                    //                             name="name"
+                    //                             label="Please update Child's name:"
+                    //                             value={kid.name}
+                    //                             disabled={this.state.kidDisabled}
+                    //                             handleChange={this.handleInputKidChange}
+                    //                         />
+                    //                         <FormLabel
+                    //                             key={id}
+                    //                             data={id}
+                    //                             for="gradeLevel"
+                    //                             name="gradeLevel"
+                    //                             label="Current Grade kid is in :"
+                    //                             value={kid.gradeLevel}
+                    //                             disabled={this.state.kidDisabled}
+                    //                         />
+                    //                         <FormLabel
+                    //                             key={id}
+                    //                             data={id}
+                    //                             for="schoolId"
+                    //                             name="schoolId"
+                    //                             label="Current School : "
+                    //                             value={kid.schoolId}
+                    //                             disabled={this.state.kidDisabled}
+                    //                         />
+                    //                         <FormButton
+                    //                             nameButton="Edit All Kid(s) Info"
+                    //                             handleButtonClick={this.handleEditKidButtonClick}
+                    //                         />
+                    //                     </div>
+                    //                     :
+                    //                     <div>
+                    //                         <FormTitle
+                    //                             title="Update Kid Info"
+                    //                         />
+                    //                         <FormLabel
+                    //                             key={id+1}
+                    //                             data={id+1}
+                    //                             for="name"
+                    //                             name="name"
+                    //                             label="Please update Child's name:"
+                    //                             value={kid.name}
+                    //                             handleChange={this.handleInputKidChange}
+                    //                         />
+                    //                         <Dropdown
+                    //                             for="gradeLevel"
+                    //                             label="Currently which grade is your kid in?"
 
-                                            >
-                                                {this.state.schools.map((school, j) => {
-                                                    return (
-                                                        <OptionForDropdown
-                                                            option={school.name}
-                                                            value={kid.schoolId}
-                                                            // selected value={kid.schoolId}
-                                                            key={j}
-                                                        />
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                            <FormButton
-                                                nameButton="Update Child"
-                                                className="btn-success"
-                                                handleButtonClick={this.handleUpdateKidInfo}
-                                            />
-                                            <FormButton
-                                                nameButton="Remove Child"
-                                                className="btn-warning"
-                                                handleButtonClick={this.handleDeleteKidInfo}
-                                            />
-                                        </div>
-                                    }
+                    //                         >
+                    //                             {this.state.gradeLevels.map((grade, i) => {
+                    //                                 return (
+                    //                                     <OptionForDropdown option={grade}
+                    //                                         value={kid.gradeLevel}
+                    //                                         key={i} />
+                    //                                 )
+                    //                             })}
+                    //                         </Dropdown>
+                    //                         <Dropdown
+                    //                             for="schoolId"
+                    //                             label="Which school is your kid going to?"
+
+                    //                         >
+                    //                             {this.state.schools.map((school, j) => {
+                    //                                 return (
+                    //                                     <OptionForDropdown
+                    //                                         option={school.name}
+                    //                                         value={kid.schoolId}
+                    //                                         // selected value={kid.schoolId}
+                    //                                         key={j}
+                    //                                     />
+                    //                                 )
+                    //                             })}
+                    //                         </Dropdown>
+                    //                         <FormButton
+                    //                             nameButton="Update Child"
+                    //                             className="btn-success"
+                    //                             handleButtonClick={this.handleUpdateKidInfo}
+                    //                         />
+                    //                         <FormButton
+                    //                             nameButton="Remove Child"
+                    //                             className="btn-warning"
+                    //                             handleButtonClick={this.handleDeleteKidInfo}
+                    //                         />
+                    //                     </div>
+                    //                 }
 
 
-                                </div>
-                            );
-                        })
-                    ) : (
-                            <h3>No Family Member(s) found
+                    //             </div>
+                    //         );
+                    //     })
+                    // ) : (
+                            (<h3>No Family Member(s) found
                            {/* <FormButton 
                                 nameButton ="Add New Kid Info"
                                 handleButtonClick={this.handleAddNewMember}

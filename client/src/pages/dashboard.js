@@ -10,7 +10,7 @@ import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
 
 import API from "../utils/API";
-import { stat } from "fs";
+// import { stat } from "fs";
 
 class Dashboard extends Component {
   //Setting all default values 
@@ -105,7 +105,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 id="welcome-text" className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
 
             <Activity>
               {this.state.results.length ? (
@@ -152,8 +152,6 @@ class Dashboard extends Component {
               email={this.state.loggedInUser.email}
               city={this.state.loggedInUser.city}
               state={this.state.loggedInUser.state}
-              photoLink= {this.state.loggedInUser.photoLink}
-              key={this.state.loggedInUser.id}
             >
 
             </MyProfile>

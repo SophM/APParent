@@ -1,10 +1,19 @@
+.post-content{
+    font-family: 'Artifika', serif;
+    font-size: 1rem
+}
+
 .category {
-    text-align: center;
+    /* text-align: center; */
     margin-top: 50px;
+    
 }
 
 #postCardTitle {
-	color: #176d88;
+    color: #176d88;
+    font-weight: 900;
+    font-family: 'Artifika', serif;
+
 }
 
 #modalTitle {

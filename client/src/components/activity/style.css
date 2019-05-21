@@ -1,16 +1,4 @@
-h1 {
-    /* testing */
-
-    /* color: blue; */
-
-
-}
-
-/* .row:hover {
-    border-style: solid;
-
-} */
-
-#eachPost{
-    
+#activity-title {
+    font-weight: 700;
+    font-family: 'Artifika', serif;
 }

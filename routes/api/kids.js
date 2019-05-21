@@ -6,7 +6,7 @@ router.route("/")
 	.get(kidsController.findAllKidsForAParent);
 
 // Updating  only one kid for a parent 
-router.route("/update")
+router.route("/update/:id")
 	.post(kidsController.update);
 
 // Delete the selected child  

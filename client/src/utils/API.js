@@ -43,8 +43,8 @@ export default {
         return axios.get("/api/kids");
     }, 
     //update a kid info for a parent
-    updateKidForAParent: function(data) {
-        return axios.post("/api/kids/update", data);
+    updateKidForAParent: function(data, id) {
+        return axios.post("/api/kids/update/"+id, data);
     }, 
     //delete a kid info for a parent
     deleteKidForAParent: function(data) {

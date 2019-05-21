@@ -47,6 +47,7 @@ class KidProfile extends Component {
     }
 
     handleUpdateButtonClick = event => {
+        event.preventDefault()
         const kidUpdatedData = {
             name: this.state.kidInfo[0].value,
             gradeLevel: this.state.kidInfo[1].value,

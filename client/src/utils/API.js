@@ -38,6 +38,19 @@ export default {
         return axios.post("/api/parents/update", data);
     }, 
 
+    //get all kids info for a parent
+    findAllKidsForAParent: function() {
+        return axios.get("/api/kids");
+    }, 
+    //update a kid info for a parent
+    updateKidForAParent: function(data) {
+        return axios.post("/api/kids/update", data);
+    }, 
+    //delete a kid info for a parent
+    deleteKidForAParent: function(data) {
+        return axios.delete("/api/kids/:id");
+    }, 
+
     logout: function(){
         return axios.get("/logout");
     },

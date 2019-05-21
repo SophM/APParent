@@ -1,35 +1,54 @@
 //This component is for Edit or View my Profile 
 
 import React, { Component } from "react";
-import { FormContainer, FormTitle, FormLabel, FormButton } from "../form";
+import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
+// import KidCard from "../kidCard"; 
 
 class MyProfile extends Component {
 
     state = {
         disabled: true,
-        userInfo: 
+        kidDisabled: true,
+        userInfo:
             [
                 {
                     for: "userName",
-                    label:"Enter your username",
+                    label: "Enter your username",
                     value: this.props.userName,
                 },
                 {
                     for: "city", //db column
-                    label:"Enter your city", //message u see 
+                    label: "Enter your city", //message u see 
                     value: this.props.city
                 },
                 {
                     for: "state",
-                    label:"Choose a state",
+                    label: "Choose a state",
                     value: this.props.state
+                },
+                {
+                    for: "photoLink",
+                    label: "Enter a link for your profile picture",
+                    value: this.props.photoLink
                 }
             ],
-
+        kidInfo: [
+            {
+                name: "",
+                id: 1,
+                gradeLevel: "",
+                schoolId: ""
+            }
+        ],
+        schools: [], //holds all the info related to school 
+        kids: [], //Holds all the info related to kids 
+        //Grade Level dropdown options 
+        gradeLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     };
 
-
+    //***************Parent Info */
+    //-------------------------------------
     handleInputChange = event => {
         // const {name, value} = event.target;
         const value = event.target.value;
@@ -43,7 +62,7 @@ class MyProfile extends Component {
         })
 
     }
-
+    //Enable the User to update his profile 
     handleEditButtonClick = event => {
         event.preventDefault();
         // console.log("EDIT MY PROFILE");
@@ -51,7 +70,7 @@ class MyProfile extends Component {
             disabled: false
         })
     }
-
+    //Saves the changes made to the profile 
     handleSaveButtonClick = event => {
         event.preventDefault();
         // console.log("SAVE MY PROFILE");
@@ -62,17 +81,114 @@ class MyProfile extends Component {
         const userUpdatedData = {
             userName: this.state.userInfo[0].value,
             city: this.state.userInfo[1].value,
-            state: this.state.userInfo[2].value
+            state: this.state.userInfo[2].value,
+            photoLink: this.state.userInfo[3].value
         }
 
-        console.log(userUpdatedData);
+        console.log("Parent Details ", userUpdatedData);
 
         //Updates the user profile 
         API.updateProfile(userUpdatedData)
             .then(res => {
                 window.location.reload();
             })
-            .catch(err => console.log(err)); 
+            .catch(err => console.log(err));
+    }
+    //***************Parent Info */
+    //-------------------------------------
+
+    //***************Kid Info */
+    //-------------------------------------
+    // //Related to additional Family members : 
+    // handleAddNewMember = event => {
+    //     event.preventDefault();
+    //     console.log("Add NEW FAMILY MEMBER");
+    //     //Enable the component 
+    //     this.setState({
+    //         addnewMember : true 
+    //     })
+
+    // }
+
+    //Enable the User to update his profile 
+    handleEditKidButtonClick = event => {
+        event.preventDefault();
+        // console.log("EDIT Kid Info");
+        this.setState({
+            kidDisabled: false
+        })
+    }
+    handleInputKidChange = event => {
+        console.log("handleInputKidChange");
+
+        const value = event.target.value;
+        const key = event.target.getAttribute("data-id");
+
+        let copy = [...this.state.kidInfo];
+        // console.log("Copy", copy); 
+        copy[key].value = value;
+
+        this.setState({
+            kidInfo: copy
+        })
+    }
+
+    handleUpdateButtonClick = event => {
+        const kidUpdatedData = {
+            name: this.state.kidInfo[0].value,
+            id: this.state.kidInfo[1].value,
+            gradeLevel: this.state.kidInfo[2].value,
+            schoolId: this.state.kidInfo[3].value
+        }
+
+        console.log("Kid Details ", kidUpdatedData);
+
+        //Updates the kid profile 
+        API.updateKidForAParent(kidUpdatedData)
+            .then(res => {
+                console.log("Kid data - upd", res);
+                window.location.reload();
+            })
+            .catch(err => console.log(err));
+    }
+
+    handleDeleteKidInfo = event => {
+        event.preventDefault();
+        console.log("Delete KID INFO");
+        API.deleteKidForAParent()
+        .then(res => {
+            console.log("Kid deleted");
+            window.location.reload();
+        })
+        .catch(err => console.log(err));
+    }
+    //***************Kid Info */
+    //-------------------------------------
+
+    componentDidMount() {
+        // retrieves all the kids for the logged in parent... 
+        API.findAllKidsForAParent()
+            .then(
+                res => {
+                    console.log("Kids for parent", res.data);
+                    this.setState({
+                        kids: res.data
+                    })
+                }
+            )
+            .catch(err => console.log(err));
+
+        // retrieves all the schools - filter by state 
+        API.getAllSchools()
+            .then(
+                res => {
+                    console.log(res.data);
+                    this.setState({
+                        schools: res.data
+                    })
+                }
+            )
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -81,11 +197,11 @@ class MyProfile extends Component {
                 <FormContainer>
                     {/* <FormAction 
                     route={props.route} > */}
-                    { this.state.disabled ? 
+                    {this.state.disabled ?
                         <FormTitle
                             title="View My Profile"
                         />
-                    :
+                        :
                         <FormTitle
                             title="Update Profile Info"
                         />
@@ -93,11 +209,11 @@ class MyProfile extends Component {
 
                     {/* Rendering Form labels using the userInfo object values */}
 
-                    {this.state.userInfo.map((user , i) =>{
+                    {this.state.userInfo.map((user, i) => {
 
-                        return(
+                        return (
                             <FormLabel
-                                key= {i}
+                                key={i}
                                 data={i}
                                 for={user.for}
                                 name={user.for}
@@ -105,25 +221,139 @@ class MyProfile extends Component {
                                 disabled={this.state.disabled}
                                 value={user.value}
                                 handleChange={this.handleInputChange}
-                            /> 
+                            />
                         );
                     }
                     )}
-                    
+
                     {/* Conditional hide & show the buttons */}
-                    { this.state.disabled ? 
+                    {this.state.disabled ?
                         <FormButton
                             nameButton="Edit Profile"
                             handleButtonClick={this.handleEditButtonClick}
-                        /> 
-                    :  
-                        <FormButton
-                            nameButton="Save Profile"
-                            handleButtonClick={this.handleSaveButtonClick}
-                        /> 
+                        />
+                        :
+                        <div>
+                            <FormButton
+                                nameButton="Save Profile"
+                                handleButtonClick={this.handleSaveButtonClick}
+                            />
+                        </div>
                     }
-                   
-                    
+                    {/* Loop through all the kids for the logged in Parent */}
+                    {this.state.kids.length ? (
+                        this.state.kids.map((kid, id) => {
+                            return (
+                                <div>
+                                    {this.state.kidDisabled ?
+                                        <div>
+                                            <FormTitle
+                                                title="View Kid Info"
+                                            />
+                                            {/* Disabled Form labels to display kid data  */}
+                                            <FormLabel
+                                                key={id}
+                                                data={id}
+                                                for="name"
+                                                name="name"
+                                                label="Please update Child's name:"
+                                                value={kid.name}
+                                                disabled={this.state.kidDisabled}
+                                                handleChange={this.handleInputKidChange}
+                                            />
+                                            <FormLabel
+                                                key={id}
+                                                data={id}
+                                                for="gradeLevel"
+                                                name="gradeLevel"
+                                                label="Current Grade kid is in :"
+                                                value={kid.gradeLevel}
+                                                disabled={this.state.kidDisabled}
+                                            />
+                                            <FormLabel
+                                                key={id}
+                                                data={id}
+                                                for="schoolId"
+                                                name="schoolId"
+                                                label="Current School : "
+                                                value={kid.schoolId}
+                                                disabled={this.state.kidDisabled}
+                                            />
+                                            <FormButton
+                                                nameButton="Edit All Kid(s) Info"
+                                                handleButtonClick={this.handleEditKidButtonClick}
+                                            />
+                                        </div>
+                                        :
+                                        <div>
+                                            <FormTitle
+                                                title="Update Kid Info"
+                                            />
+                                            <FormLabel
+                                                key={id+1}
+                                                data={id+1}
+                                                for="name"
+                                                name="name"
+                                                label="Please update Child's name:"
+                                                value={kid.name}
+                                                handleChange={this.handleInputKidChange}
+                                            />
+                                            <Dropdown
+                                                for="gradeLevel"
+                                                label="Currently which grade is your kid in?"
+
+                                            >
+                                                {this.state.gradeLevels.map((grade, i) => {
+                                                    return (
+                                                        <OptionForDropdown option={grade}
+                                                            value={kid.gradeLevel}
+                                                            key={i} />
+                                                    )
+                                                })}
+                                            </Dropdown>
+                                            <Dropdown
+                                                for="schoolId"
+                                                label="Which school is your kid going to?"
+
+                                            >
+                                                {this.state.schools.map((school, j) => {
+                                                    return (
+                                                        <OptionForDropdown
+                                                            option={school.name}
+                                                            value={kid.schoolId}
+                                                            // selected value={kid.schoolId}
+                                                            key={j}
+                                                        />
+                                                    )
+                                                })}
+                                            </Dropdown>
+                                            <FormButton
+                                                nameButton="Update Child"
+                                                className="btn-success"
+                                                handleButtonClick={this.handleUpdateKidInfo}
+                                            />
+                                            <FormButton
+                                                nameButton="Remove Child"
+                                                className="btn-warning"
+                                                handleButtonClick={this.handleDeleteKidInfo}
+                                            />
+                                        </div>
+                                    }
+
+
+                                </div>
+                            );
+                        })
+                    ) : (
+                            <h3>No Family Member(s) found
+                           {/* <FormButton 
+                                nameButton ="Add New Kid Info"
+                                handleButtonClick={this.handleAddNewMember}
+                            /> */}
+                            </h3>
+                        )
+                    }
+
                     {/* </FormAction> */}
                 </FormContainer>
             </div>

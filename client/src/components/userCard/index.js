@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.css";
 
 function userCard(props) {
 
@@ -6,7 +7,7 @@ function userCard(props) {
     
         <div className="card" style={{ width: "18rem" }}>
             {/* <img src="http://lorempixel.com/125/125/people/2/cc" className="card-img-top" alt={props.userName} /> */}
-            <img src={props.photoLink} className="card-img-top" alt={props.userName} />
+            <img src={props.photoLink} className="card-img-top userImg" alt={props.userName} />
             <div className="card-body">
                 <h2 className="card-title">{props.userName}</h2>
                 <h5 className="card-text">Email: {props.email}</h5>

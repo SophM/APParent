@@ -9,6 +9,16 @@ module.exports = {
                 })
         // }
     },
+    findAllByState: function (req, res) {
+        // if (req.isAuthenticated()) {
+            db.schools.findAll(
+                {where: {state: req.session.passport.user.state}}
+            )
+                .then(function (result) {
+                    res.json(result)
+                })
+        // }
+    },
     create: function (req, res) {
         if (req.isAuthenticated()) {
             db.school.create({

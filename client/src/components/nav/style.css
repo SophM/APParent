@@ -1,6 +1,16 @@
 /* styling for nav bar */
+.logout {
+    font-family: 'Artifika', serif;
 
-img {
+}
+
+#name-app {
+    font-family: 'Artifika', serif;
+	font-size: 40px;
+	font-weight: 900
+}
+
+#nav-image {
     width: 90px;
 }
 

@@ -89,6 +89,6 @@ export function CommentDisplay(props) {
 
 export function CommentSubmitButton(props) {
     return (
-        <button type="submit" className="btn btn-primary btn-block" onClick={props.handleButtonClick}>Submit Comment </button>
+        <button type="submit" className="btn" onClick={props.handleButtonClick}>Submit Comment </button>
     )
 }

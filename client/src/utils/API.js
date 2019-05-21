@@ -47,8 +47,8 @@ export default {
         return axios.post("/api/kids/update/"+id, data);
     }, 
     //delete a kid info for a parent
-    deleteKidForAParent: function(data) {
-        return axios.delete("/api/kids/:id");
+    deleteKidForAParent: function(id) {
+        return axios.delete("/api/kids/"+id);
     }, 
 
     logout: function(){

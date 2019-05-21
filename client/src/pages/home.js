@@ -1,8 +1,7 @@
 // this is the landing page
 import React, { Component } from "react";
-import { FormTitle, FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../components/./form";
+import { FormTitle } from "../components/./form";
 import "../style/home.css";
-import API from "../utils/API";
 import LoginForm from "../components/./loginForm";
 import SignUp from "../components/signUp-Form";
 
@@ -10,15 +9,6 @@ import SignUp from "../components/signUp-Form";
 class Home extends Component {
 
     state = {
-        // data: {
-        //     title: "Sign Up",
-        //     route: "/api/parents/signup",
-        //     for: ["userName", "password", "email", "city",],
-        //     nameButton: "Sign Up",
-        //     message: "Already Have An Account?",
-        //     path: "/login",
-        //     action: "Login",
-        // }
         form: "Sign-Up"
     };
 
@@ -31,15 +21,6 @@ class Home extends Component {
         }
         else {
             this.setState({
-                // data: {
-                //     title: "Login",
-                //     route: "/api/parents/login",
-                //     for: ["email", "password"],
-                //     nameButton: "Login",
-                //     message: "No Account?",
-                //     action: "Register",
-                //     alt: "signup"
-                // }
                 form: "Login"
 
             })
@@ -61,28 +42,7 @@ class Home extends Component {
                                 </button>
                             </div>
                             <div className="modal-body">
-
-
-                                {/* <FormAction
-                                    route={this.state.data.route}
-                                >
-                                    {this.state.data.for.map( (item, i) => {
-                                        // to get nicer labels for the inputs on the sign-up and login forms
-                                        if (this.state.data.for.length !== 2) {
-                                            labels = ["Enter a username", "Enter a password", "Enter an email", "Which city do you live in?"];
-                                        } else {
-                                            labels =["Enter your email", "Enter your password"]; 
-                                        }
-                                        return (
-                                            <FormLabel
-                                                key={item}
-                                                for={item}
-                                                label={labels[i]}
-                                            />
-                                        )
-                                    })} */}
                                 {(this.state.form === "Sign-Up") ?
-                                    // change this to Sign up form later
                                     <SignUp
                                         path={this.handleButtonClick}
                                     />
@@ -91,60 +51,10 @@ class Home extends Component {
                                         path={this.handleButtonClick}
                                     />
                                 }
-                                {/* ternary so the state input is only displayed on the sign-up form */}
-                                {/* {this.state.data.title === "Sign Up" ?
-                                        <div>
-                                            <div className="form-group text-left">
-                                                <label for="state">Which state do you live in?</label>
-                                                <select class="form-control bfh-states" id="state" name="state" data-country="US" data-state="CA"></select>
-                                            </div>
-                                            <FormLabel 
-                                                for="nameFirstKid"
-                                                label="What's the name of your first kid?"
-                                            />
-                                            <Dropdown
-                                                for="grade"
-                                                label="Which grade is your kid in?"
-                                            >
-                                                {gradeLevels.map(grade => {
-                                                    return (
-                                                        <OptionForDropdown option={grade}/>
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                            <Dropdown 
-                                                for="schoolId"
-                                                label="Which school is your kid going to?"
-                                            >
-                                                {this.state.schools.map(school => {
-                                                    return (
-                                                        <OptionForDropdown 
-                                                        option={school.name}
-                                                        value={school.id}
-                                                        />
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                        </div>
-                                    : (" ")}  */}
-
-                                {/* <FormButton
-                                        nameButton={this.state.data.nameButton}
-                                    />
-                                </FormAction>
-                                <FormMessage
-                                    message={this.state.data.message}
-                                    path={this.handleButtonClick}
-                                    action={this.state.data.action}
-                                    id={this.state.data.alt}
-                                /> */}
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
 
                 <img className="logo" src="/images/logo-only-color.png" alt="logo" />
                 <h1 id="welcome-text" className="text-center mt-3">Welcome to APP@rent!</h1>
@@ -159,9 +69,6 @@ class Home extends Component {
                         <button className="button" id="login" data-toggle="modal" data-target="#exampleModalLong" onClick={this.handleButtonClick}>Login</button>
                     </div>
                 </div>
-
-
-
 
             </div>
         )

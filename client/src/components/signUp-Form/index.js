@@ -4,6 +4,7 @@ import { FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDrop
 import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
+import gradeLevel from "../../gradeLevel.json";
 
 const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
@@ -51,18 +52,30 @@ class SignUp extends Component {
                     options: statesList
                 }
             ],
-        numberOfKid: 1,
-        allKidInfo: [],
-        kidInfo:
+        kidInfo: 
             [
                 {
-                    name: "",
-                    grade: 1,
-                    schoolId: 1
-                }
+                    for: "name",
+                    label: "Enter the name of your kid",
+                    placeholder: "kid's name",
+                    value: ""
+                },
+                {
+                    for: "grade",
+                    label: "Which grade is your kid in?",
+                    value: "1",
+                    options: gradeLevel
+
+                },
+                {   
+                    for: "school",
+                    label: "Which school does your kid go to?",
+                    value: "1",
+                    options: []
+                }    
             ],
-        schools: [],
-        gradeLevels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        numberOfKid: 1,
+        allKidsInfo: [],
         formMessage:
         {
             message: "Already Have An Account?",
@@ -79,8 +92,10 @@ class SignUp extends Component {
             .then(
                 res => {
                     console.log(res.data);
+                    let copy = [...this.state.kidInfo];
+                    copy[2].options = res.data;
                     this.setState({
-                        schools: res.data
+                        kidInfo: copy
                     })
                 }
             )
@@ -116,82 +131,98 @@ class SignUp extends Component {
     }
 
     handleInputChangeKid = event => {
-        // const value = event.target.value;
-        const { name, value } = event.target;
-
-        // this.state.kidInfoTemp.push(event.target.value);
-        // this.state.kidInfo.push(event.target.value);
-
-        const copy = [...this.state.kidInfo];
-
-        copy[0][name] = value;
-
+        const value = event.target.value;
+        const key = event.target.getAttribute("data-id")
+        let copy = [...this.state.kidInfo]
+        copy[key].value = value
         this.setState({
             kidInfo: copy
-        })
+        });
+    }
 
-        // copy.push({
-        //     name: this.state.kidInfoTemp[0],
-        //     grade: this.state.kidInfoTemp[1],
-        //     schoolId: this.state.kidInfoTemp[2]
-        // })
+    handleAddKidButtonClick = event => {
+        event.preventDefault();
 
-        // this.setState({
-        //     kidInfo:
-        //         [
-        //             {   
-        //                 name: this.state.kidInfoTemp[0],
-        //                 grade: this.state.kidInfoTemp[1],
-        //                 schoolId: this.state.kidInfoTemp[2]
-        //             }
-        //         ]
-        // });
-
+        // if the parent clicks the "add kid" button after entering info for the first kid, it will proceed
+        if (this.state.kidInfo[0].value && this.state.kidInfo[1].value && this.state.kidInfo[2].value) {
+            // copy the kidInfo
+            let copyKid = [...this.state.kidInfo];
+            // store the current kidInfo into the allKidInfo variable
+            this.state.allKidsInfo.push(
+                {
+                    name: copyKid[0].value,
+                    grade: copyKid[1].value,
+                    schoolId: copyKid[2].value
+                }
+            );
+            // clear the fields for kid form
+            copyKid[0].value = "";
+            copyKid[1].value = "1";
+            copyKid[2].value = "1";
+            // update kidInfo to get empty fields in form, add 1 kid to the counter and 
+            // display new registration form for the other kid
+            this.setState({
+                kidInfo: copyKid,
+                numberOfKid: this.state.numberOfKid + 1,
+                addKid: true
+            });
+        // otherwise will get error message that the parent has to fill up the fields
+        } else {
+            this.setState({ 
+                hasError: true
+            });
+        }
     }
 
     handleSignUpButtonClick = event => {
         event.preventDefault();
 
-        console.log("all kid info: ", this.state.allKidInfo);
-        console.log("number of kids: ", this.state.numberOfKid)
+        // if the parent signs up without adding another kid or after adding a the last kid - grab the only (or last) kidInfo here
+        let copyKid = [...this.state.kidInfo];
+        this.state.allKidsInfo.push(
+            {
+                name: copyKid[0].value,
+                grade: copyKid[1].value,
+                schoolId: copyKid[2].value
+            }
+        );
 
-        // if (this.state.kidInfo[0].name && this.state.kidInfo[0].grade && this.state.kidInfo[0].schoolId) {
+        // console log for checking
+        console.log("all kid info: ", this.state.allKidsInfo);
 
-        //   
-        console.log("kidInfo: ", this.state.kidInfo);
+        // the parent has to enter info in every field to be able to submit form
+        if (this.state.kidInfo[0].value && this.state.kidInfo[1].value && this.state.kidInfo[2].value) {
+  
+            API.signup(
+                {
+                    userName: this.state.parentInfo[0].value,
+                    password: this.state.parentInfo[1].value,
+                    email: this.state.parentInfo[2].value,
+                    photoLink: this.state.parentInfo[3].value,
+                    city: this.state.parentInfo[4].value,
+                    state: this.state.parentInfo[5].value,
+                    allKidsInfo: this.state.allKidsInfo
+                }
+            )
+            .then(res => {
+                if (res.data.status === "success") {
+                    window.location.reload()
+                }
+                else if (res.data.status === "unsuccessful"){
+                    this.setState(
+                        { hasError: true }
+                    )
+                }
 
-        //     API.signup(
-        //         {
-        //             userName: this.state.parentInfo[0].value,
-        //             password: this.state.parentInfo[1].value,
-        //             email: this.state.parentInfo[2].value,
-        //             photoLink: this.state.parentInfo[3].value,
-        //             city: this.state.parentInfo[4].value,
-        //             state: this.state.parentState,
-        //             kidName: this.state.kidInfo[0].name,
-        //             grade: this.state.kidInfo[0].grade,
-        //             schoolId: this.state.kidInfo[0].schoolId
-        //         }
-        //     )
-        //     .then(res => {
-        //         if (res.data.status === "success") {
-        //             window.location.reload()
-        //         }
-        //         else if (res.data.status === "unsuccessful"){
-        //             this.setState(
-        //                 { hasError: true }
-        //             )
-        //         }
+            })
+            .catch(err => console.log(err))
+        // otherwise will get error message that the parent has to fill up the fields
+        } else {
 
-        //     })
-        //     .catch(err => console.log(err))
-
-        // } else {
-
-        //     this.setState({ 
-        //         hasError: true
-        //     })
-        // }
+            this.setState({ 
+                hasError: true
+            })
+        }
     }
 
     handleCloseButtonClick = event => {
@@ -200,20 +231,6 @@ class SignUp extends Component {
         this.setState({
             hasError: false
         })
-    }
-
-    handleAddKidButtonClick = event => {
-        event.preventDefault();
-
-        console.log("kid info: ", this.state.kidInfo);
-
-        this.state.allKidInfo.push(this.state.kidInfo[0]);
-
-        this.setState({
-            numberOfKid: this.state.numberOfKid + 1,
-            addKid: true
-        });
-
     }
 
     resetError = () => {
@@ -281,119 +298,98 @@ class SignUp extends Component {
                         />
                     </div>
                 ) : (
-                        <div>
-                            {(this.state.hasError) ? (
-                                <ErrorMessage
-                                    message="Please fill up all the fields!"
-                                    handleCloseButtonClick={this.handleCloseButtonClick}
-                                />
-                            ) : (
-                                    ""
-                                )}
-                            <FormAction>
-                                {(!this.state.addKid) ? (
-                                    <div>
-                                        <div className="font-weight-bold mb-2">Information for kid #1</div>
-                                        <FormLabel
-                                            for="name"
-                                            label="What's the name of your kid?"
-                                            handleChange={this.handleInputChangeKid}
-                                        />
-                                        <Dropdown
-                                            for="grade"
-                                            label="Which grade is your kid in?"
-                                            handleChange={this.handleInputChangeKid}
-                                        >
-                                            {this.state.gradeLevels.map((grade, i) => {
-                                                return (
-                                                    <OptionForDropdown option={grade} value={grade} key={i} />
-                                                )
-                                            })}
-                                        </Dropdown>
-                                        <Dropdown
-                                            for="schoolId"
-                                            label="Which school is your kid going to?"
-                                            handleChange={this.handleInputChangeKid}
-                                        >
-                                            {this.state.schools.map(school => {
-                                                return (
-                                                    <OptionForDropdown
-                                                        option={school.name}
-                                                        value={school.id}
-                                                        key={school.id}
-                                                    />
-                                                )
-                                            })}
-                                        </Dropdown>
-                                    </div>
-                                ) : (
-                                        <div>
-                                            <div className="font-weight-bold mb-2">Information for kid #{this.state.numberOfKid}</div>
-                                            <FormLabel
-                                                for="name"
-                                                label="What's the name of your kid?"
-                                                handleChange={this.handleInputChangeKid}
-                                            />
-                                            <Dropdown
-                                                for="grade"
-                                                label="Which grade is your kid in?"
-                                                handleChange={this.handleInputChangeKid}
-                                            >
-                                                {this.state.gradeLevels.map((grade, i) => {
-                                                    return (
-                                                        <OptionForDropdown option={grade} value={grade} key={i} />
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                            <Dropdown
-                                                for="schoolId"
-                                                label="Which school is your kid going to?"
-                                                handleChange={this.handleInputChangeKid}
-                                            >
-                                                {this.state.schools.map(school => {
-                                                    return (
-                                                        <OptionForDropdown
-                                                            option={school.name}
-                                                            value={school.id}
-                                                            key={school.id}
-                                                        />
-                                                    )
-                                                })}
-                                            </Dropdown>
-                                        </div>
-                                    )}
-                                {/* <div className="font-weight-bold mb-2">Information for kid #1</div>
-                            <FormLabel 
-                                for="name"
-                                label="What's the name of your kid?"
-                                handleChange={this.handleInputChangeKid}
+                    <div>
+                        {(this.state.hasError) ? (
+                            <ErrorMessage
+                                message="Please fill up all the fields!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
                             />
-                            <Dropdown
-                                for="grade"
-                                label="Which grade is your kid in?"
-                                handleChange={this.handleInputChangeKid}
-                            >
-                            {this.state.gradeLevels.map((grade, i) => {
-                                return (
-                                    <OptionForDropdown option={grade} value={grade} key={i} />
-                                )
-                            })}
-                            </Dropdown>
-                            <Dropdown 
-                                for="schoolId"
-                                label="Which school is your kid going to?"
-                                handleChange={this.handleInputChangeKid}
-                            >
-                                {this.state.schools.map(school => {
-                                    return (
-                                        <OptionForDropdown 
-                                            option={school.name}
-                                            value={school.id}
-                                            key={school.id}
-                                        />
-                                    )
-                                })}
-                            </Dropdown> */}
+                        ) : (
+                            ""
+                        )}
+                        <FormAction>
+                            {(!this.state.addKid) ? (
+                                <div>
+                                    <div className="font-weight-bold mb-2">Enter information for kid #1</div>
+                                    {this.state.kidInfo.map((info, i) => {
+                                        if (info.for === "name") {
+                                            return (
+                                                <FormLabel
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    handleChange={this.handleInputChangeKid}
+                                                />
+                                            )
+                                        } else {
+                                            return (
+                                                <Dropdown
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    disabled={this.state.disabled}
+                                                    handleChange={this.handleInputChangeKid}
+                                                >
+                                                    {info.options.map((item, j) => {
+                                                        return (
+                                                            <OptionForDropdown
+                                                                option={item.name}
+                                                                value={item.id}
+                                                                key={j}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Dropdown>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className="font-weight-bold text-success mb-2">Information saved for kid #{this.state.numberOfKid - 1}</div>
+                                    <div className="font-weight-bold mb-2"> Enter information for kid #{this.state.numberOfKid}</div>
+                                    {this.state.kidInfo.map((info, i) => {
+                                        if (info.for === "name") {
+                                            return (
+                                                <FormLabel
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    handleChange={this.handleInputChangeKid}
+                                                />
+                                            )
+                                        } else {
+                                            return (
+                                                <Dropdown
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    disabled={this.state.disabled}
+                                                    handleChange={this.handleInputChangeKid}
+                                                >
+                                                    {info.options.map((item, j) => {
+                                                        return (
+                                                            <OptionForDropdown
+                                                                option={item.name}
+                                                                value={item.id}
+                                                                key={j}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Dropdown>
+                                            )
+                                        }
+                                    })}       
+                                </div>
+                            )}
                             </FormAction>
                             <FormButton
                                 nameButton="I have another kid!"

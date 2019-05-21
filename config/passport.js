@@ -38,6 +38,7 @@ module.exports = function (passport) {
           } else {
             //creating a new account in our database
             // console.log("user ######", user)
+            // console.log(req.body);
             db.parents.create({
               userName: req.body.userName,
               email: email,
@@ -47,18 +48,23 @@ module.exports = function (passport) {
               password: db.parents.generateHash(password)
             }).then(function (newUser) {
               console.log("new user", newUser)
-                           
-              db.kids.create({
-                name: req.body.kidName,
-                gradeLevel: req.body.grade,
-                parentId: newUser.dataValues.id,
-                schoolId: req.body.schoolId
+
+              // using a transaction and Promise to create a kid row by looping through the allKidsInfo array
+              var kidInfo = req.body.allKidsInfo;
+              db.sequelize.transaction(function(t) {
+                var promises = [];
+                for (var i = 0; i < kidInfo.length; i++) {
+                  var newPromise = db.kids.create(
+                    {name: kidInfo[i].name, gradeLevel: kidInfo[i].grade, parentId: newUser.dataValues.id, schoolId: kidInfo[i].schoolId}
+                  );
+                  promises.push(newPromise);
+                };
+                return Promise.all(promises);
               }).then(function (newKid) {
-                return done(null, newUser)
+                return done(null, newUser);
               }).catch(err => console.log(err));
 
             }).catch(err => console.log(err));
-
 
           }
         })

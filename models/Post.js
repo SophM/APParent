@@ -21,6 +21,10 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    imageUrl:{
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   });
 

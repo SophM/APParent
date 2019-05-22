@@ -2,7 +2,7 @@
 import React,{Component} from "react";
 import { FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
 import API from "../../utils/API";
-
+import Dropzone from "../drop-zone"
 //Declaring all categories for the Post 
 const categories = ["Event", "Advice", "Free", "On sale", "Question"];
 
@@ -11,16 +11,25 @@ class WritePost extends Component {
     state = {
         title: "",
         description: "",
-        category: "Event"
+        category: "Event",
+        imageUrl: ""
     };
 
     handleInputChange = event => {
         const value = event.target.value;
+        console.log(value)
         const column = event.target.id
         this.setState({
             [column]: value
         })
         
+    }
+
+    handleImageChange = (url) => {
+        this.setState({
+            imageUrl: url
+        })
+        console.log("Image State:", this.state.imageUrl)
     }
 
     handleButtonClick = event => {
@@ -31,7 +40,8 @@ class WritePost extends Component {
             {
                 title: this.state.title,
                 description: this.state.description,
-                category: this.state.category
+                category: this.state.category,
+                imageUrl: this.state.imageUrl
             }
         ).then(() => {
             //redirect to dashboard
@@ -45,6 +55,7 @@ class WritePost extends Component {
         <div>
             <FormContainer>
                 <FormTitle
+                    icon="fas fa-edit"
                     title="Write a post"
                 />
                 <Dropdown
@@ -70,6 +81,9 @@ class WritePost extends Component {
                     label="Enter your message"
                     placeholder="message"
                     handleChange={this.handleInputChange}
+                />
+                <Dropzone
+                helper={this.handleImageChange}
                 />
                 <FormButton
                     nameButton="Post"

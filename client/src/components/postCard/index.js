@@ -11,7 +11,7 @@ class PostCard extends Component {
   state = {
     nameButton: "Comment",
     description: "",
-    timeStamp:"",
+    timeStamp: "",
     comments: [],
   };
 
@@ -27,7 +27,7 @@ class PostCard extends Component {
             comments: res.data
           })
 
-        }  
+        }
       )
       .catch(err => console.log(err));
   }
@@ -66,7 +66,7 @@ class PostCard extends Component {
       .catch(err => console.log(err));
     this.setState({ description: "" });
   };
-  
+
   renderComments = () => {
     const { comments } = this.state;
     // const { members } = this.props;
@@ -75,7 +75,7 @@ class PostCard extends Component {
         // if (comments && members) {
         // const parent = members.find((member) => member.id === comment.parentId);
         // const parentUsername = parent && parent.userName;
-        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={comment.updatedAt}/><hr/></div>)
+        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={comment.updatedAt} /><hr /></div>)
         // }
       })}
     </div>)
@@ -88,38 +88,42 @@ class PostCard extends Component {
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body post-content text-left">
-                <h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1>
-                <p className="category" id="postCardCategory">
-                  <b><u>Category:</u></b> {this.props.category}
-                </p>
-                <p className="card-text" id="postCardTitle" id="postCardPostedBy">
-                  <b><u>Posted By:</u></b> {this.props.name}
-                </p>
+                <img class="profile-icon" src={this.props.userPhoto} />
+                <span><b className="author">{this.props.name}</b> posted:</span>
+                <span><h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1></span>
+                <div className="text-center"><img className="post-photo" src={this.props.postPhoto}/></div>
                 <p className="card-text" id="postCardDetails">
                   <b><u>Details:</u> </b>{this.props.description}
                 </p>
+                <p className="category card-text" id="postCardCategory">
+                  <b><u>Category:</u></b> {this.props.category}
+                </p>
+                {/* <p className="card-text" id="postCardTitle" id="postCardPostedBy">
+                  <b><u>Posted By:</u></b> {this.props.name}
+                </p> */}
+
                 <p>
-                <b><u>Last Updated: </u></b>{this.props.updatedAt}
+                  <b><u>Last Updated: </u></b>{this.props.updatedAt}
                 </p>
               </div>
               <button
-                className="btn btn-primary btn-lg float-right m-3 mr-5"
+                className="btn btn-lg mx-auto open-comment"
                 id="comment"
                 data-toggle="modal"
-                data-target={"#post"+this.props.postId}
+                data-target={"#post" + this.props.postId}
                 onClick={this.handleCommentClick}
               >
-                Comment
+                <i class="far fa-comment-alt"></i> Comment
               </button>
             </div>
-            
+
           </div>
         </div>
 
         {/* modal */}
         <div
           className="modal fade"
-          id={"post"+this.props.postId}
+          id={"post" + this.props.postId}
           tabindex="-1"
           role="dialog"
           aria-labelledby="exampleModalLongTitle"
@@ -141,20 +145,20 @@ class PostCard extends Component {
               <div className="modal-body">
                 {this.renderComments()}
                 <form onSubmit={this.handleFormSubmit}>
-                <p><b>Your Comment:</b> {this.state.description}</p>
+                  <p><b>Your Comment:</b> {this.state.description}</p>
 
-                <input
-                  for="comment"
-                  label="Comment Here"
-                  type="text"
-                  placeholder="Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.handleInputChange}
-                />
+                  <input
+                    for="comment"
+                    label="Comment Here"
+                    type="text"
+                    placeholder="Description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.handleInputChange}
+                  />
 
-                <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
-                {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
+                  <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
+                  {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
                 </form>
                 {/* need a button to post */}
                 {/* create a handle click for the button - that will post to MySQL */}

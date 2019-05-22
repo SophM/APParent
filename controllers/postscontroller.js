@@ -10,6 +10,7 @@ module.exports = {
                 category: req.body.category,
                 //double check to see if req.session.passport.user.id is what we need
                 parentId: req.session.passport.user.id,
+                imageUrl: req.body.imageUrl
             }).then(function (result) {
                 res.end()
                 // res.json(result)

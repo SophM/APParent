@@ -3,10 +3,12 @@
     font-size: 1rem
 }
 
-.category {
-    /* text-align: center; */
-    margin-top: 50px;
-    
+.profile-icon {
+    width: 7%
+}
+
+.author{
+    color: rgb(7, 83, 206)
 }
 
 #postCardTitle {
@@ -20,3 +22,10 @@
 	color: #176d88;
 }
 
+.open-comment:hover {
+    background: rgba(200, 198, 198, 0.349)
+}
+
+.post-photo{
+    max-width: 50%;
+}

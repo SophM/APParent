@@ -35,6 +35,7 @@ class Home extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <FormTitle
+                                    icon="fas fa-sign-in-alt"
                                     title={this.state.form}
                                 />
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">

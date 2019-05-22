@@ -1,5 +1,5 @@
 import React from "react"
-
+import "./style.css"
 export function FormContainer({ children }) {
     return (
         <div className="row mt-5 mb-3">
@@ -14,7 +14,7 @@ export function FormContainer({ children }) {
 
 export function FormTitle(props) {
     return (
-        <h1 className="text-center mb-3"><i className="fas fa-sign-in-alt"></i> {props.title}</h1>
+        <h1 className="text-center mb-3"><i className={props.icon}></i> {props.title}</h1>
     )
 };
 
@@ -89,6 +89,6 @@ export function CommentDisplay(props) {
 
 export function CommentSubmitButton(props) {
     return (
-        <button type="submit" className="btn" onClick={props.handleButtonClick}>Submit Comment </button>
+        <button type="submit" className="btn comment-button" onClick={props.handleButtonClick}>Submit Comment </button>
     )
 }

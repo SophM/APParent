@@ -33,7 +33,9 @@
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-dom": "^16.8.6",
+    "react-dropzone": "^10.1.5",
     "sequelize": "^5.8.1",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "superagent": "^5.0.5"
   }
 }

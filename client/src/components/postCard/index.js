@@ -88,9 +88,10 @@ class PostCard extends Component {
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body post-content text-left">
-                <img class="profile-icon" src={this.props.photo} />
+                <img class="profile-icon" src={this.props.userPhoto} />
                 <span><b className="author">{this.props.name}</b> posted:</span>
                 <span><h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1></span>
+                <div className="text-center"><img className="post-photo" src={this.props.postPhoto}/></div>
                 <p className="card-text" id="postCardDetails">
                   <b><u>Details:</u> </b>{this.props.description}
                 </p>

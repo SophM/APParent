@@ -25,3 +25,7 @@
 .open-comment:hover {
     background: rgba(200, 198, 198, 0.349)
 }
+
+.post-photo{
+    max-width: 50%;
+}

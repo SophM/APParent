@@ -1,5 +1,5 @@
 import React from "react"
-
+import "./style.css"
 export function FormContainer({ children }) {
     return (
         <div className="row mt-5 mb-3">
@@ -89,6 +89,6 @@ export function CommentDisplay(props) {
 
 export function CommentSubmitButton(props) {
     return (
-        <button type="submit" className="btn" onClick={props.handleButtonClick}>Submit Comment </button>
+        <button type="submit" className="btn comment-button" onClick={props.handleButtonClick}>Submit Comment </button>
     )
 }

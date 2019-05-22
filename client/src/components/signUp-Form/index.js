@@ -23,7 +23,7 @@ class SignUp extends Component {
                 },
                 {
                     for: "password",
-                    label: "Enter your password",
+                    label: "Enter your password (at least 8 characters)",
                     placeholder: "password",
                     value: ""
                 },
@@ -83,6 +83,7 @@ class SignUp extends Component {
             alt: "login"
         },
         hasError: false,
+        passwordTooShort: false,
         addKid: false
     };
 
@@ -115,15 +116,26 @@ class SignUp extends Component {
     handleContinueButtonClick = event => {
         event.preventDefault();
 
+        // if all the fields have been filled up
         if (this.state.parentInfo[0].value && this.state.parentInfo[1].value && this.state.parentInfo[2].value && this.state.parentInfo[3].value && this.state.parentInfo[4].value && this.state.parentInfo[5].value) {
+            // if the password is at least 8 characters long
+            if (this.state.parentInfo[1].value.length >= 8) {
+                // display the second part of the form
+                this.setState({
+                    firstStepRegistration: false
+                });
+                console.log("parent info: ", this.state.parentInfo);
+            // if password is not at least 8 characters long
+            } else {
+                // display error message
+                this.setState({
+                    passwordTooShort: true
+                })
+            }
 
-            this.setState({
-                firstStepRegistration: false
-            });
-            console.log("parent info: ", this.state.parentInfo);
-
+        // if all the fields haven't been filled up
         } else {
-
+            // display error message
             this.setState({
                 hasError: true
             })
@@ -229,15 +241,17 @@ class SignUp extends Component {
         event.preventDefault();
 
         this.setState({
-            hasError: false
+            hasError: false,
+            passwordTooShort: false,
         })
     }
 
     resetError = () => {
-        if (this.state.hasError) {
+        if (this.state.hasError || this.state.passwordTooShort) {
             setTimeout(() => {
                 this.setState({
-                    hasError: false
+                    hasError: false,
+                    passwordTooShort: false,
                 })
             }, 2000)
         }
@@ -256,8 +270,16 @@ class SignUp extends Component {
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                                ""
-                            )}
+                            ""
+                        )}
+                        {(this.state.passwordTooShort) ? (
+                            <ErrorMessage
+                                message="Your password should be at least 8 characters long!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
+                            />
+                        ) : (
+                            ""
+                        )}
                         <FormAction>
                             {this.state.parentInfo.map((parentInfo, i) => {
                                 if (parentInfo.for !== "state") {

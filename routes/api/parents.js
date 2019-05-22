@@ -7,6 +7,10 @@ const passport = require("passport");
 router.route("/")
 	.get(parentsController.findAllParents);
 
+// get the info of the parents already in the database - to check username at sign-up
+router.route("/all")
+	.get(parentsController.findAllParentsInDB);
+
 // displaying only one parent
 router.route("/:id")
 	.get(parentsController.findOne);

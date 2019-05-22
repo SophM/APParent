@@ -43,6 +43,12 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+    // get all the parents already in the database - to check username at sign-up
+    findAllParentsInDB: function(req, res) {
+        db.parents.findAll().then(function(results) { res.json(results)});
+    },
+
+
     // find all posts for a specific parent
     // findAllPostsForAParent: function(req, res){
     //     db.parents.findOne({
@@ -97,6 +103,7 @@ module.exports = {
             })
             .catch(err => res.status(422).json(err));
     },
+
     checkStatus: function (req, res) {
         if (req.isAuthenticated()) {
             res.json({ loggedIn: true })

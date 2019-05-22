@@ -12,6 +12,7 @@ const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colora
 class SignUp extends Component {
 
     state = {
+        allUsernames: [],
         firstStepRegistration: true,
         parentInfo:
             [
@@ -23,7 +24,7 @@ class SignUp extends Component {
                 },
                 {
                     for: "password",
-                    label: "Enter your password",
+                    label: "Enter your password (at least 8 characters)",
                     placeholder: "password",
                     value: ""
                 },
@@ -83,6 +84,8 @@ class SignUp extends Component {
             alt: "login"
         },
         hasError: false,
+        passwordTooShort: false,
+        usernameAlreadyExists: false,
         addKid: false
     };
 
@@ -100,6 +103,19 @@ class SignUp extends Component {
                 }
             )
             .catch(err => console.log(err));
+
+        // get the info of the parents already in the database - to check username
+        API.searchAllParentsInDB()
+            .then(
+                res => {
+                    console.log(res.data);
+                    // push into an array all the usernames already in the database
+                    for (var i = 0; i < res.data.length; i++) {
+                        this.state.allUsernames.push(res.data[i].userName);
+                    }
+                    console.log(this.state.allUsernames);
+                }
+            )
     }
 
     handleInputChangeParent = event => {
@@ -115,15 +131,34 @@ class SignUp extends Component {
     handleContinueButtonClick = event => {
         event.preventDefault();
 
+        // if all the fields have been filled up
         if (this.state.parentInfo[0].value && this.state.parentInfo[1].value && this.state.parentInfo[2].value && this.state.parentInfo[3].value && this.state.parentInfo[4].value && this.state.parentInfo[5].value) {
-
-            this.setState({
-                firstStepRegistration: false
-            });
-            console.log("parent info: ", this.state.parentInfo);
-
+            // if username doesn't already exist in the database
+            if (this.state.allUsernames.indexOf(this.state.parentInfo[0].value) === -1) {
+                // if password isn't too short
+                if (this.state.parentInfo[1].value.length >= 8) {
+                    // display the second part of the form
+                    this.setState({
+                        firstStepRegistration: false
+                    });
+                    console.log("parent info: ", this.state.parentInfo);
+                // if password too short
+                } else {
+                    // display error message
+                    this.setState({
+                        passwordTooShort: true
+                    });
+                }
+            // if username already present in the database
+            } else {
+                // display error message
+                this.setState({
+                    usernameAlreadyExists: true
+                });
+            }    
+        // if all the fields haven't been filled up
         } else {
-
+            // display error message
             this.setState({
                 hasError: true
             })
@@ -205,15 +240,7 @@ class SignUp extends Component {
                 }
             )
             .then(res => {
-                if (res.data.status === "success") {
-                    window.location.reload()
-                }
-                else if (res.data.status === "unsuccessful"){
-                    this.setState(
-                        { hasError: true }
-                    )
-                }
-
+                window.location.reload()
             })
             .catch(err => console.log(err))
         // otherwise will get error message that the parent has to fill up the fields
@@ -229,15 +256,19 @@ class SignUp extends Component {
         event.preventDefault();
 
         this.setState({
-            hasError: false
+            hasError: false,
+            passwordTooShort: false,
+            usernameAlreadyExists: false
         })
     }
 
     resetError = () => {
-        if (this.state.hasError) {
+        if (this.state.hasError || this.state.passwordTooShort || this.state.usernameAlreadyExists || this.state.emailAlreadyExists) {
             setTimeout(() => {
                 this.setState({
-                    hasError: false
+                    hasError: false,
+                    passwordTooShort: false,
+                    usernameAlreadyExists: false
                 })
             }, 2000)
         }
@@ -256,8 +287,24 @@ class SignUp extends Component {
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                                ""
-                            )}
+                            ""
+                        )}
+                        {(this.state.passwordTooShort) ? (
+                            <ErrorMessage
+                                message="Your password should be at least 8 characters long!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
+                            />
+                        ) : (
+                            ""
+                        )}
+                        {(this.state.usernameAlreadyExists) ? (
+                            <ErrorMessage
+                                message="Sorry, this username is already taken!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
+                            />
+                        ) : (
+                            ""
+                        )}
                         <FormAction>
                             {this.state.parentInfo.map((parentInfo, i) => {
                                 if (parentInfo.for !== "state") {

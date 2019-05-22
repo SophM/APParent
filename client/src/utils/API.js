@@ -66,5 +66,10 @@ export default {
     // sign up - create parent and kid in the database
     signup: function (data) {
         return axios.post("api/parents/signup", data);
+    },
+
+    // get the info of the parents already in the database - to check username at sign-up
+    searchAllParentsInDB: function() {
+        return axios.get("api/parents/all");
     }
 };

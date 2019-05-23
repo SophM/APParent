@@ -32,6 +32,10 @@ export default {
     getAllSchools: function() {
         return axios.get("/api/schools");
     },
+    // find all the schools
+    getAllSchoolsByState: function(data) {
+        return axios.get("/api/schools"+data);
+    },
 
     //update logged in profile 
     updateProfile: function(data) {

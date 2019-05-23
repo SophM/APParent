@@ -12,10 +12,11 @@ module.exports = {
     findAllByState: function (req, res) {
         // if (req.isAuthenticated()) {
             db.schools.findAll(
-                {where: {state: req.session.passport.user.state}}
+                {where: {state: req.param.state}}
             )
                 .then(function (result) {
                     res.json(result)
+                    console.log("Schools for the state", result  );
                 })
         // }
     },

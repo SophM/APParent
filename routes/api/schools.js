@@ -1,10 +1,15 @@
 const router = require("express").Router();
 const schoolsController = require("../../controllers/schoolscontroller.js");
 
-// displaying all the posts
+// displaying all the schools
 router.route("/")
     .get(schoolsController.findAll);
-    
+
+// displaying all the schools for the state 
+router.route("/state/:state")
+.get(schoolsController.findAllByState);
+
+
 // create a new school 
 router.route("/")
 	.post(schoolsController.create);

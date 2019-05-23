@@ -53,7 +53,7 @@ class FilterBy extends Component {
                 </div>
                 <div className="col-9 col-sm-12">
                   <select className="form-select" id="states">
-                    <option value="">Choose...</option>
+                    <option options={this.state.gradeLevels} value="">Choose...</option>
                   </select>
                 </div>
               </div>

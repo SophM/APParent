@@ -13,6 +13,7 @@ class SignUp extends Component {
 
     state = {
         allUsernames: [],
+        allEmails: [],
         firstStepRegistration: true,
         parentInfo:
             [
@@ -86,6 +87,7 @@ class SignUp extends Component {
         hasError: false,
         passwordTooShort: false,
         usernameAlreadyExists: false,
+        emailAlreadyExists: false,
         addKid: false
     };
 
@@ -112,8 +114,10 @@ class SignUp extends Component {
                     // push into an array all the usernames already in the database
                     for (var i = 0; i < res.data.length; i++) {
                         this.state.allUsernames.push(res.data[i].userName);
+                        this.state.allEmails.push(res.data[i].email);
                     }
                     console.log(this.state.allUsernames);
+                    console.log(this.state.allEmails);
                 }
             )
     }
@@ -135,21 +139,34 @@ class SignUp extends Component {
         if (this.state.parentInfo[0].value && this.state.parentInfo[1].value && this.state.parentInfo[2].value && this.state.parentInfo[3].value && this.state.parentInfo[4].value && this.state.parentInfo[5].value) {
             // if username doesn't already exist in the database
             if (this.state.allUsernames.indexOf(this.state.parentInfo[0].value) === -1) {
-                // if password isn't too short
-                if (this.state.parentInfo[1].value.length >= 8) {
+                // if the email doesn't already exist in the database
+                if (this.state.allEmails.indexOf(this.state.parentInfo[2].value) === -1) {
                     // display the second part of the form
                     this.setState({
                         firstStepRegistration: false
                     });
                     console.log("parent info: ", this.state.parentInfo);
-                // if password too short
+                    // if password isn't too short
+                    if (this.state.parentInfo[1].value.length >= 8) {
+                        // display the second part of the form
+                        this.setState({
+                            firstStepRegistration: false
+                        });
+                        console.log("parent info: ", this.state.parentInfo);
+                    // if password too short
+                    } else {
+                        // display error message
+                        this.setState({
+                            passwordTooShort: true
+                        });
+                    }
+                // if the email is already present in the database
                 } else {
-                    // display error message
                     this.setState({
-                        passwordTooShort: true
+                        emailAlreadyExists: true
                     });
                 }
-            // if username already present in the database
+            // if username is already present in the database
             } else {
                 // display error message
                 this.setState({
@@ -258,7 +275,8 @@ class SignUp extends Component {
         this.setState({
             hasError: false,
             passwordTooShort: false,
-            usernameAlreadyExists: false
+            usernameAlreadyExists: false,
+            emailAlreadyExists: false
         })
     }
 
@@ -268,7 +286,8 @@ class SignUp extends Component {
                 this.setState({
                     hasError: false,
                     passwordTooShort: false,
-                    usernameAlreadyExists: false
+                    usernameAlreadyExists: false,
+                    emailAlreadyExists: false,
                 })
             }, 2000)
         }
@@ -300,6 +319,14 @@ class SignUp extends Component {
                         {(this.state.usernameAlreadyExists) ? (
                             <ErrorMessage
                                 message="Sorry, this username is already taken!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
+                            />
+                        ) : (
+                            ""
+                        )}
+                        {(this.state.emailAlreadyExists) ? (
+                            <ErrorMessage
+                                message="Sorry, a parent already registered with this email!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (

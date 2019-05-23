@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import API from "../../utils/API";
-import gradeLevel from "../../gradeLevel.json"
 
 class FilterBy extends Component {
   //State 
@@ -10,24 +9,18 @@ class FilterBy extends Component {
     schools: []
   }
 
-//   // Dynamically create select list
-// let options = [];
-// countryArray.map(item =>
-//   options.push({ label: item.name.label, value: item.name.value }),
-// );
-
 
   componentDidMount() {
     // retrieves all the schools
-    API.getAllSchools()
+    API.getAllSchoolsByState("California")
         .then(
             res => {
                 console.log(res.data);
-                let copy = [...this.state.schools];
-                copy[2].options = res.data;
-                this.setState({
-                    schools: copy
-                })
+            // Dynamically create select list
+            let options = [];
+            res.data.map(state =>
+              options.push({ label: state.name, value: state.name }),
+            );
             }
         )
         .catch(err => console.log(err));

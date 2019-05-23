@@ -48,12 +48,13 @@ class userCard extends Component {
                     <h4 className="card-body text-info">Kid(s) Information <i class="fa fa-child"></i>
 <i class="fa fa-child big-child" ></i>: </h4>
                     {/* <h5 className="card-text"><b>No of Kids:</b> {this.state.kids.length}</h5> */}
+                    {/* Loops the grades all of kids for a parent */}
                     <h5 className="card-text"><b>Grade Range:</b>
                         {this.state.kids.length ? (
                             this.state.kids.map((kid, i) => {
                                 return (
-                                    <div className="grades">
-                                        {kid.gradeLevel}</div>
+                                    <div className="grades" key={i}>
+                                        {kid.gradeLevel} </div>
                                 );
                             })) : (<div>Infant - Preschooler</div>)
 
@@ -62,7 +63,7 @@ class userCard extends Component {
                         {this.state.kids.length ? (
                             this.state.kids.map((kid, i) => {
                                 return (
-                                    <div>
+                                    <div key={i}>
                                         {kid.school.name}</div>
                                 );
                             })) : (<div>Infant - Preschooler</div>)

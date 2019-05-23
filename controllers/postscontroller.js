@@ -41,6 +41,7 @@ module.exports = {
                     order: [['updatedAt', 'DESC']],
                     include: [
                         {
+                            attributes: ["id", "userName", "photoLink"],
                             model: db.parents,
                             as: "parent"
                         }

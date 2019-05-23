@@ -33,6 +33,7 @@ module.exports = {
     // find all parents - sauf the parent logged in
     findAllParents: function (req, res) {
         db.parents.findAll({
+            attributes: ["id", "userName", "email", "city", "state", "photoLink"],
             where: {
                 // excluded the logged-in parent
                 [Op.not]: [{ id: req.session.passport.user.id }]
@@ -45,7 +46,9 @@ module.exports = {
 
     // get all the parents already in the database - to check username at sign-up
     findAllParentsInDB: function(req, res) {
-        db.parents.findAll().then(function(results) { res.json(results)});
+        db.parents.findAll({
+            attributes: ["userName", "email"]
+        }).then(function(results) { res.json(results)});
     },
 
 

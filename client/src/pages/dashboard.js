@@ -7,13 +7,10 @@ import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 import UserCard from "../components/userCard";
 import MyProfile from "../components/myProfile";
-import FilterBy from "../components/FilterBy"
 import NavBar from "../components/nav";
 
 import API from "../utils/API";
 // import { stat } from "fs";
-
-const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 class Dashboard extends Component {
   //Setting all default values 
@@ -56,9 +53,6 @@ class Dashboard extends Component {
       )
       .catch(err => console.log(err));
 
-    //Search Criteria 
-    
-    this.setState({ states: statesList, allStates: statesList})
   }
 
   handleClickOnSideBar = event => {
@@ -96,15 +90,6 @@ class Dashboard extends Component {
     )
   }
 
-  //Filter criteria for ALl MEMBERS 
-  searchStates(query){
-    console.log("Our App knows the query: " + query); 
-    let states = this.state.allStates.filter((state) => {
-      return state.title.includes(query) || state.body.includes(query)
-    });
-    console.log(states); 
-    this.setState({states: states})
-  }
 
   render() {
     {/* display the page with the activity component */ }
@@ -192,11 +177,8 @@ class Dashboard extends Component {
           <div id="page-wrap">
 
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-            
-            <AllMembers>
 
-            <FilterBy searchStates={this.searchStates.bind(this)} /> 
-            <hr /> 
+            <AllMembers>
               {this.state.members.length ? (
                 this.state.members.map((member, i) => {
                   return (
@@ -207,7 +189,6 @@ class Dashboard extends Component {
                       city={member.city}
                       state={member.state}
                       photoLink={member.photoLink}
-                      parentId={member.id}
                     />
                   );
                 })

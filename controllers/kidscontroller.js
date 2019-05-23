@@ -35,12 +35,34 @@ module.exports = {
                 .catch(err => res.status(422).json(err));
         }
     },
-    // find all kids for a specific parent
+    // find all kids for a specific Logged in parent
     findAllKidsForAParent: function (req, res) {
         console.log("Logged Parent id ", req.session.passport.user.id); 
         db.kids.findAll({
+            attributes: ['id', 'gradeLevel', 'schoolId', 'parentId'],
             where: {
                 parentId: req.session.passport.user.id
+            },
+            include: [
+                {
+                    model: db.schools,
+                    as: "school", 
+                    required: true
+                }
+            ]
+        }).then(function (result) {
+            console.log("All kids info for a parent: ", result);
+            res.json(result)
+        })
+        .catch(err => res.status(422).json(err));
+    }, 
+    // find all kids for all parent(s)
+    findAllKids: function (req, res) {
+        console.log("Parent id ", req.params.id); 
+        db.kids.findAll({
+            attributes: ['id', 'gradeLevel'],
+            where: {
+                parentId: req.params.id
             },
             include: [
                 {

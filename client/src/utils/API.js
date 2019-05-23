@@ -42,6 +42,10 @@ export default {
     findAllKidsForAParent: function() {
         return axios.get("/api/kids");
     }, 
+     //get all kids info for all parents on the website 
+     findAllKids: function(parentId) {
+        return axios.get("/api/kids/all/" + parentId);
+    }, 
     //update a kid info for a parent
     updateKidForAParent: function(data, id) {
         return axios.post("/api/kids/update/"+id, data);

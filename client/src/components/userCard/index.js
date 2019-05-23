@@ -44,9 +44,9 @@ class userCard extends Component {
                 <div className="card-body">
                     <h2 className="card-title text-info">{this.props.userName}</h2>
                     <h5 className="card-text"><b>Email:</b> {this.props.email}</h5>
-                    <h5 className="card-text"><b>City:</b> {this.props.city}</h5>
-                    <h5 className="card-text"><b>State :</b> {this.props.state}</h5>
-                    <h4 className="card-body text-info">Kid Info: </h4>
+                    <h5 className="card-text"><b>Resides in:</b> {this.props.city} | <b> State :</b> {this.props.state}</h5>
+                    <h4 className="card-body text-info">Kid(s) Information <i class="fa fa-child"></i>
+<i class="fa fa-child big-child" ></i>: </h4>
                     {/* <h5 className="card-text"><b>No of Kids:</b> {this.state.kids.length}</h5> */}
                     <h5 className="card-text"><b>Grade Range:</b>
                         {this.state.kids.length ? (
@@ -62,8 +62,8 @@ class userCard extends Component {
                         {this.state.kids.length ? (
                             this.state.kids.map((kid, i) => {
                                 return (
-                                    <div className="grades">
-                                        {kid.gradeLevel}</div>
+                                    <div>
+                                        {kid.school.name}</div>
                                 );
                             })) : (<div>Infant - Preschooler</div>)
 

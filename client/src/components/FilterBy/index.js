@@ -44,27 +44,7 @@ class FilterBy extends Component {
         <form noValidate>
           <p className="mb-1 text-center text-info">Refine your results</p>
           <div className="columns text-center">
-            <div className="column col-4 col-xs-12">
-              <div className="form-group">
-                <div className="col-3 col-sm-12">
-                  <label className="form-label" htmlFor="grade-filter">
-                    Grade Level
-                  </label>
-                </div>
-                <div className="col-9 col-sm-12">
-                  <input
-                    className="form-input"
-                    min="1"
-                    max="12"
-                    type="number"
-                    id="grade-filter"
-                    placeholder="1 to 12"
-                    // value={this.state.}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="column col-4 col-xs-12">
+            <div className="column col-6 col-xs-12">
               <div className="form-group">
                 <div className="col-3 col-sm-12">
                   <label className="form-label" htmlFor="states">
@@ -78,7 +58,7 @@ class FilterBy extends Component {
                 </div>
               </div>
             </div>
-            <div className="column col-4 col-xs-12">
+            <div className="column col-6 col-xs-12">
               <div className="form-group">
                 <div className="col-3 col-sm-12">
                   <label className="form-label" htmlFor="schools">

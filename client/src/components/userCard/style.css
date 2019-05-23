@@ -6,3 +6,8 @@
 /* .grades { 
     float: right; 
 } */
+
+.big-child{
+   font-size:24px; 
+   color:red; 
+}

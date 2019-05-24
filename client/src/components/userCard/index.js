@@ -45,8 +45,8 @@ class userCard extends Component {
                     <h2 className="card-title text-info">{this.props.userName}</h2>
                     <h5 className="card-text"><b>Email:</b> {this.props.email}</h5>
                     <h5 className="card-text"><b>Resides in:</b> {this.props.city} | <b> State :</b> {this.props.state}</h5>
-                    <h4 className="card-body text-info">Kid(s) Information <i class="fa fa-child"></i>
-<i class="fa fa-child big-child" ></i>: </h4>
+                    <h4 className="card-body text-info">Kid(s) Information <i className="fa fa-child"></i>
+<i className="fa fa-child big-child" ></i>: </h4>
                     {/* <h5 className="card-text"><b>No of Kids:</b> {this.state.kids.length}</h5> */}
                     {/* Loops the grades all of kids for a parent */}
                     <h5 className="card-text"><b>Grade Range:</b>

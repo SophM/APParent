@@ -10,9 +10,10 @@ module.exports = {
         // }
     },
     findAllByState: function (req, res) {
+        console.log("BY STATE SCHOOOL - ", req.params.state);
         // if (req.isAuthenticated()) {
             db.schools.findAll(
-                {where: {state: req.param.state}}
+                {where: {state: req.params.state}}
             )
                 .then(function (result) {
                     res.json(result)

@@ -113,7 +113,7 @@ class PostCard extends Component {
                 data-target={"#post" + this.props.postId}
                 onClick={this.handleCommentClick}
               >
-                <i class="far fa-comment-alt"></i> Comment
+                <i className="far fa-comment-alt"></i> Comment
               </button>
             </div>
 

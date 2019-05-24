@@ -1,29 +1,33 @@
 import React, { Component} from 'react';
+import { Dropdown, OptionForDropdown} from "../form"; 
 import API from "../../utils/API";
+
+const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 class FilterBy extends Component {
   //State 
   state = {
-    gradeLevels: '',
-    states: [], 
-    schools: []
+    allStates: statesList,  
+    schools: [], 
+    filterState: "California"
   }
 
-
   componentDidMount() {
-    // retrieves all the schools
-    API.getAllSchoolsByState("California")
-        .then(
-            res => {
-                console.log(res.data);
-            // Dynamically create select list
-            let options = [];
-            res.data.map(state =>
-              options.push({ label: state.name, value: state.name }),
-            );
-            }
-        )
-        .catch(err => console.log(err));
+    // console.log("All States", this.state.allStates); 
+    
+    // retrieves all the schools - filter by state 
+    API.getAllSchoolsByState(this.state.filterState)
+    .then(
+        res => {
+            console.log(res.data);
+            this.setState({
+                schools: res.data
+            })
+        }
+    )
+    .catch(err => console.log(err));
+
+    console.log("Schools", this.state.schools); 
   }
   //Criteria 
   handleSearch(event) {
@@ -46,7 +50,10 @@ class FilterBy extends Component {
                 </div>
                 <div className="col-9 col-sm-12">
                   <select className="form-select" id="states">
-                    <option options={this.state.gradeLevels} value="">Choose...</option>
+                    <option value="">Choose...</option>
+                    {this.state.allStates.map((item) =>
+                      <option key={item}>{item}</option>
+                    )}
                   </select>
                 </div>
               </div>
@@ -59,8 +66,12 @@ class FilterBy extends Component {
                   </label>
                 </div>
                 <div className="col-9 col-sm-12">
-                  <select className="form-select" id="schools">
+                  <select className="form-select" id="states">
                     <option value="">Choose...</option>
+                    {/* {this.state.schools.map((item, j) =>
+
+                      <option key={item}>{item}</option>
+                    )} */}
                   </select>
                 </div>
               </div>

@@ -8,7 +8,7 @@ import AllMembers from "../components/allMembers";
 import UserCard from "../components/userCard";
 import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
-
+import FilterBy from "../components/FilterBy";
 import API from "../utils/API";
 // import { stat } from "fs";
 
@@ -178,7 +178,12 @@ class Dashboard extends Component {
 
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
 
+          
+
             <AllMembers>
+            <FilterBy  /> 
+            {/* searchStates={this.searchStates.bind(this)} */}
+            <hr /> 
               {this.state.members.length ? (
                 this.state.members.map((member, i) => {
                   return (
@@ -189,6 +194,7 @@ class Dashboard extends Component {
                       city={member.city}
                       state={member.state}
                       photoLink={member.photoLink}
+                      parentId={member.id}
                     />
                   );
                 })

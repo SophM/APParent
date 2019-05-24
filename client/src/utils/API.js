@@ -32,6 +32,10 @@ export default {
     getAllSchools: function() {
         return axios.get("/api/schools");
     },
+    // find all the schools
+    getAllSchoolsByState: function(data) {
+        return axios.get("/api/schools/state/"+data);
+    },
 
     //update logged in profile 
     updateProfile: function(data) {
@@ -41,6 +45,10 @@ export default {
     //get all kids info for a parent
     findAllKidsForAParent: function() {
         return axios.get("/api/kids");
+    }, 
+     //get all kids info for all parents on the website 
+     findAllKids: function(parentId) {
+        return axios.get("/api/kids/all/" + parentId);
     }, 
     //update a kid info for a parent
     updateKidForAParent: function(data, id) {

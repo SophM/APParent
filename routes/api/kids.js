@@ -5,6 +5,10 @@ const kidsController = require("../../controllers/kidscontroller.js");
 router.route("/")
 	.get(kidsController.findAllKidsForAParent);
 
+// displaying all kids for all parent(s)
+router.route("/all/:id")
+.get(kidsController.findAllKids);
+
 // Updating  only one kid for a parent 
 router.route("/update/:id")
 	.post(kidsController.update);

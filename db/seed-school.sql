@@ -13,6 +13,12 @@ VALUES
 ( "Argonne Elementary School ", "750 - 16th Avenue", "San Francisco", "California", 94103, "2019-04-12 03:31:57", "2019-04-12 03:31:57"), 
 ( "Asawa San Francisco School of the Arts ", "680 18th Avenue", "San Francisco", "California", 94112, "2019-04-12 03:31:57", "2019-04-12 03:31:57"); 
 
+INSERT INTO schools (name,streetAddress, city, state, zipcode, createdAt, updatedAt)
+VALUES
+("Adams, Samuel Elementary", "165 Webster St.","East Boston", "Massachusetts", 02128, "2019-04-12 03:31:57", "2019-04-12 03:31:57"), 
+("Blackstone Elementary School", "1380 Shawmut Ave.","Boston", "Massachusetts", 02118, "2019-04-12 03:31:57", "2019-04-12 03:31:57"), 
+("TechBoston Academy", "9 Peacevale Rd.","Dorchester", "Massachusetts", 02124, "2019-04-12 03:31:57", "2019-04-12 03:31:57"); 
+
 -- INSERT INTO parentSchools (createdAt, updatedAt, parentId, schoolId)
 -- VALUES 
 -- ("2019-04-12 03:31:57", "2019-04-12 03:31:57", 1 ,1 ), 

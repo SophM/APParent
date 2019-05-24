@@ -201,15 +201,19 @@ class MyProfile extends Component {
                     {/* <FormAction 
                     route={props.route} > */}
                     {this.state.disabled ?
+                    <div className="row">
+                         {/* Image of the loggeed in user */}
+                        <img className="rounded-circle view-pic" src={this.props.photoLink} />
                         <FormTitle
                             title="View My Profile"
                         />
+                        </div>
                         :
                         <FormTitle
                             title="Update Profile Info"
                         />
                     }
-
+                   
                     {/* Rendering Form labels using the userInfo object values */}
 
                     {this.state.userInfo.map((user, i) => {
@@ -293,7 +297,7 @@ class MyProfile extends Component {
 
                     {/* </FormAction> */}
                 </FormContainer>
-            </div>
+                </div>
         );
     }
 }

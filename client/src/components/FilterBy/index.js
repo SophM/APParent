@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import { Dropdown, OptionForDropdown} from "../form"; 
 import API from "../../utils/API";
+// import Select from 'react-select';
 
 const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
@@ -9,29 +10,52 @@ class FilterBy extends Component {
   state = {
     allStates: statesList,  
     schools: [], 
-    filterState: "California"
+    filteredState: "California"
   }
 
   componentDidMount() {
-    // console.log("All States", this.state.allStates); 
+    console.log("School State", this.state.filteredState); 
     
+    // // retrieves all the schools - filter by state 
+    // API.getAllSchoolsByState(this.state.filteredState)
+    // .then(
+    //     res => {
+    //         // this.setState({
+    //         //     schools:  res.data 
+    //         // })
+    //         console.log("Filtered Schools : ", res.data); 
+    //         let copy = [...this.state.schools];
+    //         copy[2].options = res.data;
+    //         this.setState({
+    //           schools: copy
+    //         })
+    //     }
+    // )
+    // .catch(err => console.log(err));
+
+    
+  }
+  //Criteria 
+
+  handleChange = event => {
+    
+    console.log(`Option selected:`,  event.target.value);
+
+    this.setState({ filteredState: event.target.value});
+
     // retrieves all the schools - filter by state 
-    API.getAllSchoolsByState(this.state.filterState)
+    API.getAllSchoolsByState(event.target.value)
     .then(
         res => {
-            console.log(res.data);
-            this.setState({
-                schools: res.data
+           
+            console.log("Filtered Schools : ", res.data); 
+             this.setState({
+                schools:  res.data 
             })
         }
     )
     .catch(err => console.log(err));
 
-    console.log("Schools", this.state.schools); 
-  }
-  //Criteria 
-  handleSearch(event) {
-    this.props.searchStates(event.target.value)
   }
 
   render() {
@@ -49,7 +73,7 @@ class FilterBy extends Component {
                   </label>
                 </div>
                 <div className="col-9 col-sm-12">
-                  <select className="form-select" id="states">
+                  <select className="form-select" id="states" onChange={this.handleChange}>
                     <option value="">Choose...</option>
                     {this.state.allStates.map((item) =>
                       <option key={item}>{item}</option>
@@ -68,10 +92,10 @@ class FilterBy extends Component {
                 <div className="col-9 col-sm-12">
                   <select className="form-select" id="states">
                     <option value="">Choose...</option>
-                    {/* {this.state.schools.map((item, j) =>
+                    {this.state.schools.map((item, j) =>
 
-                      <option key={item}>{item}</option>
-                    )} */}
+                      <option key={j} value={item.name} option={item.name} ></option>
+                    )}
                   </select>
                 </div>
               </div>

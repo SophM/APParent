@@ -89,11 +89,17 @@ class PostCard extends Component {
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body post-content text-left">
-                <img className="profile-icon" src={this.props.userPhoto} />
-                <span><b className="author">{this.props.name}</b> posted</span>
-                <span className="category card-text" id="postCardCategory">
+                <div className="wrapper-div">
+                  <img className="profile-icon mx-2" src={this.props.userPhoto} />
+                  <div className="sub-div">
+                    <p><b className="author">{this.props.name}</b> posted</p>
+                    <p className="last-updated">{moment(this.props.updatedAt).fromNow()}</p>
+                  </div>
+                </div>
+                <span className="category my-auto card-text" id="postCardCategory">
                   <b>Category:</b> {this.props.category}
                 </span>
+
                 <div className="mx-auto">
                   <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
                   <p className="card-text mx-auto" id="postCardDetails">
@@ -110,7 +116,6 @@ class PostCard extends Component {
 
 
               </div>
-              <b className="last-updated">{moment(this.props.updatedAt).fromNow()}</b>
               <button
                 className="btn btn-lg mx-auto open-comment"
                 id="comment"

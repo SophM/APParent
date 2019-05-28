@@ -1,3 +1,7 @@
+.post-container {
+    max-height: 100vh;
+}
+
 .post-content{
     font-family: 'Artifika', serif;
     font-size: 1rem
@@ -11,9 +15,10 @@
     color: rgb(7, 83, 206)
 }
 
-#postCardTitle {
+.card-title {
     color: #176d88;
     font-weight: 900;
+    font-size: 2rem;
     font-family: 'Artifika', serif;
 
 }
@@ -27,5 +32,17 @@
 }
 
 .post-photo{
-    max-width: 50%;
+    max-width:50%
+}
+
+.category {
+    float:right
+}
+
+.posted {
+    float:left
+}
+
+.last-updated {
+    float: left
 }

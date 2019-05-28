@@ -1,6 +1,7 @@
 // make component a statefull component
 import React, { Component } from "react";
 import { CommentSubmitButton, CommentDisplay } from "../form";
+import moment from "moment"
 import API from "../../utils/API";
 import "./style.css";
 
@@ -83,29 +84,33 @@ class PostCard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="post-container">
         <div className="card mb-3">
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body post-content text-left">
-                <img class="profile-icon" src={this.props.userPhoto} />
-                <span><b className="author">{this.props.name}</b> posted:</span>
-                <span><h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1></span>
-                <div className="text-center"><img className="post-photo" src={this.props.postPhoto}/></div>
-                <p className="card-text" id="postCardDetails">
-                  <b><u>Details:</u> </b>{this.props.description}
-                </p>
-                <p className="category card-text" id="postCardCategory">
-                  <b><u>Category:</u></b> {this.props.category}
-                </p>
+                <img className="profile-icon" src={this.props.userPhoto} />
+                <span><b className="author">{this.props.name}</b> posted</span>
+                <span className="category card-text" id="postCardCategory">
+                  <b>Category:</b> {this.props.category}
+                </span>
+                <div className="mx-auto">
+                  <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
+                  <p className="card-text mx-auto" id="postCardDetails">
+                    <b><u>Details:</u> </b>{this.props.description}
+                  </p>
+                </div>
+
+                <div className="text-center"><img className="post-photo" src={this.props.postPhoto} /></div>
+
+
                 {/* <p className="card-text" id="postCardTitle" id="postCardPostedBy">
                   <b><u>Posted By:</u></b> {this.props.name}
                 </p> */}
 
-                <p>
-                  <b><u>Last Updated: </u></b>{this.props.updatedAt}
-                </p>
+
               </div>
+              <b className="last-updated">{moment(this.props.updatedAt).fromNow()}</b>
               <button
                 className="btn btn-lg mx-auto open-comment"
                 id="comment"

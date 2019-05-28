@@ -1,6 +1,6 @@
-.post-container {
+/* .post-container {
     max-height: 100vh;
-}
+} */
 
 .post-content{
     font-family: 'Artifika', serif;
@@ -33,16 +33,12 @@
 }
 
 .post-photo{
-    max-width:50%
+    max-width:50%;
 }
 
 .category {
     float:right
 }
-
-/* .posted {
-    float:left
-} */
 
 .last-updated {
     float: none;

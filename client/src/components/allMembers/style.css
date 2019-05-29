@@ -21,3 +21,12 @@
         margin-left: 10%;
     }  
 }
+
+#allmembers-title {
+    font-weight: 700;
+    font-family: 'Artifika', serif;
+}
+
+#each-member {
+    font-family: 'Artifika', serif;
+}

@@ -89,27 +89,16 @@ class PostCard extends Component {
           <div className="row no-gutters">
             <div className="col">
               <div className="card-body post-content text-left">
-                <div className="wrapper-div">
-                  <img className="profile-icon mx-2" src={this.props.userPhoto} />
-                  <div className="sub-div">
-                    <p><b className="author">{this.props.name}</b> posted</p>
-                    <p className="last-updated">{moment(this.props.updatedAt).fromNow()}</p>
-                  </div>
-                </div>
-                <span className="category my-auto card-text" id="postCardCategory">
-                  <b>Category:</b> {this.props.category}
-                </span>
-
-                <div className="mx-auto">
-                  <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
-                  <p className="card-text mx-auto" id="postCardDetails">
-                    <b><u>Details:</u> </b>{this.props.description}
-                  </p>
-                </div>
-
-                <div className="text-center"><img className="post-photo" src={this.props.postPhoto} /></div>
-
-
+                <img className="profile-icon" src={this.props.userPhoto} />
+                <span><b className="author">{this.props.name}</b> posted:</span>
+                <span><h1 className="card-title text-center" id="postCardTitle">{this.props.title}</h1></span>
+                <div className="text-center"><img className="post-photo" src={this.props.postPhoto}/></div>
+                <p className="card-text" id="postCardDetails">
+                  <b><u>Details:</u> </b>{this.props.description}
+                </p>
+                <p className="category card-text" id="postCardCategory">
+                  <b><u>Category:</u></b> {this.props.category}
+                </p>
                 {/* <p className="card-text" id="postCardTitle" id="postCardPostedBy">
                   <b><u>Posted By:</u></b> {this.props.name}
                 </p> */}
@@ -123,7 +112,7 @@ class PostCard extends Component {
                 data-target={"#post" + this.props.postId}
                 onClick={this.handleCommentClick}
               >
-                <i class="far fa-comment-alt"></i> Comment
+                <i className="far fa-comment-alt"></i> Comment
               </button>
             </div>
 

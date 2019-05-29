@@ -10,7 +10,7 @@ function Nav(props) {
         <img id="nav-image" src="./images/logo-only-color.png" alt="logo-pic"/>
       </a>
       <h1 id="name-app" className="mt-4 font-weight-bold text-white ml-auto">APP@rent</h1>
-      <a className="nav-link mt-2 text-white ml-auto mt-4 mr-2" id="logout" href="/" onClick={props.logout}><h4 className="logout">Logout</h4></a>
+      <a className="nav-link mt-2 text-white ml-auto mr-2" id="logout" href="/" onClick={props.logout}><h4 className="logout">Logout</h4></a>
     </nav>
   );
 }

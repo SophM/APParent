@@ -53,11 +53,12 @@ class MyDropzone extends Component {
         {({ getRootProps, getInputProps }) => {
           return (
             <div
+              className="drop-container"
               {...getRootProps()}
             >
               <input {...getInputProps()} />
               {
-                <p>Try dropping some files here, or click to select files to upload.</p>
+                <p class="dropzone-text">Add an image to your post by dragging it here or click here to upload</p>
               }
               <div>
                 {this.state.uploadedFileCloudinaryUrl === '' ? null :

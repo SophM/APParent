@@ -1,6 +1,7 @@
 // make component a statefull component
 import React, { Component } from "react";
 import { CommentSubmitButton, CommentDisplay } from "../form";
+import moment from "moment"
 import API from "../../utils/API";
 import "./style.css";
 
@@ -83,7 +84,7 @@ class PostCard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="post-container">
         <div className="card mb-3">
           <div className="row no-gutters">
             <div className="col">
@@ -102,9 +103,7 @@ class PostCard extends Component {
                   <b><u>Posted By:</u></b> {this.props.name}
                 </p> */}
 
-                <p>
-                  <b><u>Last Updated: </u></b>{this.props.updatedAt}
-                </p>
+
               </div>
               <button
                 className="btn btn-lg mx-auto open-comment"

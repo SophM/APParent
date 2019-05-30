@@ -50,8 +50,8 @@ module.exports = {
             attributes: ["id", "userName", "email", "city", "state", "photoLink"],
             where: {
                 // excluded the logged-in parent
-                 state: req.params.state 
-                //  id: {[Op.not]:  req.session.passport.user.id}
+                 state: req.params.state ,
+                 [Op.not]: [{ id: req.session.passport.user.id }]
             }
         }).then(function (result) {
             console.log("3 - Filtering Members based on state", result);

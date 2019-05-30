@@ -1,6 +1,7 @@
 // import all the dependencies
 import React, { Component } from "react";
 import { FormAction, FormLabel, FormButton, FormMessage, Dropdown, OptionForDropdown } from "../form";
+import AddSchool from "../add-school";
 import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
@@ -88,7 +89,9 @@ class SignUp extends Component {
         passwordTooShort: false,
         usernameAlreadyExists: false,
         emailAlreadyExists: false,
-        addKid: false
+        addKid: false,
+        addSchool: false,
+        messageSchoolAdded: false
     };
 
     componentDidMount() {
@@ -106,12 +109,12 @@ class SignUp extends Component {
             )
             .catch(err => console.log(err));
 
-        // get the info of the parents already in the database - to check username
+        // get the info of the parents already in the database - to check username and email
         API.searchAllParentsInDB()
             .then(
                 res => {
                     console.log(res.data);
-                    // push into an array all the usernames already in the database
+                    // push into an array all the usernames and emails already in the database
                     for (var i = 0; i < res.data.length; i++) {
                         this.state.allUsernames.push(res.data[i].userName);
                         this.state.allEmails.push(res.data[i].email);
@@ -120,6 +123,25 @@ class SignUp extends Component {
                     console.log(this.state.allEmails);
                 }
             )
+    }
+
+    // function to update the school list once/if a parent has created one
+    updateSchoolList = () => {
+        API.getAllSchools()
+            .then(
+                res => {
+                    console.log(res.data);
+                    let copy = [...this.state.kidInfo];
+                    copy[2].options = res.data;
+                    this.setState({
+                        kidInfo: copy,
+                        addSchool: false,
+                        messageSchoolAdded: true
+                    })
+
+                }
+            )
+            .catch(err => console.log(err));
     }
 
     handleInputChangeParent = event => {
@@ -216,7 +238,8 @@ class SignUp extends Component {
             this.setState({
                 kidInfo: copyKid,
                 numberOfKid: this.state.numberOfKid + 1,
-                addKid: true
+                addKid: true,
+                messageSchoolAdded: false
             });
         // otherwise will get error message that the parent has to fill up the fields
         } else {
@@ -267,6 +290,16 @@ class SignUp extends Component {
                 hasError: true
             })
         }
+    }
+
+    handleAddSchoolOption = event => {
+        event.preventDefault();
+
+        this.setState({
+            addSchool: true,
+            messageSchoolAdded: false
+        })
+
     }
 
     handleCloseButtonClick = event => {
@@ -464,7 +497,21 @@ class SignUp extends Component {
                                     })}       
                                 </div>
                             )}
+                            {this.state.messageSchoolAdded ? (
+                                <p className="font-weight-bold text-success">Your school has been added to the dropdown menu!</p>
+                            ) : (
+                                ""
+                            )}
+                            <button className="mb-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{border: "none", background: "none", color: "orange"}}>Didn't find your school? Click here to add it!</button>
+                            {this.state.addSchool ? (
+                                <AddSchool 
+                                    toUpdateSchoolList={this.updateSchoolList}
+                                />
+                            ) : (
+                                ""
+                            )}
                             </FormAction>
+                            <hr style={{border: "1px solid #176d88"}}></hr>
                             <FormButton
                                 nameButton="I have another kid!"
                                 handleButtonClick={this.handleAddKidButtonClick}

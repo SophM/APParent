@@ -18,9 +18,7 @@ class Dashboard extends Component {
     results: [],
     members: [],
     pageWanted: "dashboard",
-    loggedInUser: [], 
-    //Filter criteria 
-    filteredState: "California"
+    loggedInUser: []
   };
 
   componentDidMount() {
@@ -89,20 +87,6 @@ class Dashboard extends Component {
         console.log("Logged Out")
       }
     )
-  }
-
-  //Filter Date for All Members 
-  handleSearchCriteria = () =>{
-    console.log("On changee of Filter value ", this.state.filteredState);
-    API.searchAllMembersForAState(this.state.filteredState)
-      .then(res =>
-        this.setState({
-          members: res.data, 
-          pageWanted: "allMembers",
-          filteredState: this.props.filteredState
-        })
-      )
-      .catch(err => console.log(err));
   }
 
   render() {
@@ -194,8 +178,8 @@ class Dashboard extends Component {
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             {/* Displays all the Members on the website expect for the logged in USer  */}
             <AllMembers>
-            <FilterBy handleClick={this.handleSearchCriteria} /> 
-
+            <FilterBy  /> 
+            {/* handleClick={this.handleSearchCriteria} */}
             <hr /> 
               {this.state.members.length ? (
                 this.state.members.map((member, i) => {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
 // import Select from 'react-select';
-// import statesList from "../../statesList.json"; 
 
 const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 
@@ -10,17 +9,16 @@ class FilterBy extends Component {
   state = {
     allStates: statesList,
     schools: [],
+    // Seeting value by default 
     filteredState: "California"
   }
 
   componentDidMount() {
 
-    // retrieves all the schools - filter by state 
-    API.getAllSchoolsByState(this.state.filteredState)
+    // retrieves all the schools
+    API.getAllSchools()
       .then(
         res => {
-
-          console.log("Filtered Schools : ", res.data);
 
           this.setState({
             schools: res.data
@@ -34,22 +32,22 @@ class FilterBy extends Component {
 
   handleChange = event => {
 
-    console.log(`Option selected:`, event.target.value);
+    // console.log(`Option selected:`, event.target.value);
 
     this.setState({ filteredState: event.target.value });
 
-    // retrieves all the schools - filter by state 
-    API.getAllSchoolsByState(event.target.value)
-      .then(
-        res => {
+    // // retrieves all the schools - filter by state 
+    // API.getAllSchoolsByState(event.target.value)
+    //   .then(
+    //     res => {
 
-          console.log("Filtered Schools : ", res.data);
-          this.setState({
-            schools: res.data
-          })
-        }
-      )
-      .catch(err => console.log(err));
+    //       console.log("Filtered Schools : ", res.data);
+    //       this.setState({
+    //         schools: res.data
+    //       })
+    //     }
+    //   )
+    //   .catch(err => console.log(err));
 
     // retrieves all the members - filter by state 
     API.searchAllMembersForAState(event.target.value)

@@ -53,6 +53,8 @@ class userCard extends Component {
                         {this.state.kids.length ? (
                             this.state.kids.map((kid, i) => {
                                 return (
+                                    // console.log(this.state.kids.filter(function(v,i) { return this.state.kids.indexOf(v) == i; }))
+
                                     <div className="grades" key={i}>
                                         {kid.gradeLevel} </div>
                                 );

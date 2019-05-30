@@ -18,8 +18,9 @@ class Dashboard extends Component {
     results: [],
     members: [],
     pageWanted: "dashboard",
-    loggedInUser: []
-
+    loggedInUser: [], 
+    //Filter criteria 
+    filteredState: []
   };
 
   componentDidMount() {
@@ -90,8 +91,21 @@ class Dashboard extends Component {
     )
   }
 
+  //Filter Date for All Members 
+  handleSearchCriteria =() =>{
+    console.log("state", this.state.filteredState);
+    API.searchAllMembersForAState(this.state.filteredState)
+      .then(res =>
+        this.setState({
+          members: res.data, 
+          pageWanted: "allMembers"
+        })
+      )
+      .catch(err => console.log(err));
+  }
 
   render() {
+    console.log("Filter value", this.state.filteredState);
     {/* display the page with the activity component */ }
     if (this.state.pageWanted === "dashboard") {
       return (
@@ -181,7 +195,7 @@ class Dashboard extends Component {
           
 
             <AllMembers>
-            <FilterBy  /> 
+            <FilterBy handleClick={this.handleSearchCriteria} /> 
             {/* searchStates={this.searchStates.bind(this)} */}
             <hr /> 
               {this.state.members.length ? (

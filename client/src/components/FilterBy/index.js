@@ -54,6 +54,18 @@ class FilterBy extends Component {
         }
     )
     .catch(err => console.log(err));
+    
+    // retrieves all the members - filter by state 
+  
+   API.searchAllMembersForAState(event.target.value)
+   .then(res => {
+     this.setState({
+       members: res.data
+     })
+     console.log("Filtered Members", res.data);
+    }
+   )
+   .catch(err => console.log(err));
 
   }
 
@@ -100,7 +112,7 @@ class FilterBy extends Component {
               </div>
             </div>
             <div>
-              <button className="btn-info"> Search</button>
+              <button className="btn-info" onSubmit={this.props.handleChange}> Search</button>
             </div>
           </div>
         </form>

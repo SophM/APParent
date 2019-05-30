@@ -87,7 +87,8 @@ class WritePost extends Component {
                 helper={this.handleImageChange}
                 />
                 <FormButton
-                    moreClass="post-button text-center"
+                    moreClass="post-button my-3 mx-auto"
+                    icon="fas fa-edit"
                     nameButton="Post"
                     handleButtonClick={this.handleButtonClick}
                 />

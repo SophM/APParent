@@ -11,7 +11,7 @@ class userCard extends Component {
     }
     componentDidMount() {
         // retrieves all the kids for the parent... 
-        console.log("Parent ID: ", this.props.parentId);
+        // console.log("Parent ID: ", this.props.parentId);
         API.findAllKids(this.props.parentId)
             .then(
                 res => {

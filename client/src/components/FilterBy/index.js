@@ -10,62 +10,73 @@ class FilterBy extends Component {
   state = {
     allStates: statesList,  
     schools: [], 
-    filteredState: "California"
+    filteredState: "Hawaii",
+    allusers: []
   }
 
   componentDidMount() {
-    console.log("School State", this.state.filteredState); 
+    // console.log("School State", this.state.filteredState); 
     
     // retrieves all the schools - filter by state 
     API.getAllSchoolsByState(this.state.filteredState)
     .then(
         res => {
-            // this.setState({
-            //     schools:  res.data 
-            // })
+
             console.log("Filtered Schools : ", res.data); 
-            let copy = [...this.state.schools];
-            copy[2].options = res.data;
+           
             this.setState({
-              schools: copy
+              schools: res.data
             })
         }
     )
     .catch(err => console.log(err));
+
+     // retrieves all the members - filter by state 
+     API.searchAllMembersForAState(this.state.filteredState)
+     .then(res => {
+
+       this.setState({
+         allusers: res.data
+       })
+       console.log("allu ses", this.state.allusers);
+     }
+     )
+     .catch(err => console.log(err));
+
     
   }
   //On selection of the State re-populateed the school dropdown with the updated value 
 
   handleChange = event => {
     
-    console.log(`Option selected:`,  event.target.value);
+    console.log(`Option selected:`, event.target.value);
 
-    this.setState({ filteredState: event.target.value});
+    this.setState({ filteredState: event.target.value });
 
     // retrieves all the schools - filter by state 
     API.getAllSchoolsByState(event.target.value)
-    .then(
+      .then(
         res => {
-           
-            console.log("Filtered Schools : ", res.data); 
-             this.setState({
-                schools:  res.data 
-            })
+
+          console.log("Filtered Schools : ", res.data);
+          this.setState({
+            schools: res.data
+          })
         }
-    )
-    .catch(err => console.log(err));
-    
+      )
+      .catch(err => console.log(err));
+
     // retrieves all the members - filter by state 
-  
-   API.searchAllMembersForAState(event.target.value)
-   .then(res => {
-     this.setState({
-       members: res.data
-     })
-     console.log("Filtered Members", res.data);
-    }
-   )
-   .catch(err => console.log(err));
+    API.searchAllMembersForAState(event.target.value)
+      .then(res => {
+
+        console.log("Filtered Members", res.data);
+        this.setState({
+          members: res.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
 
   }
 
@@ -104,8 +115,8 @@ class FilterBy extends Component {
                   <select className="form-select" id="schools">
                     <option value="">Choose...</option>
                     {this.state.schools.map((item, j) =>
-                      // console.log("School name ", item.name)
-                      <option key={j} value={item.name} options={item.name} ></option>
+                      // console.log("School name ", item)
+                      <option key={item.id}>{item.name}</option>
                     )}
                   </select>
                 </div>

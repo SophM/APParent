@@ -203,7 +203,7 @@ class MyProfile extends Component {
                     {this.state.disabled ?
                     <div className="row">
                          {/* Image of the loggeed in user */}
-                        <img className="rounded-circle view-pic" src={this.props.photoLink} />
+                        <img className="rounded-circle view-pic" src={this.props.photoLink} alt={this.props.userName} />
                         <FormTitle
                             title="View My Profile"
                         />

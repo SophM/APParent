@@ -90,7 +90,7 @@ class PostCard extends Component {
             <div className="col">
               <div className="card-body post-content text-left">
                 <div className="wrapper-div">
-                  <img className="profile-icon mx-2" src={this.props.userPhoto} />
+                  <img className="rounded-circle profile-icon mx-2" src={this.props.userPhoto} />
                   <div className="sub-div">
                     <p><b className="author">{this.props.name}</b> posted</p>
                     <p className="last-updated">{moment(this.props.updatedAt).fromNow()}</p>

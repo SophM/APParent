@@ -9,6 +9,7 @@
 
 .profile-icon {
     width: 4rem;
+    height: 4rem;
 }
 
 .author{
@@ -33,7 +34,8 @@
 }
 
 .post-photo{
-    max-width:50%;
+    /* width:25vw; */
+    max-height: 50vh;
 }
 
 .category {

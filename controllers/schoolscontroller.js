@@ -22,8 +22,8 @@ module.exports = {
         // }
     },
     create: function (req, res) {
-        if (req.isAuthenticated()) {
-            db.school.create({
+        // if (req.isAuthenticated()) {
+            db.schools.create({
                 name: req.body.name,
                 streetAddress: req.body.streetAddress,
                 city: req.body.city,
@@ -32,6 +32,6 @@ module.exports = {
             }).then(function (result) {
                 res.json(result)
             })
-        }
+        // }
     }
 }

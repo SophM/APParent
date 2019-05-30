@@ -9,9 +9,8 @@ router.route("/")
 router.route("/state/:state")
 .get(schoolsController.findAllByState);
 
-
 // create a new school 
-router.route("/")
+router.route("/new")
 	.post(schoolsController.create);
 
 module.exports = router;

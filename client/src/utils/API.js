@@ -36,9 +36,13 @@ export default {
     getAllSchools: function() {
         return axios.get("/api/schools");
     },
-    // find all the schools
+    // find all the schools by state
     getAllSchoolsByState: function(data) {
         return axios.get("/api/schools/state/"+data);
+    },
+    // enter a new school in the database
+    createSchool: function(data) {
+        return axios.post("api/schools/new", data);
     },
 
     //update logged in profile 
@@ -80,7 +84,7 @@ export default {
         return axios.post("api/parents/signup", data);
     },
 
-    // get the info of the parents already in the database - to check username at sign-up
+    // get the info of the parents already in the database - to check username and email at sign-up
     searchAllParentsInDB: function() {
         return axios.get("api/parents/all");
     }

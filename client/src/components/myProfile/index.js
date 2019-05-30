@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { FormContainer, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
 import KidProfile from "../kidProfile";
+import "./style.css";
 
 const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
@@ -203,7 +204,7 @@ class MyProfile extends Component {
                     {this.state.disabled ?
                     <div className="row">
                          {/* Image of the loggeed in user */}
-                        <img className="rounded-circle view-pic" src={this.props.photoLink} alt={this.props.userName} />
+                        <img className="rounded-circle profile-view mx-4" src={this.props.photoLink} alt={this.props.userName} />
                         <FormTitle
                             title="View My Profile"
                         />
@@ -262,12 +263,14 @@ class MyProfile extends Component {
                         <FormButton
                             nameButton="Edit Profile"
                             handleButtonClick={this.handleEditButtonClick}
+                            id="btn-edit"
                         />
                         :
                         <div>
                             <FormButton
                                 nameButton="Save Profile"
                                 handleButtonClick={this.handleSaveButtonClick}
+                                id="btn-save"
                             />
                         </div>
                     }

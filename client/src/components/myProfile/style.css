@@ -1,9 +1,9 @@
 /* This component is for Edit or View my Profile  */
-.btn-update {
-    color: greenyellow; 
+#btn-edit {
+    color: orange; 
 }
 
-.view-pic {
-    
-    width: 12%;
+.profile-view {
+    width:100px;
+    height: 100px;
 }

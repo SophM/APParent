@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { FormAction, FormTitle, FormLabel, FormButton, Dropdown, OptionForDropdown } from "../form";
 import API from "../../utils/API";
-import gradeLevel from "../../gradeLevel.json"
+import gradeLevel from "../../gradeLevel.json"; 
+import "./style.css";
 
 class KidProfile extends Component {
     state = {
@@ -76,9 +77,15 @@ class KidProfile extends Component {
             .catch(err => console.log(err));
     }
 
+    handleReturnBack = event => {
+        event.preventDefault();
+        console.log("redirect page");
+       
+    }
+
     componentDidMount() {
-        console.log("Grade", this.props.grade); 
-        console.log("Kid ID", this.props.kidId); 
+        // console.log("Grade", this.props.grade); 
+        // console.log("Kid ID", this.props.kidId); 
         API.getAllSchools()
             .then(
                 res => {
@@ -144,19 +151,25 @@ class KidProfile extends Component {
                         <FormButton
                             nameButton="Edit Kid Info"
                             handleButtonClick={this.handleEditButtonClick}
+                            id="btn-edit"
                         />
                     ) :
                         (
                             <div>
                                 <FormButton
                                     nameButton="Update Child"
-                                    className="btn-success"
+                                    id="btn-update"
                                     handleButtonClick={this.handleUpdateButtonClick}
                                 />
                                 <FormButton
                                     nameButton="Remove Child"
-                                    className="btn-warning"
+                                    id="btn-warning"
                                     handleButtonClick={this.handleDeleteInfo}
+                                />
+                                 <FormButton
+                                    nameButton="Cancel"
+                                    id="btn-cancel"
+                                    handleButtonClick={this.handleReturnBack}
                                 />
                             </div>
                         )}

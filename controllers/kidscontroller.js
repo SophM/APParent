@@ -39,7 +39,7 @@ module.exports = {
     findAllKidsForAParent: function (req, res) {
         console.log("Logged Parent id ", req.session.passport.user.id); 
         db.kids.findAll({
-            attributes: ['id', 'gradeLevel', 'schoolId', 'parentId'],
+            attributes: ['id', 'gradeLevel', 'schoolId', 'parentId', 'name'],
             where: {
                 parentId: req.session.passport.user.id
             },

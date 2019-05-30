@@ -76,7 +76,7 @@ class KidProfile extends Component {
             })
             .catch(err => console.log(err));
     }
-
+    // Reloading the page to redirect to dashboard 
     handleReturnBack = event => {
         event.preventDefault();
         console.log("redirect page to dashboard");
@@ -169,7 +169,7 @@ class KidProfile extends Component {
                                 />
                                  <FormButton
                                     nameButton="Cancel"
-                                    moreClass="btn-secondary mr-2"
+                                    moreClass="btn-secondary mr-2 btn-sm"
                                     handleButtonClick={this.handleReturnBack}
                                 />
                             </div>

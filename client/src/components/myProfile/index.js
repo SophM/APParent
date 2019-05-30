@@ -98,6 +98,14 @@ class MyProfile extends Component {
             })
             .catch(err => console.log(err));
     }
+
+    // Reloading the page to redirect to dashboard 
+    handleReturnBack = event => {
+        event.preventDefault();
+        console.log("redirect page to dashboard");
+        window.location.reload();
+       
+    }
     //***************Parent Info */
     //-------------------------------------
 
@@ -270,7 +278,12 @@ class MyProfile extends Component {
                             <FormButton
                                 nameButton=" Save Profile"
                                 handleButtonClick={this.handleSaveButtonClick}
-                                moreClass="btn-success far fa-save"
+                                moreClass="btn-success far fa-save mr-2"
+                            />
+                            <FormButton
+                                nameButton="Cancel"
+                                moreClass="btn-secondary btn-sm mr-2"
+                                handleButtonClick={this.handleReturnBack}
                             />
                         </div>
                     }

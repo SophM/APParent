@@ -12,7 +12,7 @@ export default {
     },
     //search all members for a State
     searchAllMembersForAState: function(data){
-        return axios.get("/api/parents/state" + data.state);
+        return axios.get("/api/parents/state/" + data);
     },
         //See Logged in user data 
     findOne: function() {

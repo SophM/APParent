@@ -3,6 +3,7 @@ import React,{Component} from "react";
 import { FormContainer, FormTitle, FormLabel, InputText, Dropdown, OptionForDropdown, FormButton} from "../form";
 import API from "../../utils/API";
 import Dropzone from "../drop-zone"
+import "./style.css"
 //Declaring all categories for the Post 
 const categories = ["Event", "Advice", "Free", "On sale", "Question"];
 
@@ -86,6 +87,7 @@ class WritePost extends Component {
                 helper={this.handleImageChange}
                 />
                 <FormButton
+                    moreClass="post-button text-center"
                     nameButton="Post"
                     handleButtonClick={this.handleButtonClick}
                 />

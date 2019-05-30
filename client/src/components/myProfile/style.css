@@ -1,6 +1,9 @@
 /* This component is for Edit or View my Profile  */
-#btn-edit {
-    color: orange; 
+.btn-edit{
+    background: #5dc3d0;
+    color: whitesmoke; 
+    width: 25%;
+    font-weight: bold;
 }
 
 .profile-view {

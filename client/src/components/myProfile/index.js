@@ -260,17 +260,17 @@ class MyProfile extends Component {
 
                     {/* Conditional hide & show the buttons */}
                     {this.state.disabled ?
-                        <FormButton
-                            nameButton="Edit Profile"
+                        <center><FormButton
+                            nameButton=" Edit Profile"
                             handleButtonClick={this.handleEditButtonClick}
-                            id="btn-edit"
-                        />
+                            moreClass="btn-edit far fa-edit"
+                        /></center>
                         :
                         <div>
                             <FormButton
-                                nameButton="Save Profile"
+                                nameButton=" Save Profile"
                                 handleButtonClick={this.handleSaveButtonClick}
-                                id="btn-save"
+                                moreClass="btn-success far fa-save"
                             />
                         </div>
                     }

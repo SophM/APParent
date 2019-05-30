@@ -79,7 +79,8 @@ class KidProfile extends Component {
 
     handleReturnBack = event => {
         event.preventDefault();
-        console.log("redirect page");
+        console.log("redirect page to dashboard");
+        window.location.reload();
        
     }
 
@@ -149,26 +150,26 @@ class KidProfile extends Component {
 
                     {this.state.disabled ? (
                         <FormButton
-                            nameButton="Edit Kid Info"
+                            nameButton=" Edit Kid Info"
                             handleButtonClick={this.handleEditButtonClick}
-                            id="btn-edit"
+                            moreClass="btn-edit far fa-edit"
                         />
                     ) :
                         (
                             <div>
                                 <FormButton
-                                    nameButton="Update Child"
-                                    id="btn-update"
+                                    nameButton=" Update Child"
+                                    moreClass="btn-success far fa-save mr-2"
                                     handleButtonClick={this.handleUpdateButtonClick}
                                 />
                                 <FormButton
                                     nameButton="Remove Child"
-                                    id="btn-warning"
+                                    moreClass="btn-warning fas fa-eraser mr-2"
                                     handleButtonClick={this.handleDeleteInfo}
                                 />
                                  <FormButton
                                     nameButton="Cancel"
-                                    id="btn-cancel"
+                                    moreClass="btn-secondary mr-2"
                                     handleButtonClick={this.handleReturnBack}
                                 />
                             </div>

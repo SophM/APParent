@@ -37,14 +37,14 @@ class userCard extends Component {
                         <i className="fa fa-child big-child" ></i>: </h4>
                     {/* <h5 className="card-text"><b>No of Kids:</b> {this.state.kids.length}</h5> */}
                     {/* Loops the grades all of kids for a parent */}
-                    <h5 className="card-text"><b>Grade Range:</b>
+                    <h5 className="card-text"><b>Grade(s):</b>
                         {this.state.kids.length ? (
                             this.state.kids.map((kid, i) => {
                                 return (
                                     // console.log(this.state.kids.filter(function(v,i) { return this.state.kids.indexOf(v) == i; }))
 
                                     <div className="grades" key={i}>
-                                        {kid.gradeLevel} </div>
+                                        {kid.gradeLevel}  </div>
                                 );
                             })) : (<div>Infant - Preschooler</div>)
 

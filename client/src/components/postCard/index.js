@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { CommentSubmitButton, CommentDisplay } from "../form";
 import moment from "moment"
 import API from "../../utils/API";
+import Linkify from 'react-linkify';
 import "./style.css";
 
 // make a api call to get all comment posts
@@ -11,7 +12,7 @@ class PostCard extends Component {
   // make a state for the values in this component
   state = {
     nameButton: "Comment",
-    description: "",
+    description: this.props.description,
     timeStamp: "",
     comments: [],
   };
@@ -99,12 +100,14 @@ class PostCard extends Component {
                 <span className="category my-auto card-text" id="postCardCategory">
                   <b>Category:</b> {this.props.category}
                 </span>
-                <hr/>
+                <hr />
                 <div className="mx-auto">
                   <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
-                  <p className="card-text mx-auto" id="postCardDetails">
-                    <b><u>Details:</u> </b>{this.props.description}
-                  </p>
+                  <Linkify>
+                    <p className="card-text mx-auto" id="postCardDetails">
+                      <b><u>Details:</u> </b>{this.state.description}
+                    </p>
+                  </Linkify>
                 </div>
 
                 <div className="text-center"><img className="post-photo" src={this.props.postPhoto} /></div>

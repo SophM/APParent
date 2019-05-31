@@ -304,7 +304,7 @@ class MyProfile extends Component {
                             )})}
                             </div>) :
 
-                            (<h3>No Family Member(s) found
+                            (<h3 className="no-kid-message">No family member found!
                            {/* <FormButton 
                                 nameButton ="Add New Kid Info"
                                 handleButtonClick={this.handleAddNewMember}

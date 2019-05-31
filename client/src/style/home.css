@@ -25,7 +25,7 @@ body:after {
 #welcome-text {
 	font-family: 'Artifika', serif;
 	font-size: 50px;
-	font-weight: 900
+	font-weight: 900; 
 }
 
 #welcome-subtext {

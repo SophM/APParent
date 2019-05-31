@@ -59,7 +59,31 @@ module.exports = {
         })
             .catch(err => res.status(422).json(err));
     },
-    
+    // get all parents - except the parent logged in - filter by School Name 
+    findAllParentsForASchool: function (req, res) {
+        db.parents.findAll(
+            {
+                order: [
+                    ["updatedAt", "ASC"]
+                ],
+                attributes: ["id", "userName", "email", "city", "state", "photoLink"],
+                //includes the cross-reference table to join the schools with parents 
+                include: [
+                    { model: db.parentSchools, as: "parentSchools" },
+                    { 
+                        model: db.schools, as: "schools" , 
+                        where:{
+                            [Op.eq]: [{ name: req.params.school }]
+                        }
+                    }
+                ]
+            }
+        ).then(function (results) {
+            res.json(results);
+            console.log("parents for a school ", results);
+        })
+            .catch(err => res.status(422).json(err));
+    },
     // get all the parents already in the database - to check username at sign-up
     findAllParentsInDB: function(req, res) {
         db.parents.findAll({

@@ -281,7 +281,7 @@ class MyProfile extends Component {
                                 moreClass="btn-success far fa-save mr-2"
                             />
                             <FormButton
-                                nameButton="Cancel"
+                                nameButton=" Cancel "
                                 moreClass="btn-secondary btn-sm mr-2"
                                 handleButtonClick={this.handleReturnBack}
                             />

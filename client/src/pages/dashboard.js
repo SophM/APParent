@@ -2,15 +2,12 @@
 import React, { Component } from "react";
 import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
-// ----------- start Sophie
-// remove the PostCard component
-// ----------- end Sophie
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
-import UserCard from "../components/userCard";
+// import UserCard from "../components/userCard";
 import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
-import FilterBy from "../components/FilterBy";
+// import FilterBy from "../components/FilterBy";
 import API from "../utils/API";
 // import { stat } from "fs";
 
@@ -20,7 +17,7 @@ class Dashboard extends Component {
     // ----------- start Sophie
     // remove the results variable
     // ----------- end Sophie
-    members: [],
+    // members: [],
     pageWanted: "dashboard",
     loggedInUser: []
   };
@@ -31,14 +28,9 @@ class Dashboard extends Component {
     // remove the call to get all the posts
     // ----------- end Sophie
 
-    //Retrives all the Members Data - By default displays all 
-    API.searchAllMembers()
-      .then(res =>
-        this.setState({
-          members: res.data
-        })
-      )
-      .catch(err => console.log(err));
+    // ----------- start Namita
+    // remove the call to get all members
+    // ----------- end Namita
 
     //Retrives Logged in USer Info 
     API.findOne()
@@ -148,28 +140,7 @@ class Dashboard extends Component {
 
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             {/* Displays all the Members on the website expect for the logged in USer  */}
-            <AllMembers>
-            <FilterBy  /> 
-            {/* handleClick={this.handleSearchCriteria} */}
-            <hr /> 
-              {this.state.members.length ? (
-                this.state.members.map((member, i) => {
-                  return (
-                    <UserCard
-                      key={member.id}
-                      email={member.email}
-                      userName={member.userName}
-                      city={member.city}
-                      state={member.state}
-                      photoLink={member.photoLink}
-                      parentId={member.id}
-                    />
-                  );
-                })
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
-            </AllMembers>
+            <AllMembers />
 
           </div>
         </div>

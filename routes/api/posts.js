@@ -32,7 +32,7 @@ router.route("/category/:category")
     .get(postscontroller.findAllFilteredPosts);
 
 // get all the posts in an ascending order
-router.route("/ascending")
+router.route("/all/ascending")
     .get(postscontroller.findAllPostsAscending);
 //------------- end Sophie 
 

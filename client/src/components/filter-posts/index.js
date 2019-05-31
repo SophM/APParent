@@ -23,7 +23,7 @@ class FilterPosts extends Component {
     }
 
     handleQuestionFilter = () => {
-        this.props.toGetAllFilteredPosts("Questions");
+        this.props.toGetAllFilteredPosts("Question");
     }
 
     handleRecentFirstFilter = () => {

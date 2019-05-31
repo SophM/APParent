@@ -10,3 +10,11 @@
     width:100px;
     height: 100px;
 }
+
+.card-title {
+    color: #176d88;
+    font-weight: 900;
+    font-size: 2rem;
+    font-family: 'Artifika', serif;
+
+}

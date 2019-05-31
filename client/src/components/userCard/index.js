@@ -59,7 +59,7 @@ class userCard extends Component {
                             })) : (<div>Infant - Preschooler</div>)
 
                         }</h5>
-                    <button className="btn btn-success btn-lg mt-1">Chat</button>
+                    <button className="btn btn-success btn-lg mt-1 far fa-comments"> Chat</button>
                 </div>
             </div>
 

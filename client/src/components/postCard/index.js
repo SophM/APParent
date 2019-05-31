@@ -12,7 +12,7 @@ class PostCard extends Component {
   // make a state for the values in this component
   state = {
     nameButton: "Comment",
-    description: this.props.description,
+    description: "",
     timeStamp: "",
     comments: [],
   };
@@ -105,7 +105,7 @@ class PostCard extends Component {
                   <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
                   <Linkify>
                     <p className="card-text mx-auto" id="postCardDetails">
-                      <b><u>Details:</u> </b>{this.state.description}
+                      <b><u>Details:</u> </b>{this.props.description}
                     </p>
                   </Linkify>
                 </div>

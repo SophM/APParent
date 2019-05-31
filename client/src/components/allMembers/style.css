@@ -31,6 +31,7 @@
     font-family: 'Artifika', serif;
 }
 
-#each-member {
+#each-member, .no-result-message {
     font-family: 'Artifika', serif;
 }
+

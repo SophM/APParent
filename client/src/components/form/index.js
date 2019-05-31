@@ -20,7 +20,7 @@ export function FormTitle(props) {
 
 export function FormAction(props) {
     return (
-        <form action={props.route} method="POST">
+        <form onSubmit={props.submit}>
             {props.children}
         </form>
     )

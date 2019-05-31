@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
-import PostCard from "../components/postCard";
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 // import UserCard from "../components/userCard";
@@ -15,32 +14,23 @@ import API from "../utils/API";
 class Dashboard extends Component {
   //Setting all default values 
   state = {
-    results: [],
-    members: [],
+    // ----------- start Sophie
+    // remove the results variable
+    // ----------- end Sophie
+    // members: [],
     pageWanted: "dashboard",
     loggedInUser: []
   };
 
   componentDidMount() {
 
-    //retrieves All the post 
-    API.searchAll()
-      .then(
-        res =>
-          this.setState({
-            results: res.data
-          })
-      )
-      .catch(err => console.log(err));
+    // ----------- start Sophie
+    // remove the call to get all the posts
+    // ----------- end Sophie
 
-    //Retrives all the Members Data - By default displays all 
-    API.searchAllMembers()
-      .then(res =>
-        this.setState({
-          members: res.data
-        })
-      )
-      .catch(err => console.log(err));
+    // ----------- start Namita
+    // remove the call to get all members
+    // ----------- end Namita
 
     //Retrives Logged in USer Info 
     API.findOne()
@@ -67,18 +57,11 @@ class Dashboard extends Component {
   //Write a post 
 
   handleCreatePost = () => {
-
-    //Pulling all the posts again redirect to dashboard 
-    API.searchAll()
-      .then(
-        res =>
-          this.setState({
-            results: res.data,
-            pageWanted: "dashboard"
-          })
-      )
-      .catch(err => console.log(err));
-
+    // ----------- start Sophie
+      this.setState({
+        pageWanted: "dashboard"
+      })
+    // ----------- end Sophie
   }
 
   handleLogOut = () => {
@@ -105,29 +88,9 @@ class Dashboard extends Component {
           <div id="page-wrap">
 
             <h1 id="welcome-text" className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
-
-            <Activity>
-              {this.state.results.length ? (
-                this.state.results.map((post) => {
-                  return (
-                    <PostCard
-                      key={post.id}
-                      category={post.category}
-                      title={post.title}
-                      name={post.parent.userName}
-                      userPhoto={post.parent.photoLink}
-                      postPhoto={post.imageUrl}
-                      description={post.description}
-                      updatedAt={post.updatedAt}
-                      postId={post.id}
-                      members={this.state.members}
-                    />
-                  );
-                })
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
-            </Activity>
+            {/* ------- start Sophie */}
+            <Activity />
+            {/* ------- end Sophie */}
           </div>
         </div>
       );
@@ -177,11 +140,7 @@ class Dashboard extends Component {
 
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             {/* Displays all the Members on the website expect for the logged in USer  */}
-            <AllMembers>
-            {/* handleClick={this.handleSearchCriteria} */}
-            <hr /> 
-           
-            </AllMembers>
+            <AllMembers />
 
           </div>
         </div>

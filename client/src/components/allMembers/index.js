@@ -16,14 +16,7 @@ class AllMembers extends Component {
 
   componentDidMount() {
 
-    //Retrives all the Members Data - By default displays all 
-    API.searchAllMembers()
-      .then(res =>
-        this.setState({
-          members: res.data
-        })
-      )
-      .catch(err => console.log(err));
+    this.searchAllMembers(); 
   }
 
   // function to filter the members based on the state selected 
@@ -51,6 +44,16 @@ class AllMembers extends Component {
     console.log("filterMemberListBySchool", filteredSchool);
 
   }
+  searchAllMembers = () => {
+     //Retrives all the Members Data - By default displays all 
+     API.searchAllMembers()
+     .then(res =>
+       this.setState({
+         members: res.data
+       })
+     )
+     .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -58,8 +61,8 @@ class AllMembers extends Component {
         <div className="card">
           <h5 id="allmembers-title" className="card-header">All Members</h5>
           <FilterBy 
-            MemberListByState={this.filterMemberListByState}
-            MemberListBySchool={this.filterMemberListBySchool}/>
+            handleStateChange={this.filterMemberListByState}
+            handleSchoolChange={this.filterMemberListBySchool}/>
           <div className="card-body">
             <div id="each-member" className="card-columns">
               {/* {children} */}

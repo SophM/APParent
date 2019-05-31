@@ -23,11 +23,16 @@ export default {
         return axios.get("/api/parents");
     },
     //search all members for a State
-    searchAllMembersForAState: function(data){
+    searchAllMembersForAState: function (data) {
         return axios.get("/api/parents/state/" + data);
     },
-        //See Logged in user data 
-    findOne: function() {
+    //search all members for a School
+    searchAllMembersForASchool: function (data) {
+        return axios.get("/api/parents/school/" + data);
+    },
+    
+    //See Logged in user data 
+    findOne: function () {
         return axios.get("/api/parents/:id");
     },
     //Create a post 

@@ -29,7 +29,7 @@ class AllMembers extends Component {
     return (
       <div className="container mt-4 mb-4">
         <div className="card">
-          <h5 id="allmembers-title" className="card-header ">All Members</h5>
+          <h5 id="allmembers-title" className="card-header">All Members</h5>
           <FilterBy />
           <div className="card-body">
             <div id="each-member" className="card-columns">

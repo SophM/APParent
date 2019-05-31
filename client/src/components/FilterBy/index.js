@@ -3,10 +3,13 @@ import API from "../../utils/API";
 // import Select from 'react-select';
 
 const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
-
+const hrStyle = {
+  "border-top": "2px solid orange"
+}
 class FilterBy extends Component {
-  //State 
+  //Default State Values  
   state = {
+    //Set all states for the DropDown List 
     allStates: statesList,
     schools: [],
     // Seeting value by default 
@@ -32,7 +35,7 @@ class FilterBy extends Component {
 
   handleChange = event => {
 
-    // console.log(`Option selected:`, event.target.value);
+    console.log(`Option selected:`, event.target.value);
 
     this.setState({ filteredState: event.target.value });
 
@@ -69,17 +72,17 @@ render() {
   return (
     <div className="container">
       <form noValidate>
-        <p className="mb-1 text-center text-info">Refine your results</p>
+        <h3 className="mb-1 text-center text-info">Refine your results</h3>
         <div className="columns text-center">
           <div className="column col-6 col-xs-12">
             <div className="form-group">
               <div className="col-3 col-sm-12">
                 <label className="form-label" htmlFor="states">
-                  States
+                  By State : 
                   </label>
               </div>
               <div className="col-9 col-sm-12">
-                <select className="form-select" id="states" onChange={this.handleChange}>
+                <select className="custom-select my-1 mr-sm-2" id="states" onChange={this.handleChange}>
                   <option value="">Choose...</option>
                   {this.state.allStates.map((item) =>
                     <option key={item}>{item}</option>
@@ -92,11 +95,11 @@ render() {
             <div className="form-group">
               <div className="col-3 col-sm-12">
                 <label className="form-label" htmlFor="schools">
-                  Schools
+                  By School : 
                   </label>
               </div>
               <div className="col-9 col-sm-12">
-                <select className="form-select" id="schools">
+                <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleChange}>
                   <option value="">Choose...</option>
                   {this.state.schools.map((item, j) =>
                     // console.log("School name ", item)
@@ -106,11 +109,12 @@ render() {
               </div>
             </div>
           </div>
-          <div>
+          {/* <div>
             <button className="btn-info" onSubmit={this.props.handleChange}> Search</button>
-          </div>
+          </div> */}
         </div>
       </form>
+      <hr style={hrStyle} />
     </div>
   )
 }

@@ -97,7 +97,7 @@ class AllMembers extends Component {
                   );
                 })
               ) : (
-                  <h3>No Results to Display</h3>
+                  <h3 className="no-result-message mt-5">No result to display!</h3>
                 )}
 
             </div>

@@ -271,18 +271,20 @@ class MyProfile extends Component {
                         <center><FormButton
                             nameButton=" Edit Profile"
                             handleButtonClick={this.handleEditButtonClick}
-                            moreClass="btn-edit far fa-edit"
+                            moreClass="btn-edit"
+                            icon="far fa-edit"
                         /></center>
                         :
                         <div>
                             <FormButton
                                 nameButton=" Save Profile"
                                 handleButtonClick={this.handleSaveButtonClick}
-                                moreClass="btn-success far fa-save mr-2"
+                                moreClass="btn-success mr-2"
+                                icon="far fa-save"
                             />
                             <FormButton
                                 nameButton=" Cancel "
-                                moreClass="btn-secondary btn-sm mr-2"
+                                moreClass="btn-secondary mr-2"
                                 handleButtonClick={this.handleReturnBack}
                             />
                         </div>

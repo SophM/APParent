@@ -16,5 +16,8 @@
     font-weight: 900;
     font-size: 2rem;
     font-family: 'Artifika', serif;
+}
 
+.title-for-form, .btn-edit, .btn-success, .btn-secondary {
+    font-family: 'Artifika', serif;
 }

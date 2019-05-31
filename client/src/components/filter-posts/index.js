@@ -14,46 +14,46 @@ class FilterPosts extends Component {
     render() {
         return(
             <div className="mb-3">
-                <p id="filter-text" className="font-weight-bold">Filter the posts: </p>
+                <p id="filter-text" className="font-weight-bold">Filters: </p>
                 <FormButton 
                     nameButton="Event"
-                    moreClass="event-btn"
+                    moreClass="event-btn p-1 ml-1 mr-1"
                     icon="fas fa-calendar-alt"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
                     nameButton="Advice"
-                    moreClass="advice-btn"
+                    moreClass="advice-btn p-1 ml-1 mr-1"
                     icon="fas fa-info-circle"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
                     nameButton="Free"
-                    moreClass="free-btn"
+                    moreClass="free-btn p-1 ml-1 mr-1"
                     icon="fas fa-gift"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
                     nameButton="On Sale"
-                    moreClass="onSale-btn"
+                    moreClass="onSale-btn p-1 ml-1 mr-1"
                     icon="fas fa-dollar-sign"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
                     nameButton="Question"
-                    moreClass="question-btn"
+                    moreClass="question-btn p-1 ml-1 mr-1"
                     icon="fas fa-question-circle"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
-                    nameButton="Most Recent"
-                    moreClass="recent-btn"
+                    nameButton="Recent first"
+                    moreClass="recent-btn p-1 ml-1 mr-1"
                     icon="fas fa-arrow-circle-up"
                     handleButtonClick={this.handleFilterButtonClick}
                 />
                 <FormButton 
-                    nameButton="Oldest"
-                    moreClass="old-btn"
+                    nameButton="Old first"
+                    moreClass="old-btn p-1 ml-1 mr-1"
                     icon="fas fa-arrow-circle-down"
                     handleButtonClick={this.handleFilterButtonClick}
                 />

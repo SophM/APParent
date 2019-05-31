@@ -22,6 +22,39 @@ class Activity extends Component {
       .catch(err => console.log(err))
   }
 
+  getPostsForCategory = category => {
+
+    API.getFilteredPosts(category)
+      .then( res => {
+        console.log(res.data);
+        this.setState({
+          posts: res.data
+        });
+      })
+      .catch(err => console.log(err))
+  }
+
+  getPostsDescendingOrder = () => {
+    API.searchAll()
+      .then( res => {
+        console.log(res.data);
+        this.setState({
+          posts: res.data
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
+  getPostsAscendingOrder = () => {
+    API.getAllAscending()
+      .then( res => {
+        console.log(res.data);
+        this.setState({
+          posts: res.data
+        })
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
     return (
@@ -29,7 +62,11 @@ class Activity extends Component {
         <div className="card activity-container mx-auto">
           <h5 id="activity-title" className="card-header">Activity Feed</h5>
           <div className="card-body" id="eachPost">
-            <FilterPosts />
+            <FilterPosts 
+              toGetAllFilteredPosts={this.getPostsForCategory}
+              toGetAllPostsDescendingOrder={this.getPostsDescendingOrder}
+              toGetAllPostsAscendingOrder={this.getPostsAscendingOrder}
+            />
             {this.state.posts.length ? (
               this.state.posts.map((post) => {
                 return (

@@ -5,10 +5,10 @@ import Activity from "../components/activity";
 import PostCard from "../components/postCard";
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
-import UserCard from "../components/userCard";
+// import UserCard from "../components/userCard";
 import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
-import FilterBy from "../components/FilterBy";
+// import FilterBy from "../components/FilterBy";
 import API from "../utils/API";
 // import { stat } from "fs";
 
@@ -178,26 +178,9 @@ class Dashboard extends Component {
             <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
             {/* Displays all the Members on the website expect for the logged in USer  */}
             <AllMembers>
-            <FilterBy  /> 
             {/* handleClick={this.handleSearchCriteria} */}
             <hr /> 
-              {this.state.members.length ? (
-                this.state.members.map((member, i) => {
-                  return (
-                    <UserCard
-                      key={member.id}
-                      email={member.email}
-                      userName={member.userName}
-                      city={member.city}
-                      state={member.state}
-                      photoLink={member.photoLink}
-                      parentId={member.id}
-                    />
-                  );
-                })
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
+           
             </AllMembers>
 
           </div>

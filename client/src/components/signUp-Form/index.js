@@ -15,7 +15,6 @@ class SignUp extends Component {
     state = {
         allUsernames: [],
         allEmails: [],
-        firstStepRegistration: true,
         parentInfo:
             [
                 {
@@ -86,6 +85,7 @@ class SignUp extends Component {
             alt: "login"
         },
         hasError: false,
+        firstStepRegistration: true,
         passwordTooShort: false,
         usernameAlreadyExists: false,
         emailAlreadyExists: false,
@@ -125,25 +125,7 @@ class SignUp extends Component {
             )
     }
 
-    // function to update the school list once/if a parent has created one
-    updateSchoolList = () => {
-        API.getAllSchools()
-            .then(
-                res => {
-                    console.log(res.data);
-                    let copy = [...this.state.kidInfo];
-                    copy[2].options = res.data;
-                    this.setState({
-                        kidInfo: copy,
-                        addSchool: false,
-                        messageSchoolAdded: true
-                    })
-
-                }
-            )
-            .catch(err => console.log(err));
-    }
-
+    // to grab the parent's input about her/himself
     handleInputChangeParent = event => {
         const value = event.target.value;
         const key = event.target.getAttribute("data-id")
@@ -154,6 +136,7 @@ class SignUp extends Component {
         });
     }
 
+    // to go to the second part of the registration once validating all the data related to the parents
     handleContinueButtonClick = event => {
         event.preventDefault();
 
@@ -163,12 +146,7 @@ class SignUp extends Component {
             if (this.state.allUsernames.indexOf(this.state.parentInfo[0].value) === -1) {
                 // if the email doesn't already exist in the database
                 if (this.state.allEmails.indexOf(this.state.parentInfo[2].value) === -1) {
-                    // display the second part of the form
-                    this.setState({
-                        firstStepRegistration: false
-                    });
-                    console.log("parent info: ", this.state.parentInfo);
-                    // if password isn't too short
+                    // if the password is at least 8 characters long
                     if (this.state.parentInfo[1].value.length >= 8) {
                         // display the second part of the form
                         this.setState({
@@ -204,6 +182,16 @@ class SignUp extends Component {
         }
     }
 
+    // to allow the parent to go back the first part of the registration
+    handleGoBackButtonClick = event => {
+        event.preventDefault();
+        
+        this.setState({
+            firstStepRegistration: true
+        })
+    }
+
+    // to grab the parent's input about the kid
     handleInputChangeKid = event => {
         const value = event.target.value;
         const key = event.target.getAttribute("data-id")
@@ -214,6 +202,7 @@ class SignUp extends Component {
         });
     }
 
+    // to reset the kid form if the parent has more than one kid
     handleAddKidButtonClick = event => {
         event.preventDefault();
 
@@ -239,7 +228,8 @@ class SignUp extends Component {
                 kidInfo: copyKid,
                 numberOfKid: this.state.numberOfKid + 1,
                 addKid: true,
-                messageSchoolAdded: false
+                messageSchoolAdded: false,
+                addSchool: false
             });
         // otherwise will get error message that the parent has to fill up the fields
         } else {
@@ -249,6 +239,7 @@ class SignUp extends Component {
         }
     }
 
+    // to sign up
     handleSignUpButtonClick = event => {
         event.preventDefault();
 
@@ -292,6 +283,7 @@ class SignUp extends Component {
         }
     }
 
+    // to display the add-school form
     handleAddSchoolOption = event => {
         event.preventDefault();
 
@@ -302,6 +294,35 @@ class SignUp extends Component {
 
     }
 
+    // to hide the add-school form - function passed to the add-school component
+    hideAddSchoolForm = event => {
+        event.preventDefault();
+
+        this.setState({
+            addSchool: false,
+        })
+    }
+
+    // function to update the school list once/if a parent has created one
+    updateSchoolList = () => {
+        API.getAllSchools()
+            .then(
+                res => {
+                    console.log(res.data);
+                    let copy = [...this.state.kidInfo];
+                    copy[2].options = res.data;
+                    this.setState({
+                        kidInfo: copy,
+                        addSchool: false,
+                        messageSchoolAdded: true
+                    })
+
+                }
+            )
+            .catch(err => console.log(err));
+    }
+
+    // to close the error message
     handleCloseButtonClick = event => {
         event.preventDefault();
 
@@ -313,6 +334,7 @@ class SignUp extends Component {
         })
     }
 
+    // to make the error message disappear after 2 seconds
     resetError = () => {
         if (this.state.hasError || this.state.passwordTooShort || this.state.usernameAlreadyExists || this.state.emailAlreadyExists) {
             setTimeout(() => {
@@ -401,6 +423,8 @@ class SignUp extends Component {
                         </FormAction>
                         <FormButton
                             nameButton="Continue"
+                            moreClass="continue-btn"
+                            icon="fas fa-arrow-circle-right"
                             handleButtonClick={this.handleContinueButtonClick}
                         />
                     </div>
@@ -502,26 +526,37 @@ class SignUp extends Component {
                             ) : (
                                 ""
                             )}
-                            <button className="mb-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{border: "none", background: "none", color: "orange"}}>Didn't find your school? Click here to add it!</button>
+                            <button className="mb-2 mt-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{border: "none", background: "none", color: "#fca33d"}}>Didn't find your school? Click here to add it!</button>
                             {this.state.addSchool ? (
                                 <AddSchool 
                                     toUpdateSchoolList={this.updateSchoolList}
+                                    toHideAddSchoolForm={this.hideAddSchoolForm}
                                 />
                             ) : (
                                 ""
                             )}
-                            </FormAction>
-                            <hr style={{border: "1px solid #176d88"}}></hr>
-                            <FormButton
-                                nameButton="I have another kid!"
-                                handleButtonClick={this.handleAddKidButtonClick}
-                            />
-                            <FormButton
-                                nameButton="Sign Up"
-                                handleButtonClick={this.handleSignUpButtonClick}
-                            />
-                        </div>
-                    )}
+                        </FormAction>
+                        <hr style={{border: "1px solid #176d88"}}></hr>
+                        <FormButton
+                            nameButton="Go back"
+                            moreClass="go-back-btn mr-3 ml-4"
+                            icon="fas fa-arrow-circle-left"
+                            handleButtonClick={this.handleGoBackButtonClick}
+                        />
+                        <FormButton
+                            nameButton="I have another kid!"
+                            moreClass="add-kid-btn"
+                            icon="fas fa-child"
+                            handleButtonClick={this.handleAddKidButtonClick}
+                        />
+                        <FormButton
+                            nameButton="Sign Up"
+                            moreClass="signup-btn ml-3"
+                            icon="fas fa-sign-in-alt"
+                            handleButtonClick={this.handleSignUpButtonClick}
+                        />
+                    </div>
+                )}
 
                 <FormMessage
                     message={this.state.formMessage.message}

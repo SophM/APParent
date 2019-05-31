@@ -152,24 +152,27 @@ class KidProfile extends Component {
                         <FormButton
                             nameButton=" Edit Kid Info"
                             handleButtonClick={this.handleEditButtonClick}
-                            moreClass="btn-edit far fa-edit"
+                            moreClass="btn-edit "
+                            icon="far fa-edit"
                         />
                     ) :
                         (
                             <div>
                                 <FormButton
                                     nameButton=" Update Child"
-                                    moreClass="btn-success far fa-save mr-2"
+                                    moreClass="btn-success mr-2"
+                                    icon="far fa-save"
                                     handleButtonClick={this.handleUpdateButtonClick}
                                 />
                                 <FormButton
                                     nameButton="Remove Child"
-                                    moreClass="btn-warning fas fa-eraser mr-2"
+                                    moreClass="btn-warning mr-2"
+                                    icon="fas fa-eraser"
                                     handleButtonClick={this.handleDeleteInfo}
                                 />
                                  <FormButton
                                     nameButton="Cancel"
-                                    moreClass="btn-secondary mr-2 btn-sm"
+                                    moreClass="btn-secondary mr-2"
                                     handleButtonClick={this.handleReturnBack}
                                 />
                             </div>

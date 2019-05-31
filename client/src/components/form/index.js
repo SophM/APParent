@@ -14,7 +14,7 @@ export function FormContainer({ children }) {
 
 export function FormTitle(props) {
     return (
-        <h1 className="text-center mb-3"><i className={props.icon}></i> {props.title}</h1>
+        <h1 className="text-center mb-3 title-for-form"><i className={props.icon}></i> {props.title}</h1>
     )
 };
 

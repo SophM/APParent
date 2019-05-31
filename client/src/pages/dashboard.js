@@ -4,11 +4,10 @@ import Sidebar from "../components/sidebar";
 import Activity from "../components/activity";
 import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
-// import UserCard from "../components/userCard";
 import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
-// import FilterBy from "../components/FilterBy";
 import API from "../utils/API";
+import "../style/dashboard.css";
 // import { stat } from "fs";
 
 class Dashboard extends Component {
@@ -87,7 +86,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 id="welcome-text" className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
             {/* ------- start Sophie */}
             <Activity />
             {/* ------- end Sophie */}
@@ -108,7 +107,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
 
             {/* Logged in User Details along with their kid info within  */}
             <MyProfile
@@ -138,7 +137,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
             {/* Displays all the Members on the website expect for the logged in USer  */}
             <AllMembers />
 
@@ -159,7 +158,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
 
             <WritePost
               handleCreatePost={this.handleCreatePost}
@@ -182,7 +181,7 @@ class Dashboard extends Component {
           />
           <div id="page-wrap">
 
-            <h1 className="mt-2 text-dark">Welcome {this.state.loggedInUser.userName}</h1>
+            <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
             <div className="container mt-4 mb-4">
               <div className="card">
                 <h3 className="card-header">About us!</h3>

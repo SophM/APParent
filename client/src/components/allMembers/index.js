@@ -27,11 +27,10 @@ class AllMembers extends Component {
   }
 
   // function to filter the members based on the state selected 
-  filterMemberListByState(filteredState) {
-    // event.preventDefault();
+  filterMemberListByState = filteredState => {
 
     console.log("filterMemberListByState");
-    console.log(`Option selected:`, filteredState);
+
     // retrieves all the members - filter by state 
     API.searchAllMembersForAState(filteredState)
       .then(results => {
@@ -46,13 +45,21 @@ class AllMembers extends Component {
       .catch(err => console.log(err));
   }
 
+  // function to filter the members based on the school selected 
+  filterMemberListBySchool = filteredSchool => {
+
+    console.log("filterMemberListBySchool", filteredSchool);
+
+  }
+
   render() {
     return (
       <div className="container mt-4 mb-4">
         <div className="card">
           <h5 id="allmembers-title" className="card-header">All Members</h5>
           <FilterBy 
-            handleChange={this.filterMemberListByState}/>
+            MemberListByState={this.filterMemberListByState}
+            MemberListBySchool={this.filterMemberListBySchool}/>
           <div className="card-body">
             <div id="each-member" className="card-columns">
               {/* {children} */}

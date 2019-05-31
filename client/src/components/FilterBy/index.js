@@ -13,12 +13,13 @@ class FilterBy extends Component {
     allStates: statesList,
     schools: [],
     // Seeting value by default 
-    filteredState: "California"
+    filteredState: "California", 
+    filteredSchool: ""
   }
 
   componentDidMount() {
 
-    // retrieves all the schools
+    // retrieves all the schools -populate the School DropDown List 
     API.getAllSchools()
       .then(
         res => {
@@ -33,14 +34,21 @@ class FilterBy extends Component {
   }
   //On selection of the State re-populateed the school dropdown with the updated value 
 
-  handleChange = event => {
+  handleStateChange = event => {
 
     console.log(`Option selected:`, event.target.value);
 
     this.setState({ filteredState: event.target.value });
 
     //Call API function in ALlMembers component instead of here 
-    this.props.filterMemberListByState(this.state.filteredState); 
+    this.props.filterMemberListByState(this.state.filteredState);
+  }
+
+  handleSchoolChange = event => {
+
+    console.log(`Option selected:`, event.target.value);
+
+    this.setState({ filteredSchool: event.target.value });
 
     // // retrieves all the schools - filter by state 
     // API.getAllSchoolsByState(event.target.value)
@@ -54,21 +62,7 @@ class FilterBy extends Component {
     //     }
     //   )
     //   .catch(err => console.log(err));
-
-    // // retrieves all the members - filter by state 
-    // API.searchAllMembersForAState(event.target.value)
-    //   .then(results => {
-
-    //     console.log("Filtered Members", results.data);
-    //     //Attach data to ALlMEMBERS STATE OF DASHBOARD 
-    //     this.setState({
-    //       members: results.data
-    //     })
-    //   }
-    //   )
-    //   .catch(err => console.log(err));
-
-}
+  }
 
 render() {
 
@@ -85,7 +79,7 @@ render() {
                   </label>
               </div>
               <div className="col-9 col-sm-12">
-                <select className="custom-select my-1 mr-sm-2" id="states" onChange={this.handleChange}>
+                <select className="custom-select my-1 mr-sm-2" id="states" onChange={this.handleStateChange}>
                   <option value="">Choose...</option>
                   {this.state.allStates.map((item) =>
                     <option key={item}>{item}</option>
@@ -102,7 +96,7 @@ render() {
                   </label>
               </div>
               <div className="col-9 col-sm-12">
-                <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleChange}>
+                <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleSchoolChange}>
                   <option value="">Choose...</option>
                   {this.state.schools.map((item, j) =>
                     // console.log("School name ", item)

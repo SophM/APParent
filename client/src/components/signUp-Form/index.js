@@ -6,8 +6,10 @@ import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
 import gradeLevel from "../../gradeLevel.json";
+import Dropzone from "../drop-zone"
 
-const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+
+const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 
 // define a class SignUp to create the component
 class SignUp extends Component {
@@ -54,7 +56,7 @@ class SignUp extends Component {
                     options: statesList
                 }
             ],
-        kidInfo: 
+        kidInfo:
             [
                 {
                     for: "name",
@@ -69,12 +71,12 @@ class SignUp extends Component {
                     options: gradeLevel
 
                 },
-                {   
+                {
                     for: "school",
                     label: "Which school does your kid go to?",
                     value: "1",
                     options: []
-                }    
+                }
             ],
         numberOfKid: 1,
         allKidsInfo: [],
@@ -137,6 +139,14 @@ class SignUp extends Component {
         });
     }
 
+    handleImageChange = (url) => {
+        let copy = [...this.state.parentInfo]
+        copy[3].value = url
+        this.setState({
+            parentInfo: copy
+        })
+    }
+
     // to go to the second part of the registration once validating all the data related to the parents
     handleContinueButtonClick = event => {
         event.preventDefault();
@@ -156,33 +166,33 @@ class SignUp extends Component {
                                 firstStepRegistration: false
                             });
                             console.log("parent info: ", this.state.parentInfo);
-                        // if password too short
+                            // if password too short
                         } else {
                             // display error message
                             this.setState({
                                 passwordTooShort: true
                             });
                         }
-                    // if the email is already present in the database
+                        // if the email is already present in the database
                     } else {
                         this.setState({
                             emailAlreadyExists: true
                         });
                     }
-                // if the email doesn't have the correct format
+                    // if the email doesn't have the correct format
                 } else {
                     this.setState({
                         emailNotCorrectFormat: true
                     });
                 }
-            // if username is already present in the database
+                // if username is already present in the database
             } else {
                 // display error message
                 this.setState({
                     usernameAlreadyExists: true
                 });
-            }    
-        // if all the fields haven't been filled up
+            }
+            // if all the fields haven't been filled up
         } else {
             // display error message
             this.setState({
@@ -194,7 +204,7 @@ class SignUp extends Component {
     // to allow the parent to go back the first part of the registration
     handleGoBackButtonClick = event => {
         event.preventDefault();
-        
+
         this.setState({
             firstStepRegistration: true
         })
@@ -240,9 +250,9 @@ class SignUp extends Component {
                 messageSchoolAdded: false,
                 addSchool: false
             });
-        // otherwise will get error message that the parent has to fill up the fields
+            // otherwise will get error message that the parent has to fill up the fields
         } else {
-            this.setState({ 
+            this.setState({
                 hasError: true
             });
         }
@@ -267,7 +277,7 @@ class SignUp extends Component {
 
         // the parent has to enter info in every field to be able to submit form
         if (this.state.kidInfo[0].value && this.state.kidInfo[1].value && this.state.kidInfo[2].value) {
-  
+
             API.signup(
                 {
                     userName: this.state.parentInfo[0].value,
@@ -279,14 +289,14 @@ class SignUp extends Component {
                     allKidsInfo: this.state.allKidsInfo
                 }
             )
-            .then(res => {
-                window.location.reload()
-            })
-            .catch(err => console.log(err))
-        // otherwise will get error message that the parent has to fill up the fields
+                .then(res => {
+                    window.location.reload()
+                })
+                .catch(err => console.log(err))
+            // otherwise will get error message that the parent has to fill up the fields
         } else {
 
-            this.setState({ 
+            this.setState({
                 hasError: true
             })
         }
@@ -372,43 +382,80 @@ class SignUp extends Component {
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         {(this.state.passwordTooShort) ? (
                             <ErrorMessage
                                 message="Your password should be at least 8 characters long!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         {(this.state.usernameAlreadyExists) ? (
                             <ErrorMessage
                                 message="Sorry, this username is already taken!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         {(this.state.emailAlreadyExists) ? (
                             <ErrorMessage
                                 message="Sorry, a parent already registered with this email!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         {(this.state.emailNotCorrectFormat) ? (
                             <ErrorMessage
                                 message="Please enter a correct email!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (
-                            ""
-                        )}
+                                ""
+                            )}
                         <FormAction>
                             {this.state.parentInfo.map((parentInfo, i) => {
-                                if (parentInfo.for !== "state") {
+                                if (parentInfo.for === "state") {
+                                    return (
+                                        <Dropdown
+                                            key={i}
+                                            data={i}
+                                            for={parentInfo.for}
+                                            label={parentInfo.label}
+                                            value={parentInfo.value}
+                                            handleChange={this.handleInputChangeParent}
+                                        >
+                                            {parentInfo.options.map((state, j) => {
+                                                return (
+                                                    <OptionForDropdown option={state} value={state} key={j} />
+                                                )
+                                            })}
+                                        </Dropdown>
+                                    );
+                                    // return (
+                                    //     <FormLabel
+                                    //         key={i}
+                                    //         data={i}
+                                    //         for={parentInfo.for}
+                                    //         label={parentInfo.label}
+                                    //         placeholder={parentInfo.placeholder}
+                                    //         value={parentInfo.value}
+                                    //         handleChange={this.handleInputChangeParent}
+                                    //     />
+                                    // );
+                                } else if (parentInfo.for === "photo") {
+                                    return (
+                                        <div>
+                                            <label>Upload a picture to be display on your profile</label>
+                                            <Dropzone 
+                                            helper={this.handleImageChange}
+                                            />
+                                        </div>
+                                    )
+                                } else {
                                     return (
                                         <FormLabel
                                             key={i}
@@ -419,26 +466,26 @@ class SignUp extends Component {
                                             value={parentInfo.value}
                                             handleChange={this.handleInputChangeParent}
                                         />
-                                    );
-                                } else {
-                                    return (
-                                        <Dropdown
-                                            key={i}
-                                            data={i}
-                                            for={parentInfo.for}
-                                            label={parentInfo.label}
-                                            value={parentInfo.value}
-                                            handleChange={this.handleInputChangeParent}
-                                        >
-                                        {parentInfo.options.map((state, j) => {
-                                            return (
-                                                <OptionForDropdown option={state} value={state} key={j} />
-                                            )
-                                        })}
-                                        </Dropdown>
-                                    );  
+                                    )
+                                    // return (
+                                    //     <Dropdown
+                                    //         key={i}
+                                    //         data={i}
+                                    //         for={parentInfo.for}
+                                    //         label={parentInfo.label}
+                                    //         value={parentInfo.value}
+                                    //         handleChange={this.handleInputChangeParent}
+                                    //     >
+                                    //         {parentInfo.options.map((state, j) => {
+                                    //             return (
+                                    //                 <OptionForDropdown option={state} value={state} key={j} />
+                                    //             )
+                                    //         })}
+                                    //     </Dropdown>
+                                    // );
                                 }
                             })}
+
                         </FormAction>
                         <FormButton
                             nameButton="Continue"
@@ -448,134 +495,134 @@ class SignUp extends Component {
                         />
                     </div>
                 ) : (
-                    <div>
-                        {(this.state.hasError) ? (
-                            <ErrorMessage
-                                message="Please fill up all the fields!"
-                                handleCloseButtonClick={this.handleCloseButtonClick}
-                            />
-                        ) : (
-                            ""
-                        )}
-                        <FormAction>
-                            {(!this.state.addKid) ? (
-                                <div>
-                                    <div className="font-weight-bold mb-2">Enter information for kid #1</div>
-                                    {this.state.kidInfo.map((info, i) => {
-                                        if (info.for === "name") {
-                                            return (
-                                                <FormLabel
-                                                    key={i}
-                                                    data={i}
-                                                    for={info.for}
-                                                    label={info.label}
-                                                    value={info.value}
-                                                    handleChange={this.handleInputChangeKid}
-                                                />
-                                            )
-                                        } else {
-                                            return (
-                                                <Dropdown
-                                                    key={i}
-                                                    data={i}
-                                                    for={info.for}
-                                                    label={info.label}
-                                                    value={info.value}
-                                                    disabled={this.state.disabled}
-                                                    handleChange={this.handleInputChangeKid}
-                                                >
-                                                    {info.options.map((item, j) => {
-                                                        return (
-                                                            <OptionForDropdown
-                                                                option={item.name}
-                                                                value={item.id}
-                                                                key={j}
-                                                            />
-                                                        )
-                                                    })}
-                                                </Dropdown>
-                                            )
-                                        }
-                                    })}
-                                </div>
-                            ) : (
-                                <div>
-                                    <div className="font-weight-bold text-success mb-2">Information saved for kid #{this.state.numberOfKid - 1}</div>
-                                    <div className="font-weight-bold mb-2"> Enter information for kid #{this.state.numberOfKid}</div>
-                                    {this.state.kidInfo.map((info, i) => {
-                                        if (info.for === "name") {
-                                            return (
-                                                <FormLabel
-                                                    key={i}
-                                                    data={i}
-                                                    for={info.for}
-                                                    label={info.label}
-                                                    value={info.value}
-                                                    handleChange={this.handleInputChangeKid}
-                                                />
-                                            )
-                                        } else {
-                                            return (
-                                                <Dropdown
-                                                    key={i}
-                                                    data={i}
-                                                    for={info.for}
-                                                    label={info.label}
-                                                    value={info.value}
-                                                    disabled={this.state.disabled}
-                                                    handleChange={this.handleInputChangeKid}
-                                                >
-                                                    {info.options.map((item, j) => {
-                                                        return (
-                                                            <OptionForDropdown
-                                                                option={item.name}
-                                                                value={item.id}
-                                                                key={j}
-                                                            />
-                                                        )
-                                                    })}
-                                                </Dropdown>
-                                            )
-                                        }
-                                    })}       
-                                </div>
-                            )}
-                            {this.state.messageSchoolAdded ? (
-                                <p className="font-weight-bold text-success">Your school has been added to the dropdown menu!</p>
-                            ) : (
-                                ""
-                            )}
-                            <button className="mb-2 mt-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{border: "none", background: "none", color: "#fca33d"}}>Didn't find your school? Click here to add it!</button>
-                            {this.state.addSchool ? (
-                                <AddSchool 
-                                    toUpdateSchoolList={this.updateSchoolList}
-                                    toHideAddSchoolForm={this.hideAddSchoolForm}
+                        <div>
+                            {(this.state.hasError) ? (
+                                <ErrorMessage
+                                    message="Please fill up all the fields!"
+                                    handleCloseButtonClick={this.handleCloseButtonClick}
                                 />
                             ) : (
-                                ""
-                            )}
-                        </FormAction>
-                        <hr style={{border: "1px solid #176d88"}}></hr>
-                        <FormButton
-                            nameButton="Go back"
-                            moreClass="go-back-btn mr-3 ml-4"
-                            icon="fas fa-arrow-circle-left"
-                            handleButtonClick={this.handleGoBackButtonClick}
-                        />
-                        <FormButton
-                            nameButton="I have another kid!"
-                            moreClass="add-kid-btn"
-                            icon="fas fa-child"
-                            handleButtonClick={this.handleAddKidButtonClick}
-                        />
-                        <FormButton
-                            nameButton="Sign Up"
-                            moreClass="signup-btn ml-3"
-                            icon="fas fa-sign-in-alt"
-                            handleButtonClick={this.handleSignUpButtonClick}
-                        />
-                    </div>
-                )}
+                                    ""
+                                )}
+                            <FormAction>
+                                {(!this.state.addKid) ? (
+                                    <div>
+                                        <div className="font-weight-bold mb-2">Enter information for kid #1</div>
+                                        {this.state.kidInfo.map((info, i) => {
+                                            if (info.for === "name") {
+                                                return (
+                                                    <FormLabel
+                                                        key={i}
+                                                        data={i}
+                                                        for={info.for}
+                                                        label={info.label}
+                                                        value={info.value}
+                                                        handleChange={this.handleInputChangeKid}
+                                                    />
+                                                )
+                                            } else {
+                                                return (
+                                                    <Dropdown
+                                                        key={i}
+                                                        data={i}
+                                                        for={info.for}
+                                                        label={info.label}
+                                                        value={info.value}
+                                                        disabled={this.state.disabled}
+                                                        handleChange={this.handleInputChangeKid}
+                                                    >
+                                                        {info.options.map((item, j) => {
+                                                            return (
+                                                                <OptionForDropdown
+                                                                    option={item.name}
+                                                                    value={item.id}
+                                                                    key={j}
+                                                                />
+                                                            )
+                                                        })}
+                                                    </Dropdown>
+                                                )
+                                            }
+                                        })}
+                                    </div>
+                                ) : (
+                                        <div>
+                                            <div className="font-weight-bold text-success mb-2">Information saved for kid #{this.state.numberOfKid - 1}</div>
+                                            <div className="font-weight-bold mb-2"> Enter information for kid #{this.state.numberOfKid}</div>
+                                            {this.state.kidInfo.map((info, i) => {
+                                                if (info.for === "name") {
+                                                    return (
+                                                        <FormLabel
+                                                            key={i}
+                                                            data={i}
+                                                            for={info.for}
+                                                            label={info.label}
+                                                            value={info.value}
+                                                            handleChange={this.handleInputChangeKid}
+                                                        />
+                                                    )
+                                                } else {
+                                                    return (
+                                                        <Dropdown
+                                                            key={i}
+                                                            data={i}
+                                                            for={info.for}
+                                                            label={info.label}
+                                                            value={info.value}
+                                                            disabled={this.state.disabled}
+                                                            handleChange={this.handleInputChangeKid}
+                                                        >
+                                                            {info.options.map((item, j) => {
+                                                                return (
+                                                                    <OptionForDropdown
+                                                                        option={item.name}
+                                                                        value={item.id}
+                                                                        key={j}
+                                                                    />
+                                                                )
+                                                            })}
+                                                        </Dropdown>
+                                                    )
+                                                }
+                                            })}
+                                        </div>
+                                    )}
+                                {this.state.messageSchoolAdded ? (
+                                    <p className="font-weight-bold text-success">Your school has been added to the dropdown menu!</p>
+                                ) : (
+                                        ""
+                                    )}
+                                <button className="mb-2 mt-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{ border: "none", background: "none", color: "#fca33d" }}>Didn't find your school? Click here to add it!</button>
+                                {this.state.addSchool ? (
+                                    <AddSchool
+                                        toUpdateSchoolList={this.updateSchoolList}
+                                        toHideAddSchoolForm={this.hideAddSchoolForm}
+                                    />
+                                ) : (
+                                        ""
+                                    )}
+                            </FormAction>
+                            <hr style={{ border: "1px solid #176d88" }}></hr>
+                            <FormButton
+                                nameButton="Go back"
+                                moreClass="go-back-btn mr-3 ml-4"
+                                icon="fas fa-arrow-circle-left"
+                                handleButtonClick={this.handleGoBackButtonClick}
+                            />
+                            <FormButton
+                                nameButton="I have another kid!"
+                                moreClass="add-kid-btn"
+                                icon="fas fa-child"
+                                handleButtonClick={this.handleAddKidButtonClick}
+                            />
+                            <FormButton
+                                nameButton="Sign Up"
+                                moreClass="signup-btn ml-3"
+                                icon="fas fa-sign-in-alt"
+                                handleButtonClick={this.handleSignUpButtonClick}
+                            />
+                        </div>
+                    )}
 
                 <FormMessage
                     message={this.state.formMessage.message}

@@ -165,7 +165,6 @@ class AddSchool extends Component {
                 <FormButton 
                     nameButton="Nevermind, I found it!"
                     moreClass="nevermind-btn"
-                    icon=""
                     handleButtonClick={this.props.toHideAddSchoolForm}
                 />
             </div>

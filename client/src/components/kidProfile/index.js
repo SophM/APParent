@@ -103,9 +103,17 @@ class KidProfile extends Component {
     render() {
         return (
             <div>
-                <FormTitle
-                    title="View Kid Info"
-                />
+                {this.state.disabled ?
+                    <FormTitle
+                        title="View Kid Info"
+                        icon="fas fa-eye"
+                    />
+                    :
+                    <FormTitle
+                        title="Update Kid Info"
+                        icon="fas fa-edit"
+                    />
+                }
                 <FormAction>
                     {this.state.kidInfo.map((info, i) => {
                         if (info.for === "name") {

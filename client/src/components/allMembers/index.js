@@ -22,7 +22,7 @@ class AllMembers extends Component {
   // function to filter the members based on the state selected 
   filterMemberListByState = filteredState => {
 
-    console.log("filterMemberListByState");
+    console.log("filterMemberListByState", filteredState);
 
     // retrieves all the members - filter by state 
     API.searchAllMembersForAState(filteredState)
@@ -42,8 +42,22 @@ class AllMembers extends Component {
   filterMemberListBySchool = filteredSchool => {
 
     console.log("filterMemberListBySchool", filteredSchool);
+    // retrieves all the members - filter by state 
+    API.searchAllMembersForASchool(filteredSchool)
+      .then(results => {
+
+        console.log("Filtered Schools & parents", results.data);
+        //Refresh the Members data based on the filter criteria 
+        this.setState({
+          members: results.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
 
   }
+
+  //Default funtion - display all member's s
   searchAllMembers = () => {
      //Retrives all the Members Data - By default displays all 
      API.searchAllMembers()
@@ -61,8 +75,9 @@ class AllMembers extends Component {
         <div className="card">
           <h5 id="allmembers-title" className="card-header">All Members</h5>
           <FilterBy 
-            handleStateChange={this.filterMemberListByState}
-            handleSchoolChange={this.filterMemberListBySchool}/>
+            searchAll={this.searchAllMembers}
+            searchByState={this.filterMemberListByState}
+            searchBySchool={this.filterMemberListBySchool}/>
           <div className="card-body">
             <div id="each-member" className="card-columns">
               {/* {children} */}

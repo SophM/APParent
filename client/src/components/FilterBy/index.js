@@ -47,7 +47,7 @@ class FilterBy extends Component {
 
       this.setState({ filteredState: event.target.value });
       //Call API function in ALlMembers component instead of here 
-      this.props.filterMemberListByState(this.state.filteredState);
+      this.props.searchByState(event.target.value);
     }
   }
 
@@ -57,18 +57,9 @@ class FilterBy extends Component {
 
     this.setState({ filteredSchool: event.target.value });
 
-    // retrieves all the schools - filter by state 
-    API.searchAllMembersForASchool(event.target.value)
-      .then(
-        res => {
-
-          console.log("Filtered Schools : ", res.data);
-          this.setState({
-            schools: res.data
-          })
-        }
-      )
-      .catch(err => console.log(err));
+    //Call API function in ALlMembers component instead of here 
+    this.props.searchBySchool(event.target.value);
+   
   }
 
   render() {

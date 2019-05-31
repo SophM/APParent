@@ -39,6 +39,9 @@ class FilterBy extends Component {
 
     this.setState({ filteredState: event.target.value });
 
+    //Call API function in ALlMembers component instead of here 
+    this.props.filterMemberListByState(this.state.filteredState); 
+
     // // retrieves all the schools - filter by state 
     // API.getAllSchoolsByState(event.target.value)
     //   .then(
@@ -52,18 +55,18 @@ class FilterBy extends Component {
     //   )
     //   .catch(err => console.log(err));
 
-    // retrieves all the members - filter by state 
-    API.searchAllMembersForAState(event.target.value)
-      .then(results => {
+    // // retrieves all the members - filter by state 
+    // API.searchAllMembersForAState(event.target.value)
+    //   .then(results => {
 
-        console.log("Filtered Members", results.data);
-        //Attach data to ALlMEMBERS STATE OF DASHBOARD 
-        this.setState({
-          members: results.data
-        })
-      }
-      )
-      .catch(err => console.log(err));
+    //     console.log("Filtered Members", results.data);
+    //     //Attach data to ALlMEMBERS STATE OF DASHBOARD 
+    //     this.setState({
+    //       members: results.data
+    //     })
+    //   }
+    //   )
+    //   .catch(err => console.log(err));
 
 }
 

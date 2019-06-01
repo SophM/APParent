@@ -236,19 +236,23 @@ class MyProfile extends Component {
                     {/* <FormAction 
                     route={props.route} > */}
                     {this.state.disabled ?
-                    <div className="row">
-                         {/* Image of the loggeed in user */}
-                        <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")}  alt={this.props.userName} />
-                        <FormTitle
-                            title="View My Profile"
-                            icon="fas fa-eye"
-                        />
+                        <div className="row">
+                            {/* Image of the loggeed in user */}
+                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <FormTitle
+                                title="View My Profile"
+                                icon="fas fa-eye"
+                            />
                         </div>
                         :
-                        <FormTitle
-                            title="Update Profile Info"
-                            icon="fas fa-edit"
-                        />
+                        <div className="row">
+                            {/* Image of the loggeed in user */}
+                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <FormTitle
+                                title="Update Profile Info"
+                                icon="fas fa-edit"
+                            />
+                        </div>
                     }
                    
                     {/* Rendering Form labels using the userInfo object values */}

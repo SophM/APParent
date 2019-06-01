@@ -84,9 +84,8 @@ class KidProfile extends Component {
         this.setState({
             disabled: true
         })
-         //Redirecting the page to disabled 
-        //  this.props.redirectPage(); 
-       
+         //Refreshing DATA for the Cancel Kid  
+        console.log( "ID", this.state.kidId); 
     }
 
     componentDidMount() {

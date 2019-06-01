@@ -102,8 +102,36 @@ class MyProfile extends Component {
     // Reloading the page to redirect to dashboard 
     handleReturnBack = event => {
         event.preventDefault();
-        console.log("redirect page to dashboard");
-        window.location.reload();
+        console.log("Cancel button is clicked" , window.location.pathname);
+    
+        this.props.redirectPage(); 
+        this.setState({
+            disabled: true
+        })
+    
+        //Retrives Logged in USer Info 
+        API.findOne()
+            .then(res => {
+
+                let userResetData = {...this.state.userInfo}; 
+                console.log("Reset User Data - 1 ", userResetData); 
+
+                userResetData = {
+                    userName: res.data.userName,
+                    city: res.data.city,
+                    state: res.data.state,
+                    photoLink: res.data.photoLink
+                }
+                console.log("Reset User Data -2 ", userResetData); 
+
+                // //Reassign value 
+                
+                console.log("Reset User Data -3 ", this.state.userInfo); 
+
+            }
+            )
+            .catch(err => console.log(err));
+        // window.location.reload();
        
     }
     //***************Parent Info */
@@ -182,7 +210,7 @@ class MyProfile extends Component {
         API.findAllKidsForAParent()
             .then(
                 res => {
-                    console.log("Kids for parent", res.data);
+                    // console.log("Kids for parent", res.data);
                     this.setState({
                         kids: res.data
                     })
@@ -194,7 +222,7 @@ class MyProfile extends Component {
         API.getAllSchools()
             .then(
                 res => {
-                    console.log(res.data);
+                    // console.log("School Data : ", res.data);
                     this.setState({
                         schools: res.data
                     })
@@ -288,6 +316,7 @@ class MyProfile extends Component {
                                 nameButton=" Cancel "
                                 moreClass="btn-secondary mr-2"
                                 handleButtonClick={this.handleReturnBack}
+                                disabled={this.state.disabled}
                             />
                         </div>
                     }

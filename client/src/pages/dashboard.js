@@ -71,6 +71,12 @@ class Dashboard extends Component {
     )
   }
 
+  redirectProfilePage = () => {
+    this.setState({
+      pageWanted: "myProfile"
+    })
+
+  }
   render() {
 
     {/* display the page with the activity component */ }
@@ -116,6 +122,7 @@ class Dashboard extends Component {
               city={this.state.loggedInUser.city}
               state={this.state.loggedInUser.state}
               photoLink={this.state.loggedInUser.photoLink}
+              redirectPage={this.redirectProfilePage}
             >
 
             </MyProfile>

@@ -102,11 +102,37 @@ class MyProfile extends Component {
     // Reloading the page to redirect to dashboard 
     handleReturnBack = event => {
         event.preventDefault();
-        console.log("redirect page to dashboard");
-        window.location.reload();
+        console.log("Cancel button is clicked" , window.location.pathname);
+        //Redirecting the page to disabled 
+        this.props.redirectPage(); 
+
+        //Retrives Logged in USer Info 
+        API.findOne()
+            .then(res => {
+
+                let userResetData = {
+                    userName: res.data.userName,
+                    city: res.data.city,
+                    state: res.data.state,
+                    photoLink: res.data.photoLink
+                }
+                console.log("Reset User Data -2 ", userResetData); 
+
+                // //Reassign value 
+                this.setState({
+                    // userInfo : userResetData, 
+                    disabled: true
+                })
+            }
+            )
+            .catch(err => console.log(err));
+          
+            console.log("Reset User Data -3 ", this.state.userInfo); 
+
+        // window.location.reload();
        
     }
-    //***************Parent Info */
+    //***************END Parent Info */
     //-------------------------------------
 
     //***************Kid Info */
@@ -182,7 +208,7 @@ class MyProfile extends Component {
         API.findAllKidsForAParent()
             .then(
                 res => {
-                    console.log("Kids for parent", res.data);
+                    // console.log("Kids for parent", res.data);
                     this.setState({
                         kids: res.data
                     })
@@ -194,7 +220,7 @@ class MyProfile extends Component {
         API.getAllSchools()
             .then(
                 res => {
-                    console.log(res.data);
+                    // console.log("School Data : ", res.data);
                     this.setState({
                         schools: res.data
                     })
@@ -210,19 +236,23 @@ class MyProfile extends Component {
                     {/* <FormAction 
                     route={props.route} > */}
                     {this.state.disabled ?
-                    <div className="row">
-                         {/* Image of the loggeed in user */}
-                        <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")}  alt={this.props.userName} />
-                        <FormTitle
-                            title="View My Profile"
-                            icon="fas fa-eye"
-                        />
+                        <div className="row">
+                            {/* Image of the loggeed in user */}
+                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <FormTitle
+                                title="View My Profile"
+                                icon="fas fa-eye"
+                            />
                         </div>
                         :
-                        <FormTitle
-                            title="Update Profile Info"
-                            icon="fas fa-edit"
-                        />
+                        <div className="row">
+                            {/* Image of the loggeed in user */}
+                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <FormTitle
+                                title="Update Profile Info"
+                                icon="fas fa-edit"
+                            />
+                        </div>
                     }
                    
                     {/* Rendering Form labels using the userInfo object values */}
@@ -285,9 +315,11 @@ class MyProfile extends Component {
                                 icon="far fa-save"
                             />
                             <FormButton
-                                nameButton=" Cancel "
+                                nameButton="Cancel "
                                 moreClass="btn-secondary mr-2"
                                 handleButtonClick={this.handleReturnBack}
+                                disabled={this.state.disabled}
+                                icon="fas fa-backspace"
                             />
                         </div>
                     }

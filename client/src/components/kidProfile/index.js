@@ -79,9 +79,13 @@ class KidProfile extends Component {
     // Reloading the page to redirect to dashboard 
     handleReturnBack = event => {
         event.preventDefault();
-        console.log("redirect page to dashboard");
-        window.location.reload();
-       
+        console.log("Kid Cancel button");
+        // window.location.reload();
+        this.setState({
+            disabled: true
+        })
+         //Refreshing DATA for the Cancel Kid  
+        console.log( "ID", this.state.kidId); 
     }
 
     componentDidMount() {
@@ -182,6 +186,8 @@ class KidProfile extends Component {
                                     nameButton="Cancel"
                                     moreClass="btn-secondary mr-2"
                                     handleButtonClick={this.handleReturnBack}
+                                    disabled={this.state.disabled}
+                                    icon="fas fa-backspace"
                                 />
                             </div>
                         )}

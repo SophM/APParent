@@ -72,9 +72,9 @@ class FilterBy extends Component {
             <div className="column col-6 col-xs-12">
               <div className="form-group">
                 <div className="col-3 col-sm-12">
-                  <label className="form-label" htmlFor="states">
+                  <strong><label className="form-label" htmlFor="states">
                     By State :
-                  </label>
+                  </label></strong>
                 </div>
                 <div className="col-9 col-sm-12">
                   <select className="custom-select my-1 mr-sm-2" id="states" onChange={this.handleStateChange}>
@@ -89,9 +89,9 @@ class FilterBy extends Component {
             <div className="column col-6 col-xs-12">
               <div className="form-group">
                 <div className="col-3 col-sm-12">
-                  <label className="form-label" htmlFor="schools">
+                <strong><label className="form-label" htmlFor="schools">
                     By School :
-                  </label>
+                  </label> </strong>
                 </div>
                 <div className="col-9 col-sm-12">
                   <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleSchoolChange}>

@@ -74,7 +74,7 @@ module.exports = {
                     attributes: ["id", "userName", "email", "city", "state", "photoLink"],
                     //includes the cross-reference table to join the schools with parents 
                     include: [
-                        // { model: db.parentSchools, as: "parentSchools" },
+                        { model: db.parentSchools, as: "parentSchools" },
                         {
                             model: db.schools, as: "schools",
                             where: {

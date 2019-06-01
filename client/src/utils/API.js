@@ -15,7 +15,7 @@ export default {
 
     // get all the posts in an ascending order
     getAllAscending: function() {
-        return axios.get("/api/posts/ascending");
+        return axios.get("/api/posts/all/ascending");
     },
     // ------ end Sophie
 

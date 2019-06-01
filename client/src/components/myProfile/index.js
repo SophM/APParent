@@ -103,20 +103,14 @@ class MyProfile extends Component {
     handleReturnBack = event => {
         event.preventDefault();
         console.log("Cancel button is clicked" , window.location.pathname);
-    
+        //Redirecting the page to disabled 
         this.props.redirectPage(); 
-        this.setState({
-            disabled: true
-        })
-    
+
         //Retrives Logged in USer Info 
         API.findOne()
             .then(res => {
 
-                let userResetData = {...this.state.userInfo}; 
-                console.log("Reset User Data - 1 ", userResetData); 
-
-                userResetData = {
+                let userResetData = {
                     userName: res.data.userName,
                     city: res.data.city,
                     state: res.data.state,
@@ -125,12 +119,18 @@ class MyProfile extends Component {
                 console.log("Reset User Data -2 ", userResetData); 
 
                 // //Reassign value 
+                this.setState({
+                    // userInfo : userResetData, 
+                    disabled: true
+                })
                 
-                console.log("Reset User Data -3 ", this.state.userInfo); 
 
             }
             )
             .catch(err => console.log(err));
+          
+            console.log("Reset User Data -3 ", this.state.userInfo); 
+
         // window.location.reload();
        
     }
@@ -313,10 +313,11 @@ class MyProfile extends Component {
                                 icon="far fa-save"
                             />
                             <FormButton
-                                nameButton=" Cancel "
+                                nameButton="Cancel "
                                 moreClass="btn-secondary mr-2"
                                 handleButtonClick={this.handleReturnBack}
                                 disabled={this.state.disabled}
+                                icon="fas fa-backspace"
                             />
                         </div>
                     }

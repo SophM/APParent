@@ -123,8 +123,6 @@ class MyProfile extends Component {
                     // userInfo : userResetData, 
                     disabled: true
                 })
-                
-
             }
             )
             .catch(err => console.log(err));
@@ -134,7 +132,7 @@ class MyProfile extends Component {
         // window.location.reload();
        
     }
-    //***************Parent Info */
+    //***************END Parent Info */
     //-------------------------------------
 
     //***************Kid Info */

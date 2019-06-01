@@ -68,7 +68,7 @@ class FilterBy extends Component {
       <div className="container">
         <form noValidate>
           <h3 className="mb-1 text-center card-title">Refine your results <i class="fa fa-search-plus" aria-hidden="true"></i></h3>
-          <div className="columns text-center">
+          <div className="row text-center">
             <div className="column col-6 col-xs-12">
               <div className="form-group">
                 <div className="col-3 col-sm-12">

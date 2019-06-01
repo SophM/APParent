@@ -11,18 +11,18 @@ class KidProfile extends Component {
             [
                 {
                     for: "name",
-                    label: "Please Update Child's Name",
+                    label: "Your kid's name",
                     value: this.props.name,
                 },
                 {
                     for: "grade",
-                    label: "Current Grade kid is in :",
+                    label: "Your kid's grade",
                     value: this.props.grade,
                     options: gradeLevel
                 },
                 {
                     for: "school",
-                    label: "Current School :",
+                    label: "Your kid's school",
                     value: this.props.school,
                     options: []
                 }
@@ -109,12 +109,14 @@ class KidProfile extends Component {
             <div>
                 {this.state.disabled ?
                     <FormTitle
-                        title="View Kid Info"
+                        title={`View ${this.props.name}'s Info`}
+                        moreClass="kid-section-title"
                         icon="fas fa-eye"
                     />
                     :
                     <FormTitle
-                        title="Update Kid Info"
+                        title={`Update ${this.props.name}'s Info`}
+                        moreClass="kid-section-title"
                         icon="fas fa-edit"
                     />
                 }
@@ -162,29 +164,29 @@ class KidProfile extends Component {
 
                     {this.state.disabled ? (
                         <FormButton
-                            nameButton=" Edit Kid Info"
+                            nameButton={`Edit ${this.props.name}'s info`}
                             handleButtonClick={this.handleEditButtonClick}
-                            moreClass="btn-edit "
+                            moreClass="btn-edit mb-4"
                             icon="far fa-edit"
                         />
                     ) :
                         (
                             <div>
                                 <FormButton
-                                    nameButton=" Update Child"
-                                    moreClass="btn-success mr-2"
+                                    nameButton={`Update ${this.props.name}'s info`}
+                                    moreClass="btn-success mr-2 mb-4"
                                     icon="far fa-save"
                                     handleButtonClick={this.handleUpdateButtonClick}
                                 />
                                 <FormButton
-                                    nameButton="Remove Child"
-                                    moreClass="btn-warning mr-2"
+                                    nameButton={`Remove ${this.props.name}'s info`}
+                                    moreClass="btn-warning mr-2 mb-4"
                                     icon="fas fa-eraser"
                                     handleButtonClick={this.handleDeleteInfo}
                                 />
                                  <FormButton
                                     nameButton="Cancel"
-                                    moreClass="btn-secondary mr-2"
+                                    moreClass="btn-secondary mr-2 mb-4"
                                     handleButtonClick={this.handleReturnBack}
                                     disabled={this.state.disabled}
                                     icon="fas fa-backspace"

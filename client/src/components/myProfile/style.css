@@ -9,6 +9,7 @@
 .profile-view {
     width:100px;
     height: 100px;
+    box-shadow: rgba(61, 61, 61, 0.719) .2rem .2rem .1rem;
 }
 
 .card-title {

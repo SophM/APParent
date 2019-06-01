@@ -13,6 +13,7 @@ class MyProfile extends Component {
     state = {
         disabled: true,
         kidDisabled: true,
+        userOriginalInfo: this.props.loggedInParent,
         userInfo:
             [
                 {
@@ -74,7 +75,7 @@ class MyProfile extends Component {
             disabled: false
         })
     }
-    //Saves the changes made to the profile 
+    //Saves the changes made to the profile and update the page without reloading
     handleSaveButtonClick = event => {
         event.preventDefault();
         // console.log("SAVE MY PROFILE");
@@ -94,43 +95,31 @@ class MyProfile extends Component {
         //Updates the user profile 
         API.updateProfile(userUpdatedData)
             .then(res => {
-                window.location.reload();
+                // retrieve the info of the logged in parent after updating
+                // display updated info on the page without reloading the page
+                this.props.updateParentProfileSection();
+                this.setState({
+                    userOriginalInfo: userUpdatedData
+                })
+                console.log("user original info: ", this.state.userOriginalInfo)
             })
             .catch(err => console.log(err));
     }
 
     // Reloading the page to redirect to dashboard 
-    handleReturnBack = event => {
+    handleCancelButtonClick = event => {
         event.preventDefault();
-        console.log("Cancel button is clicked" , window.location.pathname);
-        //Redirecting the page to disabled 
-        this.props.redirectPage(); 
 
-        //Retrives Logged in USer Info 
-        API.findOne()
-            .then(res => {
+        let copyUserInfo = [...this.state.userInfo];
+        copyUserInfo[0].value = this.state.userOriginalInfo.userName;
+        copyUserInfo[1].value = this.state.userOriginalInfo.city;
+        copyUserInfo[2].value = this.state.userOriginalInfo.state;
+        copyUserInfo[3].value = this.state.userOriginalInfo.photoLink;
 
-                let userResetData = {
-                    userName: res.data.userName,
-                    city: res.data.city,
-                    state: res.data.state,
-                    photoLink: res.data.photoLink
-                }
-                console.log("Reset User Data -2 ", userResetData); 
-
-                // //Reassign value 
-                this.setState({
-                    // userInfo : userResetData, 
-                    disabled: true
-                })
-            }
-            )
-            .catch(err => console.log(err));
-          
-            console.log("Reset User Data -3 ", this.state.userInfo); 
-
-        // window.location.reload();
-       
+        this.setState({
+            userInfo: copyUserInfo,
+            disabled: true
+        })
     }
     //***************END Parent Info */
     //-------------------------------------
@@ -156,6 +145,7 @@ class MyProfile extends Component {
             kidDisabled: false
         })
     }
+    
     handleInputKidChange = event => {
         console.log("handleInputKidChange");
 
@@ -227,6 +217,7 @@ class MyProfile extends Component {
                 }
             )
             .catch(err => console.log(err));
+
     }
 
     render() {
@@ -236,19 +227,21 @@ class MyProfile extends Component {
                     {/* <FormAction 
                     route={props.route} > */}
                     {this.state.disabled ?
-                        <div className="row">
+                        <div className="row ml-3">
                             {/* Image of the loggeed in user */}
-                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <img className="rounded-circle profile-view mr-5 mb-3" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
                             <FormTitle
+                                moreClass="ml-4"
                                 title="View My Profile"
                                 icon="fas fa-eye"
                             />
                         </div>
                         :
-                        <div className="row">
+                        <div className="row ml-3">
                             {/* Image of the loggeed in user */}
-                            <img className="rounded-circle profile-view mx-4" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
+                            <img className="rounded-circle profile-view mr-5 mb-3" src={this.props.photoLink ? (this.props.photoLink) : ("http://lorempixel.com/125/125/people/2/cc")} alt={this.props.userName} />
                             <FormTitle
+                                moreClass="ml-4"
                                 title="Update Profile Info"
                                 icon="fas fa-edit"
                             />
@@ -301,55 +294,58 @@ class MyProfile extends Component {
                     {/* Conditional hide & show the buttons */}
                     {this.state.disabled ?
                         <center><FormButton
-                            nameButton=" Edit Profile"
+                            nameButton=" Edit my profile"
                             handleButtonClick={this.handleEditButtonClick}
-                            moreClass="btn-edit"
+                            moreClass="btn-edit mb-5"
                             icon="far fa-edit"
                         /></center>
                         :
                         <div>
                             <FormButton
-                                nameButton=" Save Profile"
+                                nameButton=" Save my profile"
                                 handleButtonClick={this.handleSaveButtonClick}
-                                moreClass="btn-success mr-2"
+                                moreClass="btn-success mr-2 mb-5"
                                 icon="far fa-save"
                             />
                             <FormButton
                                 nameButton="Cancel "
-                                moreClass="btn-secondary mr-2"
-                                handleButtonClick={this.handleReturnBack}
+                                moreClass="btn-secondary mr-2 mb-5"
+                                handleButtonClick={this.handleCancelButtonClick}
                                 disabled={this.state.disabled}
                                 icon="fas fa-backspace"
                             />
                         </div>
                     }
                     {/* Loop through all the kids for the logged in Parent */}
+                    <FormTitle
+                        title=" Kid(s) Information"
+                        icon="fas fa-info-circle"
+                    />
                     {this.state.kids.length ? (
                         <div>
-                        {this.state.kids.map((kid, id) => {
-                            return (
-                                <KidProfile
-                                    key={id}
-                                    name={kid.name}
-                                    grade={kid.gradeLevel}
-                                    school={kid.schoolId}
-                                    kidId={kid.id}
-                                />
-                            )})}
-                            </div>) :
-
-                            (<h3 className="no-kid-message">No family member found!
+                            {this.state.kids.map((kid, id) => {
+                                return (
+                                    <KidProfile
+                                        key={id}
+                                        name={kid.name}
+                                        grade={kid.gradeLevel}
+                                        school={kid.schoolId}
+                                        kidId={kid.id}
+                                    />
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        <h3 className="no-kid-message">No family member found!
                            {/* <FormButton 
                                 nameButton ="Add New Kid Info"
                                 handleButtonClick={this.handleAddNewMember}
                             /> */}
-                            </h3>
-                        )
-                    }
-
+                        </h3>
+                    )}
                     {/* </FormAction> */}
                 </FormContainer>
-                </div>
+            </div>
         );
     }
 }

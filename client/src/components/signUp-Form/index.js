@@ -378,7 +378,7 @@ class SignUp extends Component {
                     <div>
                         {(this.state.hasError) ? (
                             <ErrorMessage
-                                message="Please fill up all the fields!"
+                                message="Please fill out all the fields!"
                                 handleCloseButtonClick={this.handleCloseButtonClick}
                             />
                         ) : (

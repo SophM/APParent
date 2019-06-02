@@ -69,3 +69,17 @@
     font-size: 1.3rem;
     font-family: 'Artifika', serif;
 }
+
+.comment-separator {
+    border: 1px solid #4a92a8;
+}
+
+.text-area-comment {
+    width: 90%;
+    border-radius: 2%;
+}
+
+.label-comment {
+    color: rgb(7, 83, 206);
+    /* margin-bottom: 10%; */
+}

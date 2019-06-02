@@ -78,17 +78,17 @@ export function FormMessage(props) {
 export function CommentDisplay(props) {
     return (
         <div>
-        <p className="lead mt-4">
-        <label for={props.for}>{props.posterName}:</label>
+        <p className="lead mt-4 comment-text">
+        <label for={props.for} className="label-comment font-weight-bold">{props.posterName}:</label>
             {" "}{props.comment}
         </p>
-        <p>Last Updated:{props.updatedAt}</p>
+        <p>posted {props.updatedAt}</p>
         </div>
     )
 }
 
 export function CommentSubmitButton(props) {
     return (
-        <button type="submit" className="btn comment-button" onClick={props.handleButtonClick}>Submit Comment </button>
+        <button type="submit" className="btn comment-button font-weight-bold" onClick={props.handleButtonClick}>Submit Comment </button>
     )
 }

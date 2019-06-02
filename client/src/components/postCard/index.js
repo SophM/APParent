@@ -77,7 +77,7 @@ class PostCard extends Component {
         // if (comments && members) {
         // const parent = members.find((member) => member.id === comment.parentId);
         // const parentUsername = parent && parent.userName;
-        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={comment.updatedAt} /><hr /></div>)
+        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={moment(comment.updatedAt).fromNow()} /><hr className="comment-separator"/></div>)
         // }
       })}
     </div>)
@@ -138,7 +138,7 @@ class PostCard extends Component {
           aria-labelledby="exampleModalLongTitle"
           aria-hidden="true"
         >
-          <div className="modal-dialog" role="document">
+          <div className="modal-dialog modal-dialog-scrollable" role="document">
             <div className="modal-content">
               <div className="modal-header" id="modalTitle">
                 <b>{this.props.title}</b>
@@ -154,21 +154,21 @@ class PostCard extends Component {
               <div className="modal-body">
                 {this.renderComments()}
                 <form onSubmit={this.handleFormSubmit}>
-                  <p><b>Your Comment:</b> {this.state.description}</p>
+                  {/* <p><b>Your Comment:</b> {this.state.description}</p> */}
 
-                  <input
+                  <textarea
                     for="comment"
-                    label="Comment Here"
                     type="text"
-                    placeholder="Description"
+                    className="text-area-comment"
+                    placeholder="Type your comment here!"
                     name="description"
+                    rows="3"
                     value={this.state.description}
                     onChange={this.handleInputChange}
                   />
-
-                  <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
                   {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
                 </form>
+                <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
                 {/* need a button to post */}
                 {/* create a handle click for the button - that will post to MySQL */}
               </div>

@@ -97,35 +97,33 @@ class PostCard extends Component {
                     <p className="last-updated">{moment(this.props.updatedAt).fromNow()}</p>
                   </div>
                 </div>
-                <span className="category my-auto card-text" id="postCardCategory">
+                <span className="category my-auto card-text">
                   <b>Category:</b> {this.props.category}
                 </span>
                 <hr />
                 <div className="mx-auto">
-                  <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
+                  <p className="card-title mx-auto">{this.props.title}</p>
+                  <img className="post-photo float-left mb-4 mr-3" src={this.props.postPhoto} />
                   <Linkify>
-                    <p className="card-text mx-auto" id="postCardDetails">
+                    <p className="card-text mx-auto text-justify" id="postCardDetails">
                       <b><u>Details:</u> </b>{this.props.description}
                     </p>
                   </Linkify>
                 </div>
 
-                <div className="text-center"><img className="post-photo" src={this.props.postPhoto} /></div>
-                {/* <p className="card-text" id="postCardTitle" id="postCardPostedBy">
-                  <b><u>Posted By:</u></b> {this.props.name}
-                </p> */}
-
+                <div className="comment-btn-div mx-auto text-center mt-4">
+                  <button
+                    className="btn btn-lg open-comment font-weight-bold"
+                    id="comment"
+                    data-toggle="modal"
+                    data-target={"#post" + this.props.postId}
+                    onClick={this.handleCommentClick}
+                  >
+                    <i className="far fa-comment-alt"></i> Comments
+                  </button>
+                </div>
 
               </div>
-              <button
-                className="btn btn-lg mx-auto open-comment"
-                id="comment"
-                data-toggle="modal"
-                data-target={"#post" + this.props.postId}
-                onClick={this.handleCommentClick}
-              >
-                <i className="far fa-comment-alt"></i> Comment
-              </button>
             </div>
 
           </div>

@@ -71,12 +71,29 @@ class Dashboard extends Component {
     )
   }
 
+  // to update the user info displayed on the page without reloading the page
+  updateParentProfileSection = () => {
+    //Retrieves Logged in USer Info 
+    API.findOne()
+      .then(res => {
+        this.setState({
+          loggedInUser: res.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
+
+  }
+
+
   redirectProfilePage = () => {
     this.setState({
       pageWanted: "myProfile"
     })
 
   }
+
+
   render() {
 
     {/* display the page with the activity component */ }
@@ -123,9 +140,9 @@ class Dashboard extends Component {
               state={this.state.loggedInUser.state}
               photoLink={this.state.loggedInUser.photoLink}
               redirectPage={this.redirectProfilePage}
-            >
-
-            </MyProfile>
+              updateParentProfileSection={this.updateParentProfileSection}
+              loggedInParent={this.state.loggedInUser}
+            />
 
           </div>
         </div>

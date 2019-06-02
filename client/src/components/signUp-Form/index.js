@@ -6,7 +6,7 @@ import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
 import gradeLevel from "../../gradeLevel.json";
-import Dropzone from "../drop-zone"
+import Dropzone from "../drop-zone";
 
 
 const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
@@ -15,6 +15,9 @@ const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "C
 class SignUp extends Component {
 
     state = {
+        sizeDropdownState: 1,
+        sizeDropdownGrade: 1,
+        sizeDropdownSchool: 1,
         allUsernames: [],
         allEmails: [],
         parentInfo:
@@ -135,7 +138,8 @@ class SignUp extends Component {
         let copy = [...this.state.parentInfo]
         copy[key].value = value
         this.setState({
-            parentInfo: copy
+            parentInfo: copy,
+            sizeDropdownState: 1
         });
     }
 
@@ -217,7 +221,9 @@ class SignUp extends Component {
         let copy = [...this.state.kidInfo]
         copy[key].value = value
         this.setState({
-            kidInfo: copy
+            kidInfo: copy,
+            sizeDropdownGrade: 1,
+            sizeDropdownSchool: 1
         });
     }
 
@@ -427,6 +433,9 @@ class SignUp extends Component {
                                             label={parentInfo.label}
                                             value={parentInfo.value}
                                             handleChange={this.handleInputChangeParent}
+                                            size={this.state.sizeDropdownState}
+                                            onfocus={()=>{this.setState({sizeDropdownState: 5})}}
+                                            onblur={()=>{this.setState({sizeDropdownState: 1})}}
                                         >
                                             {parentInfo.options.map((state, j) => {
                                                 return (
@@ -530,6 +539,9 @@ class SignUp extends Component {
                                                     value={info.value}
                                                     disabled={this.state.disabled}
                                                     handleChange={this.handleInputChangeKid}
+                                                    size={(info.for === "grade") ? this.state.sizeDropdownGrade : this.state.sizeDropdownSchool}
+                                                    onfocus={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 5})} : ()=>{this.setState({sizeDropdownSchool: 5})}}
+                                                    onblur={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 1})} : ()=>{this.setState({sizeDropdownSchool: 1})}}
                                                 >
                                                     {info.options.map((item, j) => {
                                                         return (
@@ -571,6 +583,9 @@ class SignUp extends Component {
                                                     value={info.value}
                                                     disabled={this.state.disabled}
                                                     handleChange={this.handleInputChangeKid}
+                                                    size={this.state.sizeDropdownSchool}
+                                                    onfocus={()=>{this.setState({sizeDropdownSchool: 5})}}
+                                                    onblur={()=>{this.setState({sizeDropdownSchool: 1})}}
                                                 >
                                                     {info.options.map((item, j) => {
                                                         return (

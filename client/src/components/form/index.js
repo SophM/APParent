@@ -48,7 +48,7 @@ export function Dropdown(props){
     return (
         <div className="form-group text-left">
             <label for={props.for}>{props.label}</label>
-            <select data-id={props.data} disabled={props.disabled} value={props.value} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
+            <select data-id={props.data} disabled={props.disabled} value={props.value} size={props.size} onFocus={props.onfocus} onBlur={props.onblur} className="form-control" id={props.for} name={props.for} onChange={props.handleChange}>
                 {props.children}
             </select>
         </div>

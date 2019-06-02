@@ -10,6 +10,7 @@ const statesList = ["Alabama","Alaska","Arizona","Arkansas","California","Colora
 class MyProfile extends Component {
 
     state = {
+        sizeDropdownState: 1,
         disabled: true,
         kidDisabled: true,
         userOriginalInfo: this.props.loggedInParent,
@@ -48,11 +49,13 @@ class MyProfile extends Component {
         let copy = [...this.state.userInfo]
         copy[key].value = value
         this.setState({
-            userInfo: copy
+            userInfo: copy,
+            sizeDropdownState: 1
             // [column] : value
         })
 
     }
+
     // Enable the User to update his profile 
     handleEditButtonClick = event => {
         event.preventDefault();
@@ -61,12 +64,14 @@ class MyProfile extends Component {
             disabled: false
         })
     }
+
     // Save the changes made to the profile and update the page without reloading
     handleUpdateButtonClick = event => {
         event.preventDefault();
         // console.log("SAVE MY PROFILE");
         this.setState({
-            disabled: true
+            disabled: true,
+            sizeDropdownState: 1
         })
 
         const userUpdatedData = {
@@ -105,6 +110,7 @@ class MyProfile extends Component {
 
         this.setState({
             userInfo: copyUserInfo,
+            sizeDropdownState: 1,
             disabled: true
         });
     }
@@ -179,6 +185,9 @@ class MyProfile extends Component {
                                     value={user.value}
                                     disabled={this.state.disabled}
                                     handleChange={this.handleInputChange}
+                                    size={this.state.sizeDropdownState}
+                                    onfocus={()=>{this.setState({sizeDropdownState: 5})}}
+                                    onblur={()=>{this.setState({sizeDropdownState: 1})}}
                                 >
                                     {user.options.map((item, j) => {
                                         return (

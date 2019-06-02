@@ -77,7 +77,7 @@ class PostCard extends Component {
         // if (comments && members) {
         // const parent = members.find((member) => member.id === comment.parentId);
         // const parentUsername = parent && parent.userName;
-        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={comment.updatedAt} /><hr /></div>)
+        return (<div><CommentDisplay for="displayComment" posterName={comment.parent.userName} comment={comment.description} updatedAt={moment(comment.updatedAt).fromNow()} /><hr className="comment-separator"/></div>)
         // }
       })}
     </div>)
@@ -97,35 +97,33 @@ class PostCard extends Component {
                     <p className="last-updated">{moment(this.props.updatedAt).fromNow()}</p>
                   </div>
                 </div>
-                <span className="category my-auto card-text" id="postCardCategory">
+                <span className="category my-auto card-text">
                   <b>Category:</b> {this.props.category}
                 </span>
                 <hr />
                 <div className="mx-auto">
-                  <p className="card-title mx-auto" id="postCardTitle">{this.props.title}</p>
+                  <p className="card-title mx-auto">{this.props.title}</p>
+                  <img className="post-photo float-left mb-4 mr-3" src={this.props.postPhoto} />
                   <Linkify>
-                    <p className="card-text mx-auto" id="postCardDetails">
+                    <p className="card-text mx-auto text-justify" id="postCardDetails">
                       <b><u>Details:</u> </b>{this.props.description}
                     </p>
                   </Linkify>
                 </div>
 
-                <div className="text-center"><img className="post-photo" src={this.props.postPhoto} /></div>
-                {/* <p className="card-text" id="postCardTitle" id="postCardPostedBy">
-                  <b><u>Posted By:</u></b> {this.props.name}
-                </p> */}
-
+                <div className="comment-btn-div mx-auto text-center mt-4">
+                  <button
+                    className="btn btn-lg open-comment font-weight-bold"
+                    id="comment"
+                    data-toggle="modal"
+                    data-target={"#post" + this.props.postId}
+                    onClick={this.handleCommentClick}
+                  >
+                    <i className="far fa-comment-alt"></i> Comments
+                  </button>
+                </div>
 
               </div>
-              <button
-                className="btn btn-lg mx-auto open-comment"
-                id="comment"
-                data-toggle="modal"
-                data-target={"#post" + this.props.postId}
-                onClick={this.handleCommentClick}
-              >
-                <i className="far fa-comment-alt"></i> Comment
-              </button>
             </div>
 
           </div>
@@ -140,7 +138,7 @@ class PostCard extends Component {
           aria-labelledby="exampleModalLongTitle"
           aria-hidden="true"
         >
-          <div className="modal-dialog" role="document">
+          <div className="modal-dialog modal-dialog-scrollable" role="document">
             <div className="modal-content">
               <div className="modal-header" id="modalTitle">
                 <b>{this.props.title}</b>
@@ -156,21 +154,21 @@ class PostCard extends Component {
               <div className="modal-body">
                 {this.renderComments()}
                 <form onSubmit={this.handleFormSubmit}>
-                  <p><b>Your Comment:</b> {this.state.description}</p>
+                  {/* <p><b>Your Comment:</b> {this.state.description}</p> */}
 
-                  <input
+                  <textarea
                     for="comment"
-                    label="Comment Here"
                     type="text"
-                    placeholder="Description"
+                    className="text-area-comment"
+                    placeholder="Type your comment here!"
                     name="description"
+                    rows="3"
                     value={this.state.description}
                     onChange={this.handleInputChange}
                   />
-
-                  <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
                   {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
                 </form>
+                <CommentSubmitButton handleButtonClick={this.handleFormSubmit} />
                 {/* need a button to post */}
                 {/* create a handle click for the button - that will post to MySQL */}
               </div>

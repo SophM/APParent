@@ -6,6 +6,8 @@ import "./style.css";
 
 class KidProfile extends Component {
     state = {
+        sizeDropdownSchool: 1,
+        sizeDropdownGrade: 1,
         disabled: true,
         deleteKidInfo: false,
         kidOriginalInfo: 
@@ -43,7 +45,9 @@ class KidProfile extends Component {
         let copy = [...this.state.kidInfo]
         copy[key].value = value
         this.setState({
-            kidInfo: copy
+            kidInfo: copy,
+            sizeDropdownSchool: 1,
+            sizeDropdownGrade: 1
         })
     }
 
@@ -72,6 +76,8 @@ class KidProfile extends Component {
                 // console.log("Kid data - upd", res);
                 this.setState({
                     kidOriginalInfo: kidUpdatedData,
+                    sizeDropdownSchool: 1,
+                    sizeDropdownGrade: 1,
                     disabled: true
                 })
             })
@@ -105,6 +111,8 @@ class KidProfile extends Component {
 
         this.setState({
             kidInfo: copyKidInfo,
+            sizeDropdownSchool: 1,
+            sizeDropdownGrade: 1,
             disabled: true
         });
     }
@@ -167,6 +175,9 @@ class KidProfile extends Component {
                                         value={info.value}
                                         disabled={this.state.disabled}
                                         handleChange={this.handleInputChange}
+                                        size={(info.for === "grade") ? this.state.sizeDropdownGrade : this.state.sizeDropdownSchool}
+                                        onfocus={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 5})} : ()=>{this.setState({sizeDropdownSchool: 5})}}
+                                        onblur={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 1})} : ()=>{this.setState({sizeDropdownSchool: 1})}}
                                     >
                                         {info.options.map((item, j) => {
                                             return (

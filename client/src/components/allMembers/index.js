@@ -41,9 +41,9 @@ class AllMembers extends Component {
   // function to filter the members based on the school selected 
   filterMemberListBySchool = filteredSchool => {
 
-    console.log("filterMemberListBySchool", filteredSchool);
+    console.log("filterMemberListBySchool", filteredSchool.toString());
     // retrieves all the members - filter by state 
-    API.searchAllMembersForASchool(filteredSchool)
+    API.searchAllMembersForASchool(({school: filteredSchool}))
       .then(results => {
 
         console.log("Filtered Schools & parents", results.data);

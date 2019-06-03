@@ -38,12 +38,6 @@
     clear: both;
 }
 
-.post-photo{
-    max-width: 15rem;
-    /* max-height: 30rem; */
-    overflow: hidden;
-}
-
 .category {
     float:right
 }

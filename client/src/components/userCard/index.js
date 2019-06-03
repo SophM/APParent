@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
-
+import {ChatButton} from "../chatRoom"
 
 class userCard extends Component {
     //Setting all default values 
@@ -59,7 +59,7 @@ class userCard extends Component {
                             })) : (<div>Infant - Preschooler</div>)
 
                         }</h5>
-                    <button className="btn btn-success btn-lg mt-1 chat-btn"><i className="far fa-comments"></i> Chat</button>
+ 
                 </div>
             </div>
 

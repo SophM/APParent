@@ -1,11 +1,13 @@
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import UserCard from "../userCard";
 import FilterBy from "../FilterBy";
 
 import API from "../../utils/API";
 import "./style.css";
+
+import {ChatRoom} from "../chatRoom"
 
 // Converting the function to a component 
 class AllMembers extends Component {
@@ -16,7 +18,7 @@ class AllMembers extends Component {
 
   componentDidMount() {
 
-    this.searchAllMembers(); 
+    this.searchAllMembers();
   }
 
   // function to filter the members based on the state selected 
@@ -59,14 +61,14 @@ class AllMembers extends Component {
 
   //Default funtion - display all member's s
   searchAllMembers = () => {
-     //Retrives all the Members Data - By default displays all 
-     API.searchAllMembers()
-     .then(res =>
-       this.setState({
-         members: res.data
-       })
-     )
-     .catch(err => console.log(err));
+    //Retrives all the Members Data - By default displays all 
+    API.searchAllMembers()
+      .then(res =>
+        this.setState({
+          members: res.data
+        })
+      )
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -74,10 +76,10 @@ class AllMembers extends Component {
       <div className="container mt-4 mb-4">
         <div className="card">
           <h5 id="allmembers-title" className="card-header">All Members</h5>
-          <FilterBy 
+          <FilterBy
             searchAll={this.searchAllMembers}
             searchByState={this.filterMemberListByState}
-            searchBySchool={this.filterMemberListBySchool}/>
+            searchBySchool={this.filterMemberListBySchool} />
           <div className="card-body">
             <div id="each-member" className="card-columns">
               {/* {children} */}

@@ -38,7 +38,8 @@ module.exports = {
                 where: {
                     // excluded the logged-in parent
                     [Op.not]: [{ id: req.session.passport.user.id }]
-                }
+                },
+                order: [['userName', 'ASC']],
             }).then(function (result) {
                 res.json(result)
             })

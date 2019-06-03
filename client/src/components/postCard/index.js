@@ -1,9 +1,11 @@
 // make component a statefull component
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { CommentSubmitButton, CommentDisplay } from "../form";
 import moment from "moment"
 import API from "../../utils/API";
 import Linkify from 'react-linkify';
+import AnimatedPicture from "../Picture-Post";
+
 import "./style.css";
 
 // make a api call to get all comment posts
@@ -103,7 +105,9 @@ class PostCard extends Component {
                 <hr />
                 <div className="mx-auto">
                   <p className="card-title mx-auto">{this.props.title}</p>
-                  <img className="post-photo float-left mb-4 mr-3" src={this.props.postPhoto} />
+                  <AnimatedPicture
+                    postPhoto={this.props.postPhoto}
+                  />
                   <Linkify>
                     <p className="card-text mx-auto text-justify" id="postCardDetails">
                       <b><u>Details:</u> </b>{this.props.description}

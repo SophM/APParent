@@ -72,12 +72,29 @@ class Dashboard extends Component {
     )
   }
 
+  // to update the user info displayed on the page without reloading the page
+  updateParentProfileSection = () => {
+    //Retrieves Logged in USer Info 
+    API.findOne()
+      .then(res => {
+        this.setState({
+          loggedInUser: res.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
+
+  }
+
+
   redirectProfilePage = () => {
     this.setState({
       pageWanted: "myProfile"
     })
 
   }
+
+
   render() {
 
     {/* display the page with the activity component */ }
@@ -124,9 +141,9 @@ class Dashboard extends Component {
               state={this.state.loggedInUser.state}
               photoLink={this.state.loggedInUser.photoLink}
               redirectPage={this.redirectProfilePage}
-            >
-
-            </MyProfile>
+              updateParentProfileSection={this.updateParentProfileSection}
+              loggedInParent={this.state.loggedInUser}
+            />
 
           </div>
         </div>
@@ -192,14 +209,36 @@ class Dashboard extends Component {
             <h1 className="mt-2 text-dark welcome-text">Welcome {this.state.loggedInUser.userName}</h1>
             <div className="container mt-4 mb-4">
               <div className="card">
-                <h3 className="card-header">About us!</h3>
+                <h5 className="card-header title-card">About us!</h5>
                 <div className="card-body">
-                  <p className="card-text">Parenthood is great but let's face it, it can also be very challenging! For every moment along the way, <strong style={{"color": "#176d88"}}>APP@rent</strong> is there to network/connect with other parents, help each other out, share tips, events.... </p>
-                  <p className="card-text"><strong style={{"color": "#176d88"}}>APP@rent</strong> was built by Namita - a happy-parent of a little boy and inspiration of the project - and Sophie, Kevin and Samuel - parents in training... with their pets!!</p>
-                  <img className="img-thumbnail img-fluid m-3" src="https://avatars2.githubusercontent.com/u/39390897?s=460&v=4" alt="namita-picture"/>
-                  <img className="img-thumbnail img-fluid m-3" src="https://avatars1.githubusercontent.com/u/47410186?s=460&v=4" alt="sophie-picture"/>
-                  <img className="img-thumbnail img-fluid m-3" src="https://avatars3.githubusercontent.com/u/41413295?s=400&v=4" alt="kevin-picture"/>
-                  <img className="img-thumbnail img-fluid m-3" src="https://avatars2.githubusercontent.com/u/45929868?s=460&v=4" alt="samuel-picture"/>
+                  <p className="card-text about-text">Parenthood is great but let's face it, it can also be very challenging! For every moment along the way, <strong style={{"color": "#176d88"}}>APP@rent</strong> is there to network/connect with other parents, help each other out, share tips, events.... </p>
+                  <p className="card-text about-text"><strong style={{"color": "#176d88"}}>APP@rent</strong> was built by Namita - a happy-parent of a little boy and inspiration of the project - and Sophie, Kevin and Samuel - parents in training... with their pets!!</p>
+                  <div className="row text-center m-3">
+                    <div className="col-3 text-center mt-3">
+                      <img className="img-thumbnail img-fluid mb-3 pic-us" src="https://avatars2.githubusercontent.com/u/39390897?s=460&v=4" alt="namita-picture"/>
+                      <br></br><a className="link-us font-weight-bold" href="https://github.com/NVK2016" target="_blank">GitHub</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://www.linkedin.com/in/namita-shenai" target="_blank">LinkedIn</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://namitashenai-portfolio.herokuapp.com/" target="_blank">Portfolio</a>
+                    </div>
+                    <div className="col-3 text-center mt-3">
+                      <img className="img-thumbnail img-fluid mb-3 pic-us" src="https://avatars1.githubusercontent.com/u/47410186?s=460&v=4" alt="sophie-picture"/>
+                      <br></br><a className="link-us font-weight-bold" href="https://github.com/SophM" target="_blank">GitHub</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://www.linkedin.com/in/sophie-m-571325176" target="_blank">LinkedIn</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://www.sophiemallez.com" target="_blank">Portfolio</a>
+                    </div>
+                    <div className="col-3 text-center mt-3">
+                      <img className="img-thumbnail img-fluid mb-3 pic-us" src="https://avatars3.githubusercontent.com/u/41413295?s=400&v=4" alt="kevin-picture"/>
+                      <br></br><a className="link-us font-weight-bold" href="https://github.com/kchoi123" target="_blank">GitHub</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://www.linkedin.com/in/kevin-choi-5b59aa40" target="_blank">LinkedIn</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://kchoi.co" target="_blank">Portfolio</a>
+                    </div>
+                    <div className="col-3 text-center mt-3">
+                      <img className="img-thumbnail img-fluid mb-3 pic-us" src="https://avatars2.githubusercontent.com/u/45929868?s=460&v=4" alt="samuel-picture"/>
+                      <br></br><a className="link-us font-weight-bold" href="https://github.com/yusungsamuel" target="_blank">GitHub</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://www.linkedin.com/in/samuel-yu-1431b8103" target="_blank">LinkedIn</a>
+                      <br></br><a className="link-us font-weight-bold" href="https://yusungsamuel.github.io/react-portfolio/" target="_blank">Portfolio</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

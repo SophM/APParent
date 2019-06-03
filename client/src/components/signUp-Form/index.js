@@ -6,19 +6,16 @@ import ErrorMessage from "../errorMessage";
 import "./style.css";
 import API from "../../utils/API";
 import gradeLevel from "../../gradeLevel.json";
-import Dropzone from "../drop-zone"
-import { default as Chatkit } from '@pusher/chatkit-server';
-const chatkit = new Chatkit({
-    instanceLocator: "v1:us1:634e15b3-fb2d-47cd-b7aa-3d8749095de8",
-    key: "616ff3c1-c8f5-4597-b5bb-f1e293f6a4f7:nYsoZ6crOrC7i3P/zpgpOaMIJQtvcuDs86pRhFWAuyw="
-})
-
+import Dropzone from "../drop-zone";
 const statesList = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 
 // define a class SignUp to create the component
 class SignUp extends Component {
 
     state = {
+        sizeDropdownState: 1,
+        sizeDropdownGrade: 1,
+        sizeDropdownSchool: 1,
         allUsernames: [],
         allEmails: [],
         parentInfo:
@@ -139,7 +136,8 @@ class SignUp extends Component {
         let copy = [...this.state.parentInfo]
         copy[key].value = value
         this.setState({
-            parentInfo: copy
+            parentInfo: copy,
+            sizeDropdownState: 1
         });
     }
 
@@ -221,7 +219,9 @@ class SignUp extends Component {
         let copy = [...this.state.kidInfo]
         copy[key].value = value
         this.setState({
-            kidInfo: copy
+            kidInfo: copy,
+            sizeDropdownGrade: 1,
+            sizeDropdownSchool: 1
         });
     }
 
@@ -439,6 +439,9 @@ class SignUp extends Component {
                                             label={parentInfo.label}
                                             value={parentInfo.value}
                                             handleChange={this.handleInputChangeParent}
+                                            size={this.state.sizeDropdownState}
+                                            onfocus={()=>{this.setState({sizeDropdownState: 5})}}
+                                            onblur={()=>{this.setState({sizeDropdownState: 1})}}
                                         >
                                             {parentInfo.options.map((state, j) => {
                                                 return (
@@ -507,11 +510,115 @@ class SignUp extends Component {
                         />
                     </div>
                 ) : (
-                        <div>
-                            {(this.state.hasError) ? (
-                                <ErrorMessage
-                                    message="Please fill up all the fields!"
-                                    handleCloseButtonClick={this.handleCloseButtonClick}
+
+                    <div>
+                        {(this.state.hasError) ? (
+                            <ErrorMessage
+                                message="Please fill up all the fields!"
+                                handleCloseButtonClick={this.handleCloseButtonClick}
+                            />
+                        ) : (
+                            ""
+                        )}
+                        <FormAction>
+                            {(!this.state.addKid) ? (
+                                <div>
+                                    <div className="font-weight-bold mb-2">Enter information for kid #1</div>
+                                    {this.state.kidInfo.map((info, i) => {
+                                        if (info.for === "name") {
+                                            return (
+                                                <FormLabel
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    handleChange={this.handleInputChangeKid}
+                                                />
+                                            )
+                                        } else {
+                                            return (
+                                                <Dropdown
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    disabled={this.state.disabled}
+                                                    handleChange={this.handleInputChangeKid}
+                                                    size={(info.for === "grade") ? this.state.sizeDropdownGrade : this.state.sizeDropdownSchool}
+                                                    onfocus={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 5})} : ()=>{this.setState({sizeDropdownSchool: 5})}}
+                                                    onblur={(info.for === "grade") ? ()=>{this.setState({sizeDropdownGrade: 1})} : ()=>{this.setState({sizeDropdownSchool: 1})}}
+                                                >
+                                                    {info.options.map((item, j) => {
+                                                        return (
+                                                            <OptionForDropdown
+                                                                option={item.name}
+                                                                value={item.id}
+                                                                key={j}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Dropdown>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className="font-weight-bold text-success mb-2">Information saved for kid #{this.state.numberOfKid - 1}</div>
+                                    <div className="font-weight-bold mb-2"> Enter information for kid #{this.state.numberOfKid}</div>
+                                    {this.state.kidInfo.map((info, i) => {
+                                        if (info.for === "name") {
+                                            return (
+                                                <FormLabel
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    handleChange={this.handleInputChangeKid}
+                                                />
+                                            )
+                                        } else {
+                                            return (
+                                                <Dropdown
+                                                    key={i}
+                                                    data={i}
+                                                    for={info.for}
+                                                    label={info.label}
+                                                    value={info.value}
+                                                    disabled={this.state.disabled}
+                                                    handleChange={this.handleInputChangeKid}
+                                                    size={this.state.sizeDropdownSchool}
+                                                    onfocus={()=>{this.setState({sizeDropdownSchool: 5})}}
+                                                    onblur={()=>{this.setState({sizeDropdownSchool: 1})}}
+                                                >
+                                                    {info.options.map((item, j) => {
+                                                        return (
+                                                            <OptionForDropdown
+                                                                option={item.name}
+                                                                value={item.id}
+                                                                key={j}
+                                                            />
+                                                        )
+                                                    })}
+                                                </Dropdown>
+                                            )
+                                        }
+                                    })}
+                                </div>
+                            )}
+                            {this.state.messageSchoolAdded ? (
+                                <p className="font-weight-bold text-success">Your school has been added to the dropdown menu!</p>
+                            ) : (
+                                ""
+                            )}
+                            <button className="mb-2 mt-2 font-weight-bold p-0" onClick={this.handleAddSchoolOption} style={{ border: "none", background: "none", color: "#fca33d" }}>Didn't find your school? Click here to add it!</button>
+                            {this.state.addSchool ? (
+                                <AddSchool
+                                    toUpdateSchoolList={this.updateSchoolList}
+                                    toHideAddSchoolForm={this.hideAddSchoolForm}
                                 />
                             ) : (
                                     ""

@@ -69,20 +69,31 @@ module.exports = {
         if (req.isAuthenticated()) {
             db.parents.findAll(
                 {
-                    order: [
-                        ["updatedAt", "ASC"]
-                    ],
                     attributes: ["id", "userName", "email", "city", "state", "photoLink"],
-                    //includes the cross-reference table to join the schools with parents 
+
+                    //INNER JOINS to get data 
                     include: [
-                        { model: db.parentSchools, as: "parentSchools" },
                         {
-                            model: db.schools, as: "schools",
-                            where: {
-                                [Op.eq]: [{ name: req.params.school }]
-                            }
-                        }
-                    ]
+                            model: db.parentSchools, as: "parentSchools", required: false,
+
+                            include: [
+                                {
+                                    model: db.schools, as: "schools",
+                                    attributes: ['id', 'name'],
+                                    where: {
+                                        name: req.body.school
+                                    },
+                                    //Nested Eager Loading 
+                                    required: false
+
+                                }]
+                            //Retrives all results related to the parent model for every parent
+                            // { all: true }
+                        }],
+                    where: {
+                        // excluded the logged-in parent
+                        [Op.not]: [{ id: req.session.passport.user.id }]
+                    },
                 }
             ).then(function (results) {
                 res.json(results);

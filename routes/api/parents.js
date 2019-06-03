@@ -57,7 +57,12 @@ function passportAuthenticate(localStrategy, req, res, next) {
 					console.log(req.session.passport.user.dataValues.id);
 					console.log("##########################");
 					console.log("\n")
-					return res.json({status:"success"});
+					return res.json({
+						status:"success",
+						userName: req.session.passport.user.dataValues.userName,
+						userId: req.session.passport.user.dataValues.id,
+						photoLink: req.session.passport.user.dataValues.photoLink
+				});
 				}
 
 			});

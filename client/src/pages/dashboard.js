@@ -6,6 +6,7 @@ import WritePost from "../components/write-post";
 import AllMembers from "../components/allMembers";
 import MyProfile from "../components/myProfile";
 import NavBar from "../components/nav";
+import {ChatRoom} from "../components/chatRoom"
 import API from "../utils/API";
 import "../style/dashboard.css";
 // import { stat } from "fs";
@@ -244,6 +245,20 @@ class Dashboard extends Component {
           </div>
         </div>
       );
+    }
+    else if (this.state.pageWanted === "chatRoom"){
+      return (
+        <div>
+        <NavBar
+            logout={this.handleLogOut}
+        />
+        <Sidebar
+            handleClick={this.handleClickOnSideBar}
+            logout={this.handleLogOut}
+        />
+        <ChatRoom/>
+        </div>
+      )
     }
   }
 }

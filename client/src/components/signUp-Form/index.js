@@ -468,10 +468,10 @@ class SignUp extends Component {
                                     // );
                                 } else if (parentInfo.for === "photo") {
                                     return (
-                                        <div className="mb-3">
+                                        <div className="mb-3" key={i}>
                                             <label>Upload a profile picture (will be displayed)</label>
                                             <Dropzone 
-                                            helper={this.handleImageChange}
+                                                helper={this.handleImageChange}
                                             />
                                         </div>
                                     )

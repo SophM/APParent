@@ -354,7 +354,10 @@ class SignUp extends Component {
 
     // function to update the school list once/if a parent has created one
     updateSchoolList = () => {
-        API.getAllSchools()
+        // API.getAllSchools()
+        console.log("Signup Parent - State Info", this.state.parentInfo[5].value);
+        // re-populates all the schools for the state of the parent
+        API.getAllSchoolsByState(this.state.parentInfo[5].value)
             .then(
                 res => {
                     console.log(res.data);

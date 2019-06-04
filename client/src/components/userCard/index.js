@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import "./style.css";
-import {ChatButton} from "../chatRoom"
 
 class userCard extends Component {
     //Setting all default values 

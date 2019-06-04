@@ -72,29 +72,32 @@ module.exports = {
                     attributes: ["id", "userName", "email", "city", "state", "photoLink"],
 
                     //INNER JOINS to get data 
-                    include: [
-                        {
-                            model: db.parentSchools, as: "parentSchools", required: false,
+                    include: [{ all: true, nested: true }]}
+                    // include: [
+                //         {
+                //             model: db.parentSchools, as: "parentSchools", required: false,
 
-                            include: [
-                                {
-                                    model: db.schools, as: "schools",
-                                    attributes: ['id', 'name'],
-                                    where: {
-                                        name: req.body.school
-                                    },
-                                    //Nested Eager Loading 
-                                    required: false
+                //             include: [
+                //                 // {
+                //                 //     model: db.schools, as: "schools",
+                //                 //     attributes: ['id', 'name'],
+                //                 //     where: {
+                //                 //         name: req.body.school
+                //                 //     },
+                //                 //     //Nested Eager Loading 
+                //                 //     required: false
 
-                                }]
-                            //Retrives all results related to the parent model for every parent
-                            // { all: true }
-                        }],
-                    where: {
-                        // excluded the logged-in parent
-                        [Op.not]: [{ id: req.session.passport.user.id }]
-                    },
-                }
+                //                 // }]
+                //                 //Retrives all results related to the parent model for every parent
+                                // { all: true }
+                //             ]    
+                //         }
+                    // ],
+                //     where: {
+                //         // excluded the logged-in parent
+                //         [Op.not]: [{ id: req.session.passport.user.id }]
+                //     },
+                // }
             ).then(function (results) {
                 res.json(results);
                 console.log("parents for a school ", results);

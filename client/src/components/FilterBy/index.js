@@ -62,6 +62,17 @@ class FilterBy extends Component {
    
   }
 
+  handleCityChange = event => {
+
+    console.log(`Value entered:`, event.target.value);
+
+    this.setState({ filteredCity: event.target.value });
+
+    //Call API function in ALlMembers component instead of here 
+    this.props.searchByCity(event.target.value);
+   
+  }
+
   render() {
 
     return (
@@ -69,14 +80,14 @@ class FilterBy extends Component {
         <form noValidate>
           <h3 className="mb-1 text-center card-title">Refine your results <i className="fa fa-search-plus" aria-hidden="true"></i></h3>
           <div className="row text-center">
-            <div className="column col-6 col-xs-12">
+            <div className="column col-4 col-xs-12">
               <div className="form-group">
-                <div className="col-3 col-sm-12">
+                <div className="col-2 col-sm-12">
                   <strong><label className="form-label" htmlFor="states">
                     By State :
                   </label></strong>
                 </div>
-                <div className="col-9 col-sm-12">
+                <div className="col-2 col-sm-12">
                   <select className="custom-select my-1 mr-sm-2" id="states" onChange={this.handleStateChange}>
                     <option value="">Choose...</option>
                     {this.state.allStates.map((item) =>
@@ -86,14 +97,14 @@ class FilterBy extends Component {
                 </div>
               </div>
             </div>
-            <div className="column col-6 col-xs-12">
+            <div className="column col-4 col-xs-12">
               <div className="form-group">
-                <div className="col-3 col-sm-12">
+                <div className="col-2 col-sm-12">
                 <strong><label className="form-label" htmlFor="schools">
                     By School :
                   </label> </strong>
                 </div>
-                <div className="col-9 col-sm-12">
+                <div className="col-2 col-sm-12">
                   <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleSchoolChange}>
                     <option value="">Choose...</option>
                     {this.state.schools.map((item, j) =>
@@ -103,7 +114,19 @@ class FilterBy extends Component {
                   </select>
                 </div>
               </div>
-            </div>
+              </div>
+              <div className="column col-4 col-xs-12">
+                <div className="form-group">
+                  <div className="col-2 col-sm-12">
+                    <strong><label className="form-label" htmlFor="city">
+                      By City :
+                  </label> </strong>
+                  </div>
+                  <div className="col-2 col-sm-12">
+                    <input id="city" className="form-control" placeholder="Please enter a city" onChange={this.handleCityChange} ></input>
+                  </div>
+                </div>
+              </div>
             {/* <div>
             <button className="btn-info" onSubmit={this.props.handleChange}> Search</button>
           </div> */}

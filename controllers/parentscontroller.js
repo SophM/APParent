@@ -64,6 +64,24 @@ module.exports = {
                 .catch(err => res.status(422).json(err));
         }
     },
+    // find all parents - except the parent logged in - filter by city 
+    findAllParentsForACity: function (req, res) {
+        if (req.isAuthenticated()) {
+            console.log("2 - Filtering Members based on city", req.params.city);
+            db.parents.findAll({
+                attributes: ["id", "userName", "email", "city", "state", "photoLink"],
+                where: {
+                    // excluded the logged-in parent
+                    city: req.params.city,
+                    [Op.not]: [{ id: req.session.passport.user.id }]
+                }
+            }).then(function (result) {
+                console.log("3 - Filtering Members based on city", result);
+                res.json(result);
+            })
+                .catch(err => res.status(422).json(err));
+        }
+    },
     // get all parents - except the parent logged in - filter by School Name 
     findAllParentsForASchool: function (req, res) {
         if (req.isAuthenticated()) {

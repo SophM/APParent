@@ -107,18 +107,18 @@ class SignUp extends Component {
 
     componentDidMount() {
         // retrieves all the schools
-        API.getAllSchools()
-            .then(
-                res => {
-                    console.log(res.data);
-                    let copy = [...this.state.kidInfo];
-                    copy[2].options = res.data;
-                    this.setState({
-                        kidInfo: copy
-                    })
-                }
-            )
-            .catch(err => console.log(err));
+        // API.getAllSchools()
+        //     .then(
+        //         res => {
+        //             console.log(res.data);
+        //             let copy = [...this.state.kidInfo];
+        //             copy[2].options = res.data;
+        //             this.setState({
+        //                 kidInfo: copy
+        //             })
+        //         }
+        //     )
+        //     .catch(err => console.log(err));
 
         // get the info of the parents already in the database - to check username and email
         API.searchAllParentsInDB()
@@ -170,6 +170,19 @@ class SignUp extends Component {
                     if (this.state.allEmails.indexOf(this.state.parentInfo[2].value) === -1) {
                         // if the password is at least 8 characters long
                         if (this.state.parentInfo[1].value.length >= 8) {
+                            // retrieves all the schools for the state of the parent
+                            API.getAllSchoolsByState(this.state.parentInfo[5].value)
+                                .then(
+                                    res => {
+                                        console.log(res.data);
+                                        let copy = [...this.state.kidInfo];
+                                        copy[2].options = res.data;
+                                        this.setState({
+                                            kidInfo: copy
+                                        })
+                                    }
+                                )
+                                .catch(err => console.log(err));
                             // display the second part of the form
                             this.setState({
                                 firstStepRegistration: false

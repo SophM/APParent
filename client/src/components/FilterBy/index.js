@@ -14,7 +14,8 @@ class FilterBy extends Component {
     schools: [],
     // Seeting value by default 
     filteredState: "all",
-    filteredSchool: "all"
+    filteredSchool: "all", 
+    filteredCity: "all"
   }
 
   componentDidMount() {
@@ -59,7 +60,7 @@ class FilterBy extends Component {
 
     //Call API function in ALlMembers component instead of here 
     this.props.searchBySchool(event.target.value);
-   
+
   }
 
   handleCityChange = event => {
@@ -70,7 +71,7 @@ class FilterBy extends Component {
 
     //Call API function in ALlMembers component instead of here 
     this.props.searchByCity(event.target.value);
-   
+
   }
 
   render() {
@@ -100,10 +101,23 @@ class FilterBy extends Component {
             <div className="column col-4 col-xs-12">
               <div className="form-group">
                 <div className="col-2 col-sm-12">
-                <strong><label className="form-label" htmlFor="schools">
+                  <strong><label className="form-label" htmlFor="city">
+                    By City :
+                  </label> </strong>
+                </div>
+                <div className="col-2 col-sm-12">
+                  <input id="city" className="form-control" placeholder="Please enter a city" onChange={this.handleCityChange} ></input>
+                </div>
+              </div>
+            </div>
+            <div className="column col-4 col-xs-12">
+              <div className="form-group">
+                <div className="col-2 col-sm-12">
+                  <strong><label className="form-label" htmlFor="schools">
                     By School :
                   </label> </strong>
                 </div>
+
                 <div className="col-2 col-sm-12">
                   <select className="custom-select my-1 mr-sm-2" id="schools" onChange={this.handleSchoolChange}>
                     <option value="">Choose...</option>
@@ -114,21 +128,10 @@ class FilterBy extends Component {
                   </select>
                 </div>
               </div>
-              </div>
-              <div className="column col-4 col-xs-12">
-                <div className="form-group">
-                  <div className="col-2 col-sm-12">
-                    <strong><label className="form-label" htmlFor="city">
-                      By City :
-                  </label> </strong>
-                  </div>
-                  <div className="col-2 col-sm-12">
-                    <input id="city" className="form-control" placeholder="Please enter a city" onChange={this.handleCityChange} ></input>
-                  </div>
-                </div>
-              </div>
+            </div>
+
             {/* <div>
-            <button className="btn-info" onSubmit={this.props.handleChange}> Search</button>
+            <button className="btn-info" onClick={this.props.searchAll()}> RESET</button>
           </div> */}
           </div>
         </form>

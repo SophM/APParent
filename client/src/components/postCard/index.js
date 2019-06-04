@@ -137,7 +137,7 @@ class PostCard extends Component {
         <div
           className="modal fade"
           id={"post" + this.props.postId}
-          tabindex="-1"
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalLongTitle"
           aria-hidden="true"

@@ -3,6 +3,7 @@ import { default as Chatkit } from '@pusher/chatkit-server';
 import { FormAction, FormLabel } from "../form"
 import API from "../../utils/API"
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
+import moment from "moment"
 import "./style.css"
 const chatkit = new Chatkit({
     instanceLocator: "v1:us1:634e15b3-fb2d-47cd-b7aa-3d8749095de8",
@@ -207,7 +208,7 @@ export class ChatRoom extends Component {
                                     <div className="col-9">
                                         <div className="message-display row">
                                             <div className="col-12">
-                                                {this.state.messagesArr ? this.state.messagesArr.map((message, i) => {
+                                                {this.state.messagesArr.length > 0 ? (this.state.messagesArr.map((message, i) => {
                                                     return (
                                                         message.user_id === this.state.currentUserId ? (
                                                             <div className="text-left rounded currentUserMsg my-1">
@@ -215,7 +216,7 @@ export class ChatRoom extends Component {
                                                                 <p>
                                                                     {message.parts[0].content}
                                                                 </p>
-                                                                <p className="message-timestamp">{message.updated_at}</p>
+                                                                <p className="message-timestamp">{moment(message.updated_at).format("MMMM Do YYYY, h:mm:ss a")}</p>
                                                             </div>)
 
                                                             : 
@@ -225,12 +226,19 @@ export class ChatRoom extends Component {
                                                                     <p>
                                                                         {message.parts[0].content}
                                                                     </p>
-                                                                    <p className="message-timestamp">{message.updated_at}</p>
+                                                                    <p className="message-timestamp">{moment(message.updated_at).format("MMMM Do YYYY, h:mm:ss a")}</p>
                                                                 </div>)
                                                 
 
                                                     )
-                                                }) : <h1>Pick Someone To Chat With</h1>}
+                                                })) : (<div className="row message-direction text-left">
+                                                    <div className="col-3 my-auto">
+                                                    <i class="fas fa-hand-point-left"></i>
+                                                    </div>
+                                                    <div className="col-9">
+                                                    <b className="direction-text"> Start a conversation with other users </b>
+                                                    </div>
+                                                    </div>)}
                                             </div>
                                         </div>
                                         <div className="row">
@@ -241,6 +249,7 @@ export class ChatRoom extends Component {
                                                     <FormLabel
                                                         handleChange={this.handleInputChange}
                                                         value={this.state.currentMessage}
+                                                        disabled={this.state.currentRoom ? (""):(true)}
                                                     />
                                                 </FormAction>
                                             </div>

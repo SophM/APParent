@@ -74,6 +74,29 @@ class FilterBy extends Component {
 
   }
 
+  handleResetButtonClick = event => {
+
+    event.preventDefault();
+    console.log("Clicked Reset Filter");
+
+    //Reset all Values 
+    this.setState({
+      //Set all states for the DropDown List 
+      allStates: statesList,
+      schools: [],
+      // Seeting value by default 
+      filteredState: "all",
+      filteredSchool: "all",
+      filteredCity: "all"
+    });
+
+    //Reset DRopdown and textbox 
+    
+    //Call API function in ALlMembers component instead of here 
+    this.props.searchAll();
+
+  }
+
   render() {
 
     return (
@@ -128,11 +151,12 @@ class FilterBy extends Component {
                   </select>
                 </div>
               </div>
+              <div>
+            <button className="btn-secondary mr-2 mb-4" onClick={this.handleResetButtonClick}> <i className="fas fa-eraser"></i> RESET</button>
+          </div>
             </div>
 
-            {/* <div>
-            <button className="btn-info" onClick={this.props.searchAll()}> RESET</button>
-          </div> */}
+          
           </div>
         </form>
         <hr style={hrStyle} />

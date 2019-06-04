@@ -49,3 +49,11 @@
     overflow: scroll;
 
 }
+
+.message-direction {
+    font-size: 3.5em;
+}
+
+.direction-text {
+    font-size: 3.5rem
+}

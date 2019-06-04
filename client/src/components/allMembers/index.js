@@ -67,6 +67,25 @@ class AllMembers extends Component {
       .catch(err => console.log(err));
   }
 
+  // function to filter the members based on the state selected 
+  filterMemberListByCity = filteredCity => {
+
+    console.log("filterMemberListByCity", filteredCity);
+
+    // retrieves all the members - filter by state 
+    API.searchAllMembersForACity(filteredCity)
+      .then(results => {
+
+        console.log("Filtered Members for City", results.data);
+        //Refresh the Members data based on the filter criteria 
+        this.setState({
+          members: results.data
+        })
+      }
+      )
+      .catch(err => console.log(err));
+  }
+
   render() {
     return (
       <div className="container mt-4 mb-4">
@@ -75,6 +94,7 @@ class AllMembers extends Component {
           <FilterBy
             searchAll={this.searchAllMembers}
             searchByState={this.filterMemberListByState}
+            searchByCity={this.filterMemberListByCity}
             searchBySchool={this.filterMemberListBySchool} />
           <div className="card-body">
             <div id="each-member" className="card-columns">

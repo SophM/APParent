@@ -54,7 +54,7 @@ export class ChatRoom extends Component {
 
     }
 
-    createRoom = (creatorId, memberId) => {
+    createRoom = (creatorId, memberId, memberName) => {
         chatkit.createRoom({
             creatorId: creatorId,
             name: creatorId + memberId,
@@ -62,7 +62,9 @@ export class ChatRoom extends Component {
         })
             .then((room) => {
                 console.log('Room created successfully', room);
-                this.setState({ currentRoom: room.id })
+                this.setState({ currentRoom: room.id,
+                    chatTargetId: memberId,
+                    chatTargetName: memberName})
                 this.retrieveMessage()
                 this.state.currentUser.subscribeToRoomMultipart({
                     roomId: this.state.currentRoom,
@@ -130,7 +132,7 @@ export class ChatRoom extends Component {
                         .catch(err => console.error(err))
                 }
                 else {
-                    this.createRoom(currentUserId, chatTargetId)
+                    this.createRoom(currentUserId, chatTargetId, chatTargetName)
                 }
 
             }).catch((err) => {
@@ -208,7 +210,7 @@ export class ChatRoom extends Component {
                                     <div className="col-9">
                                         <div className="message-display row">
                                             <div className="col-12">
-                                                {this.state.messagesArr.length > 0 ? (this.state.messagesArr.map((message, i) => {
+                                                {this.state.chatTargetName !== "..."? (this.state.messagesArr.map((message, i) => {
                                                     return (
                                                         message.user_id === this.state.currentUserId ? (
                                                             <div className="text-left rounded currentUserMsg my-1">

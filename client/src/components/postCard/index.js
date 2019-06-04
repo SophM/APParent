@@ -105,9 +105,13 @@ class PostCard extends Component {
                 <hr />
                 <div className="mx-auto">
                   <p className="card-title mx-auto">{this.props.title}</p>
-                  <PicturePost
-                    postPhoto={this.props.postPhoto}
-                  />
+                  {this.props.postPhoto ? (
+                    <PicturePost
+                      postPhoto={this.props.postPhoto}
+                    />
+                  ) : (
+                    ""
+                  )}
                   <Linkify>
                     <p className="card-text mx-auto text-justify" id="postCardDetails">
                       <b><u>Details:</u> </b>{this.props.description}

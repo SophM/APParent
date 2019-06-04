@@ -55,15 +55,16 @@ class AllMembers extends Component {
 
   }
 
-  //Default funtion - display all member's s
+  //Default function - display all member's s
   searchAllMembers = () => {
     //Retrives all the Members Data - By default displays all 
     API.searchAllMembers()
-      .then(res =>
+      .then(res => {
+        
         this.setState({
           members: res.data
         })
-      )
+      })
       .catch(err => console.log(err));
   }
 
@@ -95,7 +96,8 @@ class AllMembers extends Component {
             searchAll={this.searchAllMembers}
             searchByState={this.filterMemberListByState}
             searchByCity={this.filterMemberListByCity}
-            searchBySchool={this.filterMemberListBySchool} />
+            searchBySchool={this.filterMemberListBySchool}
+          />
           <div className="card-body">
             <div id="each-member" className="card-columns">
               {/* {children} */}

@@ -11,7 +11,7 @@ function PicturePost (props) {
     return (
       <Flipper flipKey={biggerPicture}>
         <Flipped flipId="original-pic">
-          <img className={biggerPicture ? "bigger-pic" : "original-pic"} src={props.postPhoto} onClick={togglebiggerPicture} alt="visual-description"/>
+          <img className={biggerPicture ? "bigger-pic" : "original-pic"} src={props.postPhoto ? (props.postPhoto) : ("https://via.placeholder.com/150")} onClick={togglebiggerPicture} alt="visual-description"/>
         </Flipped>
       </Flipper>
     );

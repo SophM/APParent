@@ -1,13 +1,9 @@
-
 import React, { Component } from "react";
-
 import UserCard from "../userCard";
 import FilterBy from "../FilterBy";
-
 import API from "../../utils/API";
 import "./style.css";
 
-import {ChatRoom} from "../chatRoom"
 
 // Converting the function to a component 
 class AllMembers extends Component {

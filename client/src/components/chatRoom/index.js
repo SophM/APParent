@@ -196,7 +196,7 @@ export class ChatRoom extends Component {
                                                         href="#"
                                                         class="list-group-item list-group-item-action text-left"
                                                     >
-                                                        <img className="rounded-circle profile-icon mx-2" src={user.photoLink} />{user.userName}
+                                                        <img className="rounded-circle profile-icon mx-2" alt={user.userName} src={user.photoLink} />{user.userName}
                                                     </a>
 
 

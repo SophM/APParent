@@ -5,7 +5,7 @@ In this project, we built APP@rent - an app for parents. Parenthood is great but
 
 Each parent creates a personal account by filling up a sign-up form and give some information about them (without being intrusive). Then, every parent can look through the "catalog" of members and connect with parents that live in the same area, whose kids go to the same school, have the same age… They can also share external events through the app and share tricks and tips (discounts on kid supplies, summer camp info, kid activities info, educational tips, donation of clothes, toys etc…).
 
-<a href="http://www.apparent.ga:3000" target="_blank">Click me to check the app out!</a>
+<a href="https://www.apparent.ga" target="_blank">Click me to check the app out!</a>
 
 <hr>
 
